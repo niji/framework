@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Border 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/halo"
+    width="144" height="320"
+    borderColor="#000000" borderWeight="1"
+    xmlns:g="org.libspark.gunyarapaint.components.*">
+    <fx:Script>
+        <![CDATA[
+            import flash.events.MouseEvent;
+            
+            import mx.collections.ArrayCollection;
+            import mx.events.DragEvent;
+            
+            import org.libspark.gunyarapaint.LayerBitmapCollection;
+            
+            import spark.components.HSlider;
+            import spark.events.IndexChangeEvent;
+            
+            public var delegate:IDelegate;
+
+            private function createLayer(event:MouseEvent):void
+            {
+                delegate.module.createLayer();
+            }
+            
+            private function copyLayer(event:MouseEvent):void
+            {
+                delegate.module.copyLayer();
+            }
+            
+            private function removeLayer(event:MouseEvent):void
+            {
+                delegate.module.removeLayer();
+            }
+            
+            private function mergeLayers(event:MouseEvent):void
+            {
+                delegate.module.mergeLayers();
+            }
+            
+            private function selectLayer(event:MouseEvent):void
+            {
+                var layers:LayerDataGrid = LayerDataGrid(event.target);
+                delegate.module.layerIndex = layers.selectedIndex;
+            }
+            
+            private function swapLayers(event:DragEvent):void
+            {
+                var grid:LayerDataGrid = LayerDataGrid(event.target);
+                var array:Array = ArrayCollection(grid.dataProvider).toArray().reverse();
+                var length:uint = array.length;
+                var layers:LayerBitmapCollection = delegate.recorder.painter.layers;
+                for (var i:uint = 0; i < length; i++) {
+                    var from:uint = array[i].index;
+                    var to:uint = layers.at(i).index;
+                    if (from != to)
+                        delegate.module.swapLayers(from, to);
+                }
+            }
+
+            private function setLayerAlpha(event:Event):void
+            {
+                var slider:HSlider = HSlider(event.target);
+                delegate.module.layerAlpha = slider.value;
+            }
+            
+            private function selectLayerBlendMode(event:IndexChangeEvent):void
+            {
+                var blendMode:String = delegate.supportedBlendModes[event.newIndex].data;
+                delegate.module.layerBlendMode = blendMode;
+            }
+
+        ]]>
+    </fx:Script>
+    <g:LayerDataGrid id="layerDataGrid" x="9" y="50" width="124" height="200" editable="true" sortableColumns="false" dragMoveEnabled="true" dragEnabled="true" dropEnabled="true" click="selectLayer(event)">
+        <g:columns>
+            <mx:DataGridColumn editable="false" headerText="目" dataField="showCheck" itemRenderer="org.libspark.gunyarapaint.components.CheckBoxEditor" rendererIsEditor="true" width="20"/>
+            <mx:DataGridColumn editable="false" headerText="ロ" dataField="lockCheck" itemRenderer="org.libspark.gunyarapaint.components.CheckBoxEditor" rendererIsEditor="true" width="20"/>
+            <!--mx:DataGridColumn headerText="マ" dataField="maskCheck" itemRenderer="CheckBoxEditor" rendererIsEditor="true" width="20"/-->
+            <mx:DataGridColumn editable="true" headerText="レイヤ名" dataField="name"/>
+        </g:columns>
+    </g:LayerDataGrid>
+    <s:Button x="7" y="258" id="newLayerButton" label="新" width="32" click="createLayer(event)" toolTip="レイヤーを新しく作成します"/>
+    <s:Button x="39" y="258" id="copyLayerButton" label="複" width="32" click="copyLayer(event)" toolTip="現在のレイヤーを複製して追加します"/>
+    <s:Button x="71" y="258" id="deleteLayerButton" label="削" width="32" click="removeLayer(event)" toolTip="現在のレイヤーを削除します"/>
+    <s:Button x="103" y="258" id="mergeLayerButton" label="統" width="32" click="mergeLayers(event)" fontSize="0" toolTip="直下のレイヤーを統合してひとつのレイヤーにします"/>
+    <s:DropDownList id="blendModeComboBox" x="10" y="10" width="124" change="selectLayerBlendMode(event)" dataProvider="{ApplicationDelegate(parentDocument).allBlendModes}" selectedIndex="0" toolTip="現在のレイヤーに対するブレンドモードを設定します"/>
+    <s:Label x="10" y="34" text="透"/>
+    <s:HSlider id="alphaSlider" x="30" y="34" width="102" minimum="0.05" maximum="1" snapInterval="0.05" value="1" change="setLayerAlpha(event)" toolTip="現在のレイヤーに対する不透明度を設定します"/>
+</s:Border>

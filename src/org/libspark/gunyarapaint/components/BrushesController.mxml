@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Border
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/halo"
+    borderColor="#000000"
+    borderWeight="1"
+    width="160" height="450" initialize="init(event)" currentState="default">
+    <fx:Script>
+        <![CDATA[
+            import flash.events.Event;
+            import flash.events.MouseEvent;
+            
+            import mx.effects.easing.Bounce;
+            import mx.events.FlexEvent;
+            
+            import org.libspark.gunyarapaint.modules.CircleModule;
+            import org.libspark.gunyarapaint.modules.DropperModule;
+            import org.libspark.gunyarapaint.modules.EraserModule;
+            import org.libspark.gunyarapaint.modules.FloodFillModule;
+            import org.libspark.gunyarapaint.modules.FreeHandModule;
+            import org.libspark.gunyarapaint.modules.HandToolModule;
+            import org.libspark.gunyarapaint.modules.LineModule;
+            import org.libspark.gunyarapaint.modules.PixelModule;
+            
+            import spark.components.HSlider;
+            import spark.events.IndexChangeEvent;
+            
+            public var delegate:IDelegate;
+            
+            private var currentPalette:GridItem;
+            
+            [Bindable]
+            private var color:uint;
+            
+            private function init(event:FlexEvent):void
+            {
+                currentPalette = gridItemPalette1;
+                color = currentPalette.getStyle("backgroundColor");
+            }
+            
+            private function setColRGBSlider(color:uint):void
+            {
+                colBSlider.value = color % 256;
+                color >>>= 8;
+                colGSlider.value = color % 256;
+                color >>>= 8;
+                colRSlider.value = color % 256;
+            }
+            
+            private function set thickness(value:uint):void
+            {
+                delegate.module.thickness = value;
+                thicknessSlider.value = value;
+            }
+            
+            private function selectPalette(event:MouseEvent):void
+            {
+                var item:GridItem = GridItem(event.currentTarget);
+                if (currentPalette) {
+                    currentPalette.setStyle("borderThickness", 1);
+                    currentPalette.setStyle("borderColor", 0xb7babc);
+                }
+                item.setStyle("borderThickness", 3);
+                item.setStyle("borderColor", 0x000000);
+                currentPalette = item;
+                delegate.module.color = color = item.getStyle("backgroundColor");
+                setColRGBSlider(item.getStyle("backgroundColor"));
+            }
+            
+            private function selectPen(event:IndexChangeEvent):void
+            {
+                var data:String = DropDownList(event.target).dataProvider.getItemAt(event.newIndex).data;
+                switch (data) {
+                    case "hand":
+                        delegate.module = new FreeHandModule(delegate.recorder);
+                        break;
+                    case "line":
+                        delegate.module = new LineModule(delegate.recorder);
+                        break;
+                    case "circle":
+                        delegate.module = new CircleModule(delegate.recorder);
+                        break;
+                    case "floodfill":
+                        delegate.module = new FloodFillModule(delegate.recorder);
+                        break;
+                }
+            }
+            
+            private function selectBlendMode(event:IndexChangeEvent):void
+            {
+                delegate.module.layerBlendMode =
+                    delegate.supportedBlendModes[event.newIndex].data;
+            }
+            
+            private function selectAlpha(event:Event):void
+            {
+                var slider:HSlider = HSlider(event.target);
+                delegate.module.alpha = slider.value;
+            }
+            
+            private function setColor(event:Event):void
+            {
+                var slider:HSlider = HSlider(event.target);
+                var c:uint = 0;
+                switch (slider.id) {
+                    case "colRSlider":
+                        c += slider.value * 65536;
+                        c += colGSlider.value * 256;
+                        c += colBSlider.value;
+                        break;
+                    case "colGSlider":
+                        c += colRSlider.value * 65536;
+                        c += slider.value * 256;
+                        c += colBSlider.value;
+                        break;
+                    case "colBSlider":
+                        c += colRSlider.value * 65536;
+                        c += colGSlider.value * 256;
+                        c += slider.value;
+                        break;
+                }
+                delegate.module.color = color = c;
+                currentPalette.setStyle('backgroundColor', c);
+            }
+            
+            private function selectDropper(event:MouseEvent):void
+            {
+                switchToggleState(event, DropperModule, "dropper");
+            }
+            
+            private function selectHandTool(event:MouseEvent):void
+            {
+                switchToggleState(event, HandToolModule, "hand");
+            }
+            
+            private function selectEraser(event:MouseEvent):void
+            {
+                switchToggleState(event, EraserModule, "eraser");
+            }
+            
+            private function selectPixel(event:MouseEvent):void
+            {
+                switchToggleState(event, PixelModule, "pixel");
+            }
+            
+            private function switchToggleState(event:Event, module:Class, state:String):void
+            {
+                var toggle:ToggleButton = ToggleButton(event.target);
+                var toggled:Boolean = toggle.selected;
+                dropperButton.selected = handtoolButton.selected =
+                    eraserButton.selected = dotButton.selected = false;
+                if (toggled) {
+                    delegate.module = new module(delegate.recorder);
+                    currentState = state;
+                    toggle.selected = true;
+                }
+                else {
+                    delegate.module = new FreeHandModule(delegate.recorder);
+                    currentState = "default"
+                }
+            }
+        ]]>
+    </fx:Script>
+    <s:states>
+        <s:State name="default"/>
+        <s:State name="dropper"/>
+        <s:State name="eraser"/>
+        <s:State name="floodfill"/>
+        <s:State name="hand"/>
+        <s:State name="pixel"/>
+    </s:states>
+    
+    <fx:Declarations>
+        <!-- palette select animation -->
+        <mx:Resize id="selectPaletteEffect" widthFrom="24" widthTo="24"
+                   heightFrom="20" heightTo="20"
+                   easingFunction="{Bounce.easeOut}" />
+    </fx:Declarations>
+    
+    <!-- preview -->
+    <s:Label x="10" y="10" text="ペンの状態" width="53.5" fontSize="10"/>
+    <s:Border x="118.5" y="9" width="32" height="32" id="previewThickness" borderWeight="1" borderColor="#000000">
+        <s:Ellipse width="{thicknessSlider.value}" height="{thicknessSlider.value}" x="{15 - (thicknessSlider.value / 2)}" y="{15 - (thicknessSlider.value / 2)}">
+            <s:fill>
+                <s:SolidColor color="{color}" alpha="{alphaSlider.value}"/>
+            </s:fill>
+        </s:Ellipse>
+    </s:Border>
+    
+    <!-- thickness -->
+    <s:Label x="14" y="28" text="太" width="14" height="11"/>
+    <s:HSlider x="36" y="28" width="75" minimum="1" maximum="30" snapInterval="1" height="12" value="3" id="thicknessSlider" toolTip="辺の太さを変更します"/>
+    <s:Button x="1" y="47" label="極" width="32" id="thicknessButton1" enabled.floodfill="false" click.eraser="{thickness = 1}" enabled.pixel="false" enabled.hand="false" click.default="{thickness = 1}" enabled.dropper="false"/>
+    <s:Button x="32" y="47" label="細" width="32" id="thicknessButton2" enabled.floodfill="false" click.eraser="{thickness = 3}" enabled.pixel="false" enabled.hand="false" click.default="{thickness = 3}" enabled.dropper="false"/>
+    <s:Button x="63" y="47" label="中" width="32" id="thicknessButton3" enabled.floodfill="false" click.eraser="{thickness = 10}" enabled.pixel="false" enabled.hand="false" click.default="{thickness = 10}" enabled.dropper="false"/>
+    <s:Button x="94" y="47" label="太" width="32" id="thicknessButton4" enabled.floodfill="false" click.eraser="{thickness = 20}" enabled.pixel="false" enabled.hand="false" click.default="{thickness = 20}" enabled.dropper="false"/>
+    <s:Button x="125" y="47" label="極" width="32" id="thicknessButton5" enabled.floodfill="false" click.eraser="{thickness = 30}" enabled.pixel="false" enabled.hand="false" click.default="{thickness = 30}" enabled.dropper="false"/>
+    
+    <!-- color palette -->
+    <mx:Grid id="paletteGrid" x="43" y="72" borderStyle="none" borderColor="#000000" borderThickness="1" horizontalGap="4" verticalGap="3">
+        <mx:GridRow width="100%" height="100%">
+            <mx:GridItem width="24" height="20" backgroundColor="#000000" id="gridItemPalette1" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+            <mx:GridItem width="24" height="20" backgroundColor="#ffffff" id="gridItemPalette2" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+            <mx:GridItem width="24" height="20" backgroundColor="#FFFFFF" id="gridItemPalette3" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+        </mx:GridRow>
+        <mx:GridRow width="100%" height="100%">
+            <mx:GridItem width="24" height="20" backgroundColor="#888888" id="gridItemPalette4" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+            <mx:GridItem width="24" height="20" backgroundColor="#b47575" id="gridItemPalette5" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+            <mx:GridItem width="24" height="20" backgroundColor="#FFFFFF" id="gridItemPalette6" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+        </mx:GridRow>
+        <mx:GridRow width="100%" height="100%">
+            <mx:GridItem width="24" height="20" backgroundColor="#c096c0" id="gridItemPalette7" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+            <mx:GridItem width="24" height="20" backgroundColor="#fa9696" id="gridItemPalette8" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+            <mx:GridItem width="24" height="20" backgroundColor="#FFFFFF" id="gridItemPalette9" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+        </mx:GridRow>
+        <mx:GridRow width="100%" height="100%">
+            <mx:GridItem width="24" height="20" backgroundColor="#8080ff" id="gridItemPalette10" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+            <mx:GridItem width="24" height="20" backgroundColor="#ffb6ff" id="gridItemPalette11" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+            <mx:GridItem width="24" height="20" backgroundColor="#FFFFFF" id="gridItemPalette12" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+        </mx:GridRow>
+        <mx:GridRow width="100%" height="100%">
+            <mx:GridItem width="24" height="20" backgroundColor="#e7e58d" id="gridItemPalette13" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+            <mx:GridItem width="24" height="20" backgroundColor="#25c7c9" id="gridItemPalette14" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+            <mx:GridItem width="24" height="20" backgroundColor="#FFFFFF" id="gridItemPalette15" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+        </mx:GridRow>
+        <mx:GridRow width="100%" height="100%">
+            <mx:GridItem width="24" height="20" backgroundColor="#99cb80" id="gridItemPalette16" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+            <mx:GridItem width="24" height="20" backgroundColor="#e7962d" id="gridItemPalette17" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+            <mx:GridItem width="24" height="20" backgroundColor="#FFFFFF" id="gridItemPalette18" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+        </mx:GridRow>
+        <mx:GridRow width="100%" height="100%">
+            <mx:GridItem width="24" height="20" backgroundColor="#f9ddcf" id="gridItemPalette19" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+            <mx:GridItem width="24" height="20" backgroundColor="#fcece2" id="gridItemPalette20" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+            <mx:GridItem width="24" height="20" backgroundColor="#FFFFFF" id="gridItemPalette21" click="selectPalette(event)" borderStyle="solid" cornerRadius="5">
+            </mx:GridItem>
+        </mx:GridRow>
+    </mx:Grid>
+    <s:Button id="colorPickerButton" x="46.5" y="231" label="色選択画面" width="65" fontSize="9"/>
+    <!--
+    <s:ToggleButton id="dropperButton" x="5" y="260" icon="@Embed(source='res/icon_dropper.png')" width="22" click="selectDropper(event)"/>
+    <s:ToggleButton id="handtoolButton" x="31" y="260" icon="@Embed(source='res/icon_hand_open.png')" width="22" click="selectHandTool(event)"/>
+    -->
+    <s:ToggleButton id="dropperButton" x="5" y="260" label="ス" width="32" click="selectDropper(event)" toolTip="スポイトに変更します。色を抽出するときに便利です"/>
+    <s:ToggleButton id="handtoolButton" x="43" y="260" label="ハ" width="32" click="selectHandTool(event)" selected.hand="true" toolTip="ハンドツールに変更します。現在のキャンバスを移動させたいときに使います"/>
+    <s:ToggleButton id="eraserButton" x="81" y="260" label="消" width="32" click="selectEraser(event)" selected.eraser="true" toolTip="消しゴムに変更します。間違って描いた箇所を消すのに欠かせません"/>
+    <s:ToggleButton id="dotButton" x="119" y="260" label="ド" width="32" click="selectPixel(event)" selected.pixel="true" toolTip="ドットペンに変更します。1ピクセル単位で作業するときに欠かせません"/>
+    
+    <!-- alpha -->
+    <s:Label x="10" y="288" text="透"/>
+    <s:Label x="26" y="289" text="{alphaSlider.value}" textAlign="right" width="28" enabled="false" fontSize="8"/>
+    <s:HSlider id ="alphaSlider" x="61" y="289" width="87" minimum="0.05" maximum="1" snapInterval="0.05" value="1" change.hand="selectAlpha(event)" change.eraser="selectAlpha(event)" change.pixel="selectAlpha(event)" change.floodfill="selectAlpha(event)" change.default="selectAlpha(event)" toolTip="不透明度を変更します"/>
+    
+    <!-- rgb -->
+    <s:Label x="10" y="304" text="R"/>
+    <s:Label x="26" y="305" text="{colRSlider.value}" width="28" textAlign="right" enabled="false" fontSize="8"/>
+    <s:HSlider id ="colRSlider" x="61" y="305" width="87" minimum="0" maximum="255" snapInterval="1" change.hand="setColor(event)" change.eraser="setColor(event)" change.pixel="setColor(event)" change.floodfill="setColor(event)" change.default="setColor(event)" toolTip="赤色(R)の濃さを設定します"/>
+    <s:Label x="10" y="319" text="G"/>
+    <s:Label x="26" y="322" text="{colGSlider.value}" width="28" textAlign="right" enabled="false" fontSize="8"/>
+    <s:HSlider id ="colGSlider" x="61" y="322" width="87" minimum="0" maximum="255" snapInterval="1" change.hand="setColor(event)" change.eraser="setColor(event)" change.pixel="setColor(event)" change.floodfill="setColor(event)" change.default="setColor(event)" toolTip="緑色(G)の濃さを設定します"/>
+    <s:Label x="10" y="334" text="B"/>
+    <s:Label x="26" y="340" text="{colBSlider.value}" width="28" textAlign="right" enabled="false" fontSize="8"/>
+    <s:HSlider id ="colBSlider" x="61" y="340" width="87" minimum="0" maximum="255" snapInterval="1" change.hand="setColor(event)" change.eraser="setColor(event)" change.pixel="setColor(event)" change.floodfill="setColor(event)" change.default="setColor(event)" toolTip="青色(B)の濃さを設定します"/>
+    
+    <!-- line method/blend mode -->
+    <s:DropDownList id="penModeComboBox" x="10" y="362" width="138" selectedIndex="0" enabled.floodfill="false" change.eraser="selectPen(event)" change.floodfill="selectPen(event)" enabled.pixel="false" enabled.hand="false" change.default="selectPen(event)" enabled.dropper="false" toolTip="ペンの形状を設定します">
+        <s:ArrayCollection>
+            <fx:Object label="手描き" data="hand" />
+            <fx:Object label="直線" data="line" />
+            <fx:Object label="円" data="circle" />
+            <fx:Object label="ペイント" data="floodfill" />
+        </s:ArrayCollection>
+    </s:DropDownList>
+    <s:DropDownList id="blendModeComboBox" x="10" y="391" width="138" dataProvider="{ApplicationDelegate(parentDocument).allBlendModes}" selectedIndex="0" enabled.floodfill="false" change.eraser="selectBlendMode(event)" change.floodfill="selectBlendMode(event)" enabled.pixel="false" enabled.hand="false" change.default="selectBlendMode(event)" enabled.dropper="false" toolTip="下の画像に対するブレンドモードを設定します"/>
+</s:Border>

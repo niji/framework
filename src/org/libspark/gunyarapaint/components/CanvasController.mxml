@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Border xmlns:fx="http://ns.adobe.com/mxml/2009" 
+         xmlns:s="library://ns.adobe.com/flex/spark" 
+         xmlns:mx="library://ns.adobe.com/flex/halo"
+         xmlns:components="org.libspark.gunyarapaint.components.*"
+         initialize="init(event)">
+    <fx:Script>
+        <![CDATA[
+            import flash.geom.Rectangle;
+            
+            import mx.events.FlexEvent;
+            
+            import org.libspark.gunyarapaint.AuxBitmap;
+            import org.libspark.gunyarapaint.Recorder;
+            import org.libspark.gunyarapaint.TransparentBitmap;
+            
+            import spark.core.SpriteVisualElement;
+            
+            [Bindable]
+            public var delegate:IDelegate;
+            
+            public function rotate(degree:Number):void
+            {
+                var rect:Rectangle = transform.pixelBounds;
+                var p:Point = new Point(rect.x + rect.width / 2, rect.y + rect.height / 2);
+                var matrix:Matrix = transform.matrix;
+                matrix.translate(-p.x, -p.y);
+                matrix.rotate((degree - m_previousDegree) * (Math.PI / 180));
+                matrix.translate(p.x, p.y);
+                transform.matrix = matrix;
+                m_previousDegree = degree;
+                if (degree == 0)
+                    transform.matrix = new Matrix(1, 0, 0, 1, matrix.tx, matrix.ty);
+            }
+            
+            public function scale(scale:Number):void
+            {
+                m_scale = scale >= 1 ? scale : 1.0 / (-scale + 2);
+            }
+            
+            private function init(event:FlexEvent):void
+            {
+                var sprite:SpriteVisualElement;
+                var rect:Rectangle = new Rectangle(0, 0, width, height);
+                sprite = new SpriteVisualElement();
+                sprite.addChild(new TransparentBitmap(rect));
+                transparentCanvas.addElement(sprite);
+                sprite = new SpriteVisualElement();
+                m_aux = new AuxBitmap(rect);
+                sprite.addChild(m_aux);
+                auxCanvas.addElement(sprite);
+            }
+            
+            private function resize():void
+            {
+                var recorder:Recorder = delegate.recorder;
+                var scaledWidth:Number = recorder.width * m_scale;
+                var scaledHeight:Number = recorder.height * m_scale;
+                if (scaledWidth < width)
+                    width = scaledWidth;
+                if (scaledHeight < height)
+                    height = scaledHeight;
+            }
+            
+            public function get aux():AuxBitmap
+            {
+                return m_aux;
+            }
+            
+            private var m_previousDegree:Number = 0;
+            private var m_scale:Number = 1;
+            private var m_aux:AuxBitmap;
+
+        ]]>
+    </fx:Script>
+    <fx:Declarations>
+        <!-- Place non-visual elements (e.g., services, value objects) here -->
+    </fx:Declarations>
+    <s:Group id="transparentCanvas" width="{width - 2}" height="{height - 2}" />
+    <components:DrawableCanvas id="drawable" x="{(width - drawable.width) / 2}" y="{(height - drawable.height) / 2}" width="317" height="317" delegate="{delegate}"/>
+    <s:Group id="auxCanvas" width="{drawable.width}" height="{drawable.height}" />
+    <s:HScrollBar y="{height - 2}" width="{width - 1}" />
+    <s:VScrollBar x="{width - 2}" height="{height - 1}" />
+</s:Border>

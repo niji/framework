@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Border 
+    xmlns:fx="http://ns.adobe.com/mxml/2009" 
+    xmlns:s="library://ns.adobe.com/flex/spark" 
+    xmlns:mx="library://ns.adobe.com/flex/halo"
+    borderColor="#000000" borderWeight="1"
+    width="270" height="200">
+    <fx:Script>
+        <![CDATA[
+            import flash.events.Event;
+            import flash.events.MouseEvent;
+            
+            import mx.collections.IList;
+            
+            import org.libspark.gunyarapaint.AuxBitmap;
+            
+            import spark.events.IndexChangeEvent;
+            
+            public var delegate:IDelegate;
+
+            private function rotate(event:Event):void
+            {
+                var degree:Number = HSlider(event.target).value;
+                IDelegate(parentDocument).canvas.rotate(degree);
+            }
+            
+            private function zoom(event:Event):void
+            {
+                var zoom:Number = HSlider(event.target).value;
+               //ApplicationDelegate(parentDocument).drawableCanvas.alpha = zoom;
+            }
+            
+            private function undo(event:MouseEvent):void
+            {
+                delegate.module.undo();
+            }
+            
+            private function redo(event:MouseEvent):void
+            {
+                delegate.module.redo();
+            }
+            
+            private function windowsResetButton_clickHandler(event:MouseEvent):void
+            {
+            }
+            
+            private function setAuxType(event:IndexChangeEvent):void
+            {
+                var list:IList = DropDownList(event.target).dataProvider;
+                var type:String = String(list.getItemAt(event.newIndex).data);
+                IDelegate(parentDocument).canvas.aux.type = type;
+            }
+            
+            private function windowsResetButton0_clickHandler(event:MouseEvent):void
+            {
+            }
+            
+            private function setVerticalMirror(event:MouseEvent):void
+            {
+                delegate.module.verticalMirror(0xff);
+            }
+            
+            private function setHorizontalMirror(event:MouseEvent):void
+            {
+                delegate.module.horizontalMirror(0xff);
+            }
+
+            private function setAuxLength(event:Event):void
+            {
+                var stepper:NumericStepper = NumericStepper(event.target);
+                var length:uint = uint(stepper.value);
+                IDelegate(parentDocument).canvas.aux.length = length;
+            }
+            
+            private function setVisibleAuxBox(event:MouseEvent):void
+            {
+                var aux:AuxBitmap = ApplicationDelegate(parentDocument).canvas.aux;
+                aux.boxVisible = !aux.boxVisible;
+            }
+            
+            private function setVisibleAuxSkew(event:MouseEvent):void
+            {
+                var aux:AuxBitmap = ApplicationDelegate(parentDocument).canvas.aux;
+                aux.skewVisible = !aux.skewVisible;
+            }
+        ]]>
+    </fx:Script>
+    <s:Button id="rotateResetButton" y="63" label="角度" width="40" height="20" x="10" fontSize="10" click="{canvasRotate.value = 0}"/>
+    <s:Button id="zoomResetButton" y="92" label="拡大" width="40" height="20" x="10" fontSize="10" click="{canvasZoom.value = 1}"/>
+    <s:HSlider id="canvasRotate" y="68" width="135" minimum="-180" maximum="180" snapInterval="5" value="0" showDataTip="false" x="55" valueCommit="rotate(event)" thumbDrag="rotate(event)" toolTip="現在のキャンバスを回転させます"/>
+    <s:HSlider id="canvasZoom" y="95" width="135" minimum="-4" maximum="16" snapInterval="0.1" value="1" showDataTip="false" x="55" valueCommit="zoom(event)" thumbDrag="zoom(event)" toolTip="現在のキャンバスを拡大または縮小させます"/>
+    <s:TextInput id="canvasRotateValue" y="65" width="32" height="17" fontSize="8" textAlign="right" text="{canvasRotate.value}" restrict="0-9" maxChars="4" x="197"/>
+    <s:Label y="65" text="度" x="232"/>
+    <s:TextInput id="canvasZoomValue" y="93" width="32" height="17" fontSize="8" textAlign="right" text="{canvasZoom.value}" restrict="0-9" maxChars="6" x="197"/>
+    <s:Label y="93" text="倍" x="232"/>
+    <s:Label y="10" text="補助線"  x="10"/>
+    <s:NumericStepper id="auxNumberStepper" y="10" value="4" minimum="2" maximum="16" stepSize="1" height="18" fontSize="8" x="59" change="setAuxLength(event)" toolTip="「分割」にした場合は分割数、「px単位」にした場合ピクセル数を設定します"/>
+    <s:CheckBox id="auxBoxCheckBox" y="10" label="縦横" fontSize="9" height="18" x="187" click="setVisibleAuxBox(event)"/>
+    <s:CheckBox id="auxSkewCheckBox" y="26" label="斜め" fontSize="9" height="18" x="187" click="setVisibleAuxSkew(event)"/>
+    <s:Button id="undoButton" y="36" label="アンドゥ" enabled="false" x="10" click="undo(event)"/>
+    <s:Button id="redoButton" y="36" label="リドゥ" enabled="false" x="88" click="redo(event)"/>
+    <s:Button id="windowsResetButton" x="10" y="121" label="ウィンドウ初期状態" width="120" height="16" fontSize="11" click="windowsResetButton_clickHandler(event)"/>
+    <s:Button id="verticalMirrorButton" x="138" y="121" label="全レイヤー上下反転" width="120" height="16" fontSize="11" click="setVerticalMirror(event)"/>
+    <s:Button id="horizontalMirrorButton" x="10" y="146" label="全レイヤー左右反転" width="120" height="16" fontSize="11" click="setHorizontalMirror(event)"/>
+    <s:Button id="passwordButton" x="138" y="146" label=" ふっかつのじゅもん" width="120" height="16" fontSize="11" enabled="false"/>
+    <s:Button id="logPlayButton" y="105" label="ログプレイ" visible="false" />
+    <s:Button id="checkPngButton" y="105" label="同一check" visible="false" />
+    <s:DropDownList y="10" id="auxTypeComboBox" width="70" fontSize="10" height="18" selectedIndex="0" x="113" change="setAuxType(event)">
+        <s:ArrayCollection>
+            <fx:Object label="px単位" data="{AuxBitmap.PIXELS}" />
+            <fx:Object label="分割" data="{AuxBitmap.LINES}" />
+        </s:ArrayCollection>
+    </s:DropDownList>
+</s:Border>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Border
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/halo"
+    borderColor="#000000" borderWeight="1"
+    width="550" height="170">
+    <s:Label x="25" y="7" text="投稿者名"/>
+    <s:TextInput id="fromTextInput" x="86" y="8" maxChars="32" fontSize="14" focusThickness="0"/>
+    <s:Label x="3" y="39" text="絵のタイトル"/>
+    <s:TextInput id="titleTextInput" x="86" y="40" maxChars="32" fontSize="14" focusThickness="0" width="406"/>
+    <s:CheckBox id="watchlistCheckBox" x="254" y="7" label="ウォッチリストに登録"/>
+    <s:Label x="25" y="71" text="書き込み"/>
+    <s:Button id="postOekakiButton" x="420" y="6" label="お絵カキコする！" enabled="false"/>
+    <s:TextArea id="messageTextArea" x="86" y="69" width="406" height="61" fontSize="14" focusThickness="0">
+        <s:text></s:text>
+    </s:TextArea>
+</s:Border>
