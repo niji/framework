@@ -29,7 +29,7 @@ package org.libspark.gunyarapaint.commands
         
         public function PenCommand()
         {
-            m_pen = new org.libspark.gunyarapaint.Pen();
+            m_pen = new Pen();
         }
         
         public function read(bytes:ByteArray):void
