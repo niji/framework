@@ -31,6 +31,7 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
+    <application path="org/libspark/gunyarapaint/framework/CanvasDelegate.as"/>
     <application path="FlexUnitCompilerApplication.as"/>
     <application path="FlexUnitApplication.as"/>
   </applications>
