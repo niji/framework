@@ -1,9 +1,9 @@
-package org.libspark.gunyarapaint
+package org.libspark.gunyarapaint.framework
 {
     import flash.display.Shape;
     import flash.events.EventDispatcher;
     
-    import org.libspark.gunyarapaint.errors.NotSupportedVersionError;
+    import org.libspark.gunyarapaint.framework.errors.NotSupportedVersionError;
     
     public class CanvasContext extends EventDispatcher
     {
@@ -107,10 +107,57 @@ package org.libspark.gunyarapaint
             return m_height;
         }
         
-        protected var m_version:uint;
-        protected var m_painter:Painter;
-        protected var m_undo:UndoStack;
-        protected var m_width:uint;
-        protected var m_height:uint;
+        /**
+         * お絵描きを実行するオブジェクトを設定する
+         * 
+         */
+        internal function setPainter(value:Painter):void
+        {
+            m_painter = value;
+        }
+        
+        /**
+         * 現在のお絵描きログのバージョンを設定する
+         * 
+         */
+        internal function setVersion(value:uint):void
+        {
+            m_version = value;
+        }
+        
+        /**
+         * UndoStack オブジェクトを設定する
+         * 
+         * @return ログのバージョン
+         */
+        internal function setUndo(value:UndoStack):void
+        {
+            m_undo = value;
+        }
+        
+        /**
+         * 描写するキャンバスの幅を設定する
+         * 
+         */
+        internal function setWidth(value:uint):void
+        {
+            m_width = value;
+        }
+        
+        /**
+         * 描写するキャンバスの高さを設定する
+         * 
+         * @return 画像の幅
+         */
+        internal function setHeight(value:uint):void
+        {
+            m_height = value;
+        }
+        
+        private var m_version:uint;
+        private var m_painter:Painter;
+        private var m_undo:UndoStack;
+        private var m_width:uint;
+        private var m_height:uint;
     }
 }

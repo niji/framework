@@ -1,4 +1,4 @@
-package org.libspark.gunyarapaint
+package org.libspark.gunyarapaint.framework
 {
     import flash.utils.ByteArray;
 
@@ -15,12 +15,12 @@ package org.libspark.gunyarapaint
         
         public function prepare(width:int, height:int, undo:int):void
         {
-            m_width = width;
-            m_height = height;
+            setWidth(width);
+            setHeight(height);
             m_logger.writeHeader(PAINTER_LOG_VERSION, width, height, undo);
             m_logger.loadCommands();
             createPainter(width, height, undo);
-            m_undo = new UndoStack(m_painter, undo);
+            setUndo(new UndoStack(painter, undo));
         }
         
         public function get logger():Logger

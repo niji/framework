@@ -1,13 +1,13 @@
-package org.libspark.gunyarapaint
+package org.libspark.gunyarapaint.framework
 {
     import flash.display.BitmapData;
     import flash.utils.ByteArray;
     import flash.utils.clearInterval;
     import flash.utils.setInterval;
     
-    import org.libspark.gunyarapaint.commands.ICommand;
-    import org.libspark.gunyarapaint.errors.EOLError;
-    import org.libspark.gunyarapaint.events.PlayerEvent;
+    import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.errors.EOLError;
+    import org.libspark.gunyarapaint.framework.events.PlayerEvent;
 
     public final class Player extends CanvasContext
     {
@@ -32,18 +32,16 @@ package org.libspark.gunyarapaint
             var data:Object = {};
             m_parser = new Parser(bytes);
             m_parser.readHeader(data);
-            var width:uint = m_width = data.width;
-            var height:uint = m_height = data.height;
-            var version:uint = m_version = data.version;
+            var width:uint = data.width;
+            var height:uint = data.height;
+            var version:uint = data.version; 
             createPainter(width, height, version);
             m_parser.loadCommands();
             m_parser.preload();
-            m_undo = new UndoStack(m_painter, m_parser.maxUndoCount);
-        }
-        
-        public function restore(layerBitmaps:BitmapData, metadata:Object):void
-        {
-            m_painter.restore(layerBitmaps, metadata);
+            setWidth(width);
+            setHeight(height);
+            setVersion(version);
+            setUndo(new UndoStack(painter, m_parser.maxUndoCount));
         }
         
         /**
@@ -52,9 +50,9 @@ package org.libspark.gunyarapaint
          */
         public function reload():void
         {
-            createPainter(m_width, m_height, m_version);
+            createPainter(width, height, version);
             m_parser.resetCommands();
-            m_undo = new UndoStack(m_painter, m_parser.maxUndoCount);
+            setUndo(new UndoStack(painter, m_parser.maxUndoCount));
         }
         
         /**
@@ -163,7 +161,7 @@ package org.libspark.gunyarapaint
         
         public var speed:uint;
         public var duration:uint;
-        protected var m_parser:Parser;
+        private var m_parser:Parser;
         private var m_timerID:uint;
     }
 }

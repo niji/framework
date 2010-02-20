@@ -1,6 +1,5 @@
-package org.libspark.gunyarapaint
+package org.libspark.gunyarapaint.framework
 {
-    
     internal final class PainterV2 extends Painter
     {
         public function PainterV2(width:int, height:int, engine:PaintEngine)
