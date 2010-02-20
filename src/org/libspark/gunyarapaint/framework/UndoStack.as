@@ -1,11 +1,11 @@
-package org.libspark.gunyarapaint
+package org.libspark.gunyarapaint.framework
 {
     import flash.events.EventDispatcher;
     import flash.events.IEventDispatcher;
     
-    import org.libspark.gunyarapaint.errors.RedoError;
-    import org.libspark.gunyarapaint.errors.UndoError;
-    import org.libspark.gunyarapaint.events.UndoEvent;
+    import org.libspark.gunyarapaint.framework.errors.RedoError;
+    import org.libspark.gunyarapaint.framework.errors.UndoError;
+    import org.libspark.gunyarapaint.framework.events.UndoEvent;
 
     public final class UndoStack extends EventDispatcher
     {

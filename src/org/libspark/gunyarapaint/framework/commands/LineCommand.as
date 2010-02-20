@@ -1,4 +1,4 @@
-package org.libspark.gunyarapaint.commands
+package org.libspark.gunyarapaint.framework.commands
 {
     import flash.geom.Point;
 

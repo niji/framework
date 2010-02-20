@@ -1,6 +1,6 @@
-package org.libspark.gunyarapaint.modules
+package org.libspark.gunyarapaint.framework.modules
 {
-    import org.libspark.gunyarapaint.Recorder;
+    import org.libspark.gunyarapaint.framework.Recorder;
     
     public class EraserModule extends DrawModule implements IDrawable
     {

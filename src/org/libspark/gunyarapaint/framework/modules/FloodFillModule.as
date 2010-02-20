@@ -1,8 +1,8 @@
-package org.libspark.gunyarapaint.modules
+package org.libspark.gunyarapaint.framework.modules
 {
-    import org.libspark.gunyarapaint.Recorder;
-    import org.libspark.gunyarapaint.commands.FloodFillCommand;
-    import org.libspark.gunyarapaint.commands.MoveToCommand;
+    import org.libspark.gunyarapaint.framework.Recorder;
+    import org.libspark.gunyarapaint.framework.commands.FloodFillCommand;
+    import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     
     public class FloodFillModule extends DrawModule implements IDrawable
     {

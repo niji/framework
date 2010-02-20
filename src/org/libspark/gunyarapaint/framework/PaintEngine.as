@@ -1,4 +1,4 @@
-package org.libspark.gunyarapaint
+package org.libspark.gunyarapaint.framework
 {
     import flash.display.Graphics;
     import flash.display.Shape;

@@ -1,8 +1,8 @@
-package org.libspark.gunyarapaint.commands
+package org.libspark.gunyarapaint.framework.commands
 {
     import flash.utils.ByteArray;
     
-    import org.libspark.gunyarapaint.CanvasContext;
+    import org.libspark.gunyarapaint.framework.CanvasContext;
     
     public final class PixelCommand implements ICommand
     {

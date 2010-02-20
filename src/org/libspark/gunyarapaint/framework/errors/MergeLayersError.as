@@ -1,4 +1,4 @@
-package org.libspark.gunyarapaint.errors
+package org.libspark.gunyarapaint.framework.errors
 {
     public final class MergeLayersError extends Error
     {

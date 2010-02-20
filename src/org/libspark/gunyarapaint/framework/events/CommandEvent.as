@@ -1,6 +1,6 @@
-package org.libspark.gunyarapaint.events
+package org.libspark.gunyarapaint.framework.events
 {
-    import org.libspark.gunyarapaint.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.commands.ICommand;
 
     public final class CommandEvent extends AbstractEvent
     {

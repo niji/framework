@@ -1,31 +1,31 @@
-package org.libspark.gunyarapaint
+package org.libspark.gunyarapaint.framework
 {
     import flash.events.EventDispatcher;
     
-    import org.libspark.gunyarapaint.commands.BeginFillCommand;
-    import org.libspark.gunyarapaint.commands.CompositeCommand;
-    import org.libspark.gunyarapaint.commands.DrawCircleCommand;
-    import org.libspark.gunyarapaint.commands.EndFillCommand;
-    import org.libspark.gunyarapaint.commands.FloodFillCommand;
-    import org.libspark.gunyarapaint.commands.HorizontalMirrorCommand;
-    import org.libspark.gunyarapaint.commands.ICommand;
-    import org.libspark.gunyarapaint.commands.LineToCommand;
-    import org.libspark.gunyarapaint.commands.MoveToCommand;
-    import org.libspark.gunyarapaint.commands.PenCommand;
-    import org.libspark.gunyarapaint.commands.PixelCommand;
-    import org.libspark.gunyarapaint.commands.RedoCommand;
-    import org.libspark.gunyarapaint.commands.UndoCommand;
-    import org.libspark.gunyarapaint.commands.VerticalMirrorCommand;
-    import org.libspark.gunyarapaint.commands.layer.CopyLayerCommand;
-    import org.libspark.gunyarapaint.commands.layer.CreateLayerCommand;
-    import org.libspark.gunyarapaint.commands.layer.MergeLayerCommand;
-    import org.libspark.gunyarapaint.commands.layer.RemoveLayerCommand;
-    import org.libspark.gunyarapaint.commands.layer.SetLayerAlphaCommand;
-    import org.libspark.gunyarapaint.commands.layer.SetLayerBlendModeCommand;
-    import org.libspark.gunyarapaint.commands.layer.SetLayerIndexCommand;
-    import org.libspark.gunyarapaint.commands.layer.SetLayerVisibleCommand;
-    import org.libspark.gunyarapaint.commands.layer.SwapLayerCommand;
-    import org.libspark.gunyarapaint.events.CommandEvent;
+    import org.libspark.gunyarapaint.framework.commands.BeginFillCommand;
+    import org.libspark.gunyarapaint.framework.commands.CompositeCommand;
+    import org.libspark.gunyarapaint.framework.commands.DrawCircleCommand;
+    import org.libspark.gunyarapaint.framework.commands.EndFillCommand;
+    import org.libspark.gunyarapaint.framework.commands.FloodFillCommand;
+    import org.libspark.gunyarapaint.framework.commands.HorizontalMirrorCommand;
+    import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.commands.LineToCommand;
+    import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
+    import org.libspark.gunyarapaint.framework.commands.PenCommand;
+    import org.libspark.gunyarapaint.framework.commands.PixelCommand;
+    import org.libspark.gunyarapaint.framework.commands.RedoCommand;
+    import org.libspark.gunyarapaint.framework.commands.UndoCommand;
+    import org.libspark.gunyarapaint.framework.commands.VerticalMirrorCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.CopyLayerCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.CreateLayerCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.MergeLayerCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.RemoveLayerCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.SetLayerAlphaCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.SetLayerBlendModeCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.SetLayerIndexCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.SetLayerVisibleCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.SwapLayerCommand;
+    import org.libspark.gunyarapaint.framework.events.CommandEvent;
 
     public class CommandCollection extends EventDispatcher
     {

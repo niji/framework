@@ -1,9 +1,9 @@
-package org.libspark.gunyarapaint
+package org.libspark.gunyarapaint.framework
 {
     import flash.display.BitmapData;
     import flash.display.Sprite;
     
-    import org.libspark.gunyarapaint.errors.MergeLayersError;
+    import org.libspark.gunyarapaint.framework.errors.MergeLayersError;
 
     public class LayerBitmapCollection
     {

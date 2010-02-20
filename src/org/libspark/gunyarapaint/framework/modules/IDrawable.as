@@ -1,4 +1,4 @@
-package org.libspark.gunyarapaint.modules
+package org.libspark.gunyarapaint.framework.modules
 {
     public interface IDrawable
     {

@@ -1,9 +1,9 @@
-package org.libspark.gunyarapaint.commands
+package org.libspark.gunyarapaint.framework.commands
 {
     import flash.utils.ByteArray;
     
-    import org.libspark.gunyarapaint.CanvasContext;
-    import org.libspark.gunyarapaint.Pen;
+    import org.libspark.gunyarapaint.framework.CanvasContext;
+    import org.libspark.gunyarapaint.framework.Pen;
     
     public final class PenCommand implements ICommand
     {

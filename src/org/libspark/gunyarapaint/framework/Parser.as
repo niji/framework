@@ -1,17 +1,17 @@
-    package org.libspark.gunyarapaint
+    package org.libspark.gunyarapaint.framework
 {
     import flash.utils.ByteArray;
     import flash.utils.Endian;
     
-    import org.libspark.gunyarapaint.commands.ICommand;
-    import org.libspark.gunyarapaint.commands.LineToCommand;
-    import org.libspark.gunyarapaint.commands.MoveToCommand;
-    import org.libspark.gunyarapaint.commands.RedoCommand;
-    import org.libspark.gunyarapaint.commands.UndoCommand;
-    import org.libspark.gunyarapaint.errors.EOLError;
-    import org.libspark.gunyarapaint.errors.InvalidCommandError;
-    import org.libspark.gunyarapaint.errors.InvalidSignatureError;
-    import org.libspark.gunyarapaint.events.CommandEvent;
+    import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.commands.LineToCommand;
+    import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
+    import org.libspark.gunyarapaint.framework.commands.RedoCommand;
+    import org.libspark.gunyarapaint.framework.commands.UndoCommand;
+    import org.libspark.gunyarapaint.framework.errors.EOLError;
+    import org.libspark.gunyarapaint.framework.errors.InvalidCommandError;
+    import org.libspark.gunyarapaint.framework.errors.InvalidSignatureError;
+    import org.libspark.gunyarapaint.framework.events.CommandEvent;
     
     public final class Parser extends CommandCollection
     {

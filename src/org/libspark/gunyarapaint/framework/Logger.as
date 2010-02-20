@@ -1,11 +1,11 @@
-package org.libspark.gunyarapaint
+package org.libspark.gunyarapaint.framework
 {
     import flash.utils.ByteArray;
     import flash.utils.Endian;
     
-    import org.libspark.gunyarapaint.commands.ICommand;
-    import org.libspark.gunyarapaint.commands.LineToCommand;
-    import org.libspark.gunyarapaint.commands.MoveToCommand;
+    import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.commands.LineToCommand;
+    import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
 
     public final class Logger extends CommandCollection
     {

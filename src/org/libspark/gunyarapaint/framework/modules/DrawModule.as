@@ -1,25 +1,25 @@
-package org.libspark.gunyarapaint.modules
+package org.libspark.gunyarapaint.framework.modules
 {
     import flash.errors.IllegalOperationError;
     
-    import org.libspark.gunyarapaint.LayerBitmap;
-    import org.libspark.gunyarapaint.Logger;
-    import org.libspark.gunyarapaint.Painter;
-    import org.libspark.gunyarapaint.Recorder;
-    import org.libspark.gunyarapaint.commands.HorizontalMirrorCommand;
-    import org.libspark.gunyarapaint.commands.ICommand;
-    import org.libspark.gunyarapaint.commands.PenCommand;
-    import org.libspark.gunyarapaint.commands.RedoCommand;
-    import org.libspark.gunyarapaint.commands.UndoCommand;
-    import org.libspark.gunyarapaint.commands.VerticalMirrorCommand;
-    import org.libspark.gunyarapaint.commands.layer.CopyLayerCommand;
-    import org.libspark.gunyarapaint.commands.layer.CreateLayerCommand;
-    import org.libspark.gunyarapaint.commands.layer.MergeLayerCommand;
-    import org.libspark.gunyarapaint.commands.layer.RemoveLayerCommand;
-    import org.libspark.gunyarapaint.commands.layer.SetLayerAlphaCommand;
-    import org.libspark.gunyarapaint.commands.layer.SetLayerBlendModeCommand;
-    import org.libspark.gunyarapaint.commands.layer.SetLayerIndexCommand;
-    import org.libspark.gunyarapaint.commands.layer.SwapLayerCommand;
+    import org.libspark.gunyarapaint.framework.LayerBitmap;
+    import org.libspark.gunyarapaint.framework.Logger;
+    import org.libspark.gunyarapaint.framework.Painter;
+    import org.libspark.gunyarapaint.framework.Recorder;
+    import org.libspark.gunyarapaint.framework.commands.HorizontalMirrorCommand;
+    import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.commands.PenCommand;
+    import org.libspark.gunyarapaint.framework.commands.RedoCommand;
+    import org.libspark.gunyarapaint.framework.commands.UndoCommand;
+    import org.libspark.gunyarapaint.framework.commands.VerticalMirrorCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.CopyLayerCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.CreateLayerCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.MergeLayerCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.RemoveLayerCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.SetLayerAlphaCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.SetLayerBlendModeCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.SetLayerIndexCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.SwapLayerCommand;
 
     internal class DrawModule
     {

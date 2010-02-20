@@ -1,10 +1,10 @@
-package org.libspark.gunyarapaint.modules
+package org.libspark.gunyarapaint.framework.modules
 {
-    import org.libspark.gunyarapaint.Painter;
-    import org.libspark.gunyarapaint.Recorder;
-    import org.libspark.gunyarapaint.commands.CompositeCommand;
-    import org.libspark.gunyarapaint.commands.LineToCommand;
-    import org.libspark.gunyarapaint.commands.MoveToCommand;
+    import org.libspark.gunyarapaint.framework.Painter;
+    import org.libspark.gunyarapaint.framework.Recorder;
+    import org.libspark.gunyarapaint.framework.commands.CompositeCommand;
+    import org.libspark.gunyarapaint.framework.commands.LineToCommand;
+    import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     
     public class LineModule extends DrawModule implements IDrawable
     {

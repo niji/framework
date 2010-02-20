@@ -1,12 +1,12 @@
-package org.libspark.gunyarapaint.modules
+package org.libspark.gunyarapaint.framework.modules
 {
     import flash.geom.Rectangle;
     
-    import org.libspark.gunyarapaint.Painter;
-    import org.libspark.gunyarapaint.Recorder;
-    import org.libspark.gunyarapaint.commands.CompositeCommand;
-    import org.libspark.gunyarapaint.commands.DrawCircleCommand;
-    import org.libspark.gunyarapaint.commands.MoveToCommand;
+    import org.libspark.gunyarapaint.framework.Painter;
+    import org.libspark.gunyarapaint.framework.Recorder;
+    import org.libspark.gunyarapaint.framework.commands.CompositeCommand;
+    import org.libspark.gunyarapaint.framework.commands.DrawCircleCommand;
+    import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     
     public class CircleModule extends DrawModule implements IDrawable
     {

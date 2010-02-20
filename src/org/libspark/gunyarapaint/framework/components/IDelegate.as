@@ -1,9 +1,9 @@
-package org.libspark.gunyarapaint.components
+package org.libspark.gunyarapaint.framework.components
 {
     import mx.collections.ArrayCollection;
     
-    import org.libspark.gunyarapaint.Recorder;
-    import org.libspark.gunyarapaint.modules.IDrawable;
+    import org.libspark.gunyarapaint.framework.Recorder;
+    import org.libspark.gunyarapaint.framework.modules.IDrawable;
     
     public interface IDelegate
     {

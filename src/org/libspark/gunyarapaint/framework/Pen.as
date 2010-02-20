@@ -1,4 +1,4 @@
-package org.libspark.gunyarapaint
+package org.libspark.gunyarapaint.framework
 {
     import flash.display.BitmapData;
     import flash.display.BlendMode;
@@ -9,7 +9,7 @@ package org.libspark.gunyarapaint
     import flash.events.EventDispatcher;
     import flash.geom.Matrix;
     
-    import org.libspark.gunyarapaint.events.PenEvent;
+    import org.libspark.gunyarapaint.framework.events.PenEvent;
 
     public final class Pen extends EventDispatcher
     {

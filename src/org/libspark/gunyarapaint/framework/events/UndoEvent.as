@@ -1,4 +1,4 @@
-package org.libspark.gunyarapaint.events
+package org.libspark.gunyarapaint.framework.events
 {
     public final class UndoEvent extends AbstractEvent
     {

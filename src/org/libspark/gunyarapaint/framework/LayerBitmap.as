@@ -1,4 +1,4 @@
-package org.libspark.gunyarapaint
+package org.libspark.gunyarapaint.framework
 {
     import flash.display.Bitmap;
     import flash.display.BitmapData;

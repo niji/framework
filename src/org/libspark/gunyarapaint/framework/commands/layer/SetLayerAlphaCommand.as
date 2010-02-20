@@ -1,9 +1,9 @@
-package org.libspark.gunyarapaint.commands.layer
+package org.libspark.gunyarapaint.framework.commands.layer
 {
     import flash.utils.ByteArray;
     
-    import org.libspark.gunyarapaint.CanvasContext;
-    import org.libspark.gunyarapaint.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.CanvasContext;
+    import org.libspark.gunyarapaint.framework.commands.ICommand;
     
     public final class SetLayerAlphaCommand implements ICommand
     {
