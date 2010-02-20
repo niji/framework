@@ -1,9 +1,9 @@
-package org.libspark.gunyarapaint.test
+package org.libspark.gunyarapaint.framework.test
 {
     import flash.display.BitmapData;
     
-    import org.libspark.gunyarapaint.LayerBitmap;
-    import org.libspark.gunyarapaint.LayerBitmapCollection;
+    import org.libspark.gunyarapaint.framework.LayerBitmap;
+    import org.libspark.gunyarapaint.framework.LayerBitmapCollection;
     
     public class FakeLayerBitmapCollection extends LayerBitmapCollection
     {

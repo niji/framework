@@ -1,11 +1,11 @@
-package org.libspark.gunyarapaint.test.commands
+package org.libspark.gunyarapaint.framework.test.commands
 {
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.commands.MoveToCommand;
-    import org.libspark.gunyarapaint.test.FakeCanvasContext;
-    import org.libspark.gunyarapaint.test.FakePaintEngine;
+    import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
+    import org.libspark.gunyarapaint.framework.test.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.test.FakePaintEngine;
 
     public class MoveToCommandTest
     {

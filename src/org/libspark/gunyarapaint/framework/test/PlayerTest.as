@@ -1,9 +1,9 @@
-package org.libspark.gunyarapaint.test
+package org.libspark.gunyarapaint.framework.test
 {
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.Player;
+    import org.libspark.gunyarapaint.framework.Player;
 
     public class PlayerTest
     {
@@ -25,7 +25,7 @@ package org.libspark.gunyarapaint.test
             Assert.assertFalse(player.playing);
         }
         
-        [Test(expects="org.libspark.gunyarapaint.errors.InvalidSignatureError")]
+        [Test(expects="org.libspark.gunyarapaint.framework.errors.InvalidSignatureError")]
         public function 正しい署名が入っていないログを読み込むと例外を送出する():void
         {
             var bytes:ByteArray = new ByteArray();
@@ -36,7 +36,7 @@ package org.libspark.gunyarapaint.test
             canvas.load(bytes);
         }
         
-        [Test(expects="org.libspark.gunyarapaint.errors.NotSupportedVersionError")]
+        [Test(expects="org.libspark.gunyarapaint.framework.errors.NotSupportedVersionError")]
         public function サポートしないバージョンのログを読み込むと例外を送出する():void
         {
             var bytes:ByteArray = createLog("0.0.0");

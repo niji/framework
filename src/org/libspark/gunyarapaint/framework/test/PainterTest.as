@@ -1,4 +1,4 @@
-package org.libspark.gunyarapaint.test
+package org.libspark.gunyarapaint.framework.test
 {
     import flash.display.BlendMode;
     import flash.display.CapsStyle;
@@ -8,9 +8,9 @@ package org.libspark.gunyarapaint.test
     import flash.display.Sprite;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.Painter;
-    import org.libspark.gunyarapaint.LayerBitmap;
-    import org.libspark.gunyarapaint.Pen;
+    import org.libspark.gunyarapaint.framework.Painter;
+    import org.libspark.gunyarapaint.framework.LayerBitmap;
+    import org.libspark.gunyarapaint.framework.Pen;
 
     public class PainterTest
     {

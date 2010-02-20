@@ -1,11 +1,11 @@
-package org.libspark.gunyarapaint.test
+package org.libspark.gunyarapaint.framework.test
 {
     import flash.display.Shape;
     import flash.geom.Point;
     import flash.geom.Rectangle;
     
-    import org.libspark.gunyarapaint.PaintEngine;
-    import org.libspark.gunyarapaint.Pen;
+    import org.libspark.gunyarapaint.framework.PaintEngine;
+    import org.libspark.gunyarapaint.framework.Pen;
 
     public class FakePaintEngine extends PaintEngine
     {

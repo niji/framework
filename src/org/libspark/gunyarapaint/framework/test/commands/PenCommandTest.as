@@ -1,4 +1,4 @@
-package org.libspark.gunyarapaint.test.commands
+package org.libspark.gunyarapaint.framework.test.commands
 {
     import flash.display.CapsStyle;
     import flash.display.JointStyle;
@@ -6,10 +6,10 @@ package org.libspark.gunyarapaint.test.commands
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.commands.ICommand;
-    import org.libspark.gunyarapaint.commands.PenCommand;
-    import org.libspark.gunyarapaint.test.FakeCanvasContext;
-    import org.libspark.gunyarapaint.test.FakePaintEngine;
+    import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.commands.PenCommand;
+    import org.libspark.gunyarapaint.framework.test.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.test.FakePaintEngine;
 
     public class PenCommandTest
     {

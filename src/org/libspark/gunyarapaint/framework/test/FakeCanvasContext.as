@@ -1,7 +1,7 @@
-package org.libspark.gunyarapaint.test
+package org.libspark.gunyarapaint.framework.test
 {
-    import org.libspark.gunyarapaint.CanvasContext;
-    import org.libspark.gunyarapaint.Painter;
+    import org.libspark.gunyarapaint.framework.CanvasContext;
+    import org.libspark.gunyarapaint.framework.Painter;
     
     public class FakeCanvasContext extends CanvasContext
     {

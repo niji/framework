@@ -1,12 +1,12 @@
-package org.libspark.gunyarapaint.test.commands.layer
+package org.libspark.gunyarapaint.framework.test.commands.layer
 {
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.commands.ICommand;
-    import org.libspark.gunyarapaint.commands.layer.CopyLayerCommand;
-    import org.libspark.gunyarapaint.test.FakeCanvasContext;
-    import org.libspark.gunyarapaint.test.FakeLayerBitmapCollection;
+    import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.CopyLayerCommand;
+    import org.libspark.gunyarapaint.framework.test.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.test.FakeLayerBitmapCollection;
 
     public class CopyLayerCommandTest
     {

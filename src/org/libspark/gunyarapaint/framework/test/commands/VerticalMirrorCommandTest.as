@@ -1,12 +1,12 @@
-package org.libspark.gunyarapaint.test.commands
+package org.libspark.gunyarapaint.framework.framework.test.commands
 {
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.commands.ICommand;
-    import org.libspark.gunyarapaint.commands.VerticalMirrorCommand;
-    import org.libspark.gunyarapaint.test.FakeCanvasContext;
-    import org.libspark.gunyarapaint.test.FakePainter;
+    import org.libspark.gunyarapaint.framework.framework.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.framework.commands.VerticalMirrorCommand;
+    import org.libspark.gunyarapaint.framework.framework.test.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.framework.test.FakePainter;
 
     public class VerticalMirrorCommandTest
     {

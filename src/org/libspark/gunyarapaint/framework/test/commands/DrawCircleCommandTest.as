@@ -1,12 +1,12 @@
-package org.libspark.gunyarapaint.test.commands
+package org.libspark.gunyarapaint.framework.test.commands
 {
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.commands.DrawCircleCommand;
-    import org.libspark.gunyarapaint.commands.ICommand;
-    import org.libspark.gunyarapaint.test.FakeCanvasContext;
-    import org.libspark.gunyarapaint.test.FakePaintEngine;
+    import org.libspark.gunyarapaint.framework.commands.DrawCircleCommand;
+    import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.test.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.test.FakePaintEngine;
 
     public class DrawCircleCommandTest
     {

@@ -1,11 +1,11 @@
-package org.libspark.gunyarapaint.test.commands
+package org.libspark.gunyarapaint.framework.test.commands
 {
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.commands.ICommand;
-    import org.libspark.gunyarapaint.commands.RedoCommand;
-    import org.libspark.gunyarapaint.test.FakeCanvasContext;
+    import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.commands.RedoCommand;
+    import org.libspark.gunyarapaint.framework.test.FakeCanvasContext;
 
     public class RedoCommandTest
     {

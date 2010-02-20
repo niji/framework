@@ -1,27 +1,27 @@
-package org.libspark.gunyarapaint.test
+package org.libspark.gunyarapaint.framework.test
 {
-    import org.libspark.gunyarapaint.test.commands.BeginFillCommandTest;
-    import org.libspark.gunyarapaint.test.commands.CompositeCommandTest;
-    import org.libspark.gunyarapaint.test.commands.DrawCircleCommandTest;
-    import org.libspark.gunyarapaint.test.commands.EndFillComamndTest;
-    import org.libspark.gunyarapaint.test.commands.FloodFillCommandTest;
-    import org.libspark.gunyarapaint.test.commands.HorizontalMirrorCommandTest;
-    import org.libspark.gunyarapaint.test.commands.LineToCommandTest;
-    import org.libspark.gunyarapaint.test.commands.MoveToCommandTest;
-    import org.libspark.gunyarapaint.test.commands.PenCommandTest;
-    import org.libspark.gunyarapaint.test.commands.PixelCommandTest;
-    import org.libspark.gunyarapaint.test.commands.RedoCommandTest;
-    import org.libspark.gunyarapaint.test.commands.UndoCommandTest;
-    import org.libspark.gunyarapaint.test.commands.VerticalMirrorCommandTest;
-    import org.libspark.gunyarapaint.test.commands.layer.CopyLayerCommandTest;
-    import org.libspark.gunyarapaint.test.commands.layer.CreateLayerCommandTest;
-    import org.libspark.gunyarapaint.test.commands.layer.MergeLayerCommandTest;
-    import org.libspark.gunyarapaint.test.commands.layer.RemoveLayerCommandTest;
-    import org.libspark.gunyarapaint.test.commands.layer.SetLayerAlphaCommandTest;
-    import org.libspark.gunyarapaint.test.commands.layer.SetLayerBlendModeCommandTest;
-    import org.libspark.gunyarapaint.test.commands.layer.SetLayerIndexCommandTest;
-    import org.libspark.gunyarapaint.test.commands.layer.SetLayerVisibleCommandTest;
-    import org.libspark.gunyarapaint.test.commands.layer.SwapLayerCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.BeginFillCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.CompositeCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.DrawCircleCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.EndFillComamndTest;
+    import org.libspark.gunyarapaint.framework.test.commands.FloodFillCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.HorizontalMirrorCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.LineToCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.MoveToCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.PenCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.PixelCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.RedoCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.UndoCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.VerticalMirrorCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.layer.CopyLayerCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.layer.CreateLayerCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.layer.MergeLayerCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.layer.RemoveLayerCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.layer.SetLayerAlphaCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.layer.SetLayerBlendModeCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.layer.SetLayerIndexCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.layer.SetLayerVisibleCommandTest;
+    import org.libspark.gunyarapaint.framework.test.commands.layer.SwapLayerCommandTest;
 
     [Suite]
     [RunWith("org.flexunit.runners.Suite")]

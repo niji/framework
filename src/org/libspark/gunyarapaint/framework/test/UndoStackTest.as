@@ -1,10 +1,10 @@
-package org.libspark.gunyarapaint.test
+package org.libspark.gunyarapaint.framework.framework.test
 {
     import flash.events.Event;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.UndoStack;
-    import org.libspark.gunyarapaint.events.UndoEvent;
+    import org.libspark.gunyarapaint.framework.framework.UndoStack;
+    import org.libspark.gunyarapaint.framework.framework.events.UndoEvent;
 
     public class UndoStackTest
     {
@@ -27,14 +27,14 @@ package org.libspark.gunyarapaint.test
             undo.redo(painter);
         }
         
-        [Test(expects="org.libspark.gunyarapaint.errors.UndoError")]
+        [Test(expects="org.libspark.gunyarapaint.framework.framework.errors.UndoError")]
         public function 過剰な巻き戻しが発生すると例外を送出する():void
         {
             var undo:UndoStack = new UndoStack(painter);
             undo.undo(painter);
         }
         
-        [Test(expects="org.libspark.gunyarapaint.errors.RedoError")]
+        [Test(expects="org.libspark.gunyarapaint.framework.framework.errors.RedoError")]
         public function 過剰なやり直しが発生すると例外を送出する():void
         {
             var undo:UndoStack = new UndoStack(painter);

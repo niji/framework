@@ -1,11 +1,11 @@
-package org.libspark.gunyarapaint.test
+package org.libspark.gunyarapaint.framework.test
 {
     import flash.display.BitmapData;
     import flash.display.BlendMode;
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.LayerBitmap;
+    import org.libspark.gunyarapaint.framework.LayerBitmap;
 
     public class LayerBitmapTest
     {

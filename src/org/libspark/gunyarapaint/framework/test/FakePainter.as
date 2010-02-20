@@ -1,10 +1,10 @@
-package org.libspark.gunyarapaint.test
+package org.libspark.gunyarapaint.framework.test
 {
     import flash.display.BlendMode;
     import flash.geom.Point;
     
-    import org.libspark.gunyarapaint.PaintEngine;
-    import org.libspark.gunyarapaint.Painter;
+    import org.libspark.gunyarapaint.framework.PaintEngine;
+    import org.libspark.gunyarapaint.framework.Painter;
     
     public class FakePainter extends Painter
     {

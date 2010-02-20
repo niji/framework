@@ -1,7 +1,7 @@
-package org.libspark.gunyarapaint.test
+package org.libspark.gunyarapaint.framework.test
 {
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.LayerBitmapCollection;
+    import org.libspark.gunyarapaint.framework.LayerBitmapCollection;
 
     public class LayerBitmapContainerTest
     {
@@ -56,7 +56,7 @@ package org.libspark.gunyarapaint.test
             Assert.assertStrictlyEquals(1.0, lc.at(0).alpha);
         }
         
-        [Test(expects="org.libspark.gunyarapaint.errors.MergeLayersError")]
+        [Test(expects="org.libspark.gunyarapaint.framework.errors.MergeLayersError")]
         public function 両方のレイヤーが可視でなければ統合が失敗する():void
         {
             var lc:LayerBitmapCollection = layerContainer;

@@ -1,15 +1,15 @@
-package org.libspark.gunyarapaint.test
+package org.libspark.gunyarapaint.framework.test
 {
     import flash.utils.ByteArray;
     
     import org.flexunit.Assert;
-    import org.libspark.gunyarapaint.Parser;
-    import org.libspark.gunyarapaint.commands.ICommand;
-    import org.libspark.gunyarapaint.commands.LineToCommand;
-    import org.libspark.gunyarapaint.commands.MoveToCommand;
-    import org.libspark.gunyarapaint.commands.RedoCommand;
-    import org.libspark.gunyarapaint.commands.UndoCommand;
-    import org.libspark.gunyarapaint.commands.layer.CopyLayerCommand;
+    import org.libspark.gunyarapaint.framework.Parser;
+    import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.commands.LineToCommand;
+    import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
+    import org.libspark.gunyarapaint.framework.commands.RedoCommand;
+    import org.libspark.gunyarapaint.framework.commands.UndoCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.CopyLayerCommand;
 
     public class ParserTest
     {
