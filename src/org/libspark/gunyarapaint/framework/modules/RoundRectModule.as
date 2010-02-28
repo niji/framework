@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.modules
 {
     import org.libspark.gunyarapaint.framework.Recorder;
     
-    public class RoundRectModule extends DrawModule implements IDrawable
+    internal final class RoundRectModule extends DrawModule implements IDrawable
     {
         public function RoundRectModule(recorder:Recorder)
         {
@@ -36,6 +36,11 @@ package org.libspark.gunyarapaint.framework.modules
         public function interrupt(x:Number, y:Number):void
         {
             stopDrawing();
+        }
+        
+        public function get name():String
+        {
+            return DrawModuleFactory.ROUND_RECT;
         }
     }
 }

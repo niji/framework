@@ -6,7 +6,7 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.LineToCommand;
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     
-    public class LineModule extends DrawModule implements IDrawable
+    internal final class LineModule extends DrawModule implements IDrawable
     {
         public function LineModule(recorder:Recorder)
         {
@@ -54,6 +54,11 @@ package org.libspark.gunyarapaint.framework.modules
         public function interrupt(x:Number, y:Number):void
         {
             stopDrawing();
+        }
+        
+        public function get name():String
+        {
+            return DrawModuleFactory.LINE;
         }
     }
 }

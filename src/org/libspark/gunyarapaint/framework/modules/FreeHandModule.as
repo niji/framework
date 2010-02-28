@@ -10,7 +10,7 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     import org.libspark.gunyarapaint.framework.commands.PenCommand;
     
-    public class FreeHandModule extends DrawModule implements IDrawable
+    internal final class FreeHandModule extends DrawModule implements IDrawable
     {
         public function FreeHandModule(recorder:Recorder)
         {
@@ -83,6 +83,11 @@ package org.libspark.gunyarapaint.framework.modules
         {
             move(x, y);
             stop(x, y);
+        }
+        
+        public function get name():String
+        {
+            return DrawModuleFactory.FREE_HAND;
         }
     }
 }

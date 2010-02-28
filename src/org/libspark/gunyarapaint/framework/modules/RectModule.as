@@ -3,7 +3,7 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.Recorder;
     
-    public class RectModule extends DrawModule implements IDrawable
+    internal final class RectModule extends DrawModule implements IDrawable
     {
         public function RectModule(recorder:Recorder)
         {
@@ -51,6 +51,11 @@ package org.libspark.gunyarapaint.framework.modules
         public function interrupt(x:Number, y:Number):void
         {
             stopDrawing();
+        }
+        
+        public function get name():String
+        {
+            return DrawModuleFactory.RECT;
         }
     }
 }

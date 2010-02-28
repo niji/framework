@@ -100,6 +100,13 @@ package org.libspark.gunyarapaint.framework.modules
          */
         function swapLayers(from:uint, to:uint):void;
         
+        /**
+         * モジュール名を返す
+         * 
+         * @return name
+         */        
+        function get name():String;
+        
         function set keyA(value:Boolean):void;
         function set keyQ(value:Boolean):void;
         function set shouldStartAfterDrawing(value:Boolean):void;

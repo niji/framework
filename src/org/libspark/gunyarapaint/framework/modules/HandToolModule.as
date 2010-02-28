@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.modules
 {
     import org.libspark.gunyarapaint.framework.Recorder;
     
-    public class HandToolModule extends DrawModule implements IDrawable
+    internal final class HandToolModule extends DrawModule implements IDrawable
     {
         public function HandToolModule(recorder:Recorder)
         {
@@ -23,6 +23,11 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function interrupt(x:Number, y:Number):void
         {
+        }
+        
+        public function get name():String
+        {
+            return "";
         }
     }
 }
