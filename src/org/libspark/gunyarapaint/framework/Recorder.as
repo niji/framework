@@ -1,6 +1,8 @@
 package org.libspark.gunyarapaint.framework
 {
     import flash.utils.ByteArray;
+    
+    import org.libspark.gunyarapaint.framework.commands.ICommand;
 
     public final class Recorder extends CanvasContext
     {
@@ -13,6 +15,13 @@ package org.libspark.gunyarapaint.framework
             m_logger = new Logger(bytes);
         }
         
+        /**
+         * 画像の大きさを設定し、ヘッダーに書き込む
+         * 
+         * @param width 画像の幅
+         * @param height 画像の高さ
+         * @param undo やり直しできる回数
+         */        
         public function prepare(width:int, height:int, undo:int):void
         {
             setWidth(width);
@@ -23,9 +32,17 @@ package org.libspark.gunyarapaint.framework
             setUndo(new UndoStack(painter, undo));
         }
         
-        public function get logger():Logger
+        /**
+         * コマンドの書き出し及び実行を同時に行う
+         * 
+         * @param command コマンドオブジェクト
+         * @param args コマンドに対する引数
+         */
+        public function commitCommand(id:uint, args:Object):void
         {
-            return m_logger;
+            var command:ICommand = m_logger.getCommand(id);
+            command.write(m_logger.bytes, args);
+            command.execute(this);
         }
         
         private var m_logger:Logger;

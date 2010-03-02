@@ -14,12 +14,12 @@ package org.libspark.gunyarapaint.framework.modules
         public function start(x:Number, y:Number):void
         {
             validateLayerState();
-            commitCommand(
-                m_logger.getCommand(MoveToCommand.ID),
+            m_recorder.commitCommand(
+                MoveToCommand.ID,
                 getArgumentsFromCoordinate(x, y)
             );
-            commitCommand(
-                m_logger.getCommand(FloodFillCommand.ID),
+            m_recorder.commitCommand(
+                FloodFillCommand.ID,
                 {}
             );
         }

@@ -37,8 +37,8 @@ package org.libspark.gunyarapaint.framework.modules
         
         private function setPixel(x:Number, y:Number):void
         {
-            commitCommand(
-                m_logger.getCommand(PixelCommand.ID),
+            m_recorder.commitCommand(
+                PixelCommand.ID,
                 getArgumentsFromCoordinate(x, y)
             );
         }

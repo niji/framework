@@ -3,11 +3,9 @@ package org.libspark.gunyarapaint.framework.modules
     import flash.errors.IllegalOperationError;
     
     import org.libspark.gunyarapaint.framework.LayerBitmap;
-    import org.libspark.gunyarapaint.framework.Logger;
     import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.HorizontalMirrorCommand;
-    import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.commands.PenCommand;
     import org.libspark.gunyarapaint.framework.commands.RedoCommand;
     import org.libspark.gunyarapaint.framework.commands.UndoCommand;
@@ -26,23 +24,22 @@ package org.libspark.gunyarapaint.framework.modules
         public function DrawModule(recorder:Recorder)
         {
             m_recorder = recorder;
-            m_logger = recorder.logger;
         }
         
         public function undo():void
         {
-            commitCommand(m_logger.getCommand(UndoCommand.ID), {});
+            m_recorder.commitCommand(UndoCommand.ID, {});
         }
         
         public function redo():void
         {
-            commitCommand(m_logger.getCommand(RedoCommand.ID), {});
+            m_recorder.commitCommand(RedoCommand.ID, {});
         }
         
         public function horizontalMirror(index:uint):void
         {
-            commitCommand(
-                m_logger.getCommand(HorizontalMirrorCommand.ID),
+            m_recorder.commitCommand(
+                HorizontalMirrorCommand.ID,
                 {
                     "index": index
                 }
@@ -51,8 +48,8 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function verticalMirror(index:uint):void
         {
-            commitCommand(
-                m_logger.getCommand(VerticalMirrorCommand.ID),
+            m_recorder.commitCommand(
+                VerticalMirrorCommand.ID,
                 {
                     "index": index
                 }
@@ -61,28 +58,40 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function copyLayer():void
         {
-            commitCommand(m_logger.getCommand(CopyLayerCommand.ID), {});
+            m_recorder.commitCommand(
+                CopyLayerCommand.ID,
+                {}
+            );
         }
         
         public function createLayer():void
         {
-            commitCommand(m_logger.getCommand(CreateLayerCommand.ID), {});
+            m_recorder.commitCommand(
+                CreateLayerCommand.ID,
+                {}
+            );
         }
         
         public function mergeLayers():void
         {
-            commitCommand(m_logger.getCommand(MergeLayerCommand.ID), {});
+            m_recorder.commitCommand(
+                MergeLayerCommand.ID,
+                {}
+            );
         }
         
         public function removeLayer():void
         {
-            commitCommand(m_logger.getCommand(RemoveLayerCommand.ID), {});
+            m_recorder.commitCommand(
+                RemoveLayerCommand.ID,
+                {}
+            );
         }
         
         public function swapLayers(from:uint, to:uint):void
         {
-            commitCommand(
-                m_logger.getCommand(SwapLayerCommand.ID),
+            m_recorder.commitCommand(
+                SwapLayerCommand.ID,
                 {
                     "from": from,
                     "to": to
@@ -141,18 +150,6 @@ package org.libspark.gunyarapaint.framework.modules
                 s_coordinateX = x;
                 s_coordinateY = y;
             }
-        }
-        
-        /**
-         * コマンドの書き出し及び実行を同時に行う
-         * 
-         * @param command コマンドオブジェクト
-         * @param args コマンドに対する引数
-         */
-        protected function commitCommand(command:ICommand, args:Object):void
-        {
-            command.write(m_recorder.logger.bytes, args);
-            command.execute(m_recorder);
         }
         
         /**
@@ -247,8 +244,8 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function set alpha(value:Number):void
         {
-            commitCommand(
-                m_logger.getCommand(PenCommand.ID),
+            m_recorder.commitCommand(
+                PenCommand.ID,
                 {
                     "type": PenCommand.ALPHA,
                     "alpha": value
@@ -259,8 +256,8 @@ package org.libspark.gunyarapaint.framework.modules
         public function set blendMode(value:String):void
         {
             
-            commitCommand(
-                m_logger.getCommand(PenCommand.ID),
+            m_recorder.commitCommand(
+                PenCommand.ID,
                 {
                     "type": PenCommand.BLEND_MODE,
                     "blendMode": value
@@ -270,8 +267,8 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function set color(value:uint):void
         {
-            commitCommand(
-                m_logger.getCommand(PenCommand.ID),
+            m_recorder.commitCommand(
+                PenCommand.ID,
                 {
                     "type": PenCommand.COLOR,
                     "color": value
@@ -281,8 +278,8 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function set thickness(value:uint):void
         {
-            commitCommand(
-                m_logger.getCommand(PenCommand.ID),
+            m_recorder.commitCommand(
+                PenCommand.ID,
                 {
                     "type": PenCommand.THICKNESS,
                     "thickness": value
@@ -292,8 +289,8 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function set layerAlpha(value:Number):void
         {
-            commitCommand(
-                m_logger.getCommand(SetLayerAlphaCommand.ID),
+            m_recorder.commitCommand(
+                SetLayerAlphaCommand.ID,
                 {
                     "alpha": value
                 }
@@ -302,8 +299,8 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function set layerBlendMode(value:String):void
         {
-            commitCommand(
-                m_logger.getCommand(SetLayerBlendModeCommand.ID),
+            m_recorder.commitCommand(
+                SetLayerBlendModeCommand.ID,
                 {
                     "blendMode": value
                 }
@@ -312,8 +309,8 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function set layerIndex(value:uint):void
         {
-            commitCommand(
-                m_logger.getCommand(SetLayerIndexCommand.ID),
+            m_recorder.commitCommand(
+                SetLayerIndexCommand.ID,
                 {
                     "index": value
                 }
@@ -351,7 +348,6 @@ package org.libspark.gunyarapaint.framework.modules
         private static var s_shouldStartBeforeDrawing:Boolean = false;
         private static var s_shouldStartAfterDrawing:Boolean = false;
         protected var m_recorder:Recorder;
-        protected var m_logger:Logger;
         protected var m_drawing:Boolean;
         protected var m_drawingLine:Boolean;
     }

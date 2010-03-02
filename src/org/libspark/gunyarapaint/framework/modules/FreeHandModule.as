@@ -22,8 +22,8 @@ package org.libspark.gunyarapaint.framework.modules
             validateLayerState();
             setCoordinate(x, y);
             m_drawing = true;
-            commitCommand(
-                m_logger.getCommand(MoveToCommand.ID),
+            m_recorder.commitCommand(
+                MoveToCommand.ID,
                 getArgumentsFromCoordinate(x, y)
             );
         }
@@ -31,8 +31,8 @@ package org.libspark.gunyarapaint.framework.modules
         public function move(x:Number, y:Number):void
         {
             if (m_drawing) {
-                commitCommand(
-                    m_logger.getCommand(LineToCommand.ID),
+                m_recorder.commitCommand(
+                    LineToCommand.ID,
                     getArgumentsFromCoordinate(x, y)
                 );
             }
@@ -44,35 +44,35 @@ package org.libspark.gunyarapaint.framework.modules
                 if (!m_drawingLine) {
                     var pen:Pen = m_recorder.painter.pen;
                     var tempAlpha:Number = pen.alpha;
-                    commitCommand(
-                        m_logger.getCommand(PenCommand.ID),
+                    m_recorder.commitCommand(
+                        PenCommand.ID,
                         {
                             "type": PenCommand.ALPHA,
                             "alpha": 0
                         }
                     );
-                    commitCommand(
-                        m_logger.getCommand(BeginFillCommand.ID),
+                    m_recorder.commitCommand(
+                        BeginFillCommand.ID,
                         {
                             "color": pen.color,
                             "alpha": tempAlpha
                         }
                     );
-                    commitCommand(
-                        m_logger.getCommand(DrawCircleCommand.ID),
+                    m_recorder.commitCommand(
+                        DrawCircleCommand.ID,
                         { "radius": pen.thickness / 2 }
                     );
-                    commitCommand(m_logger.getCommand(EndFillCommand.ID), {});
-                    commitCommand(
-                        m_logger.getCommand(PenCommand.ID),
+                    m_recorder.commitCommand(EndFillCommand.ID, {});
+                    m_recorder.commitCommand(
+                        PenCommand.ID,
                         {
                             "type": PenCommand.ALPHA,
                             "alpha": tempAlpha
                         }
                     );
                 }
-                commitCommand(
-                    m_logger.getCommand(CompositeCommand.ID),
+                m_recorder.commitCommand(
+                    CompositeCommand.ID,
                     {}
                 );
                 m_drawing = false;

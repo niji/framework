@@ -41,16 +41,16 @@ package org.libspark.gunyarapaint.framework.modules
                 m_recorder.painter.stopDrawingSession();
                 if (!equalsCoordinate(x, y)) {
                     storeCircleCoordinate(x, y);
-                    commitCommand(
-                        m_logger.getCommand(MoveToCommand.ID),
+                    m_recorder.commitCommand(
+                        MoveToCommand.ID,
                         getArgumentsFromCoordinate(s_rectangle.x, s_rectangle.y)
                     );
-                    commitCommand(
-                        m_logger.getCommand(DrawCircleCommand.ID),
+                    m_recorder.commitCommand(
+                        DrawCircleCommand.ID,
                         { "radius": s_rectangle.width }
                     );
-                    commitCommand(
-                        m_logger.getCommand(CompositeCommand.ID),
+                    m_recorder.commitCommand(
+                        CompositeCommand.ID,
                         {}
                     );
                 }

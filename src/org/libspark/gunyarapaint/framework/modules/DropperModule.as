@@ -36,9 +36,8 @@ package org.libspark.gunyarapaint.framework.modules
         
         private function drop(x:Number, y:Number):void
         {
-            // TODO: implement this
-            commitCommand(
-                m_logger.getCommand(PenCommand.ID),
+            m_recorder.commitCommand(
+                PenCommand.ID,
                 {
                     "type": PenCommand.COLOR,
                     "color": m_recorder.painter.getPixel(x, y)

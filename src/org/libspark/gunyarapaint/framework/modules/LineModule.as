@@ -43,9 +43,9 @@ package org.libspark.gunyarapaint.framework.modules
                 if (!equalsCoordinate(x, y)) {
                     var from:Object = getArgumentsFromCurrentCoordinate();
                     var to:Object = getArgumentsFromCoordinate(x, y);
-                    commitCommand(m_logger.getCommand(MoveToCommand.ID), from);
-                    commitCommand(m_logger.getCommand(LineToCommand.ID), to);
-                    commitCommand(m_logger.getCommand(CompositeCommand.ID), {});
+                    m_recorder.commitCommand(MoveToCommand.ID, from);
+                    m_recorder.commitCommand(LineToCommand.ID, to);
+                    m_recorder.commitCommand(CompositeCommand.ID, {});
                 }
                 m_drawing = false;
             }
