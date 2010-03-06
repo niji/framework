@@ -10,6 +10,8 @@ package org.libspark.gunyarapaint.framework.events
         
         public static const UNREGISTERED:String = PREFIX + "unregistered";
         
+        public static const COMMITTED:String = PREFIX + "committed";
+        
         public function CommandEvent(type:String, command:ICommand)
         {
             super(type, false, false);
