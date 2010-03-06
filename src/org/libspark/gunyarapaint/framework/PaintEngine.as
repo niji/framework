@@ -121,26 +121,51 @@ package org.libspark.gunyarapaint.framework
             m_shape.blendMode = m_pen.blendMode;
         }
         
+        /**
+         * ペンオブジェクトを返す
+         * 
+         * @return Pen ペンオブジェクト
+         */
         public function get pen():Pen
         {
             return m_pen;
         }
         
+        /**
+         * シェイプオブジェクトを返す
+         * 
+         * @return Shape シェイプオブジェクト
+         */
         public function get shape():Shape
         {
             return m_shape;
         }
         
+        /**
+         * 現在のx座標を返す
+         * 
+         * @return x 現在のx座標
+         */
         public function get x():int
         {
             return m_coordinate.x;
         }
         
+        /**
+         * 現在のy座標を返す
+         * 
+         * @return y 現在のy座標
+         */
         public function get y():int
         {
             return m_coordinate.y;
         }
         
+        /**
+         * ペンオブジェクトを設定する
+         * 
+         * @param pen ペンオブジェクト
+         */
         public function set pen(value:Pen):void
         {
             m_pen = value;

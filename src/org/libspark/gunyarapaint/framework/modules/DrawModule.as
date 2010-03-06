@@ -1,7 +1,5 @@
 package org.libspark.gunyarapaint.framework.modules
 {
-    import flash.errors.IllegalOperationError;
-    
     import org.libspark.gunyarapaint.framework.LayerBitmap;
     import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.Recorder;
@@ -18,6 +16,8 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerBlendModeCommand;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerIndexCommand;
     import org.libspark.gunyarapaint.framework.commands.layer.SwapLayerCommand;
+    import org.libspark.gunyarapaint.framework.errors.InvisibleLayerError;
+    import org.libspark.gunyarapaint.framework.errors.LockedLayerError;
 
     internal class DrawModule
     {
@@ -116,25 +116,23 @@ package org.libspark.gunyarapaint.framework.modules
         /**
          * 現在のレイヤーの状態を検証する
          * 
-         * 以下の状態であれば IllegalOperationError を送出する
-         * - 現在のレイヤーが不可視
-         * - 現在のレイヤーがロックされている
-         * 
+         * @throws InvisibleLayerError 現在のレイヤーが不可視の場合
+         * @throws LockedLayerError 現在のレイヤーがロックされている場合
          */
         protected function validateLayerState():void
         {
             var layer:LayerBitmap = m_recorder.painter.layers.currentLayer;
             if (!layer.visible)
-                throw new IllegalOperationError();
+                throw new InvisibleLayerError();
             else if (layer.locked)
-                throw new IllegalOperationError();
+                throw new LockedLayerError();
         }
         
         /**
          * 現在の座標を設定する
          * 
-         * @param x
-         * @param y
+         * @param x x座標
+         * @param y y座標
          */
         protected function setCoordinate(x:Number, y:Number):void
         {
@@ -155,8 +153,8 @@ package org.libspark.gunyarapaint.framework.modules
         /**
          * 指定された座標が現在の座標と一致するかを確認する
          * 
-         * @param x
-         * @param y
+         * @param x x座標
+         * @param y y座標
          * @return 同じである場合は true
          */        
         protected function equalsCoordinate(x:Number, y:Number):Boolean
@@ -178,9 +176,9 @@ package org.libspark.gunyarapaint.framework.modules
         /**
          * 指定された座標から ICommand#write に渡す引数に変換する
          * 
-         * @param x
-         * @param y
-         * @return args
+         * @param x x座標
+         * @param y y座標
+         * @return args プロパティxとyで構成されるオブジェクト
          */
         protected function getArgumentsFromCoordinate(x:Number, y:Number):Object
         {

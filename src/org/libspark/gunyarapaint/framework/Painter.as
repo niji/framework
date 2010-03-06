@@ -137,11 +137,23 @@ package org.libspark.gunyarapaint.framework
             m_paintEngine.endFill();
         }
         
+        /**
+         * ペンオブジェクトを初期状態にリセットする
+         * 
+         * PainterEngine クラスにある resetPen の委譲
+         * 
+         */
         public function resetPen():void
         {
             m_paintEngine.resetPen();
         }
         
+        /**
+         * 描写中の内容を消去する
+         * 
+         * PainterEngine クラスにある clear の委譲
+         * 
+         */
         public function clear():void
         {
             m_paintEngine.clear();
@@ -157,12 +169,10 @@ package org.libspark.gunyarapaint.framework
         {
             // undoBuffer に入っているLayerBitmapを上書きしない為にコピーしてから作業する
             // これは floodFill 及び setPixel も同様
-            var newLayer:LayerBitmap = m_layers.currentLayer.clone();
-            newLayer.compositeFrom(
+            m_layers.currentLayer.compositeFrom(
                 m_paintEngine.shape,
                 m_paintEngine.pen.blendMode
             );
-            m_layers.setCurrentLayer(newLayer);
             m_layers.compositeAll();
         }
         
@@ -174,13 +184,11 @@ package org.libspark.gunyarapaint.framework
          */
         public function floodFill():void
         {
-            var newLayer:LayerBitmap = m_layers.currentLayer.clone();
-            newLayer.floodFill(
+            m_layers.currentLayer.floodFill(
                 m_paintEngine.x,
                 m_paintEngine.y,
                 m_paintEngine.pen.argb
             );
-            m_layers.setCurrentLayer(newLayer);
             m_layers.compositeAll();
         }
         
@@ -194,9 +202,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function setPixel(x:int, y:int):void
         {
-            var newLayer:LayerBitmap = m_layers.currentLayer.clone();
-            newLayer.setPixel(x, y, m_paintEngine.pen.argb);
-            m_layers.setCurrentLayer(newLayer);
+            m_layers.currentLayer.setPixel(x, y, m_paintEngine.pen.argb);
             m_layers.compositeAll();
         }
         
@@ -352,16 +358,31 @@ package org.libspark.gunyarapaint.framework
             m_layers.compositeAll();
         }
         
+        /**
+         * レイヤーオブジェクトを返す
+         * 
+         * @return LayerBitmapCollection
+         */
         public function get layers():LayerBitmapCollection
         {
             return m_layers;
         }
         
+        /**
+         * スプライトオブジェクトを返す
+         * 
+         * @return Sprite
+         */
         public function get view():Sprite
         {
             return m_layers.spriteToView;
         }
         
+        /**
+         * ペンオブジェクトを返す
+         * 
+         * @return Pen
+         */
         public function get pen():Pen
         {
             return m_paintEngine.pen;
@@ -389,6 +410,11 @@ package org.libspark.gunyarapaint.framework
             m_layers.compositeAll();
         }
         
+        /**
+         * ペンオブジェクトを設定する
+         * 
+         * @param value
+         */
         public function set pen(value:Pen):void
         {
             m_paintEngine.pen = value;

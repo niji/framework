@@ -33,6 +33,7 @@
          * 最初の 14bytes に "GUNYARA_PAINT" が入っていない場合 InvalidSignatureError を送出する。
          * 
          * @param data
+         * @throws InvalidSignatureError 最初の14文字がGUNYARA_PAINT:と一致しない場合
          */
         public function readHeader(data:Object):void
         {
@@ -58,7 +59,7 @@
         /**
          * ログを本体の最初の位置に移動する
          * 
-         * ヘッダーは 26 bytes あるため、それ未満であれば ArgumentError を送出する。
+         * @throws ArgumentError ログの大きさが 26 bytes 未満の場合。
          */
         public function rewind():void
         {
@@ -74,8 +75,9 @@
         /**
          * ログを先読みする
          * 
-         * ログの先読みによって、お絵描きログのコマンド数、最適なアンドゥ回数が分かる。
-         * 未登録のコマンドが入っていた場合、InvalidCommandError を送出する。
+         * ログの先読みによって、お絵描きログのコマンド数、最適なアンドゥ回数が分かる
+         * 
+         * @throws InvalidCommandError 登録されていないコマンドが検出された場合
          */
         public function preload():void
         {

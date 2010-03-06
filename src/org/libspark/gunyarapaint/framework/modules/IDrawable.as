@@ -5,40 +5,40 @@ package org.libspark.gunyarapaint.framework.modules
         /**
          * 描写の開始をする
          * 
-         * @param x
-         * @param y
+         * @param x x座標
+         * @param y y座標
          */
         function start(x:Number, y:Number):void;
         
         /**
          * 座標位置を移動する
          * 
-         * @param x
-         * @param y
+         * @param x x座標
+         * @param y y座標
          */
         function move(x:Number, y:Number):void;
         
         /**
          * 描写を終了する
          * 
-         * @param x
-         * @param y
+         * @param x x座標
+         * @param y y座標
          */
         function stop(x:Number, y:Number):void;
         
         /**
          * 描写を中断する
          * 
-         * @param x
-         * @param y
+         * @param x x座標
+         * @param y y座標
          */
         function interrupt(x:Number, y:Number):void;
         
         /**
          * 最後に移動した位置を保存する
          * 
-         * @param x
-         * @param y
+         * @param x x座標
+         * @param y y座標
          */
         function saveCoordinate(x:Number, y:Number):void;
         
