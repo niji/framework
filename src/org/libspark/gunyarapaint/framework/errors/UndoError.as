@@ -5,6 +5,7 @@ package org.libspark.gunyarapaint.framework.errors
         public function UndoError()
         {
             var message:String = "Cannot undo any more";
+            name = "UndoError";
             super(message, 0);
         }
     }

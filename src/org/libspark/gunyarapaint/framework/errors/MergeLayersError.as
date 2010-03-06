@@ -4,7 +4,8 @@ package org.libspark.gunyarapaint.framework.errors
     {
         public function MergeLayersError()
         {
-            var message:String = "Cannot merge layers because both layers are invisible";
+            var message:String = "Cannot merge layers because there is only one layer or invisible layer is found";
+            name = "MergeLayersError";
             super(message, 0);
         }
     }

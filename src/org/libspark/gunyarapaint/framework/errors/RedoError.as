@@ -5,6 +5,7 @@ package org.libspark.gunyarapaint.framework.errors
         public function RedoError()
         {
             var message:String = "Cannot redo any more";
+            name = "RedoError";
             super(message, 0);
         }
     }

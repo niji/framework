@@ -4,6 +4,7 @@ package org.libspark.gunyarapaint.framework.errors
     {
         public function EOLError()
         {
+            name = "EOLError";
             super("Log has been reached to the end", 0);
         }
     }

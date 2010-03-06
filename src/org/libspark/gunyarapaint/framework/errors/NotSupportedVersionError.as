@@ -6,6 +6,7 @@ package org.libspark.gunyarapaint.framework.errors
         {
             var message:String = "Tried loading not supported version's log ("
                 + version + ")";
+            name = "NotSupportedVersionError";
             super(message, 0);
         }
     }

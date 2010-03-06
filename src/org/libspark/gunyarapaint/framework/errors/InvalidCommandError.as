@@ -5,6 +5,7 @@ package org.libspark.gunyarapaint.framework.errors
         public function InvalidCommandError(count:uint, command:uint)
         {
             var message:String = command + " is not found at " +count;
+            name = "InvalidCommandError";
             super(message, 0);
         }
     }

@@ -5,6 +5,7 @@ package org.libspark.gunyarapaint.framework.errors
         public function InvalidSignatureError()
         {
             var message:String = "Tried loading invalid signature log";
+            name = "InvalidSignatureError";
             super(message, 0);
         }
     }
