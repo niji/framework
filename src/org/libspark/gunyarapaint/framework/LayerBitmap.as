@@ -47,7 +47,6 @@ package org.libspark.gunyarapaint.framework
         public function compositeFrom(source:IBitmapDrawable,
                                       blendMode:String):void
         {
-            bitmapData = bitmapData.clone();
             bitmapData.draw(source, null, null, blendMode);
         }
         
@@ -84,7 +83,6 @@ package org.libspark.gunyarapaint.framework
          */
         public function floodFill(x:Number, y:Number, color:uint):void
         {
-            bitmapData = bitmapData.clone();
             bitmapData.floodFill(x, y, color);
         }
         
@@ -97,7 +95,6 @@ package org.libspark.gunyarapaint.framework
          */
         public function setPixel(x:Number, y:Number, color:uint):void
         {
-            bitmapData = bitmapData.clone();
             bitmapData.setPixel32(x, y, color);
         }
         

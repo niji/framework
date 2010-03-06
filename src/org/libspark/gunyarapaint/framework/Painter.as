@@ -334,7 +334,7 @@ package org.libspark.gunyarapaint.framework
                 count, true
             );
             for (var i:uint = 0; i < count; i++) {
-                var layer:LayerBitmap = m_layers.layers[i].clone(false);
+                var layer:LayerBitmap = m_layers.layers[i].clone();
                 layers[i] = layer;
             }
             var undoData:Object = {};
@@ -350,7 +350,7 @@ package org.libspark.gunyarapaint.framework
             var count:uint = undoData.layers.length;
             var sprite:Sprite = m_layers.spriteToView;
             for (i = 0; i < count; i++) {
-                var layer:LayerBitmap = undoData.layers[i].clone(false);
+                var layer:LayerBitmap = undoData.layers[i].clone();
                 m_layers.layers.push(layer);
                 sprite.addChild(layer);
             }
