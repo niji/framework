@@ -100,6 +100,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在のレイヤーを下のレイヤーと合成する 
          * 
+         * @throws MergeLayersError レイヤーが一つ、あるいは対象のうち片方が不可視の場合
          */
         public function merge():void
         {
@@ -114,13 +115,15 @@ package org.libspark.gunyarapaint.framework
          * また、合成後は現在のレイヤーは下のレイヤーに変更され、完全に不透明になる。
          * 
          * @param index レイヤー番号
+         * @throws MergeLayersError レイヤーが一つ、あるいは対象のうち片方が不可視の場合
          */
         public function mergeAt(index:int):void
         {
-            // 両方可視である必要がある
+            // レイヤーは必ず2つ以上
             if (currentIndex > 0) {
                 var current:LayerBitmap = layers[index];
                 var prev:LayerBitmap = layers[index - 1];
+                // 両方可視である必要がある
                 if (current.visible && prev.visible) {
                     current.compositeTo(prev.bitmapData);
                     // 合成後の LayerBitmap は完全に不透明にしておく
@@ -140,6 +143,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在のレイヤーを削除する
          * 
+         * @throws RemoveLayerError レイヤーが一つの場合
          */
         public function remove():void
         {
@@ -153,6 +157,7 @@ package org.libspark.gunyarapaint.framework
          * また、現在の番号が一つ下にずれる。
          * 
          * @param index 現在のレイヤー番号
+         * @throws RemoveLayerError レイヤーが一つの場合
          */
         public function removeAt(index:int):void
         {

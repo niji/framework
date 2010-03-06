@@ -122,6 +122,22 @@ package org.libspark.gunyarapaint.framework
             }
         }
         
+        /**
+         * 引数からコマンドオブジェクトを返す
+         * 
+         * @return ICommand コマンドオブジェクト
+         * @throws ArgumentError 引数の値が0x80または0x40とビット演算レベルで一致する場合
+         */
+        public function getCommand(id:uint):ICommand
+        {
+            if (id & 0x80 || id & 0x40) {
+                throw new ArgumentError();
+            }
+            else {
+                return m_commands[id];
+            }
+        }
+        
         protected var m_commands:Vector.<ICommand>;
     }
 }
