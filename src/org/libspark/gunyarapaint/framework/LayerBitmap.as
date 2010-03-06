@@ -4,6 +4,7 @@ package org.libspark.gunyarapaint.framework
     import flash.display.BitmapData;
     import flash.display.IBitmapDrawable;
     import flash.geom.ColorTransform;
+    import flash.geom.Matrix;
 
     public final class LayerBitmap extends Bitmap
     {
@@ -63,6 +64,14 @@ package org.libspark.gunyarapaint.framework
                 s_colorTransform.alphaMultiplier = alpha;
                 dest.draw(bitmapData, null, s_colorTransform, blendMode);
             }
+        }
+        
+        public function applyMatrix(matrix:Matrix):void
+        {
+            var transformed:BitmapData = new BitmapData(width, height, true, 0x0);
+            transformed.draw(bitmapData, matrix);
+            bitmapData.dispose();
+            bitmapData = transformed;
         }
         
         /**

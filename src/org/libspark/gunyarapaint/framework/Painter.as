@@ -312,12 +312,11 @@ package org.libspark.gunyarapaint.framework
             if (index === 0xff) {
                 var c:uint = m_layers.count;
                 for (var i:uint = 0; i < c; i++) {
-                    var layer:LayerBitmap = m_layers[i];
-                    layer.transform.matrix = matrix;
+                    m_layers.at(i).applyMatrix(matrix);
                 }
             }
             else {
-                m_layers.currentLayer.transform.matrix = matrix;
+                m_layers.currentLayer.applyMatrix(matrix);
             }
             m_layers.compositeAll();
         }
@@ -372,7 +371,7 @@ package org.libspark.gunyarapaint.framework
          * 現在のレイヤーの透明度を変更する
          * 
          * @param value
-         */        
+         */
         public function set currentLayerAlpha(value:Number):void
         {
             m_layers.currentLayer.alpha = value;
@@ -383,7 +382,7 @@ package org.libspark.gunyarapaint.framework
          * 現在のブレンドモードを変更する
          * 
          * @param value
-         */        
+         */
         public function set currentLayerBlendMode(value:String):void
         {
             m_layers.currentLayer.blendMode = value;
