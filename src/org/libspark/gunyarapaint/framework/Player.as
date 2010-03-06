@@ -38,9 +38,6 @@ package org.libspark.gunyarapaint.framework
             createPainter(width, height, version);
             m_parser.loadCommands();
             m_parser.preload();
-            setWidth(width);
-            setHeight(height);
-            setVersion(version);
             setUndo(new UndoStack(painter, m_parser.maxUndoCount));
         }
         

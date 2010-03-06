@@ -4,6 +4,7 @@ package org.libspark.gunyarapaint.framework
     import flash.events.EventDispatcher;
     
     import org.libspark.gunyarapaint.framework.errors.NotSupportedVersionError;
+    import org.libspark.gunyarapaint.framework.events.UndoEvent;
     
     public class CanvasContext extends EventDispatcher
     {
@@ -23,6 +24,8 @@ package org.libspark.gunyarapaint.framework
         public function undo():void
         {
             m_undo.undo(m_painter);
+            if (hasEventListener(UndoEvent.UNDO))
+                dispatchEvent(new UndoEvent(UndoEvent.UNDO, m_undo.undoCount, m_undo.redoCount));
         }
         
         /**
@@ -31,6 +34,8 @@ package org.libspark.gunyarapaint.framework
         public function redo():void
         {
             m_undo.redo(m_painter);
+            if (hasEventListener(UndoEvent.REDO))
+                dispatchEvent(new UndoEvent(UndoEvent.REDO, m_undo.undoCount, m_undo.redoCount));
         }
         
         /**
@@ -39,6 +44,8 @@ package org.libspark.gunyarapaint.framework
         public function pushUndo():void
         {
             m_undo.push(m_painter);
+            if (hasEventListener(UndoEvent.PUSH))
+                dispatchEvent(new UndoEvent(UndoEvent.PUSH, m_undo.undoCount, m_undo.redoCount));
         }
         
         /**
@@ -50,9 +57,16 @@ package org.libspark.gunyarapaint.framework
         public function pushUndoIfNeed():void
         {
             if (m_version <= 21)
-                m_undo.push(m_painter);
+                pushUndo();
         }
         
+        /**
+         * Painter オブジェクトを作成する
+         * 
+         * @param width 画像の幅
+         * @param height 画像の高さ
+         * @param version ペイントログのバージョン
+         */
         protected function createPainter(width:int, height:int, version:uint):void
         {
             var engine:PaintEngine = new PaintEngine(new Shape());
@@ -65,6 +79,9 @@ package org.libspark.gunyarapaint.framework
             else {
                 throw new NotSupportedVersionError(version.toString());
             }
+            m_width = width;
+            m_height = height;
+            m_version = version;
         }
         
         /**
@@ -108,24 +125,6 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * お絵描きを実行するオブジェクトを設定する
-         * 
-         */
-        internal function setPainter(value:Painter):void
-        {
-            m_painter = value;
-        }
-        
-        /**
-         * 現在のお絵描きログのバージョンを設定する
-         * 
-         */
-        internal function setVersion(value:uint):void
-        {
-            m_version = value;
-        }
-        
-        /**
          * UndoStack オブジェクトを設定する
          * 
          * @return ログのバージョン
@@ -133,25 +132,6 @@ package org.libspark.gunyarapaint.framework
         internal function setUndo(value:UndoStack):void
         {
             m_undo = value;
-        }
-        
-        /**
-         * 描写するキャンバスの幅を設定する
-         * 
-         */
-        internal function setWidth(value:uint):void
-        {
-            m_width = value;
-        }
-        
-        /**
-         * 描写するキャンバスの高さを設定する
-         * 
-         * @return 画像の幅
-         */
-        internal function setHeight(value:uint):void
-        {
-            m_height = value;
         }
         
         private var m_version:uint;

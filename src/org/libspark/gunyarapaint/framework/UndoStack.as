@@ -5,15 +5,12 @@ package org.libspark.gunyarapaint.framework
     
     import org.libspark.gunyarapaint.framework.errors.RedoError;
     import org.libspark.gunyarapaint.framework.errors.UndoError;
-    import org.libspark.gunyarapaint.framework.events.UndoEvent;
 
-    public final class UndoStack extends EventDispatcher
+    internal final class UndoStack
     {
         public function UndoStack(painter:Painter,
-                                  size:uint = 16,
-                                  target:IEventDispatcher = null)
+                                  size:uint = 16)
         {
-            super(target);
             m_buffer = new Vector.<Object>(size + 1, true);
             m_index = 0;
             m_first = 0;
@@ -36,8 +33,6 @@ package org.libspark.gunyarapaint.framework
                 m_index--;
             }
             painter.undo = m_buffer[m_index];
-            if (hasEventListener(UndoEvent.UNDO))
-                dispatchEvent(new UndoEvent(UndoEvent.UNDO));
         }
         
         public function redo(painter:Painter):void
@@ -47,8 +42,6 @@ package org.libspark.gunyarapaint.framework
             }
             m_index = (m_index + 1) % m_buffer.length;
             painter.undo = m_buffer[m_index];
-            if (hasEventListener(UndoEvent.REDO))
-                dispatchEvent(new UndoEvent(UndoEvent.REDO));
         }
         
         public function push(painter:Painter):void

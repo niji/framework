@@ -1,18 +1,16 @@
 package org.libspark.gunyarapaint.framework
 {
-    import flash.utils.ByteArray;
-    
     import org.libspark.gunyarapaint.framework.commands.ICommand;
+    import org.libspark.gunyarapaint.framework.events.CommandEvent;
 
     public final class Recorder extends CanvasContext
     {
         public static const DEFAULT_UNDO_MAX:uint = 16;
         
-        public function Recorder()
+        public function Recorder(logger:Logger)
         {
+            m_logger = logger;
             super();
-            var bytes:ByteArray = new ByteArray();
-            m_logger = new Logger(bytes);
         }
         
         /**
@@ -21,11 +19,9 @@ package org.libspark.gunyarapaint.framework
          * @param width 画像の幅
          * @param height 画像の高さ
          * @param undo やり直しできる回数
-         */        
+         */
         public function prepare(width:int, height:int, undo:int):void
         {
-            setWidth(width);
-            setHeight(height);
             m_logger.writeHeader(PAINTER_LOG_VERSION, width, height, undo);
             m_logger.loadCommands();
             createPainter(width, height, undo);
@@ -43,6 +39,8 @@ package org.libspark.gunyarapaint.framework
             var command:ICommand = m_logger.getCommand(id);
             command.write(m_logger.bytes, args);
             command.execute(this);
+            if (hasEventListener(CommandEvent.COMMITTED))
+                dispatchEvent(new CommandEvent(CommandEvent.COMMITTED, command));
         }
         
         private var m_logger:Logger;
