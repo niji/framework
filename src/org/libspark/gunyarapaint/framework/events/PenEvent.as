@@ -1,5 +1,9 @@
 package org.libspark.gunyarapaint.framework.events
 {
+    /**
+     * @private
+     * 
+     */
     public final class PenEvent extends AbstractEvent
     {
         public static const THICKNESS:String = PREFIX + "thickness";

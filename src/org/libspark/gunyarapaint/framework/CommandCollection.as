@@ -26,7 +26,11 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerVisibleCommand;
     import org.libspark.gunyarapaint.framework.commands.layer.SwapLayerCommand;
     import org.libspark.gunyarapaint.framework.events.CommandEvent;
-
+    
+    /**
+     * コマンドを管理する
+     * 
+     */
     public class CommandCollection extends EventDispatcher
     {
         public static const MAX_COMMANDS:uint = 256;
@@ -81,7 +85,12 @@ package org.libspark.gunyarapaint.framework
         /**
          * コマンドを登録する
          * 
+         * <p>
+         * 登録にした後、CommandEvent.REGISTERED イベントが発生する。
+         * </p>
+         * 
          * @param command コマンドオブジェクト
+         * @throws ArgumentError command が 0x80 または 0x40 とビット演算で一致する場合
          */
         public function registerCommand(command:ICommand):void
         {
@@ -101,11 +110,12 @@ package org.libspark.gunyarapaint.framework
         /**
          * コマンドを未登録にする
          * 
-         * コマンドオブジェクトが MoveToCommand か LineToCommand もしくはコマンドのIDが
-         * 0x80 または 0x40 に該当する場合、 ArgumentError を送出する。理由は registerCommand と同じ。
+         * <p>
          * 未登録にした後、CommandEvent.UNREGISTERED イベントが発生する。
+         * </p>
          * 
          * @param command コマンドオブジェクト
+         * @throws ArgumentError command が 0x80 または 0x40 とビット演算で一致する場合
          */
         public function unregisterCommand(command:ICommand):void
         {
@@ -138,6 +148,10 @@ package org.libspark.gunyarapaint.framework
             }
         }
         
+        /**
+         * @private
+         * 
+         */
         protected var m_commands:Vector.<ICommand>;
     }
 }

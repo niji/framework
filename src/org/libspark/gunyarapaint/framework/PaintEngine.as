@@ -3,7 +3,11 @@ package org.libspark.gunyarapaint.framework
     import flash.display.Graphics;
     import flash.display.Shape;
     import flash.geom.Point;
-
+    
+    /**
+     * 実際に描写を行う
+     * 
+     */
     public class PaintEngine
     {
         public function PaintEngine(shape:Shape)

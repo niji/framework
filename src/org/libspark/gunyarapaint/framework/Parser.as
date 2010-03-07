@@ -13,6 +13,10 @@
     import org.libspark.gunyarapaint.framework.errors.InvalidSignatureError;
     import org.libspark.gunyarapaint.framework.events.CommandEvent;
     
+    /**
+     * ペイントログを解析して再生に必要な情報を管理する
+     * 
+     */
     public final class Parser extends CommandCollection
     {
         public static const EOH:uint = 26;
@@ -28,9 +32,10 @@
         /**
          * ログのヘッダーを読み取る
          * 
+         * <p>
          * 最初の 14bytes に "GUNYARA_PAINT:" 、次の 6bytes に バージョン番号、
          * 6bytes にそれぞれ 2bytes ずつで画像の幅、高さとアンドゥ回数が含まれる。
-         * 最初の 14bytes に "GUNYARA_PAINT" が入っていない場合 InvalidSignatureError を送出する。
+         * </p>
          * 
          * @param data
          * @throws InvalidSignatureError 最初の14文字がGUNYARA_PAINT:と一致しない場合
@@ -75,7 +80,9 @@
         /**
          * ログを先読みする
          * 
+         * <p>
          * ログの先読みによって、お絵描きログのコマンド数、最適なアンドゥ回数が分かる
+         * </p>
          * 
          * @throws InvalidCommandError 登録されていないコマンドが検出された場合
          */
@@ -127,11 +134,13 @@
         /**
          * ログを解析する
          * 
-         * これ以上ログを読み込むことが出来ない場合は EOLError を送出する。
-         * また、登録されていないコマンドを実行しようとした場合 InvalidCommandError を送出する。
+         * <p>
          * 解析が完了すると、CommandEvent.PARSE イベントが発生する。
+         * </p>
          * 
          * @return コマンド
+         * @throws EOLError これ以上ログを読み込むことが出来ない場合
+         * @throws InvalidCommandError 登録されていないコマンドを実行しようとした場合
          */
         public function parse():ICommand
         {
@@ -163,7 +172,6 @@
         /**
          * ログデータそのものを返す
          * 
-         * @return ログデータ
          */
         public function get bytes():ByteArray
         {
@@ -173,7 +181,6 @@
         /**
          * ログのコマンド数を返す
          * 
-         * @return ログのコマンド数
          */
         public function get count():uint
         {
@@ -183,7 +190,6 @@
         /**
          * 現在のログの解析回数を返す
          * 
-         * @return 解析回数
          */
         public function get position():uint
         {
@@ -193,7 +199,6 @@
         /**
          * 先読みによって連続してアンドゥを行った回数を返す
          * 
-         * @return アンドゥ回数
          */
         public function get maxUndoCount():uint
         {

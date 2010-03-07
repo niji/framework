@@ -6,6 +6,10 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.errors.MergeLayersError;
     import org.libspark.gunyarapaint.framework.errors.RemoveLayerError;
     
+    /**
+     * 複数のレイヤーを管理する
+     * 
+     */
     public class LayerBitmapCollection
     {
         public function LayerBitmapCollection(width:int, height:int)
@@ -110,9 +114,10 @@ package org.libspark.gunyarapaint.framework
         /**
          * 指定された番号のレイヤーを下のレイヤーと合成する
          * 
+         * <p>
          * 両方のレイヤーは可視 (visible=true) である必要がある。
-         * どちらか不可視だと MergeLayersError を送出する。
          * また、合成後は現在のレイヤーは下のレイヤーに変更され、完全に不透明になる。
+         * </p>
          * 
          * @param index レイヤー番号
          * @throws MergeLayersError レイヤーが一つ、あるいは対象のうち片方が不可視の場合
@@ -153,8 +158,10 @@ package org.libspark.gunyarapaint.framework
         /**
          * 指定された番号のレイヤーを削除する
          * 
+         * <p>
          * レイヤーが削除されると LayerBitmap は削除され、画像データにアクセス出来なくなる。
          * また、現在の番号が一つ下にずれる。
+         * </p>
          * 
          * @param index 現在のレイヤー番号
          * @throws RemoveLayerError レイヤーが一つの場合
@@ -172,6 +179,11 @@ package org.libspark.gunyarapaint.framework
             resetLayersIndex();
         }
         
+        /**
+         * 現在の全てのレイヤー情報を dataProvider に適用出来る形で返す
+         * 
+         * @return Array dataProvider に適用出来る配列
+         */
         public function toDataProvider():Array
         {
             var ret:Array = [];
@@ -182,6 +194,10 @@ package org.libspark.gunyarapaint.framework
             return ret.reverse();
         }
         
+        /**
+         * 全てのレイヤーを削除する
+         * 
+         */
         internal function clear():void
         {
             var count:uint = layers.length;
@@ -234,7 +250,6 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在のレイヤー画像の幅を返す
          * 
-         * @return レイヤー画像の幅
          */
         public function get width():uint
         {
@@ -244,7 +259,6 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在のレイヤー画像の高さを返す
          * 
-         * @return レイヤー画像の高さ
          */
         public function get height():uint
         {
@@ -254,7 +268,6 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在のレイヤー画像を返す
          * 
-         * @return レイヤー画像 (LayerBitmap)
          */
         public function get currentLayer():LayerBitmap
         {
@@ -264,18 +277,47 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在のレイヤー数を返す
          * 
-         * @return レイヤー数
          */
         public function get count():uint
         {
             return layers.length;
         }
         
+        /**
+         * 現在のレイヤー番号
+         * 
+         * @default 0
+         */
         public var currentIndex:uint;
+        
+        /**
+         * 全てのレイヤーを合成するかどうか
+         * 
+         * @default false
+         */
         public var doCompositeAll:Boolean;
+        
+        /**
+         * キャンバス用のスプライトオブジェクト
+         * 
+         * @default null
+         */
         internal var spriteToView:Sprite;
+        
+        /**
+         * 全てのレイヤーが合成された結果の画像データ
+         * 
+         * @default null
+         */
         internal var composited:BitmapData;
+        
+        /**
+         * レイヤーの配列
+         * 
+         * @default null
+         */
         internal var layers:Vector.<LayerBitmap>;
+        
         private var m_width:uint;
         private var m_height:uint;
     }

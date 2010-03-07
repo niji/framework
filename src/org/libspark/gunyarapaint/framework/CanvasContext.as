@@ -6,11 +6,29 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.errors.NotSupportedVersionError;
     import org.libspark.gunyarapaint.framework.events.UndoEvent;
     
+    /**
+     * 再生及び記録のための共通基盤
+     * 
+     */
     public class CanvasContext extends EventDispatcher
     {
+        /**
+         * ログのバージョン番号
+         * 
+         */
         public static const PAINTER_LOG_VERSION:uint = 10;
         
-        public static const PAINTER_VERSION_STRING:String = "ver.20091205";
+        /**
+         * ペインター自体のバージョン
+         * 
+         */
+        public static const PAINTER_VERSION:uint = 20100301;
+        
+        /**
+         * ペインターのバージョン文字列
+         * 
+         */
+        public static const PAINTER_VERSION_STRING:String = "ver." + PAINTER_VERSION;
         
         public function CanvasContext()
         {
@@ -51,8 +69,10 @@ package org.libspark.gunyarapaint.framework
         /**
          * 必要であれば現在のお絵描き操作をアンドゥログに追加する
          * 
+         * <p>
          * これはレイヤー操作もアンドゥログに含まれていた為、ログのバージョンが古いか、
          * レイヤー操作もアンドゥに含めてもいい選択が入っている場合にアンドゥログに追加する
+         * </p>
          */
         public function pushUndoIfNeed():void
         {

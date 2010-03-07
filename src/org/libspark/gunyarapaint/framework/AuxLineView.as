@@ -3,6 +3,10 @@ package org.libspark.gunyarapaint.framework
     import flash.display.Graphics;
     import flash.geom.Rectangle;
     
+    /**
+     * 分割して表示する補助線のオブジェクト
+     * 
+     */
     public final class AuxLineView extends AuxBitmap
     {
         public function AuxLineView(rect:Rectangle)

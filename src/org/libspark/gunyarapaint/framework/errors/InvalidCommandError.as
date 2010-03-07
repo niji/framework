@@ -1,5 +1,9 @@
 package org.libspark.gunyarapaint.framework.errors
 {
+    /**
+     * 登録されていないコマンドを呼び出そうとしたときに作成される
+     * 
+     */
     public final class InvalidCommandError extends Error
     {
         public function InvalidCommandError(count:uint, command:uint)

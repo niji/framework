@@ -6,7 +6,11 @@ package org.libspark.gunyarapaint.framework
     import flash.geom.Matrix;
     import flash.geom.Point;
     import flash.geom.Rectangle;
-
+    
+    /**
+     * レイヤーの管理と描写の管理を受け持つ
+     * 
+     */
     public class Painter
     {
         public function Painter(width:int, height:int, engine:PaintEngine)
@@ -46,7 +50,9 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在位置を変更する
          * 
+         * <p>
          * PainterEngine クラスにある moveTo の委譲
+         * </p>
          * 
          * @param x 移動先となる X 座標
          * @param y 移動先となる Y 座標
@@ -59,7 +65,9 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在位置から指定された位置まで線を描写する
          * 
+         * <p>
          * PainterEngine クラスにある lineTo の委譲
+         * </p>
          * 
          * @param x 描写先となる X 座標
          * @param y 描写先となる Y 座標
@@ -72,7 +80,9 @@ package org.libspark.gunyarapaint.framework
         /**
          * 矩形を描写する
          * 
+         * <p>
          * PainterEngine クラスにある drawRect の委譲
+         * </p>
          * 
          * @param x 基準点となる X 座標
          * @param y 基準点となる Y 座標
@@ -88,7 +98,9 @@ package org.libspark.gunyarapaint.framework
         /**
          * 楕円を描写する
          * 
+         * <p>
          * PainterEngine クラスにある drawEllipse の委譲
+         * </p>
          * 
          * @param x 基準点となる X 座標
          * @param y 基準点となる Y 座標
@@ -104,7 +116,9 @@ package org.libspark.gunyarapaint.framework
         /**
          * 塗りつぶしを開始する
          * 
+         * <p>
          * PainterEngine クラスにある beginFill の委譲
+         * </p>
          * 
          * @param color 塗りつぶす色
          * @param alpha 透明度
@@ -117,7 +131,9 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在の位置から円弧を描写する
          * 
+         * <p>
          * PainterEngine クラスにある drawCircle の委譲
+         * </p>
          * 
          * @param radius 半径
          */
@@ -129,7 +145,9 @@ package org.libspark.gunyarapaint.framework
         /**
          * 塗りつぶしを終了する
          * 
+         * <p>
          * PainterEngine クラスにある endFill の委譲
+         * </p>
          * 
          */
         public function endFill():void
@@ -140,7 +158,9 @@ package org.libspark.gunyarapaint.framework
         /**
          * ペンオブジェクトを初期状態にリセットする
          * 
+         * <p>
          * PainterEngine クラスにある resetPen の委譲
+         * </p>
          * 
          */
         public function resetPen():void
@@ -151,7 +171,9 @@ package org.libspark.gunyarapaint.framework
         /**
          * 描写中の内容を消去する
          * 
+         * <p>
          * PainterEngine クラスにある clear の委譲
+         * </p>
          * 
          */
         public function clear():void
@@ -162,7 +184,9 @@ package org.libspark.gunyarapaint.framework
         /**
          * PainterEngine クラスに描写された中身を現在のレイヤーに反映させる
          * 
+         * <p>
          *  Pen クラスのブレンドモードを適用する
+         * </p>
          * 
          */
         public function composite():void
@@ -179,7 +203,9 @@ package org.libspark.gunyarapaint.framework
         /**
          * 塗りつぶしを行う 
          * 
+         * <p>
          * PainterEngine クラスの現在位置と Pen クラスの色を適用する
+         * </p>
          * 
          */
         public function floodFill():void
@@ -195,7 +221,9 @@ package org.libspark.gunyarapaint.framework
         /**
          * 1 ピクセルを描写する
          * 
+         * <p>
          * 現在の Pen クラスの色を適用する
+         * </p>
          * 
          * @param x 描写先となる X 座標
          * @param y 描写先となる Y 座標
@@ -244,11 +272,21 @@ package org.libspark.gunyarapaint.framework
             m_layers.compositeAll();
         }
         
+        /**
+         * 指定されたレイヤーに対して水平方向に鏡面処理を実行する
+         * 
+         * @param index レイヤー番号
+         */
         public function transformWithHorizontalMirrorAt(index:int):void
         {
             transformFromMatrixAt(index, m_horizontalMirrorMatrix);
         }
         
+        /**
+         * 指定されたレイヤーに対して垂直方向に鏡面処理を実行する
+         * 
+         * @param index レイヤー番号
+         */
         public function transformWithVerticalMirrorAt(index:int):void
         {
             transformFromMatrixAt(index, m_verticalMirrorMatrix);
@@ -257,8 +295,10 @@ package org.libspark.gunyarapaint.framework
         /**
          * 描写開始を宣言する
          * 
+         * <p>
          * 全てのレイヤーに対してではなく、現在のレイヤーのみにブレンドモードが
          * 適用されるように Sprite の変更が行われる。
+         * </p>
          */
         public function startDrawingSession():void
         {
@@ -361,7 +401,6 @@ package org.libspark.gunyarapaint.framework
         /**
          * レイヤーオブジェクトを返す
          * 
-         * @return LayerBitmapCollection
          */
         public function get layers():LayerBitmapCollection
         {
@@ -371,7 +410,6 @@ package org.libspark.gunyarapaint.framework
         /**
          * スプライトオブジェクトを返す
          * 
-         * @return Sprite
          */
         public function get view():Sprite
         {
@@ -381,7 +419,6 @@ package org.libspark.gunyarapaint.framework
         /**
          * ペンオブジェクトを返す
          * 
-         * @return Pen
          */
         public function get pen():Pen
         {
@@ -391,7 +428,6 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在のレイヤーの透明度を変更する
          * 
-         * @param value
          */
         public function set currentLayerAlpha(value:Number):void
         {
@@ -402,7 +438,6 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在のブレンドモードを変更する
          * 
-         * @param value
          */
         public function set currentLayerBlendMode(value:String):void
         {
@@ -413,7 +448,6 @@ package org.libspark.gunyarapaint.framework
         /**
          * ペンオブジェクトを設定する
          * 
-         * @param value
          */
         public function set pen(value:Pen):void
         {

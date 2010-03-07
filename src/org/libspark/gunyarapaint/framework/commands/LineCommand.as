@@ -1,7 +1,11 @@
 package org.libspark.gunyarapaint.framework.commands
 {
     import flash.geom.Point;
-
+    
+    /**
+     * @private
+     * 
+     */
     internal class LineCommand
     {
         public function LineCommand()

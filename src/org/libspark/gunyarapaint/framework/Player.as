@@ -8,7 +8,11 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.errors.EOLError;
     import org.libspark.gunyarapaint.framework.events.PlayerEvent;
-
+    
+    /**
+     * ログを再生する
+     * 
+     */
     public final class Player extends CanvasContext
     {
         public function Player()
@@ -22,8 +26,10 @@ package org.libspark.gunyarapaint.framework
         /**
          * ログデータを読み込む
          * 
+         * <p>
          * まず先読みを実行してからお絵描きログを読み込んで再生出来る状態にする。
          * このクラスを継承する Player はこれを必ず実行する必要がある。
+         * </p>
          * 
          * @param bytes ログデータ
          */
@@ -55,7 +61,10 @@ package org.libspark.gunyarapaint.framework
         /**
          * ログを再生する
          * 
+         * <p>
          * PlayerEvent.STARTED イベントが発生する
+         * </p>
+         * 
          */
         public function start():void
         {
@@ -69,7 +78,10 @@ package org.libspark.gunyarapaint.framework
         /**
          * ログの再生を一時停止する
          * 
+         * <p>
          * PlayerEvent.PAUSED イベントが発生する
+         * </p>
+         * 
          */
         public function pause():void
         {
@@ -81,7 +93,10 @@ package org.libspark.gunyarapaint.framework
         /**
          * ログの再生を停止する
          * 
+         * <p>
          * PlayerEvent.STOPPED イベントが発生する
+         * </p>
+         * 
          */
         public function stop():void
         {
@@ -129,7 +144,6 @@ package org.libspark.gunyarapaint.framework
         /**
          * ログのコマンド数を返す
          * 
-         * @return ログのコマンド数
          */
         public function get count():uint
         {
@@ -139,7 +153,6 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在のログの解析回数を返す
          * 
-         * @return 解析回数
          */
         public function get position():uint
         {
@@ -149,15 +162,24 @@ package org.libspark.gunyarapaint.framework
         /**
          * 再生中かどうかを調べる
          * 
-         * @return 再生中であれば真
          */
         public function get playing():Boolean
         {
             return m_timerID != 0;
         }
         
+        /**
+         * 再生速度
+         * 
+         */
         public var speed:uint;
+        
+        /**
+         * ログの長さ
+         * 
+         */
         public var duration:uint;
+        
         private var m_parser:Parser;
         private var m_timerID:uint;
     }

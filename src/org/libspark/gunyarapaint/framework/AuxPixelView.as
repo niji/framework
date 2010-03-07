@@ -3,6 +3,10 @@ package org.libspark.gunyarapaint.framework
     import flash.display.Graphics;
     import flash.geom.Rectangle;
     
+    /**
+     * ピクセル単位で表示する補助線のオブジェクト
+     * 
+     */
     public final class AuxPixelView extends AuxBitmap
     {
         public function AuxPixelView(rect:Rectangle)

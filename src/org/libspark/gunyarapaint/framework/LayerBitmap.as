@@ -5,7 +5,11 @@ package org.libspark.gunyarapaint.framework
     import flash.display.IBitmapDrawable;
     import flash.geom.ColorTransform;
     import flash.geom.Matrix;
-
+    
+    /**
+     * ビットマップによるレイヤー画像のオブジェクト
+     * 
+     */
     public final class LayerBitmap extends Bitmap
     {
         public function LayerBitmap(bitmapData:BitmapData)
@@ -53,7 +57,9 @@ package org.libspark.gunyarapaint.framework
         /**
          * レイヤーを BitmapData に描写する
          * 
+         * <p>
          * 現在のレイヤーの透明度及びブレンドモードを用いられて合成される。
+         * </p>
          * 
          * @param dest 描写先の BitmapData
          */
@@ -66,6 +72,11 @@ package org.libspark.gunyarapaint.framework
             }
         }
         
+        /**
+         * 現在のレイヤーにマトリックスオブジェクトを適用して変形させる
+         * 
+         * @param matrix マトリックスオブジェクト
+         */
         public function applyMatrix(matrix:Matrix):void
         {
             var transformed:BitmapData = new BitmapData(width, height, true, 0x0);
@@ -98,8 +109,20 @@ package org.libspark.gunyarapaint.framework
             bitmapData.setPixel32(x, y, color);
         }
         
+        /**
+         * 現在のレイヤー番号
+         * 
+         * @default 0
+         */        
         public var index:uint;
+        
+        /**
+         * レイヤーがロックされているかどうか
+         * 
+         * @default false
+         */        
         public var locked:Boolean;
+        
         private static var s_colorTransform:ColorTransform = new ColorTransform(
             1.0,
             1.0,

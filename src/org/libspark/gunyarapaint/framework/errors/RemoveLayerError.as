@@ -1,5 +1,9 @@
 package org.libspark.gunyarapaint.framework.errors
 {
+    /**
+     * レイヤーがひとつしか無いときに削除しようとした場合に作成される
+     * 
+     */
     public final class RemoveLayerError extends Error
     {
         public function RemoveLayerError()

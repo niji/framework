@@ -5,7 +5,11 @@ package org.libspark.gunyarapaint.framework
     
     import org.libspark.gunyarapaint.framework.errors.RedoError;
     import org.libspark.gunyarapaint.framework.errors.UndoError;
-
+    
+    /**
+     * アンドゥを管理する
+     * 
+     */
     internal final class UndoStack
     {
         public function UndoStack(painter:Painter,

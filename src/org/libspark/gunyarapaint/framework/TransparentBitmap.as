@@ -4,6 +4,10 @@ package org.libspark.gunyarapaint.framework
     import flash.display.BitmapData;
     import flash.geom.Rectangle;
     
+    /**
+     * 一番下に表示する透明画像の代替
+     * 
+     */
     public final class TransparentBitmap extends Bitmap
     {
         public function TransparentBitmap(rect:Rectangle, pixelSnapping:String = "auto", smoothing:Boolean = false)

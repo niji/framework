@@ -1,5 +1,9 @@
 package org.libspark.gunyarapaint.framework.modules
 {
+    /**
+     * 描写モジュールに必要なメソッドを定義したインターフェース。利用は外部から可能だが、実装は内部で行われる。
+     * 
+     */
     public interface IDrawable
     {
         /**

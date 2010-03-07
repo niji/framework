@@ -5,6 +5,10 @@ package org.libspark.gunyarapaint.framework.commands.layer
     import org.libspark.gunyarapaint.framework.CanvasContext;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     
+    /**
+     * @private
+     * 
+     */
     public final class SetLayerAlphaCommand implements ICommand
     {
         public static const ID:uint = 22;

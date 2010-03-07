@@ -5,6 +5,10 @@ package org.libspark.gunyarapaint.framework.commands
     import org.libspark.gunyarapaint.framework.CanvasContext;
     import org.libspark.gunyarapaint.framework.Pen;
     
+    /**
+     * @private
+     * 
+     */
     public final class PenCommand implements ICommand
     {
         public static const ID:uint = 3;

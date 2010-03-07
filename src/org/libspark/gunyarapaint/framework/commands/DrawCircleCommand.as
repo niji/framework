@@ -4,6 +4,10 @@ package org.libspark.gunyarapaint.framework.commands
     
     import org.libspark.gunyarapaint.framework.CanvasContext;
     
+    /**
+     * @private
+     * 
+     */
     public final class DrawCircleCommand implements ICommand
     {
         public static const ID:uint = 10;

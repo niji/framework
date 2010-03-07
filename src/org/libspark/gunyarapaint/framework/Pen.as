@@ -10,7 +10,11 @@ package org.libspark.gunyarapaint.framework
     import flash.geom.Matrix;
     
     import org.libspark.gunyarapaint.framework.events.PenEvent;
-
+    
+    /**
+     * ペンオブジェクト
+     * 
+     */
     public final class Pen extends EventDispatcher
     {
         public function Pen()
@@ -18,6 +22,10 @@ package org.libspark.gunyarapaint.framework
             reset();
         }
         
+        /**
+         * 初期状態に戻す
+         * 
+         */
         public function reset():void
         {
             m_thickness = 3;
@@ -33,6 +41,10 @@ package org.libspark.gunyarapaint.framework
             m_matrix = new Matrix();
         }
         
+        /**
+         * Graphics オブジェクトに対して現在のペンを適用する
+         * 
+         */
         internal function setLineStyle(graphics:Graphics):void
         {
             graphics.lineStyle(
@@ -49,16 +61,28 @@ package org.libspark.gunyarapaint.framework
                 graphics.lineBitmapStyle(m_bitmap, m_matrix);
         }
         
+        /**
+         * 現在の色を取得する。ARGB 形式(0xAARRGGBB) で返す
+         * 
+         */
         public function get argb():uint
         {
             return uint(m_alpha * 255) << 24 | m_color;
         }
         
+        /**
+         * 現在のペンの太さを取得する
+         * 
+         */
         public function get thickness():uint
         {
             return m_thickness;
         }
         
+        /**
+         * ペンの太さを設定する
+         * 
+         */
         public function set thickness(value:uint):void
         {
             m_thickness = value;
@@ -66,11 +90,19 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new PenEvent(PenEvent.THICKNESS))
         }
         
+        /**
+         * 現在の色を取得する。RGB形式(0xRRGGBB) で返す
+         * 
+         */
         public function get color():uint
         {
             return m_color;
         }
         
+        /**
+         * 色を設定する(アルファ情報は無視される)。
+         * 
+         */
         public function set color(value:uint):void
         {
             m_color = value;
@@ -78,11 +110,19 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new PenEvent(PenEvent.COLOR))
         }
         
+        /**
+         * 現在の不透明度を取得する
+         * 
+         */
         public function get alpha():Number
         {
             return m_alpha;
         }
         
+        /**
+         * 不透明度を設定する
+         * 
+         */
         public function set alpha(value:Number):void
         {
             m_alpha = value;
@@ -90,11 +130,19 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new PenEvent(PenEvent.ALPHA))
         }
         
+        /**
+         * 現在のブレンドモードを取得する
+         * 
+         */
         public function get blendMode():String
         {
             return m_blendMode;
         }
         
+        /**
+         * ブレンドモードを設定する
+         * 
+         */
         public function set blendMode(value:String):void
         {
             m_blendMode = value;
@@ -102,11 +150,19 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new PenEvent(PenEvent.BLEND_MODE))
         }
         
+        /**
+         * 現在のLineScaleMode の値を取得する
+         * 
+         */
         public function get scaleMode():String
         {
             return m_scaleMode;
         }
         
+        /**
+         * LineScaleMode の値を設定する
+         * 
+         */
         public function set scaleMode(value:String):void
         {
             m_scaleMode = value;
@@ -114,11 +170,19 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new PenEvent(PenEvent.SCALE_MODE))
         }
         
+        /**
+         * 現在のCapsStyle の値を取得する
+         * 
+         */
         public function get capsStyle():String
         {
             return m_capsStyle;
         }
         
+        /**
+         * CapsStyle の値を設定する
+         * 
+         */
         public function set capsStyle(value:String):void
         {
             m_capsStyle = value;
@@ -126,11 +190,19 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new PenEvent(PenEvent.CAPS_STYLE))
         }
         
+        /**
+         * 現在のJointStyle の値を取得する
+         * 
+         */
         public function get jointStyle():String
         {
             return m_jointStyle;
         }
         
+        /**
+         * JointStyle の値を設定する
+         * 
+         */
         public function set jointStyle(value:String):void
         {
             m_jointStyle = value;
@@ -138,11 +210,19 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new PenEvent(PenEvent.JOINT_STYLE))
         }
         
+        /**
+         * 現在のマイター値を取得する
+         * 
+         */
         public function get miterLimit():Number
         {
             return m_miterLimit;
         }
         
+        /**
+         * マイター値を設定する
+         * 
+         */
         public function set miterLimit(value:Number):void
         {
             m_miterLimit = value;
@@ -150,11 +230,19 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new PenEvent(PenEvent.MITER_LIMIT))
         }
         
+        /**
+         * @private
+         * 
+         */
         public function get pixelHinting():Boolean
         {
             return m_pixelHinting;
         }
         
+        /**
+         * @private
+         * 
+         */
         public function set pixelHinting(value:Boolean):void
         {
             m_pixelHinting = value;
@@ -162,11 +250,19 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new PenEvent(PenEvent.PIXEL_HINTING))
         }
         
+        /**
+         * @private
+         * 
+         */
         public function get bitmap():BitmapData
         {
             return m_bitmap;
         }
         
+        /**
+         * @private
+         * 
+         */
         public function set bitmap(value:BitmapData):void
         {
             m_bitmap = value;
@@ -174,11 +270,19 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new PenEvent(PenEvent.BITMAP))
         }
         
+        /**
+         * @private
+         * 
+         */
         public function get matrix():Matrix
         {
             return m_matrix;
         }
         
+        /**
+         * @private
+         * 
+         */
         public function set matrix(value:Matrix):void
         {
             m_matrix = value;

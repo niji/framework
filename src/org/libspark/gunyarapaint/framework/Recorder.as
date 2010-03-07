@@ -5,9 +5,17 @@ package org.libspark.gunyarapaint.framework
     
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.events.CommandEvent;
-
+    
+    /**
+     * ログを記録する
+     * 
+     */
     public final class Recorder extends CanvasContext
     {
+        /**
+         * やり直し可能な回数の初期値
+         * 
+         */
         public static const DEFAULT_UNDO_MAX:uint = 16;
         
         public function Recorder(bytes:ByteArray, commands:CommandCollection = null)
