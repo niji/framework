@@ -35,7 +35,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.currentLayerAlpha = m_alpha;
+            canvas.currentLayerAlpha = m_alpha;
             canvas.pushUndoIfNeed();
         }
         

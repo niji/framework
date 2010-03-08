@@ -31,7 +31,7 @@ package org.libspark.gunyarapaint.framework.commands
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.drawCircle(m_radius);
+            canvas.drawCircle(m_radius);
         }
         
         public function reset():void

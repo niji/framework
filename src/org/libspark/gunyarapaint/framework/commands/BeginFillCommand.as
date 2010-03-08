@@ -36,7 +36,7 @@ package org.libspark.gunyarapaint.framework.commands
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.beginFill(m_color, m_alpha);
+            canvas.beginFill(m_color, m_alpha);
         }
         
         public function reset():void

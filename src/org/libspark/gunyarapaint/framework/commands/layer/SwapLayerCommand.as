@@ -37,7 +37,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.layers.swap(m_from, m_to);
+            canvas.layers.swap(m_from, m_to);
             canvas.pushUndoIfNeed();
         }
         

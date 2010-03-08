@@ -2,11 +2,13 @@ package org.libspark.gunyarapaint.framework
 {
     import flash.display.Graphics;
     import flash.display.Shape;
+    import flash.errors.IllegalOperationError;
     import flash.geom.Point;
     
     /**
      * 実際に描写を行う
      * 
+     * @todo correctCoordinate (もともとroundPixel という名前) を仮想メソッドとして実装する
      */
     public class PaintEngine
     {
@@ -35,9 +37,10 @@ package org.libspark.gunyarapaint.framework
          */
         public function moveTo(x:Number, y:Number):void
         {
-            m_graphics.moveTo(x, y);
             m_coordinate.x = x;
             m_coordinate.y = y;
+            correctCoordinate(m_coordinate);
+            m_graphics.moveTo(m_coordinate.x, m_coordinate.y);
         }
         
         /**
@@ -48,9 +51,10 @@ package org.libspark.gunyarapaint.framework
          */
         public function lineTo(x:Number, y:Number):void
         {
-            m_graphics.lineTo(x, y);
             m_coordinate.x = x;
             m_coordinate.y = y;
+            correctCoordinate(m_coordinate);
+            m_graphics.lineTo(m_coordinate.x, m_coordinate.y);
         }
         
         /**
@@ -113,6 +117,10 @@ package org.libspark.gunyarapaint.framework
         public function endFill():void
         {
             m_graphics.endFill();
+        }
+        
+        public function correctCoordinate(point:Point):void
+        {
         }
         
         /**

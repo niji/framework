@@ -1,8 +1,5 @@
 package org.libspark.gunyarapaint.framework
 {
-    import flash.events.EventDispatcher;
-    import flash.events.IEventDispatcher;
-    
     import org.libspark.gunyarapaint.framework.errors.RedoError;
     import org.libspark.gunyarapaint.framework.errors.UndoError;
     
@@ -12,7 +9,7 @@ package org.libspark.gunyarapaint.framework
      */
     internal final class UndoStack
     {
-        public function UndoStack(painter:Painter,
+        public function UndoStack(painter:CanvasContext,
                                   size:uint = 16)
         {
             m_buffer = new Vector.<Object>(size + 1, true);
@@ -25,7 +22,7 @@ package org.libspark.gunyarapaint.framework
             }
         }
         
-        public function undo(painter:Painter):void
+        public function undo(cc:CanvasContext):void
         {
             if (m_index === m_first) {
                 throw new UndoError();
@@ -36,22 +33,22 @@ package org.libspark.gunyarapaint.framework
             else {
                 m_index--;
             }
-            painter.undo = m_buffer[m_index];
+            cc.restoreState(m_buffer[m_index]);
         }
         
-        public function redo(painter:Painter):void
+        public function redo(cc:CanvasContext):void
         {
             if (m_index === m_last) {
                 throw new RedoError();
             }
             m_index = (m_index + 1) % m_buffer.length;
-            painter.undo = m_buffer[m_index];
+            cc.restoreState(m_buffer[m_index]);
         }
         
-        public function push(painter:Painter):void
+        public function push(painter:CanvasContext):void
         {
             m_index = (m_index + 1) % m_buffer.length;
-            m_buffer[m_index] = painter.undo;
+            m_buffer[m_index] = painter.saveState();
             m_last = m_index;
             if (m_index === m_first) {
                 m_first = (m_first + 1) % m_buffer.length;

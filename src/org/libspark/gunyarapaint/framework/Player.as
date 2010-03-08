@@ -1,6 +1,5 @@
 package org.libspark.gunyarapaint.framework
 {
-    import flash.display.BitmapData;
     import flash.utils.ByteArray;
     import flash.utils.clearInterval;
     import flash.utils.setInterval;
@@ -15,12 +14,17 @@ package org.libspark.gunyarapaint.framework
      */
     public final class Player extends CanvasContext
     {
-        public function Player()
+        public function Player(parser:Parser)
         {
-            super();
+            var data:Object = {};
+            parser.readHeader(data);
+            parser.loadCommands();
+            parser.preload();
             speed = 1;
             duration = 50;
             m_timerID = 0;
+            m_parser = parser;
+            super(data.width, data.height, createPaintEngine(data.version));
         }
         
         /**
@@ -33,29 +37,11 @@ package org.libspark.gunyarapaint.framework
          * 
          * @param bytes ログデータ
          */
-        public function load(bytes:ByteArray):void
+        public static function load(bytes:ByteArray):Player
         {
-            var data:Object = {};
-            m_parser = new Parser(bytes);
-            m_parser.readHeader(data);
-            var width:uint = data.width;
-            var height:uint = data.height;
-            var version:uint = data.version; 
-            createPainter(width, height, version);
-            m_parser.loadCommands();
-            m_parser.preload();
-            setUndo(new UndoStack(painter, m_parser.maxUndoCount));
-        }
-        
-        /**
-         * ログデータを再読み込みしてオブジェクトを初期化する
-         * 
-         */
-        public function reload():void
-        {
-            createPainter(width, height, version);
-            m_parser.resetCommands();
-            setUndo(new UndoStack(painter, m_parser.maxUndoCount));
+            var player:Player = new Player(new Parser(bytes));
+            player.setUndo(new UndoStack(player, player.m_parser.maxUndoCount));
+            return player;
         }
         
         /**

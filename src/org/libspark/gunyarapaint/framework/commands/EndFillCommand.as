@@ -27,7 +27,7 @@ package org.libspark.gunyarapaint.framework.commands
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.endFill();
+            canvas.endFill();
         }
         
         public function reset():void

@@ -42,7 +42,7 @@ package org.libspark.gunyarapaint.framework.modules
         {
             if (m_drawing) {
                 if (!m_drawingLine) {
-                    var pen:Pen = m_recorder.painter.pen;
+                    var pen:Pen = m_recorder.pen;
                     var tempAlpha:Number = pen.alpha;
                     m_recorder.commitCommand(
                         PenCommand.ID,

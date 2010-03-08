@@ -28,7 +28,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.layers.add();
+            canvas.layers.add();
             canvas.pushUndoIfNeed();
         }
         

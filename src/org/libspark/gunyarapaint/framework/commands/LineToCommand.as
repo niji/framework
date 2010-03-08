@@ -65,7 +65,7 @@ package org.libspark.gunyarapaint.framework.commands
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.lineTo(
+            canvas.lineTo(
                 readCoordinate.x || writeCoordinate.x,
                 readCoordinate.y || writeCoordinate.y
             );

@@ -2,7 +2,6 @@ package org.libspark.gunyarapaint.framework.modules
 {
     import flash.geom.Rectangle;
     
-    import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.CompositeCommand;
     import org.libspark.gunyarapaint.framework.commands.DrawCircleCommand;
@@ -19,26 +18,25 @@ package org.libspark.gunyarapaint.framework.modules
         {
             validateLayerState();
             setCoordinate(x, y);
-            m_recorder.painter.startDrawingSession();
+            m_recorder.startDrawingSession();
             m_drawing = true;
         }
         
         public function move(x:Number, y:Number):void
         {
             if (m_drawing) {
-                var painter:Painter = m_recorder.painter;
                 storeCircleCoordinate(x, y);
-                painter.clear();
-                painter.resetPen();
-                painter.moveTo(s_rectangle.x, s_rectangle.y);
-                painter.drawCircle(s_rectangle.width);
+                m_recorder.clear();
+                m_recorder.resetPen();
+                m_recorder.moveTo(s_rectangle.x, s_rectangle.y);
+                m_recorder.drawCircle(s_rectangle.width);
             }
         }
         
         public function stop(x:Number, y:Number):void
         {
             if (m_drawing) {
-                m_recorder.painter.stopDrawingSession();
+                m_recorder.stopDrawingSession();
                 if (!equalsCoordinate(x, y)) {
                     storeCircleCoordinate(x, y);
                     m_recorder.commitCommand(

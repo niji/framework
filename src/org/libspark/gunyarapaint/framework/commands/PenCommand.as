@@ -130,7 +130,7 @@ package org.libspark.gunyarapaint.framework.commands
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.pen = m_pen;
+            canvas.pen = m_pen;
         }
         
         public function reset():void

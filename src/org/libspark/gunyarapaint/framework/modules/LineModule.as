@@ -1,6 +1,5 @@
 package org.libspark.gunyarapaint.framework.modules
 {
-    import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.CompositeCommand;
     import org.libspark.gunyarapaint.framework.commands.LineToCommand;
@@ -17,29 +16,24 @@ package org.libspark.gunyarapaint.framework.modules
         {
             validateLayerState();
             setCoordinate(x, y);
-            m_recorder.painter.startDrawingSession();
+            m_recorder.startDrawingSession();
             m_drawing = true;
         }
         
         public function move(x:Number, y:Number):void
         {
             if (m_drawing) {
-                var painter:Painter = m_recorder.painter;
-                var fromX:int = painter.roundPixel(coordinateX);
-                var fromY:int = painter.roundPixel(coordinateY);
-                var toX:int = painter.roundPixel(x);
-                var toY:int = painter.roundPixel(y);
-                painter.clear();
-                painter.resetPen();
-                painter.moveTo(fromX, fromY);
-                painter.lineTo(toX, toY);
+                m_recorder.clear();
+                m_recorder.resetPen();
+                m_recorder.moveTo(coordinateX, coordinateY);
+                m_recorder.lineTo(x, y);
             }
         }
         
         public function stop(x:Number, y:Number):void
         {
             if (m_drawing) {
-                m_recorder.painter.stopDrawingSession();
+                m_recorder.stopDrawingSession();
                 if (!equalsCoordinate(x, y)) {
                     var from:Object = getArgumentsFromCurrentCoordinate();
                     var to:Object = getArgumentsFromCoordinate(x, y);

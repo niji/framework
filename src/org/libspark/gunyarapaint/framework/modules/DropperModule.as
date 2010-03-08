@@ -40,7 +40,7 @@ package org.libspark.gunyarapaint.framework.modules
                 PenCommand.ID,
                 {
                     "type": PenCommand.COLOR,
-                    "color": m_recorder.painter.getPixel(x, y)
+                    "color": m_recorder.getPixel(x, y)
                 }
             );
         }

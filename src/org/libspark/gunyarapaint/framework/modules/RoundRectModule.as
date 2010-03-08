@@ -13,7 +13,7 @@ package org.libspark.gunyarapaint.framework.modules
         {
             validateLayerState();
             setCoordinate(x, y);
-            m_recorder.painter.startDrawingSession();
+            m_recorder.startDrawingSession();
             m_drawing = true;
         }
         
@@ -25,7 +25,7 @@ package org.libspark.gunyarapaint.framework.modules
         public function stop(x:Number, y:Number):void
         {
             if (m_drawing) {
-                m_recorder.painter.stopDrawingSession();
+                m_recorder.stopDrawingSession();
                 if (!equalsCoordinate(x, y)) {
                     // TODO: implement this
                 }

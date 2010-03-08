@@ -36,7 +36,7 @@ package org.libspark.gunyarapaint.framework.commands
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.setPixel(m_x, m_y);
+            canvas.setPixel(m_x, m_y);
             canvas.pushUndo();
         }
         

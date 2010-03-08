@@ -37,7 +37,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.layers.at(m_index).visible = m_visible;
+            canvas.layers.at(m_index).visible = m_visible;
             canvas.pushUndoIfNeed();
         }
         

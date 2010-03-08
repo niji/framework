@@ -1,6 +1,5 @@
 package org.libspark.gunyarapaint.framework.modules
 {
-    import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.PixelCommand;
     

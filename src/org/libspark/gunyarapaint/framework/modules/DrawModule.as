@@ -1,7 +1,8 @@
 package org.libspark.gunyarapaint.framework.modules
 {
+    import flash.geom.Point;
+    
     import org.libspark.gunyarapaint.framework.LayerBitmap;
-    import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.HorizontalMirrorCommand;
     import org.libspark.gunyarapaint.framework.commands.PenCommand;
@@ -121,7 +122,7 @@ package org.libspark.gunyarapaint.framework.modules
          */
         protected function validateLayerState():void
         {
-            var layer:LayerBitmap = m_recorder.painter.layers.currentLayer;
+            var layer:LayerBitmap = m_recorder.layers.currentLayer;
             if (!layer.visible)
                 throw new InvisibleLayerError();
             else if (layer.locked)
@@ -157,11 +158,13 @@ package org.libspark.gunyarapaint.framework.modules
          * @param y y座標
          * @return 同じである場合は true
          */        
-        protected function equalsCoordinate(x:Number, y:Number):Boolean
+        protected function equalsCoordinate(x:uint, y:uint):Boolean
         {
-            var painter:Painter = m_recorder.painter;
-            return painter.roundPixel(x) == painter.roundPixel(s_coordinateX) &&
-                painter.roundPixel(y) == painter.roundPixel(s_coordinateY);
+            var from:Point = new Point(s_coordinateX, s_coordinateY);
+            var to:Point = new Point(x, y);
+            m_recorder.correctCoordinate(from);
+            m_recorder.correctCoordinate(to);
+            return from.equals(to);
         }
         
         /**
@@ -182,10 +185,11 @@ package org.libspark.gunyarapaint.framework.modules
          */
         protected function getArgumentsFromCoordinate(x:Number, y:Number):Object
         {
-            var painter:Painter = m_recorder.painter;
+            var coordinate:Point = new Point(x, y);
+            m_recorder.correctCoordinate(coordinate);
             var args:Object = {
-                "x": painter.roundPixel(x),
-                "y": painter.roundPixel(y)
+                "x": coordinate.x,
+                "y": coordinate.y
             };
             return args;
         }
@@ -196,7 +200,7 @@ package org.libspark.gunyarapaint.framework.modules
          */
         protected function stopDrawing():void
         {
-            m_recorder.painter.stopDrawingSession();
+            m_recorder.stopDrawingSession();
             m_drawing = false;
         }
         

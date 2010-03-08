@@ -32,7 +32,7 @@ package org.libspark.gunyarapaint.framework.commands
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.transformWithHorizontalMirrorAt(m_index);
+            canvas.transformWithHorizontalMirrorAt(m_index);
         }
         
         public function reset():void

@@ -36,7 +36,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.currentLayerBlendMode = m_blendMode;
+            canvas.currentLayerBlendMode = m_blendMode;
             canvas.pushUndoIfNeed();
         }
         

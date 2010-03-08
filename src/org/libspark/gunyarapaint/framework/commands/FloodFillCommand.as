@@ -27,9 +27,9 @@ package org.libspark.gunyarapaint.framework.commands
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.floodFill();
+            canvas.floodFill();
             canvas.pushUndo();
-            canvas.painter.stopDrawingSession();
+            canvas.stopDrawingSession();
         }
         
         public function reset():void

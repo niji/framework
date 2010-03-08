@@ -28,7 +28,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.layers.merge();
+            canvas.layers.merge();
             canvas.pushUndoIfNeed();
         }
         

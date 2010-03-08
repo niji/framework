@@ -55,11 +55,11 @@ package org.libspark.gunyarapaint.framework.commands
         
         public function execute(canvas:CanvasContext):void
         {
-            canvas.painter.moveTo(
+            canvas.moveTo(
                 readCoordinate.x || writeCoordinate.x,
                 readCoordinate.y || writeCoordinate.y
             );
-            canvas.painter.startDrawingSession();
+            canvas.startDrawingSession();
         }
         
         public function get commandID():uint

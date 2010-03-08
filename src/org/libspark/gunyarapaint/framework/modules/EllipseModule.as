@@ -1,6 +1,5 @@
 package org.libspark.gunyarapaint.framework.modules
 {
-    import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.Recorder;
     
     internal final class EllipseModule extends DrawModule implements IDrawable
@@ -14,25 +13,20 @@ package org.libspark.gunyarapaint.framework.modules
         {
             validateLayerState();
             setCoordinate(x, y);
-            m_recorder.painter.startDrawingSession();
+            m_recorder.startDrawingSession();
             m_drawing = true;
         }
         
         public function move(x:Number, y:Number):void
         {
             if (m_drawing) {
-                var painter:Painter = m_recorder.painter;
-                var fromX:int = painter.roundPixel(coordinateX);
-                var fromY:int = painter.roundPixel(coordinateY);
-                var toX:int = painter.roundPixel(x);
-                var toY:int = painter.roundPixel(y);
-                painter.clear();
-                painter.resetPen();
-                painter.drawEllipse(
-                    fromX,
-                    fromY,
-                    Math.abs(toX - fromX),
-                    Math.abs(toY - fromY)
+                m_recorder.clear();
+                m_recorder.resetPen();
+                m_recorder.drawEllipse(
+                    coordinateX,
+                    coordinateY,
+                    Math.abs(x - coordinateX),
+                    Math.abs(y - coordinateY)
                 );
             }
         }
@@ -40,7 +34,7 @@ package org.libspark.gunyarapaint.framework.modules
         public function stop(x:Number, y:Number):void
         {
             if (m_drawing) {
-                m_recorder.painter.stopDrawingSession();
+                m_recorder.stopDrawingSession();
                 if (!equalsCoordinate(x, y)) {
                     // TODO: implement this
                 }
