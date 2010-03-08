@@ -2,7 +2,6 @@ package org.libspark.gunyarapaint.framework
 {
     import flash.display.Graphics;
     import flash.display.Shape;
-    import flash.errors.IllegalOperationError;
     import flash.geom.Point;
     
     /**

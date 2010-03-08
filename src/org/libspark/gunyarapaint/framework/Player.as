@@ -24,7 +24,8 @@ package org.libspark.gunyarapaint.framework
             duration = 50;
             m_timerID = 0;
             m_parser = parser;
-            super(data.width, data.height, createPaintEngine(data.version));
+            var version:uint = data.version;
+            super(data.width, data.height, version, createPaintEngine(version));
         }
         
         /**

@@ -16,7 +16,7 @@ package org.libspark.gunyarapaint.framework
             m_index = 0;
             m_first = 0;
             m_last = 0;
-            m_buffer[i] = painter.undo;
+            m_buffer[i] = painter.saveState();
             for (var i:uint = 1; i < size + 1; i++) {
                 m_buffer[i] = null;
             }

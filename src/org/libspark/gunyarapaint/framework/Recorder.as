@@ -22,7 +22,8 @@ package org.libspark.gunyarapaint.framework
         {
             m_bytes = bytes;
             m_command = commands;
-            super(width, height, createPaintEngine(PAINTER_LOG_VERSION));
+            var version:uint = PAINTER_LOG_VERSION;
+            super(width, height, version, createPaintEngine(version));
         }
         
         /**

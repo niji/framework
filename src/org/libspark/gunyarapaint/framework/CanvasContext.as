@@ -37,15 +37,17 @@ package org.libspark.gunyarapaint.framework
          */
         public static const PAINTER_VERSION_STRING:String = "ver." + PAINTER_VERSION;
         
-        public function CanvasContext(width:uint, height:uint, paintEngine:PaintEngine)
+        public function CanvasContext(width:uint, height:uint, version:uint, paintEngine:PaintEngine)
         {
-            m_coordinate = new Point();
             m_layers = new LayerBitmapCollection(width, height);
             m_drawingSprite = new Sprite();
             m_drawingSprite.mouseEnabled = false;
             m_horizontalMirrorMatrix = new Matrix(-1, 0, 0, 1, width, 0);
             m_verticalMirrorMatrix = new Matrix(1, 0, 0, -1, 0, height);
-            m_version = PAINTER_LOG_VERSION;
+            m_paintEngine = paintEngine;
+            m_version = version;
+            m_width = width;
+            m_height = height;
         }
         
         /**
@@ -417,7 +419,7 @@ package org.libspark.gunyarapaint.framework
             m_paintEngine.correctCoordinate(coordinate);
         }
         
-        protected function createPaintEngine(version:uint):PaintEngine
+        protected static function createPaintEngine(version:uint):PaintEngine
         {
             var shape:Shape = new Shape();
             if (version > 0 && version <= 10) {
@@ -572,8 +574,8 @@ package org.libspark.gunyarapaint.framework
             m_undo = value;
         }
         
+        protected var m_layers:LayerBitmapCollection;
         private var m_paintEngine:PaintEngine;
-        private var m_layers:LayerBitmapCollection;
         private var m_horizontalMirrorMatrix:Matrix;
         private var m_verticalMirrorMatrix:Matrix;
         private var m_drawingSprite:Sprite;
@@ -581,7 +583,6 @@ package org.libspark.gunyarapaint.framework
         private var m_shouldCopyBitmap:Boolean;
         private var m_version:uint;
         private var m_undo:UndoStack;
-        private var m_coordinate:Point;
         private var m_width:uint;
         private var m_height:uint;
     }
