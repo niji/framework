@@ -2,8 +2,10 @@ package org.libspark.gunyarapaint.framework.modules
 {
     import org.libspark.gunyarapaint.framework.Recorder;
     
-    internal final class EraserModule extends DrawModule implements IDrawable
+    public final class EraserModule extends DrawModule implements IDrawable
     {
+        public static const ERASER:String = "eraser";
+        
         public function EraserModule(recorder:Recorder)
         {
             super(recorder);
@@ -30,7 +32,7 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function get name():String
         {
-            return DrawModuleFactory.ERASER;
+            return ERASER;
         }
     }
 }

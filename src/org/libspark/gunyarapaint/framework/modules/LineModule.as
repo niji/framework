@@ -5,8 +5,10 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.LineToCommand;
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     
-    internal final class LineModule extends DrawModule implements IDrawable
+    public final class LineModule extends DrawModule implements IDrawable
     {
+        public static const LINE:String = "line";
+        
         public function LineModule(recorder:Recorder)
         {
             super(recorder);
@@ -52,7 +54,7 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function get name():String
         {
-            return DrawModuleFactory.LINE;
+            return LINE;
         }
     }
 }

@@ -4,8 +4,10 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.FloodFillCommand;
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     
-    internal final class FloodFillModule extends DrawModule implements IDrawable
+    public final class FloodFillModule extends DrawModule implements IDrawable
     {
+        public static const FLOOD_FILL:String = "floodFill";
+        
         public function FloodFillModule(recorder:Recorder)
         {
             super(recorder);
@@ -39,7 +41,7 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function get name():String
         {
-            return DrawModuleFactory.FLOOD_FILL;
+            return FLOOD_FILL;
         }
     }
 }

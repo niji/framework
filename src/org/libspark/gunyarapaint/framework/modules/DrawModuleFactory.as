@@ -4,58 +4,31 @@ package org.libspark.gunyarapaint.framework.modules
 
     public final class DrawModuleFactory
     {
-        public static const CIRCLE:String = "circle";
-        
-        public static const DROPPER:String = "dropper";
-        
-        public static const ELLIPSE:String = "ellipse";
-        
-        public static const ERASER:String = "eraser";
-        
-        public static const FLOOD_FILL:String = "floodFill";
-        
-        public static const FREE_HAND:String = "freeHand";
-        
-        public static const LINE:String = "line";
-        
-        public static const PIXEL:String = "pixel";
-        
-        public static const RECT:String = "rect";
-        
-        public static const ROUND_RECT:String = "roundRect";
-        
-        public function DrawModuleFactory()
+        public function DrawModuleFactory(recorder:Recorder)
         {
-            throw new ArgumentError();
+            m_modules = {};
+            add(new CircleModule(recorder));
+            add(new DropperModule(recorder));
+            add(new EllipseModule(recorder));
+            add(new EraserModule(recorder));
+            add(new FloodFillModule(recorder));
+            add(new FreeHandModule(recorder));
+            add(new LineModule(recorder));
+            add(new PixelModule(recorder));
+            add(new RectModule(recorder));
+            add(new RoundRectModule(recorder));
         }
         
-        public static function create(name:String, recorder:Recorder):IDrawable
+        public function add(module:IDrawable):void
         {
-            switch (name) {
-                case CIRCLE:
-                    return new CircleModule(recorder);
-                case DROPPER:
-                    return new DropperModule(recorder);
-                case ELLIPSE:
-                    return new EllipseModule(recorder);
-                case ERASER:
-                    return new EraserModule(recorder);
-                case FLOOD_FILL:
-                    return new FloodFillModule(recorder);
-                case FREE_HAND:
-                    return new FreeHandModule(recorder);
-                case LINE:
-                    return new LineModule(recorder);
-                case PIXEL:
-                    return new PixelModule(recorder);
-                case RECT:
-                    return new RectModule(recorder);
-                case ROUND_RECT:
-                    return new RoundRectModule(recorder);
-                default:
-                    throw new ArgumentError();
-                    break;
-            }
+            m_modules[module.name] = module;
         }
+        
+        public function create(name:String):IDrawable
+        {
+            return m_modules[name];
+        }
+        
+        private var m_modules:Object;
     }
 }

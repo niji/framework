@@ -3,8 +3,10 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.PixelCommand;
     
-    internal final class PixelModule extends DrawModule implements IDrawable
+    public final class PixelModule extends DrawModule implements IDrawable
     {
+        public static const PIXEL:String = "pixel";
+        
         public function PixelModule(recorder:Recorder)
         {
             super(recorder);
@@ -44,7 +46,7 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function get name():String
         {
-            return DrawModuleFactory.PIXEL;
+            return PIXEL;
         }
     }
 }

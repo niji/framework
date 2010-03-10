@@ -2,8 +2,10 @@ package org.libspark.gunyarapaint.framework.modules
 {
     import org.libspark.gunyarapaint.framework.Recorder;
     
-    internal final class EllipseModule extends DrawModule implements IDrawable
+    public final class EllipseModule extends DrawModule implements IDrawable
     {
+        public static const ELLIPSE:String = "ellipse";
+        
         public function EllipseModule(recorder:Recorder)
         {
             super(recorder);
@@ -44,7 +46,7 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function get name():String
         {
-            return DrawModuleFactory.ELLIPSE;
+            return ELLIPSE;
         }
         
         public function interrupt(x:Number, y:Number):void

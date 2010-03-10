@@ -3,8 +3,10 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.PenCommand;
     
-    internal final class DropperModule extends DrawModule implements IDrawable
+    public final class DropperModule extends DrawModule implements IDrawable
     {
+        public static const DROPPER:String = "dropper";
+        
         public function DropperModule(recorder:Recorder)
         {
             super(recorder);
@@ -31,7 +33,7 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function get name():String
         {
-            return DrawModuleFactory.DROPPER;
+            return DROPPER;
         }
         
         private function drop(x:Number, y:Number):void

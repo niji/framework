@@ -2,8 +2,10 @@ package org.libspark.gunyarapaint.framework.modules
 {
     import org.libspark.gunyarapaint.framework.Recorder;
     
-    internal final class RoundRectModule extends DrawModule implements IDrawable
+    public final class RoundRectModule extends DrawModule implements IDrawable
     {
+        public static const ROUND_RECT:String = "roundRect";
+        
         public function RoundRectModule(recorder:Recorder)
         {
             super(recorder);
@@ -40,7 +42,7 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function get name():String
         {
-            return DrawModuleFactory.ROUND_RECT;
+            return ROUND_RECT;
         }
     }
 }

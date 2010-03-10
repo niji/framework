@@ -7,8 +7,10 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.DrawCircleCommand;
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     
-    internal final class CircleModule extends DrawModule implements IDrawable
+    public final class CircleModule extends DrawModule implements IDrawable
     {
+        public static const CIRCLE:String = "circle";
+        
         public function CircleModule(recorder:Recorder)
         {
             super(recorder);
@@ -63,7 +65,7 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function get name():String
         {
-            return DrawModuleFactory.CIRCLE;
+            return CIRCLE;
         }
         
         protected function storeCircleCoordinate(x:Number, y:Number):void
