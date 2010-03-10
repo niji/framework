@@ -38,7 +38,6 @@ package org.libspark.gunyarapaint.framework
             var bytes:ByteArray = new ByteArray();
             var commands:CommandCollection = new CommandCollection();
             var version:uint = PAINTER_LOG_VERSION;
-            commands.loadCommands();
             bytes.endian = Endian.BIG_ENDIAN;
             bytes.position = 0;
             var signature:String = "GUNYARA_PAINT:"

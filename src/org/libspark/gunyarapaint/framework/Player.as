@@ -18,7 +18,6 @@ package org.libspark.gunyarapaint.framework
         {
             var data:Object = {};
             parser.readHeader(data);
-            parser.loadCommands();
             parser.preload();
             speed = 1;
             duration = 50;

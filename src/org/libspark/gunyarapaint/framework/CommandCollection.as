@@ -38,13 +38,6 @@ package org.libspark.gunyarapaint.framework
         public function CommandCollection()
         {
             m_commands = new Vector.<ICommand>(MAX_COMMANDS, true);
-        }
-        
-        /**
-         * 最初から入っているコマンドを全て登録する
-         */
-        public function loadCommands():void
-        {
             registerCommand(new CopyLayerCommand());
             registerCommand(new CreateLayerCommand());
             registerCommand(new MergeLayerCommand());
