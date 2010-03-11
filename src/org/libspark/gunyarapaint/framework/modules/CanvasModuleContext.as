@@ -11,7 +11,6 @@ package org.libspark.gunyarapaint.framework.modules
             add(new CircleModule(recorder));
             add(new DropperModule(recorder));
             add(new EllipseModule(recorder));
-            add(new EraserModule(recorder));
             add(new FloodFillModule(recorder));
             add(new FreeHandModule(recorder));
             add(new LineModule(recorder));
