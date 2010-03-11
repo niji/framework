@@ -3,7 +3,7 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.PixelCommand;
     
-    public final class PixelModule extends DrawModule implements IDrawable
+    public final class PixelModule extends CanvasModule implements ICanvasModule
     {
         public static const PIXEL:String = "pixel";
         

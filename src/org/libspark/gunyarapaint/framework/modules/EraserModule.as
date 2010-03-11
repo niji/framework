@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.modules
 {
     import org.libspark.gunyarapaint.framework.Recorder;
     
-    public final class EraserModule extends DrawModule implements IDrawable
+    public final class EraserModule extends CanvasModule implements ICanvasModule
     {
         public static const ERASER:String = "eraser";
         

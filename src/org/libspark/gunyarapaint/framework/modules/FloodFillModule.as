@@ -4,7 +4,7 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.FloodFillCommand;
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     
-    public final class FloodFillModule extends DrawModule implements IDrawable
+    public final class FloodFillModule extends CanvasModule implements ICanvasModule
     {
         public static const FLOOD_FILL:String = "floodFill";
         

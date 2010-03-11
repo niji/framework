@@ -9,7 +9,7 @@ package org.libspark.gunyarapaint.framework
      */
     internal final class UndoStack
     {
-        public function UndoStack(painter:CanvasContext,
+        public function UndoStack(painter:Painter,
                                   size:uint = 16)
         {
             m_buffer = new Vector.<Object>(size + 1, true);
@@ -22,7 +22,7 @@ package org.libspark.gunyarapaint.framework
             }
         }
         
-        public function undo(cc:CanvasContext):void
+        public function undo(painter:Painter):void
         {
             if (m_index === m_first) {
                 throw new UndoError();
@@ -33,19 +33,19 @@ package org.libspark.gunyarapaint.framework
             else {
                 m_index--;
             }
-            cc.restoreState(m_buffer[m_index]);
+            painter.restoreState(m_buffer[m_index]);
         }
         
-        public function redo(cc:CanvasContext):void
+        public function redo(painter:Painter):void
         {
             if (m_index === m_last) {
                 throw new RedoError();
             }
             m_index = (m_index + 1) % m_buffer.length;
-            cc.restoreState(m_buffer[m_index]);
+            painter.restoreState(m_buffer[m_index]);
         }
         
-        public function push(painter:CanvasContext):void
+        public function push(painter:Painter):void
         {
             m_index = (m_index + 1) % m_buffer.length;
             m_buffer[m_index] = painter.saveState();

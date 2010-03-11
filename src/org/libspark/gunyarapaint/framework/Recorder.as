@@ -10,7 +10,7 @@ package org.libspark.gunyarapaint.framework
      * ログを記録する
      * 
      */
-    public final class Recorder extends CanvasContext
+    public final class Recorder extends Painter
     {
         /**
          * やり直し可能な回数の初期値
@@ -18,7 +18,7 @@ package org.libspark.gunyarapaint.framework
          */
         public static const DEFAULT_UNDO_MAX:uint = 16;
         
-        public function Recorder(width:uint, height:uint, bytes:ByteArray, commands:CommandCollection)
+        public function Recorder(width:uint, height:uint, bytes:ByteArray, commands:CommandContext)
         {
             m_bytes = bytes;
             m_command = commands;
@@ -36,7 +36,7 @@ package org.libspark.gunyarapaint.framework
         public static function create(width:int, height:int, undo:int):Recorder
         {
             var bytes:ByteArray = new ByteArray();
-            var commands:CommandCollection = new CommandCollection();
+            var commands:CommandContext = new CommandContext();
             var version:uint = PAINTER_LOG_VERSION;
             bytes.endian = Endian.BIG_ENDIAN;
             bytes.position = 0;
@@ -68,7 +68,7 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new CommandEvent(CommandEvent.COMMITTED, command));
         }
         
-        private var m_command:CommandCollection;
+        private var m_command:CommandContext;
         private var m_bytes:ByteArray;
     }
 }

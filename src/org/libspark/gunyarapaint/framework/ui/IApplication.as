@@ -4,7 +4,7 @@ package org.libspark.gunyarapaint.framework.ui
     
     import org.libspark.gunyarapaint.framework.LayerBitmapCollection;
     import org.libspark.gunyarapaint.framework.Pen;
-    import org.libspark.gunyarapaint.framework.modules.IDrawable;
+    import org.libspark.gunyarapaint.framework.modules.ICanvasModule;
     
     /**
      * ペイントアプリケーションに必要なメソッドを定義したインターフェース
@@ -22,7 +22,7 @@ package org.libspark.gunyarapaint.framework.ui
          * 描写モジュールを取得する
          * 
          */
-        function get module():IDrawable;
+        function get module():ICanvasModule;
         
         /**
          * レイヤーの配列を管理するオブジェクトを取得する

@@ -12,7 +12,7 @@ package org.libspark.gunyarapaint.framework
      * ログを再生する
      * 
      */
-    public final class Player extends CanvasContext
+    public final class Player extends Painter
     {
         public function Player(parser:Parser)
         {

@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.commands
 {
     import flash.utils.ByteArray;
     
-    import org.libspark.gunyarapaint.framework.CanvasContext;
+    import org.libspark.gunyarapaint.framework.Painter;
     
     /**
      * @private
@@ -34,9 +34,9 @@ package org.libspark.gunyarapaint.framework.commands
             m_alpha = alpha;
         }
         
-        public function execute(canvas:CanvasContext):void
+        public function execute(painter:Painter):void
         {
-            canvas.beginFill(m_color, m_alpha);
+            painter.beginFill(m_color, m_alpha);
         }
         
         public function reset():void

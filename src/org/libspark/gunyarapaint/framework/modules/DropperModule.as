@@ -3,7 +3,7 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.PenCommand;
     
-    public final class DropperModule extends DrawModule implements IDrawable
+    public final class DropperModule extends CanvasModule implements ICanvasModule
     {
         public static const DROPPER:String = "dropper";
         

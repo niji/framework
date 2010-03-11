@@ -29,14 +29,13 @@ package org.libspark.gunyarapaint.framework
     
     /**
      * コマンドを管理する
-     * TODO: CommandContext という名前に変更する
      * 
      */
-    public class CommandCollection extends EventDispatcher
+    public class CommandContext extends EventDispatcher
     {
         public static const MAX_COMMANDS:uint = 256;
         
-        public function CommandCollection()
+        public function CommandContext()
         {
             m_commands = new Vector.<ICommand>(MAX_COMMANDS, true);
             registerCommand(new CopyLayerCommand());

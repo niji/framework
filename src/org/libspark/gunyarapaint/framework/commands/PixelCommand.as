@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.commands
 {
     import flash.utils.ByteArray;
     
-    import org.libspark.gunyarapaint.framework.CanvasContext;
+    import org.libspark.gunyarapaint.framework.Painter;
     
     /**
      * @private
@@ -34,10 +34,10 @@ package org.libspark.gunyarapaint.framework.commands
             m_y = y;
         }
         
-        public function execute(canvas:CanvasContext):void
+        public function execute(painter:Painter):void
         {
-            canvas.setPixel(m_x, m_y);
-            canvas.pushUndo();
+            painter.setPixel(m_x, m_y);
+            painter.pushUndo();
         }
         
         public function reset():void

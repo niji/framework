@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
 {
     import flash.utils.ByteArray;
     
-    import org.libspark.gunyarapaint.framework.CanvasContext;
+    import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     
     /**
@@ -33,9 +33,9 @@ package org.libspark.gunyarapaint.framework.commands.layer
             }
         }
         
-        public function execute(canvas:CanvasContext):void
+        public function execute(painter:Painter):void
         {
-            canvas.layers.currentIndex = m_index;
+            painter.layers.currentIndex = m_index;
         }
         
         public function reset():void

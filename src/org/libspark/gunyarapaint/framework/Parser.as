@@ -17,7 +17,7 @@
      * ペイントログを解析して再生に必要な情報を管理する
      * 
      */
-    public final class Parser extends CommandCollection
+    public final class Parser extends CommandContext
     {
         public static const EOH:uint = 26;
         

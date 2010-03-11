@@ -20,10 +20,9 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.errors.InvisibleLayerError;
     import org.libspark.gunyarapaint.framework.errors.LockedLayerError;
 
-    // CanvasModule
-    public class DrawModule
+    public class CanvasModule
     {
-        public function DrawModule(recorder:Recorder)
+        public function CanvasModule(recorder:Recorder)
         {
             m_recorder = recorder;
         }

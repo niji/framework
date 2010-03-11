@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.commands
 {
     import flash.utils.ByteArray;
     
-    import org.libspark.gunyarapaint.framework.CanvasContext;
+    import org.libspark.gunyarapaint.framework.Painter;
     
     /**
      * コマンドオブジェクトに必要なメソッドを定義したインターフェース
@@ -30,9 +30,9 @@ package org.libspark.gunyarapaint.framework.commands
         /**
          * キャンバスに描写を実行する
          * 
-         * @param canvas キャンバス
+         * @param painter キャンバス
          */
-        function execute(canvas:CanvasContext):void;
+        function execute(painter:Painter):void;
         
         /**
          * 現在のインスタンスの描写状態をリセットする

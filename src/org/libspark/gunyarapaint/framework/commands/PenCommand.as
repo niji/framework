@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.commands
 {
     import flash.utils.ByteArray;
     
-    import org.libspark.gunyarapaint.framework.CanvasContext;
+    import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.Pen;
     
     /**
@@ -128,9 +128,9 @@ package org.libspark.gunyarapaint.framework.commands
             }
         }
         
-        public function execute(canvas:CanvasContext):void
+        public function execute(painter:Painter):void
         {
-            canvas.pen = m_pen;
+            painter.pen = m_pen;
         }
         
         public function reset():void

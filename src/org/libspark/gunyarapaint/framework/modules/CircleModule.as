@@ -7,7 +7,7 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.DrawCircleCommand;
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     
-    public final class CircleModule extends DrawModule implements IDrawable
+    public final class CircleModule extends CanvasModule implements ICanvasModule
     {
         public static const CIRCLE:String = "circle";
         

@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.commands
 {
     import flash.utils.ByteArray;
     
-    import org.libspark.gunyarapaint.framework.CanvasContext;
+    import org.libspark.gunyarapaint.framework.Painter;
     
     /**
      * @private
@@ -29,9 +29,9 @@ package org.libspark.gunyarapaint.framework.commands
             m_radius = radius;
         }
         
-        public function execute(canvas:CanvasContext):void
+        public function execute(painter:Painter):void
         {
-            canvas.drawCircle(m_radius);
+            painter.drawCircle(m_radius);
         }
         
         public function reset():void

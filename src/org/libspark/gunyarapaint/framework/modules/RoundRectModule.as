@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.modules
 {
     import org.libspark.gunyarapaint.framework.Recorder;
     
-    public final class RoundRectModule extends DrawModule implements IDrawable
+    public final class RoundRectModule extends CanvasModule implements ICanvasModule
     {
         public static const ROUND_RECT:String = "roundRect";
         

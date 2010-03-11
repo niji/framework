@@ -15,9 +15,8 @@ package org.libspark.gunyarapaint.framework
     /**
      * 再生及び記録のための共通基盤
      * 
-     * TODO: やっぱり Painter という名前にする
      */
-    public class CanvasContext extends EventDispatcher
+    public class Painter extends EventDispatcher
     {
         /**
          * ログのバージョン番号
@@ -37,7 +36,7 @@ package org.libspark.gunyarapaint.framework
          */
         public static const PAINTER_VERSION_STRING:String = "ver." + PAINTER_VERSION;
         
-        public function CanvasContext(width:uint, height:uint, version:uint, paintEngine:PaintEngine)
+        public function Painter(width:uint, height:uint, version:uint, paintEngine:PaintEngine)
         {
             m_layers = new LayerBitmapCollection(width, height);
             m_drawingSprite = new Sprite();

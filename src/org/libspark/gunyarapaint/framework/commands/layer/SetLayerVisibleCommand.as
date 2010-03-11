@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
 {
     import flash.utils.ByteArray;
     
-    import org.libspark.gunyarapaint.framework.CanvasContext;
+    import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     
     /**
@@ -35,10 +35,10 @@ package org.libspark.gunyarapaint.framework.commands.layer
             m_visible = visible;
         }
         
-        public function execute(canvas:CanvasContext):void
+        public function execute(painter:Painter):void
         {
-            canvas.layers.at(m_index).visible = m_visible;
-            canvas.pushUndoIfNeed();
+            painter.layers.at(m_index).visible = m_visible;
+            painter.pushUndoIfNeed();
         }
         
         public function reset():void

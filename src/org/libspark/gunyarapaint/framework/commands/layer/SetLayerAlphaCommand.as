@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
 {
     import flash.utils.ByteArray;
     
-    import org.libspark.gunyarapaint.framework.CanvasContext;
+    import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     
     /**
@@ -33,10 +33,10 @@ package org.libspark.gunyarapaint.framework.commands.layer
             }
         }
         
-        public function execute(canvas:CanvasContext):void
+        public function execute(painter:Painter):void
         {
-            canvas.currentLayerAlpha = m_alpha;
-            canvas.pushUndoIfNeed();
+            painter.currentLayerAlpha = m_alpha;
+            painter.pushUndoIfNeed();
         }
         
         public function reset():void

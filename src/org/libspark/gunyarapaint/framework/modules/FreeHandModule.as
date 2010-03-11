@@ -10,7 +10,7 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     import org.libspark.gunyarapaint.framework.commands.PenCommand;
     
-    public final class FreeHandModule extends DrawModule implements IDrawable
+    public final class FreeHandModule extends CanvasModule implements ICanvasModule
     {
         public static const FREE_HAND:String = "freeHand";
         

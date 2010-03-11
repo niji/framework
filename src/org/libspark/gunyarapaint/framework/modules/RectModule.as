@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.modules
 {
     import org.libspark.gunyarapaint.framework.Recorder;
     
-    public final class RectModule extends DrawModule implements IDrawable
+    public final class RectModule extends CanvasModule implements ICanvasModule
     {
         public static const RECT:String = "rect";
         

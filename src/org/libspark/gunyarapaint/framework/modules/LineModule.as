@@ -5,7 +5,7 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.LineToCommand;
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     
-    public final class LineModule extends DrawModule implements IDrawable
+    public final class LineModule extends CanvasModule implements ICanvasModule
     {
         public static const LINE:String = "line";
         

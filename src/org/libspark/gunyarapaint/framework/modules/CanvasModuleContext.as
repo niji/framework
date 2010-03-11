@@ -3,9 +3,9 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.Recorder;
 
     // TODO: CanvasModuleContext
-    public final class DrawModuleFactory
+    public final class CanvasModuleContext
     {
-        public function DrawModuleFactory(recorder:Recorder)
+        public function CanvasModuleContext(recorder:Recorder)
         {
             m_modules = {};
             add(new CircleModule(recorder));
@@ -20,12 +20,12 @@ package org.libspark.gunyarapaint.framework.modules
             add(new RoundRectModule(recorder));
         }
         
-        public function add(module:IDrawable):void
+        public function add(module:ICanvasModule):void
         {
             m_modules[module.name] = module;
         }
         
-        public function getModule(name:String):IDrawable
+        public function getModule(name:String):ICanvasModule
         {
             return m_modules[name];
         }

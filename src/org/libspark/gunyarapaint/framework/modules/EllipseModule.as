@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.modules
 {
     import org.libspark.gunyarapaint.framework.Recorder;
     
-    public final class EllipseModule extends DrawModule implements IDrawable
+    public final class EllipseModule extends CanvasModule implements ICanvasModule
     {
         public static const ELLIPSE:String = "ellipse";
         
