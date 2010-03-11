@@ -2,6 +2,7 @@ package org.libspark.gunyarapaint.framework.modules
 {
     import org.libspark.gunyarapaint.framework.Recorder;
 
+    // TODO: CanvasModuleContext
     public final class DrawModuleFactory
     {
         public function DrawModuleFactory(recorder:Recorder)
@@ -24,7 +25,7 @@ package org.libspark.gunyarapaint.framework.modules
             m_modules[module.name] = module;
         }
         
-        public function create(name:String):IDrawable
+        public function getModule(name:String):IDrawable
         {
             return m_modules[name];
         }

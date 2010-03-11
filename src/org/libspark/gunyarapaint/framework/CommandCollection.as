@@ -29,6 +29,7 @@ package org.libspark.gunyarapaint.framework
     
     /**
      * コマンドを管理する
+     * TODO: CommandContext という名前に変更する
      * 
      */
     public class CommandCollection extends EventDispatcher

@@ -15,7 +15,7 @@ package org.libspark.gunyarapaint.framework
     /**
      * 再生及び記録のための共通基盤
      * 
-     * @todo: Painter の実装を取り入れる
+     * TODO: やっぱり Painter という名前にする
      */
     public class CanvasContext extends EventDispatcher
     {

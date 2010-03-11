@@ -2,7 +2,7 @@ package org.libspark.gunyarapaint.framework.modules
 {
     /**
      * 描写モジュールに必要なメソッドを定義したインターフェース。利用は外部から可能だが、実装は内部で行われる。
-     * 
+     * ICanvasModule
      */
     public interface IDrawable
     {
@@ -43,8 +43,8 @@ package org.libspark.gunyarapaint.framework.modules
          * 
          * @param x x座標
          * @param y y座標
-         */
         function saveCoordinate(x:Number, y:Number):void;
+         */
         
         /**
          * 巻き戻しを実行する 
