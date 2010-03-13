@@ -18,7 +18,7 @@ package org.libspark.gunyarapaint.framework
          */
         public static const DEFAULT_UNDO_MAX:uint = 16;
         
-        public function Recorder(width:uint, height:uint, bytes:ByteArray, commands:CommandContext)
+        public function Recorder(bytes:ByteArray, width:uint, height:uint, commands:CommandContext)
         {
             m_bytes = bytes;
             m_command = commands;
@@ -33,22 +33,21 @@ package org.libspark.gunyarapaint.framework
          * @param height 画像の高さ
          * @param undo やり直しできる回数
          */
-        public static function create(width:int, height:int, undo:int):Recorder
+        public static function create(bytes:ByteArray, width:int, height:int, undo:int):Recorder
         {
-            var bytes:ByteArray = new ByteArray();
             var commands:CommandContext = new CommandContext();
             var version:uint = PAINTER_LOG_VERSION;
             bytes.endian = Endian.BIG_ENDIAN;
             bytes.position = 0;
             var signature:String = "GUNYARA_PAINT:"
-                + (version / 100)         + ":"
-                + ((version % 100) / 10)  + ":"
-                + (version % 10)          + ":"
+                + uint(version / 100)         + "."
+                + uint((version % 100) / 10)  + "."
+                + uint(version % 10)          + ":"
             bytes.writeUTFBytes(signature);
             bytes.writeShort(width);
             bytes.writeShort(height);
             bytes.writeShort(undo);
-            var recorder:Recorder = new Recorder(width, height, bytes, commands);
+            var recorder:Recorder = new Recorder(bytes, width, height, commands);
             recorder.setUndo(new UndoStack(recorder, undo));
             return recorder;
         }
