@@ -19,31 +19,25 @@ package org.libspark.gunyarapaint.framework.modules
             validateLayerState();
             setCoordinate(x, y);
             m_recorder.startDrawingSession();
-            m_drawing = true;
         }
         
         public function move(x:Number, y:Number):void
         {
-            if (m_drawing) {
-                m_recorder.clear();
-                m_recorder.resetPen();
-                m_recorder.moveTo(coordinateX, coordinateY);
-                m_recorder.lineTo(x, y);
-            }
+            m_recorder.clear();
+            m_recorder.resetPen();
+            m_recorder.moveTo(coordinateX, coordinateY);
+            m_recorder.lineTo(x, y);
         }
         
         public function stop(x:Number, y:Number):void
         {
-            if (m_drawing) {
-                m_recorder.stopDrawingSession();
-                if (!equalsCoordinate(x, y)) {
-                    var from:Object = getArgumentsFromCurrentCoordinate();
-                    var to:Object = getArgumentsFromCoordinate(x, y);
-                    m_recorder.commitCommand(MoveToCommand.ID, from);
-                    m_recorder.commitCommand(LineToCommand.ID, to);
-                    m_recorder.commitCommand(CompositeCommand.ID, {});
-                }
-                m_drawing = false;
+            m_recorder.stopDrawingSession();
+            if (!equalsCoordinate(x, y)) {
+                var from:Object = getArgumentsFromCurrentCoordinate();
+                var to:Object = getArgumentsFromCoordinate(x, y);
+                m_recorder.commitCommand(MoveToCommand.ID, from);
+                m_recorder.commitCommand(LineToCommand.ID, to);
+                m_recorder.commitCommand(CompositeCommand.ID, {});
             }
         }
         

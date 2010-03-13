@@ -16,31 +16,25 @@ package org.libspark.gunyarapaint.framework.modules
             validateLayerState();
             setCoordinate(x, y);
             m_recorder.startDrawingSession();
-            m_drawing = true;
         }
         
         public function move(x:Number, y:Number):void
         {
-            if (m_drawing) {
-                m_recorder.clear();
-                m_recorder.resetPen();
-                m_recorder.drawEllipse(
-                    coordinateX,
-                    coordinateY,
-                    Math.abs(x - coordinateX),
-                    Math.abs(y - coordinateY)
-                );
-            }
+            m_recorder.clear();
+            m_recorder.resetPen();
+            m_recorder.drawEllipse(
+                coordinateX,
+                coordinateY,
+                Math.abs(x - coordinateX),
+                Math.abs(y - coordinateY)
+            );
         }
         
         public function stop(x:Number, y:Number):void
         {
-            if (m_drawing) {
-                m_recorder.stopDrawingSession();
-                if (!equalsCoordinate(x, y)) {
-                    // TODO: implement this
-                }
-                m_drawing = false;
+            m_recorder.stopDrawingSession();
+            if (!equalsCoordinate(x, y)) {
+                // TODO: implement this
             }
         }
         

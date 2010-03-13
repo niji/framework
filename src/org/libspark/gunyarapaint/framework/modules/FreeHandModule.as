@@ -23,7 +23,6 @@ package org.libspark.gunyarapaint.framework.modules
         {
             validateLayerState();
             setCoordinate(x, y);
-            m_drawing = true;
             m_recorder.commitCommand(
                 MoveToCommand.ID,
                 getArgumentsFromCoordinate(x, y)
@@ -32,53 +31,50 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function move(x:Number, y:Number):void
         {
-            if (m_drawing) {
-                m_recorder.commitCommand(
-                    LineToCommand.ID,
-                    getArgumentsFromCoordinate(x, y)
-                );
-            }
+            m_recorder.commitCommand(
+                LineToCommand.ID,
+                getArgumentsFromCoordinate(x, y)
+            );
+            m_drawedLine = true;
         }
         
         public function stop(x:Number, y:Number):void
         {
-            if (m_drawing) {
-                if (!m_drawingLine) {
-                    var pen:Pen = m_recorder.pen;
-                    var tempAlpha:Number = pen.alpha;
-                    m_recorder.commitCommand(
-                        PenCommand.ID,
-                        {
-                            "type": PenCommand.ALPHA,
-                            "alpha": 0
-                        }
-                    );
-                    m_recorder.commitCommand(
-                        BeginFillCommand.ID,
-                        {
-                            "color": pen.color,
-                            "alpha": tempAlpha
-                        }
-                    );
-                    m_recorder.commitCommand(
-                        DrawCircleCommand.ID,
-                        { "radius": pen.thickness / 2 }
-                    );
-                    m_recorder.commitCommand(EndFillCommand.ID, {});
-                    m_recorder.commitCommand(
-                        PenCommand.ID,
-                        {
-                            "type": PenCommand.ALPHA,
-                            "alpha": tempAlpha
-                        }
-                    );
-                }
+            if (!m_drawedLine) {
+                var pen:Pen = m_recorder.pen;
+                var tempAlpha:Number = pen.alpha;
                 m_recorder.commitCommand(
-                    CompositeCommand.ID,
-                    {}
+                    PenCommand.ID,
+                    {
+                        "type": PenCommand.ALPHA,
+                        "alpha": 0
+                    }
                 );
-                m_drawing = false;
+                m_recorder.commitCommand(
+                    BeginFillCommand.ID,
+                    {
+                        "color": pen.color,
+                        "alpha": tempAlpha
+                    }
+                );
+                m_recorder.commitCommand(
+                    DrawCircleCommand.ID,
+                    { "radius": pen.thickness / 2 }
+                );
+                m_recorder.commitCommand(EndFillCommand.ID, {});
+                m_recorder.commitCommand(
+                    PenCommand.ID,
+                    {
+                        "type": PenCommand.ALPHA,
+                        "alpha": tempAlpha
+                    }
+                );
+                m_drawedLine = false;
             }
+            m_recorder.commitCommand(
+                CompositeCommand.ID,
+                {}
+            );
         }
         
         public function interrupt(x:Number, y:Number):void
@@ -91,5 +87,7 @@ package org.libspark.gunyarapaint.framework.modules
         {
             return FREE_HAND;
         }
+        
+        private var m_drawedLine:Boolean;
     }
 }

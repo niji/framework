@@ -201,7 +201,6 @@ package org.libspark.gunyarapaint.framework.modules
         protected function stopDrawing():void
         {
             m_recorder.stopDrawingSession();
-            m_drawing = false;
         }
         
         /**
@@ -350,7 +349,5 @@ package org.libspark.gunyarapaint.framework.modules
         private static var s_shouldStartBeforeDrawing:Boolean = false;
         private static var s_shouldStartAfterDrawing:Boolean = false;
         protected var m_recorder:Recorder;
-        protected var m_drawing:Boolean;
-        protected var m_drawingLine:Boolean;
     }
 }

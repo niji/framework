@@ -16,18 +16,15 @@ package org.libspark.gunyarapaint.framework.modules
         {
             validateLayerState();
             setPixel(x, y);
-            m_drawing = true;
         }
         
         public function move(x:Number, y:Number):void
         {
-            if (m_drawing)
-                setPixel(x, y);
+            setPixel(x, y);
         }
         
         public function stop(x:Number, y:Number):void
         {
-            m_drawing = false;
         }
         
         public function interrupt(x:Number, y:Number):void

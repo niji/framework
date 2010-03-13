@@ -21,40 +21,34 @@ package org.libspark.gunyarapaint.framework.modules
             validateLayerState();
             setCoordinate(x, y);
             m_recorder.startDrawingSession();
-            m_drawing = true;
         }
         
         public function move(x:Number, y:Number):void
         {
-            if (m_drawing) {
-                storeCircleCoordinate(x, y);
-                m_recorder.clear();
-                m_recorder.resetPen();
-                m_recorder.moveTo(s_rectangle.x, s_rectangle.y);
-                m_recorder.drawCircle(s_rectangle.width);
-            }
+            storeCircleCoordinate(x, y);
+            m_recorder.clear();
+            m_recorder.resetPen();
+            m_recorder.moveTo(s_rectangle.x, s_rectangle.y);
+            m_recorder.drawCircle(s_rectangle.width);
         }
         
         public function stop(x:Number, y:Number):void
         {
-            if (m_drawing) {
-                m_recorder.stopDrawingSession();
-                if (!equalsCoordinate(x, y)) {
-                    storeCircleCoordinate(x, y);
-                    m_recorder.commitCommand(
-                        MoveToCommand.ID,
-                        getArgumentsFromCoordinate(s_rectangle.x, s_rectangle.y)
-                    );
-                    m_recorder.commitCommand(
-                        DrawCircleCommand.ID,
-                        { "radius": s_rectangle.width }
-                    );
-                    m_recorder.commitCommand(
-                        CompositeCommand.ID,
-                        {}
-                    );
-                }
-                m_drawing = false;
+            m_recorder.stopDrawingSession();
+            if (!equalsCoordinate(x, y)) {
+                storeCircleCoordinate(x, y);
+                m_recorder.commitCommand(
+                    MoveToCommand.ID,
+                    getArgumentsFromCoordinate(s_rectangle.x, s_rectangle.y)
+                );
+                m_recorder.commitCommand(
+                    DrawCircleCommand.ID,
+                    { "radius": s_rectangle.width }
+                );
+                m_recorder.commitCommand(
+                    CompositeCommand.ID,
+                    {}
+                );
             }
         }
         
