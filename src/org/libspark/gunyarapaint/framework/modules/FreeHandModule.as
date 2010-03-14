@@ -75,6 +75,7 @@ package org.libspark.gunyarapaint.framework.modules
                 CompositeCommand.ID,
                 {}
             );
+            saveCoordinate(x, y);
         }
         
         public function interrupt(x:Number, y:Number):void

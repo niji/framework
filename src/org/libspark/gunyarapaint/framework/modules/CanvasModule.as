@@ -101,17 +101,31 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
         /**
-         * 最後に移動した座標を保存する
+         * 始点と終点を取得する(現在は単体テスト用に使われているのみ)
+         * 
+         * @param start 始点
+         * @param end 終点
+         */
+        public function getLineSegment(start:Point, end:Point):void
+        {
+            start.x = s_startPointX;
+            start.y = s_startPointY;
+            end.x = s_endPointX;
+            end.y = s_endPointY;
+        }
+        
+        /**
+         * 始点と終点の座標を保存する
          * 
          * @param x
          * @param y
          */
-        public function saveCoordinate(x:Number, y:Number):void
+        protected function saveCoordinate(x:Number, y:Number):void
         {
-            s_coordinateXWithButtonDown = s_coordinateX;
-            s_coordinateYWithButtonDown = s_coordinateY;
-            s_coordinateXWithButtonUp = x;
-            s_coordinateYWithButtonUp = y;
+            s_startPointX = s_coordinateX;
+            s_startPointY = s_coordinateY;
+            s_endPointX = x;
+            s_endPointY = y;
         }
         
         /**
@@ -137,13 +151,13 @@ package org.libspark.gunyarapaint.framework.modules
          */
         protected function setCoordinate(x:Number, y:Number):void
         {
-            if (s_shouldStartAfterDrawing) {
-                s_coordinateX = s_coordinateXWithButtonUp;
-                s_coordinateY = s_coordinateYWithButtonUp;
+            if (s_shouldDrawFromEndPoint) {
+                s_coordinateX = s_endPointX;
+                s_coordinateY = s_endPointY;
             }
-            else if (s_shouldStartBeforeDrawing) {
-                s_coordinateX = s_coordinateXWithButtonDown;
-                s_coordinateY = s_coordinateYWithButtonDown;
+            else if (s_shouldDrawFromStartPoint) {
+                s_coordinateX = s_startPointX;
+                s_coordinateY = s_startPointY;
             }
             else {
                 s_coordinateX = x;
@@ -223,24 +237,14 @@ package org.libspark.gunyarapaint.framework.modules
             s_keyQ = value;
         }
         
-        /**
-         * 開始座標を描写終了後の座標に設定するかどうか (R)
-         * 
-         * @param value 
-         */
-        public function set shouldStartAfterDrawing(value:Boolean):void
+        public function set shouldDrawFromStartPoint(value:Boolean):void
         {
-            s_shouldStartAfterDrawing = value;
+            s_shouldDrawFromStartPoint = value;
         }
         
-        /**
-         * 開始座標を描写開始時の座標に設定するかどうか (T)
-         * 
-         * @param value 
-         */
-        public function set shouldStartBeforeDrawing(value:Boolean):void
+        public function set shouldDrawFromEndPoint(value:Boolean):void
         {
-            s_shouldStartBeforeDrawing = value;
+            s_shouldDrawFromEndPoint = value;
         }
         
         public function set alpha(value:Number):void
@@ -340,14 +344,14 @@ package org.libspark.gunyarapaint.framework.modules
         
         private static var s_coordinateX:Number = 0;
         private static var s_coordinateY:Number = 0;
-        private static var s_coordinateXWithButtonUp:Number = 0;
-        private static var s_coordinateYWithButtonUp:Number = 0;
-        private static var s_coordinateXWithButtonDown:Number = 0;
-        private static var s_coordinateYWithButtonDown:Number = 0;
+        private static var s_startPointX:Number = 0;
+        private static var s_startPointY:Number = 0;
+        private static var s_endPointX:Number = 0;
+        private static var s_endPointY:Number = 0;
         private static var s_keyA:Boolean = false;
         private static var s_keyQ:Boolean = false;
-        private static var s_shouldStartBeforeDrawing:Boolean = false;
-        private static var s_shouldStartAfterDrawing:Boolean = false;
+        private static var s_shouldDrawFromStartPoint:Boolean = false;
+        private static var s_shouldDrawFromEndPoint:Boolean = false;
         protected var m_recorder:Recorder;
     }
 }

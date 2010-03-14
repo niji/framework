@@ -39,14 +39,6 @@ package org.libspark.gunyarapaint.framework.modules
         function interrupt(x:Number, y:Number):void;
         
         /**
-         * 最後に移動した位置を保存する
-         * 
-         * @param x x座標
-         * @param y y座標
-        function saveCoordinate(x:Number, y:Number):void;
-         */
-        
-        /**
          * 巻き戻しを実行する 
          * 
          */
@@ -112,9 +104,20 @@ package org.libspark.gunyarapaint.framework.modules
         function get name():String;
         
         function set keyA(value:Boolean):void;
+        
         function set keyQ(value:Boolean):void;
-        function set shouldStartAfterDrawing(value:Boolean):void;
-        function set shouldStartBeforeDrawing(value:Boolean):void;
+        
+        /**
+         * 描写開始時に終点固定を設定するかどうか (T)
+         * 
+         */
+        function set shouldDrawFromStartPoint(value:Boolean):void;
+        
+        /**
+         * 描写開始時に始点固定を設定するかどうか (R)
+         * 
+         */
+        function set shouldDrawFromEndPoint(value:Boolean):void;
         
         /**
          * 不透明度を設定する

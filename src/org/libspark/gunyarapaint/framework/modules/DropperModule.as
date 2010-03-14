@@ -25,6 +25,7 @@ package org.libspark.gunyarapaint.framework.modules
         public function stop(x:Number, y:Number):void
         {
             drop(x, y);
+            saveCoordinate(x, y);
         }
         
         public function interrupt(x:Number, y:Number):void

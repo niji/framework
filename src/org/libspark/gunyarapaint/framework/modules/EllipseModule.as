@@ -36,6 +36,7 @@ package org.libspark.gunyarapaint.framework.modules
             if (!equalsCoordinate(x, y)) {
                 // TODO: implement this
             }
+            saveCoordinate(x, y);
         }
         
         public function get name():String

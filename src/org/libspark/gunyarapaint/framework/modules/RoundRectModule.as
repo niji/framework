@@ -29,6 +29,7 @@ package org.libspark.gunyarapaint.framework.modules
             if (!equalsCoordinate(x, y)) {
                 // TODO: implement this
             }
+            saveCoordinate(x, y);
         }
         
         public function interrupt(x:Number, y:Number):void

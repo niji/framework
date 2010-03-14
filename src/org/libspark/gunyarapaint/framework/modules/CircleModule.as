@@ -13,6 +13,7 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function CircleModule(recorder:Recorder)
         {
+            m_rectangle = new Rectangle(0, 0, 0, 0);
             super(recorder);
         }
         
@@ -28,8 +29,8 @@ package org.libspark.gunyarapaint.framework.modules
             storeCircleCoordinate(x, y);
             m_recorder.clear();
             m_recorder.resetPen();
-            m_recorder.moveTo(s_rectangle.x, s_rectangle.y);
-            m_recorder.drawCircle(s_rectangle.width);
+            m_recorder.moveTo(m_rectangle.x, m_rectangle.y);
+            m_recorder.drawCircle(m_rectangle.width);
         }
         
         public function stop(x:Number, y:Number):void
@@ -39,17 +40,18 @@ package org.libspark.gunyarapaint.framework.modules
                 storeCircleCoordinate(x, y);
                 m_recorder.commitCommand(
                     MoveToCommand.ID,
-                    getArgumentsFromCoordinate(s_rectangle.x, s_rectangle.y)
+                    getArgumentsFromCoordinate(m_rectangle.x, m_rectangle.y)
                 );
                 m_recorder.commitCommand(
                     DrawCircleCommand.ID,
-                    { "radius": s_rectangle.width }
+                    { "radius": m_rectangle.width }
                 );
                 m_recorder.commitCommand(
                     CompositeCommand.ID,
                     {}
                 );
             }
+            saveCoordinate(x, y);
         }
         
         public function interrupt(x:Number, y:Number):void
@@ -62,26 +64,25 @@ package org.libspark.gunyarapaint.framework.modules
             return CIRCLE;
         }
         
-        protected function storeCircleCoordinate(x:Number, y:Number):void
+        private function storeCircleCoordinate(x:Number, y:Number):void
         {
             var dx:Number = x - coordinateX;
             var dy:Number = y - coordinateY;
             if (key_A) {
-                s_rectangle.x = x + dx;
-                s_rectangle.y = y - dy;
+                m_rectangle.x = x + dx;
+                m_rectangle.y = y - dy;
             }
             else if (key_Q) {
-                s_rectangle.x = x - dx;
-                s_rectangle.y = x + dy;
+                m_rectangle.x = x - dx;
+                m_rectangle.y = x + dy;
             }
             else {
-                s_rectangle.x = coordinateX;
-                s_rectangle.y = coordinateY;
+                m_rectangle.x = coordinateX;
+                m_rectangle.y = coordinateY;
             }
-            s_rectangle.width = Math.sqrt(dx * dx + dy * dy);
-            s_rectangle.height = 0;
+            m_rectangle.width = Math.sqrt(dx * dx + dy * dy);
         }
         
-        private static var s_rectangle:Rectangle = new Rectangle();
+        private var m_rectangle:Rectangle;
     }
 }
