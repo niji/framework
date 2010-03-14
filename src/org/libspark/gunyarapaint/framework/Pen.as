@@ -20,6 +20,7 @@ package org.libspark.gunyarapaint.framework
         public function Pen()
         {
             reset();
+            super();
         }
         
         /**
@@ -39,6 +40,29 @@ package org.libspark.gunyarapaint.framework
             m_pixelHinting = true;
             m_bitmap = null;
             m_matrix = new Matrix();
+        }
+        
+        /**
+         * 別のPenオブジェクトの設定を適用する
+         * 
+         * Painter でイベントを確実に発生させるためにsetterを経由する
+         * 
+         * @param value Pen
+         */
+        public function setPen(value:Pen):void
+        {
+            thickness = value.thickness;
+            color = value.color;
+            alpha = value.alpha;
+            blendMode = value.blendMode;
+            scaleMode = value.blendMode;
+            capsStyle = value.capsStyle;
+            jointStyle = value.jointStyle;
+            miterLimit = value.miterLimit;
+            pixelHinting = value.pixelHinting;
+            matrix = value.matrix.clone();
+            if (m_bitmap != null)
+                bitmap = value.bitmap;
         }
         
         /**
@@ -85,8 +109,9 @@ package org.libspark.gunyarapaint.framework
          */
         public function set thickness(value:uint):void
         {
+            var oldValue:uint = m_thickness;
             m_thickness = value;
-            if (hasEventListener(PenEvent.THICKNESS))
+            if (oldValue != value && hasEventListener(PenEvent.THICKNESS))
                 dispatchEvent(new PenEvent(PenEvent.THICKNESS))
         }
         
@@ -105,8 +130,9 @@ package org.libspark.gunyarapaint.framework
          */
         public function set color(value:uint):void
         {
+            var oldValue:uint = m_color;
             m_color = value;
-            if (hasEventListener(PenEvent.COLOR))
+            if (oldValue != value && hasEventListener(PenEvent.COLOR))
                 dispatchEvent(new PenEvent(PenEvent.COLOR))
         }
         
@@ -125,8 +151,9 @@ package org.libspark.gunyarapaint.framework
          */
         public function set alpha(value:Number):void
         {
+            var oldValue:Number = m_alpha;
             m_alpha = value;
-            if (hasEventListener(PenEvent.ALPHA))
+            if (oldValue != value && hasEventListener(PenEvent.ALPHA))
                 dispatchEvent(new PenEvent(PenEvent.ALPHA))
         }
         
@@ -145,8 +172,9 @@ package org.libspark.gunyarapaint.framework
          */
         public function set blendMode(value:String):void
         {
+            var oldValue:String = m_blendMode;
             m_blendMode = value;
-            if (hasEventListener(PenEvent.BLEND_MODE))
+            if (oldValue != value && hasEventListener(PenEvent.BLEND_MODE))
                 dispatchEvent(new PenEvent(PenEvent.BLEND_MODE))
         }
         
@@ -165,8 +193,9 @@ package org.libspark.gunyarapaint.framework
          */
         public function set scaleMode(value:String):void
         {
+            var oldValue:String = m_scaleMode;
             m_scaleMode = value;
-            if (hasEventListener(PenEvent.SCALE_MODE))
+            if (oldValue != value && hasEventListener(PenEvent.SCALE_MODE))
                 dispatchEvent(new PenEvent(PenEvent.SCALE_MODE))
         }
         
@@ -185,8 +214,9 @@ package org.libspark.gunyarapaint.framework
          */
         public function set capsStyle(value:String):void
         {
+            var oldValue:String = m_capsStyle;
             m_capsStyle = value;
-            if (hasEventListener(PenEvent.CAPS_STYLE))
+            if (oldValue != value && hasEventListener(PenEvent.CAPS_STYLE))
                 dispatchEvent(new PenEvent(PenEvent.CAPS_STYLE))
         }
         
@@ -205,8 +235,9 @@ package org.libspark.gunyarapaint.framework
          */
         public function set jointStyle(value:String):void
         {
+            var oldValue:String = m_jointStyle;
             m_jointStyle = value;
-            if (hasEventListener(PenEvent.JOINT_STYLE))
+            if (oldValue != value && hasEventListener(PenEvent.JOINT_STYLE))
                 dispatchEvent(new PenEvent(PenEvent.JOINT_STYLE))
         }
         
@@ -225,8 +256,9 @@ package org.libspark.gunyarapaint.framework
          */
         public function set miterLimit(value:Number):void
         {
+            var oldValue:Number = m_miterLimit;
             m_miterLimit = value;
-            if (hasEventListener(PenEvent.MITER_LIMIT))
+            if (oldValue != value && hasEventListener(PenEvent.MITER_LIMIT))
                 dispatchEvent(new PenEvent(PenEvent.MITER_LIMIT))
         }
         
@@ -245,8 +277,9 @@ package org.libspark.gunyarapaint.framework
          */
         public function set pixelHinting(value:Boolean):void
         {
+            var oldValue:Boolean = m_pixelHinting;
             m_pixelHinting = value;
-            if (hasEventListener(PenEvent.PIXEL_HINTING))
+            if (oldValue != value && hasEventListener(PenEvent.PIXEL_HINTING))
                 dispatchEvent(new PenEvent(PenEvent.PIXEL_HINTING))
         }
         
@@ -265,7 +298,8 @@ package org.libspark.gunyarapaint.framework
          */
         public function set bitmap(value:BitmapData):void
         {
-            m_bitmap = value;
+            m_bitmap.dispose();
+            m_bitmap = value.clone();
             if (hasEventListener(PenEvent.BITMAP))
                 dispatchEvent(new PenEvent(PenEvent.BITMAP))
         }
@@ -285,6 +319,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function set matrix(value:Matrix):void
         {
+            var oldValue:Matrix = m_matrix;
             m_matrix = value;
             if (hasEventListener(PenEvent.MATRIX))
                 dispatchEvent(new PenEvent(PenEvent.MATRIX))

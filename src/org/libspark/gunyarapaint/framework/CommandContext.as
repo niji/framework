@@ -60,6 +60,7 @@ package org.libspark.gunyarapaint.framework
             registerCommand(new RedoCommand());
             registerCommand(new UndoCommand());
             registerCommand(new VerticalMirrorCommand());
+            super();
         }
         
         /**

@@ -53,6 +53,7 @@ package org.libspark.gunyarapaint.framework
             m_version = version;
             m_width = width;
             m_height = height;
+            super();
         }
         
         /**
@@ -566,7 +567,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function set pen(value:Pen):void
         {
-            m_paintEngine.pen = value;
+            m_paintEngine.pen.setPen(value);
         }
         
         /**
