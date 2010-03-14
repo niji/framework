@@ -36,6 +36,12 @@ package org.libspark.gunyarapaint.framework
          */
         public static const PAINTER_VERSION_STRING:String = "ver." + PAINTER_VERSION;
         
+        /**
+         * 反転関連で全てのレイヤーに対して適用するための定数
+         * 
+         */
+        public static const ALL_LAYERS:uint = 0xff;
+        
         public function Painter(width:uint, height:uint, version:uint, paintEngine:PaintEngine)
         {
             m_layers = new LayerBitmapCollection(width, height);
@@ -434,7 +440,7 @@ package org.libspark.gunyarapaint.framework
         
         private function transformFromMatrixAt(index:int, matrix:Matrix):void
         {
-            if (index === 0xff) {
+            if (index === ALL_LAYERS) {
                 var c:uint = m_layers.count;
                 for (var i:uint = 0; i < c; i++) {
                     m_layers.at(i).applyMatrix(matrix);
