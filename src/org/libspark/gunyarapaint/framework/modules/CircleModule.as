@@ -69,12 +69,12 @@ package org.libspark.gunyarapaint.framework.modules
             var dx:Number = x - coordinateX;
             var dy:Number = y - coordinateY;
             if (key_A) {
-                m_rectangle.x = x + dx;
-                m_rectangle.y = y - dy;
+                m_rectangle.x = x + dy;
+                m_rectangle.y = y - dx;
             }
             else if (key_Q) {
-                m_rectangle.x = x - dx;
-                m_rectangle.y = x + dy;
+                m_rectangle.x = x - dy;
+                m_rectangle.y = y + dx;
             }
             else {
                 m_rectangle.x = coordinateX;
