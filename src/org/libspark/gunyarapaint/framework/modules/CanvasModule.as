@@ -217,24 +217,14 @@ package org.libspark.gunyarapaint.framework.modules
             m_recorder.stopDrawingSession();
         }
         
-        /**
-         * A ボタンがクリックされているかを設定する
-         * 
-         * @param value 
-         */
-        public function set keyA(value:Boolean):void
+        public function set shouldDrawCircleClockwise(value:Boolean):void
         {
-            s_keyA = value;
+            s_shouldDrawCircleClockwise = value;
         }
         
-        /**
-         * Q ボタンがクリックされているかを設定する
-         * 
-         * @param value 
-         */
-        public function set keyQ(value:Boolean):void
+        public function set shouldDrawCircleCounterClockwise(value:Boolean):void
         {
-            s_keyQ = value;
+            s_shouldDrawCircleCounterClockwise = value;
         }
         
         public function set shouldDrawFromStartPoint(value:Boolean):void
@@ -332,14 +322,14 @@ package org.libspark.gunyarapaint.framework.modules
             return s_coordinateY;
         }
         
-        protected function get key_A():Boolean
+        protected function getShouldDrawCircleClockwise():Boolean
         {
-            return s_keyA;
+            return s_shouldDrawCircleClockwise;
         }
         
-        protected function get key_Q():Boolean
+        protected function getShouldDrawCircleCounterClockwise():Boolean
         {
-            return s_keyQ;
+            return s_shouldDrawCircleCounterClockwise;
         }
         
         private static var s_coordinateX:Number = 0;
@@ -348,8 +338,8 @@ package org.libspark.gunyarapaint.framework.modules
         private static var s_startPointY:Number = 0;
         private static var s_endPointX:Number = 0;
         private static var s_endPointY:Number = 0;
-        private static var s_keyA:Boolean = false;
-        private static var s_keyQ:Boolean = false;
+        private static var s_shouldDrawCircleClockwise:Boolean = false;
+        private static var s_shouldDrawCircleCounterClockwise:Boolean = false;
         private static var s_shouldDrawFromStartPoint:Boolean = false;
         private static var s_shouldDrawFromEndPoint:Boolean = false;
         protected var m_recorder:Recorder;

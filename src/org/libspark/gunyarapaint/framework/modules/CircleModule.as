@@ -68,11 +68,11 @@ package org.libspark.gunyarapaint.framework.modules
         {
             var dx:Number = x - coordinateX;
             var dy:Number = y - coordinateY;
-            if (key_A) {
+            if (getShouldDrawCircleClockwise()) {
                 m_rectangle.x = x + dy;
                 m_rectangle.y = y - dx;
             }
-            else if (key_Q) {
+            else if (getShouldDrawCircleCounterClockwise()) {
                 m_rectangle.x = x - dy;
                 m_rectangle.y = y + dx;
             }

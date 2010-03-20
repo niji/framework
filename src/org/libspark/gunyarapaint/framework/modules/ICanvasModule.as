@@ -103,9 +103,17 @@ package org.libspark.gunyarapaint.framework.modules
          */        
         function get name():String;
         
-        function set keyA(value:Boolean):void;
+        /**
+         * 円の中心点を時計回りに描写するか設定する
+         * 
+         */
+        function set shouldDrawCircleClockwise(value:Boolean):void;
         
-        function set keyQ(value:Boolean):void;
+        /**
+         * 円の中心点を反時計回りに描写するかを設定する
+         * 
+         */
+        function set shouldDrawCircleCounterClockwise(value:Boolean):void;
         
         /**
          * 描写開始時に終点固定を設定するかどうか (T)
