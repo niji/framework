@@ -55,7 +55,7 @@ package org.libspark.gunyarapaint.framework
             color = value.color;
             alpha = value.alpha;
             blendMode = value.blendMode;
-            scaleMode = value.blendMode;
+            scaleMode = value.scaleMode;
             capsStyle = value.capsStyle;
             jointStyle = value.jointStyle;
             miterLimit = value.miterLimit;

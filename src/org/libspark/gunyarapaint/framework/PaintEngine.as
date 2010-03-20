@@ -172,17 +172,6 @@ package org.libspark.gunyarapaint.framework
             return m_coordinate.y;
         }
         
-        /**
-         * ペンオブジェクトを設定する
-         * 
-         * @param pen ペンオブジェクト
-         */
-        public function set pen(value:Pen):void
-        {
-            m_pen = value;
-            resetPen();
-        }
-        
         private var m_coordinate:Point;
         private var m_pen:Pen;
         private var m_shape:Shape;
