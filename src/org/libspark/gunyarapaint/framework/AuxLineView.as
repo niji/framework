@@ -18,25 +18,25 @@ package org.libspark.gunyarapaint.framework
         {
             var box:Graphics = m_box.graphics;
             var skew:Graphics = m_skew.graphics;
-            var w:Number = m_rect.width;
-            var h:Number = m_rect.height;
-            var sw:Number = w / m_divideCount;
-            var sh:Number = h / m_divideCount;
+            var width:Number = m_rect.width;
+            var height:Number = m_rect.height;
+            var sw:Number = width / m_divideCount;
+            var sh:Number = height / m_divideCount;
             for (var i:uint = 0; i < m_divideCount; i++) {
                 if (i > 0) {
                     box.moveTo(i * sw, 0);
-                    box.lineTo(i * sw, h);
+                    box.lineTo(i * sw, height);
                     box.moveTo(0, i * sh);
-                    box.lineTo(w, i * sh);
-                    skew.moveTo(i * sh, 0);
+                    box.lineTo(width, i * sh);
+                    skew.moveTo(i * sw, 0);
                     skew.lineTo(0, i * sh);
-                    skew.moveTo(w - (i * sw), 0);
-                    skew.lineTo(w, i * sh);
+                    skew.moveTo(width - (i * sw), 0);
+                    skew.lineTo(width, i * sh);
                 }
-                skew.moveTo(w - ((i + 1) * sw), h);
-                skew.lineTo(h, h - ((i + 1) * sh));
-                skew.moveTo((i + 1) * sw, h);
-                skew.lineTo(0, h - ((i + 1) * sh));
+                skew.moveTo(width - ((i + 1) * sw), height);
+                skew.lineTo(width, height - ((i + 1) * sh));
+                skew.moveTo((i + 1) * sw, height);
+                skew.lineTo(0, height - ((i + 1) * sh));
             }
         }
     }
