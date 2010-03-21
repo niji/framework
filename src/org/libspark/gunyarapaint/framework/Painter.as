@@ -49,6 +49,8 @@ package org.libspark.gunyarapaint.framework
             m_drawingSprite.mouseEnabled = false;
             m_horizontalMirrorMatrix = new Matrix(-1, 0, 0, 1, width, 0);
             m_verticalMirrorMatrix = new Matrix(1, 0, 0, -1, 0, height);
+            m_moveMatrix = new Matrix();
+            m_scaleMatrix = new Matrix();
             m_paintEngine = paintEngine;
             m_version = version;
             m_width = width;
@@ -371,6 +373,56 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
+         * 現在のレイヤーに対して平行移動を行う
+         * 
+         * @param x 移動先となるX座標
+         * @param y 移動先となるY座標
+         */
+        public function move(x:int, y:int):void
+        {
+            moveAt(m_layers.currentIndex, x, y);
+        }
+        
+        /**
+         * 指定されたレイヤーに対して平行移動を行う
+         * 
+         * @param index レイヤー番号
+         * @param x 移動先となるX座標
+         * @param y 移動先となるY座標
+         */
+        public function moveAt(index:int, x:int, y:int):void
+        {
+            m_moveMatrix.translate(x, y);
+            m_layers.at(index).applyMatrix(m_moveMatrix);
+            m_layers.compositeAll();
+        }
+        
+        /**
+         * 現在のレイヤーに対して拡大または縮小を行う
+         * 
+         * @param x 移動先となるX座標
+         * @param y 移動先となるY座標
+         */
+        public function scale(x:int, y:int):void
+        {
+            scaleAt(m_layers.currentIndex, x, y);
+        }
+        
+        /**
+         * 指定されたレイヤーに対して拡大または縮小を行う
+         * 
+         * @param index レイヤー番号
+         * @param x 移動先となるX座標
+         * @param y 移動先となるY座標
+         */
+        public function scaleAt(index:int, x:int, y:int):void
+        {
+            m_scaleMatrix.scale(x, y);
+            m_layers.at(index).applyMatrix(m_scaleMatrix);
+            m_layers.compositeAll();
+        }
+        
+        /**
          * 描写開始を宣言する
          * 
          * <p>
@@ -584,6 +636,8 @@ package org.libspark.gunyarapaint.framework
         private var m_paintEngine:PaintEngine;
         private var m_horizontalMirrorMatrix:Matrix;
         private var m_verticalMirrorMatrix:Matrix;
+        private var m_moveMatrix:Matrix;
+        private var m_scaleMatrix:Matrix;
         private var m_drawingSprite:Sprite;
         private var m_tempLayer:LayerBitmap;
         private var m_shouldCopyBitmap:Boolean;

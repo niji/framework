@@ -3,6 +3,7 @@ package org.libspark.gunyarapaint.framework
     import flash.events.EventDispatcher;
     
     import org.libspark.gunyarapaint.framework.commands.BeginFillCommand;
+    import org.libspark.gunyarapaint.framework.commands.BezierCurveCommand;
     import org.libspark.gunyarapaint.framework.commands.CompositeCommand;
     import org.libspark.gunyarapaint.framework.commands.DrawCircleCommand;
     import org.libspark.gunyarapaint.framework.commands.EndFillCommand;
@@ -19,7 +20,9 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.commands.layer.CopyLayerCommand;
     import org.libspark.gunyarapaint.framework.commands.layer.CreateLayerCommand;
     import org.libspark.gunyarapaint.framework.commands.layer.MergeLayerCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.MoveLayerCommand;
     import org.libspark.gunyarapaint.framework.commands.layer.RemoveLayerCommand;
+    import org.libspark.gunyarapaint.framework.commands.layer.ScaleLayerCommand;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerAlphaCommand;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerBlendModeCommand;
     import org.libspark.gunyarapaint.framework.commands.layer.SetLayerIndexCommand;
@@ -30,6 +33,10 @@ package org.libspark.gunyarapaint.framework
     /**
      * コマンドを管理する
      * 
+     * 26以降について
+     * 26 = ScaleLayerCommand
+     * 27 = MoveLayerCommand
+     * 28 = BezierCurveCommand
      */
     public class CommandContext extends EventDispatcher
     {
@@ -38,10 +45,13 @@ package org.libspark.gunyarapaint.framework
         public function CommandContext()
         {
             m_commands = new Vector.<ICommand>(MAX_COMMANDS, true);
+            registerCommand(new BezierCurveCommand());
             registerCommand(new CopyLayerCommand());
             registerCommand(new CreateLayerCommand());
             registerCommand(new MergeLayerCommand());
+            registerCommand(new MoveLayerCommand());
             registerCommand(new RemoveLayerCommand());
+            registerCommand(new ScaleLayerCommand());
             registerCommand(new SetLayerAlphaCommand());
             registerCommand(new SetLayerBlendModeCommand());
             registerCommand(new SetLayerIndexCommand());
