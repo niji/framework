@@ -15,11 +15,11 @@ package org.libspark.gunyarapaint.framework.commands
         
         public function reset():void
         {
-            m_compressedValue =
-                s_readCoordinate.x =
-                s_readCoordinate.y =
-                s_writeCoordinate.x =
-                s_writeCoordinate.y = 0;
+            m_compressedValue = 0;
+            s_readCoordinateX = 0;
+            s_readCoordinateY = 0;
+            s_writeCoordinateX = 0;
+            s_writeCoordinateY = 0;
         }
         
         public function set compressedValue(value:int):void
@@ -27,18 +27,10 @@ package org.libspark.gunyarapaint.framework.commands
             m_compressedValue = value;
         }
         
-        protected function get readCoordinate():Point
-        {
-            return s_readCoordinate;
-        }
-        
-        protected function get writeCoordinate():Point
-        {
-            return s_writeCoordinate;
-        }
-        
-        private static var s_readCoordinate:Point = new Point();
-        private static var s_writeCoordinate:Point = new Point();
+        protected var s_readCoordinateX:int;
+        protected var s_readCoordinateY:int;
+        protected var s_writeCoordinateX:int;
+        protected var s_writeCoordinateY:int;
         protected var m_compressedValue:int;
     }
 }

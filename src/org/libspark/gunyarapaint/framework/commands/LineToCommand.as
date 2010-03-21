@@ -38,14 +38,14 @@ package org.libspark.gunyarapaint.framework.commands
                 x = bytes.readShort();
                 y = bytes.readShort();
             }
-            readCoordinate.x += x;
-            readCoordinate.y += y;
+            s_readCoordinateX += x;
+            s_readCoordinateY += y;
         }
         
         public function write(bytes:ByteArray, args:Object):void
         {
-            var dx:int = args.x - writeCoordinate.x;
-            var dy:int = args.y - writeCoordinate.y;
+            var dx:int = args.x - s_writeCoordinateX;
+            var dy:int = args.y - s_writeCoordinateY;
             if (dx >= -4 && dx <= 3 && dy >= -4 && dy <= 3) {
                 // dxもdyも3bitに収まる場合
                 bytes.writeByte(0x80 | (dx << 3) & 0x38 | dy & 0x7);
@@ -59,15 +59,15 @@ package org.libspark.gunyarapaint.framework.commands
                 bytes.writeShort(dx);
                 bytes.writeShort(dy);
             }
-            writeCoordinate.x = args.x;
-            writeCoordinate.y = args.y;
+            s_writeCoordinateX = args.x;
+            s_writeCoordinateY = args.y;
         }
         
         public function execute(painter:Painter):void
         {
             painter.lineTo(
-                readCoordinate.x || writeCoordinate.x,
-                readCoordinate.y || writeCoordinate.y
+                s_readCoordinateX || s_writeCoordinateX,
+                s_readCoordinateY || s_writeCoordinateY
             );
         }
         
