@@ -22,6 +22,11 @@ package org.libspark.gunyarapaint.framework.commands.layer
             painter.pushUndo();
         }
         
+        public function toString():String
+        {
+            return "[MoveLayerCommand]";
+        }
+        
         public override function get commandID():uint
         {
             return ID;

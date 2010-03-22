@@ -36,6 +36,11 @@ package org.libspark.gunyarapaint.framework.commands.layer
         {
         }
         
+        public function toString():String
+        {
+            return "[RemoveLayerCommand]";
+        }
+        
         public function get commandID():uint
         {
             return ID;

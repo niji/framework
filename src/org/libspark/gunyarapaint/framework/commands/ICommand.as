@@ -41,6 +41,12 @@ package org.libspark.gunyarapaint.framework.commands
         function reset():void;
         
         /**
+         * デバッグ用の文字列を返す
+         * 
+         */ 
+        function toString():String;
+        
+        /**
          * コマンド特有の ID を返す
          * 
          * <p>

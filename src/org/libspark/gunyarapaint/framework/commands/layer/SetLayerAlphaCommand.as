@@ -44,6 +44,13 @@ package org.libspark.gunyarapaint.framework.commands.layer
             m_alpha = 0;
         }
         
+        public function toString():String
+        {
+            return "[SetLayerAlphaCommand"
+                + " alpha=" + m_alpha
+                + "]";
+        }
+        
         public function get commandID():uint
         {
             return ID;

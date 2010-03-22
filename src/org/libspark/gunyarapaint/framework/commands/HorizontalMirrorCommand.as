@@ -40,6 +40,13 @@ package org.libspark.gunyarapaint.framework.commands
             m_index = 0;
         }
         
+        public function toString():String
+        {
+            return "[HorizontalMirrorCommand"
+                + " index=" + m_index
+                + "]";
+        }
+        
         public function get commandID():uint
         {
             return ID;

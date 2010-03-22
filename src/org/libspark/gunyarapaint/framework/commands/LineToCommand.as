@@ -71,6 +71,16 @@ package org.libspark.gunyarapaint.framework.commands
             );
         }
         
+        public function toString():String
+        {
+            return "[LineToCommand"
+                + " readCoordinateX=" + s_readCoordinateX
+                + ", readCoordinateY=" + s_readCoordinateY
+                + ", writeCoordinateX=" + s_writeCoordinateX
+                + ", writeCoordinateY=" + s_writeCoordinateY
+                + "]";
+        }
+        
         public function get commandID():uint
         {
             return ID;

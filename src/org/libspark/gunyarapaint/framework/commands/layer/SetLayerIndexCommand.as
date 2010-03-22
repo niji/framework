@@ -43,6 +43,13 @@ package org.libspark.gunyarapaint.framework.commands.layer
             m_index = 0;
         }
         
+        public function toString():String
+        {
+            return "[SetLayerIndexCommand"
+                + " index=" + m_index
+                + "]";
+        }
+        
         public function get commandID():uint
         {
             return ID;

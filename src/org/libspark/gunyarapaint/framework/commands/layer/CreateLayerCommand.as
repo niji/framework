@@ -36,6 +36,11 @@ package org.libspark.gunyarapaint.framework.commands.layer
         {
         }
         
+        public function toString():String
+        {
+            return "[CreateLayerCommand]";
+        }
+        
         public function get commandID():uint
         {
             return ID;

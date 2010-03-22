@@ -45,6 +45,13 @@ package org.libspark.gunyarapaint.framework.commands.layer
             m_blendMode = BlendMode.NORMAL;
         }
         
+        public function toString():String
+        {
+            return "[SetLayerBlendModeCommand"
+                + " blendMode=" + m_blendMode
+                + "]";
+        }
+        
         public function get commandID():uint
         {
             return ID;

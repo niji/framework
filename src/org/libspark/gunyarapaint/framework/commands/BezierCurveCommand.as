@@ -55,6 +55,16 @@ package org.libspark.gunyarapaint.framework.commands
             m_controlY = 0;
         }
         
+        public function toString():String
+        {
+            return "[BezierCurveCommand"
+                + " anchorX=" + m_anchorX
+                + ", anchorY=" + m_anchorY
+                + ", controlX=" + m_controlX
+                + ", controY=" + m_controlY
+                + "]";
+        }
+        
         public function get commandID():uint
         {
             return ID;

@@ -36,6 +36,11 @@ package org.libspark.gunyarapaint.framework.commands
         {
         }
         
+        public function toString():String
+        {
+            return "[FloodFillCommand]";
+        }
+        
         public function get commandID():uint
         {
             return ID;

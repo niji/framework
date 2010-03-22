@@ -47,6 +47,14 @@ package org.libspark.gunyarapaint.framework.commands.layer
             m_to = 0;
         }
         
+        public function toString():String
+        {
+            return "[SwapLayerCommand"
+                + " from=" + m_from
+                + ", to=" + m_to
+                + "]";
+        }
+        
         public function get commandID():uint
         {
             return ID;

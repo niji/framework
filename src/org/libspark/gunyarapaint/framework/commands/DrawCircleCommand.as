@@ -38,6 +38,13 @@ package org.libspark.gunyarapaint.framework.commands
         {
         }
         
+        public function toString():String
+        {
+            return "[DrawCircleCommand"
+                + " radius=" + m_radius
+                + "]";
+        }
+        
         public function get commandID():uint
         {
             return ID;

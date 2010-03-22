@@ -47,6 +47,14 @@ package org.libspark.gunyarapaint.framework.commands.layer
             m_visible = true;
         }
         
+        public function toString():String
+        {
+            return "[SetLayerVisibleCommand"
+                + " index=" + m_index
+                + ", visible=" + m_visible
+                + "]";
+        }
+        
         public function get commandID():uint
         {
             return ID;

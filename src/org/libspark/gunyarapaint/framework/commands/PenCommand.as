@@ -138,6 +138,11 @@ package org.libspark.gunyarapaint.framework.commands
             m_pen.reset();
         }
         
+        public function toString():String
+        {
+            return "[PenCommand]";
+        }
+        
         public function get commandID():uint
         {
             return ID;

@@ -24,6 +24,11 @@ package org.libspark.gunyarapaint.framework.commands.layer
             painter.pushUndo();
         }
         
+        public function toString():String
+        {
+            return "[ScaleLayerCommand]";
+        }
+        
         public override function get commandID():uint
         {
             return ID;

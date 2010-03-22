@@ -45,6 +45,14 @@ package org.libspark.gunyarapaint.framework.commands
             m_alpha = 0;
         }
         
+        public function toString():String
+        {
+            return "[BeginFillCommand"
+                + " alpha=" + m_alpha
+                + ", color=" + m_color
+                + "]";
+        }
+        
         public function get commandID():uint
         {
             return ID;

@@ -45,6 +45,13 @@ package org.libspark.gunyarapaint.framework.commands
             return ID;
         }
         
+        public function toString():String
+        {
+            return "[VerticalMirrorCommand"
+                + " index=" + m_index
+                + "]";
+        }
+        
         private var m_index:int;
     }
 }
