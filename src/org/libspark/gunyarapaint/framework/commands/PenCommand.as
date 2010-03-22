@@ -140,7 +140,17 @@ package org.libspark.gunyarapaint.framework.commands
         
         public function toString():String
         {
-            return "[PenCommand]";
+            return "[PenCommand"
+                + " thickness=" + m_pen.thickness
+                + ", color=0x" + m_pen.color.toString(16)
+                + ", alpha=" + m_pen.alpha.toPrecision(4)
+                + ", blendMode=" + m_pen.blendMode
+                + ", scaleMode=" + m_pen.scaleMode
+                + ", caps=" + m_pen.capsStyle
+                + ", joints=" + m_pen.jointStyle
+                + ", miterLimit=" + m_pen.miterLimit.toPrecision(4)
+                + ", pixelHinting=" + m_pen.pixelHinting
+                + "]";
         }
         
         public function get commandID():uint
