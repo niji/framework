@@ -40,7 +40,7 @@ package org.libspark.gunyarapaint.framework
         public static function load(bytes:ByteArray):Player
         {
             var player:Player = new Player(new Parser(bytes));
-            player.setUndo(new UndoStack(player, player.m_parser.maxUndoCount));
+            player.setUndoStack(new UndoStack(player, player.m_parser.maxUndoCount));
             return player;
         }
         

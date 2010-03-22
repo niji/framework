@@ -4,6 +4,7 @@ package org.libspark.gunyarapaint.framework.ui
     
     import org.libspark.gunyarapaint.framework.LayerBitmapCollection;
     import org.libspark.gunyarapaint.framework.Pen;
+    import org.libspark.gunyarapaint.framework.UndoStack;
     import org.libspark.gunyarapaint.framework.modules.ICanvasModule;
     
     /**
@@ -35,6 +36,12 @@ package org.libspark.gunyarapaint.framework.ui
          * 
          */
         function get pen():Pen;
+        
+        /**
+         * やり直し管理オブジェクトを取得する
+         * 
+         */
+        function get undoStack():UndoStack;
         
         /**
          * 利用可能なブレンドモードを取得する

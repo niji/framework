@@ -24,32 +24,9 @@ package org.libspark.gunyarapaint.framework.events
          */
         public static const PUSH:String = PREFIX + "push";
         
-        public function UndoEvent(type:String, undoCount:int, redoCount:int)
+        public function UndoEvent(type:String)
         {
-            m_undoCount = undoCount;
-            m_redoCount = redoCount;
             super(type, false, false);
         }
-        
-        /**
-         * やり直しが出来る回数を取得する
-         * 
-         */
-        public function get undoCount():int
-        {
-            return m_undoCount;
-        }
-        
-        /**
-         * 巻き戻しが出来る回数を取得する
-         * 
-         */
-        public function get redoCount():int
-        {
-            return m_redoCount;
-        }
-        
-        private var m_undoCount:int;
-        private var m_redoCount:int;
     }
 }

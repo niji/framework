@@ -10,7 +10,6 @@ package org.libspark.gunyarapaint.framework
     import flash.geom.Rectangle;
     
     import org.libspark.gunyarapaint.framework.errors.NotSupportedVersionError;
-    import org.libspark.gunyarapaint.framework.events.UndoEvent;
     
     /**
      * 再生及び記録のための共通基盤
@@ -64,8 +63,6 @@ package org.libspark.gunyarapaint.framework
         public function undo():void
         {
             m_undo.undo(this);
-            if (hasEventListener(UndoEvent.UNDO))
-                dispatchEvent(new UndoEvent(UndoEvent.UNDO, m_undo.undoCount, m_undo.redoCount));
         }
         
         /**
@@ -74,8 +71,6 @@ package org.libspark.gunyarapaint.framework
         public function redo():void
         {
             m_undo.redo(this);
-            if (hasEventListener(UndoEvent.REDO))
-                dispatchEvent(new UndoEvent(UndoEvent.REDO, m_undo.undoCount, m_undo.redoCount));
         }
         
         /**
@@ -84,8 +79,6 @@ package org.libspark.gunyarapaint.framework
         public function pushUndo():void
         {
             m_undo.push(this);
-            if (hasEventListener(UndoEvent.PUSH))
-                dispatchEvent(new UndoEvent(UndoEvent.PUSH, m_undo.undoCount, m_undo.redoCount));
         }
         
         /**
@@ -108,23 +101,62 @@ package org.libspark.gunyarapaint.framework
          * @param layerBitmaps 縦に連結されたレイヤー画像
          * @param metadata メタデータ
          */
-        public function restore(layerBitmaps:BitmapData, metadata:Object):void
+        public function load(layerBitmap:BitmapData, metadata:Object):void
         {
             var width:uint = metadata.width;
             var height:uint = metadata.height;
-            var layerCount:uint = layerBitmaps.height / height;
+            var layersInfo:Array = metadata.layer_infos;
+            var layerCount:uint = layerBitmap.height / height;
             var destination:Point = new Point(0, 0);
             var rectangle:Rectangle = new Rectangle(0, 0, width, height);
             var sprite:Sprite = m_layers.spriteToView;
             m_layers.clear();
             for (var i:uint = 0; i < layerCount; i++) {
                 var bitmapData:BitmapData = new BitmapData(width, height);
-                bitmapData.copyPixels(layerBitmaps, rectangle, destination);
+                bitmapData.copyPixels(layerBitmap, rectangle, destination);
                 rectangle.y = i * height;
-                var layerBitmap:LayerBitmap = new LayerBitmap(bitmapData);
-                m_layers.layers.push(layerBitmap);
-                sprite.addChild(layerBitmap);
+                var layer:LayerBitmap = new LayerBitmap(bitmapData);
+                var layerInfo:Object = layersInfo[i];
+                layer.alpha = layerInfo.alpha;
+                layer.blendMode = layerInfo.blendMode;
+                layer.locked = layerInfo.lock == "true";
+                layer.name = layerInfo.name;
+                layer.visible = layerInfo.visible == "true";
+                m_layers.layers.push(layer);
+                sprite.addChild(layer);
             }
+        }
+        
+        /**
+         * 連結されたレイヤー画像とメタデータを保存する
+         * 
+         * @param layerBitmaps 縦に連結されたレイヤー画像
+         * @param metadata メタデータ
+         */
+        public function save(layerBitmap:BitmapData, metadata:Object):void
+        {
+            var layersInfo:Array = [];
+            var layerCount:uint = layerBitmap.height / height;
+            var rectangle:Rectangle = new Rectangle(0, 0, width, height);
+            var destination:Point = new Point(0, 0);
+            layerBitmap.lock();
+            for (var i:uint = 0; i < layerCount; i++) {
+                var layer:LayerBitmap = m_layers.at(i);
+                layerBitmap.copyPixels(layer.bitmapData, rectangle, destination);
+                destination.y = i * height;
+                var layerInfo:Object = {
+                    "alpha": layer.alpha,
+                    "blendMode": layer.blendMode,
+                    "lock": layer.locked ? "true" : "false",
+                    "name": layer.name,
+                    "visible": layer.visible ? "true" : "false"
+                };
+                layersInfo.push(layerInfo);
+            }
+            layerBitmap.unlock();
+            metadata.width = width;
+            metadata.height = height;
+            metadata.layer_infos = layersInfo;
         }
         
         /**
@@ -505,23 +537,7 @@ package org.libspark.gunyarapaint.framework
             m_layers.compositeAll();
         }
         
-        internal function saveState():Object
-        {
-            var count:uint = m_layers.count;
-            var layers:Vector.<LayerBitmap> = new Vector.<LayerBitmap>(
-                count, true
-            );
-            for (var i:uint = 0; i < count; i++) {
-                var layer:LayerBitmap = m_layers.layers[i].clone();
-                layers[i] = layer;
-            }
-            var undoData:Object = {};
-            undoData.index = m_layers.currentIndex;
-            undoData.layers = layers;
-            return undoData;
-        }
-        
-        internal function restoreState(undoData:Object):void
+        internal function loadState(undoData:Object):void
         {
             var i:uint = 0;
             m_layers.clear();
@@ -534,6 +550,20 @@ package org.libspark.gunyarapaint.framework
             }
             m_layers.currentIndex = undoData.index;
             m_layers.compositeAll();
+        }
+        
+        internal function saveState(undoData:Object):void
+        {
+            var count:uint = m_layers.count;
+            var layers:Vector.<LayerBitmap> = new Vector.<LayerBitmap>(
+                count, true
+            );
+            for (var i:uint = 0; i < count; i++) {
+                var layer:LayerBitmap = m_layers.layers[i].clone();
+                layers[i] = layer;
+            }
+            undoData.index = m_layers.currentIndex;
+            undoData.layers = layers;
         }
         
         /**
@@ -593,6 +623,11 @@ package org.libspark.gunyarapaint.framework
             return m_height;
         }
         
+        public function get undoStack():UndoStack
+        {
+            return m_undo;
+        }
+        
         /**
          * 現在のレイヤーの透明度を変更する
          * 
@@ -627,7 +662,7 @@ package org.libspark.gunyarapaint.framework
          * 
          * @return ログのバージョン
          */
-        internal function setUndo(value:UndoStack):void
+        internal function setUndoStack(value:UndoStack):void
         {
             m_undo = value;
         }
