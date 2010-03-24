@@ -39,13 +39,16 @@ package org.libspark.gunyarapaint.framework.modules
         
         private function drop(x:Number, y:Number):void
         {
-            m_recorder.commitCommand(
-                PenCommand.ID,
-                {
-                    "type": PenCommand.COLOR,
-                    "color": m_recorder.getPixel(x, y)
-                }
-            );
+			var color:uint = m_recorder.getPixel(x, y);
+			if (m_recorder.pen.color != color) {
+				m_recorder.commitCommand(
+					PenCommand.ID,
+					{
+						"type": PenCommand.COLOR,
+						"color": m_recorder.getPixel(x, y)
+					}
+				);
+			}
         }
     }
 }
