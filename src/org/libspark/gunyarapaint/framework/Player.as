@@ -1,6 +1,8 @@
 package org.libspark.gunyarapaint.framework
 {
+    import flash.events.TimerEvent;
     import flash.utils.ByteArray;
+    import flash.utils.Timer;
     import flash.utils.clearInterval;
     import flash.utils.setInterval;
     
@@ -20,8 +22,8 @@ package org.libspark.gunyarapaint.framework
             parser.readHeader(data);
             parser.preload();
             speed = 1;
-            duration = 50;
-            m_timerID = 0;
+            m_timer = new Timer(50);
+            m_timer.addEventListener(TimerEvent.TIMER, process);
             m_parser = parser;
             var version:uint = data.version;
             super(data.width, data.height, version, createPaintEngine(version));
@@ -54,8 +56,8 @@ package org.libspark.gunyarapaint.framework
          */
         public function start():void
         {
-            if (m_timerID === 0) {
-                m_timerID = flash.utils.setInterval(process, duration);
+            if (!m_timer.running) {
+                m_timer.start();
                 if (hasEventListener(PlayerEvent.STARTED))
                     dispatchEvent(new PlayerEvent(PlayerEvent.STARTED));
             }
@@ -71,9 +73,11 @@ package org.libspark.gunyarapaint.framework
          */
         public function pause():void
         {
-            stopTimer();
-            if (hasEventListener(PlayerEvent.PAUSED))
-                dispatchEvent(new PlayerEvent(PlayerEvent.PAUSED));
+            if (m_timer.running) {
+                m_timer.stop();
+                if (hasEventListener(PlayerEvent.PAUSED))
+                    dispatchEvent(new PlayerEvent(PlayerEvent.PAUSED));
+            }
         }
         
         /**
@@ -86,14 +90,16 @@ package org.libspark.gunyarapaint.framework
          */
         public function stop():void
         {
-            stopTimer();
-            m_parser.rewind();
-            m_parser.resetCommands();
-            if (hasEventListener(PlayerEvent.STOPPED))
-                dispatchEvent(new PlayerEvent(PlayerEvent.STOPPED));
+            if (m_timer.running) {
+                m_timer.stop();
+                m_parser.rewind();
+                m_parser.resetCommands();
+                if (hasEventListener(PlayerEvent.STOPPED))
+                    dispatchEvent(new PlayerEvent(PlayerEvent.STOPPED));
+            }
         }
         
-        private function process():void
+        private function process(event:TimerEvent):void
         {
             try {
                 var bytes:ByteArray = m_parser.bytes;
@@ -106,7 +112,7 @@ package org.libspark.gunyarapaint.framework
                 }
             }
             catch (e:Error) {
-                stopTimer();
+                m_timer.stop();
                 if (e is EOLError) {
                     m_parser.rewind();
                     m_parser.resetCommands();
@@ -119,12 +125,6 @@ package org.libspark.gunyarapaint.framework
                     trace(e.getStackTrace());
                 }
             }
-        }
-        
-        private function stopTimer():void
-        {
-            flash.utils.clearInterval(m_timerID);
-            m_timerID = 0;
         }
         
         /**
@@ -151,7 +151,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function get playing():Boolean
         {
-            return m_timerID != 0;
+            return m_timer.running;
         }
         
         /**
@@ -161,12 +161,15 @@ package org.libspark.gunyarapaint.framework
         public var speed:uint;
         
         /**
-         * ログの長さ
+         * 動作間隔(ミリ秒)
          * 
          */
-        public var duration:uint;
+        public function set duration(value:uint):void
+        {
+            m_timer.delay = value;
+        }
         
         private var m_parser:Parser;
-        private var m_timerID:uint;
+        private var m_timer:Timer;
     }
 }
