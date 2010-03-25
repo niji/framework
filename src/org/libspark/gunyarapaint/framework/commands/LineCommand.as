@@ -27,10 +27,10 @@ package org.libspark.gunyarapaint.framework.commands
             m_compressedValue = value;
         }
         
-        protected var s_readCoordinateX:int;
-        protected var s_readCoordinateY:int;
-        protected var s_writeCoordinateX:int;
-        protected var s_writeCoordinateY:int;
-        protected var m_compressedValue:int;
+        protected static var s_readCoordinateX:int;
+        protected static var s_readCoordinateY:int;
+        protected static var s_writeCoordinateX:int;
+        protected static var s_writeCoordinateY:int;
+        protected var m_compressedValue:uint;
     }
 }
