@@ -40,7 +40,7 @@ package org.libspark.gunyarapaint.framework
      */
     public class CommandContext extends EventDispatcher
     {
-        public static const MAX_COMMANDS:uint = 256;
+        public static const MAX_COMMANDS:uint = 64;
         
         public function CommandContext()
         {

@@ -1,4 +1,4 @@
-    package org.libspark.gunyarapaint.framework
+package org.libspark.gunyarapaint.framework
 {
     import flash.utils.ByteArray;
     import flash.utils.Endian;
@@ -97,24 +97,24 @@
             var command:ICommand = null;
             while (bytes.bytesAvailable > 0) {
                 var byte:uint = bytes.readUnsignedByte();
-                command = m_commands[byte];
-                if (command === null) {
-                    if (byte & 0x80) {
-                        command = m_commands[LineToCommand.ID];
-                        LineToCommand(command).compressedValue = byte;
-                    }
-                    else if (byte & 0x40) {
-                        command = m_commands[MoveToCommand.ID];
-                        MoveToCommand(command).compressedValue = byte;
-                    }
-                    else {
+                if (byte & 0x80) {
+                    command = m_commands[LineToCommand.ID];
+                    LineToCommand(command).compressedValue = byte;
+                }
+                else if (byte & 0x40) {
+                    command = m_commands[MoveToCommand.ID];
+                    MoveToCommand(command).compressedValue = byte;
+                }
+                else {
+                    command = m_commands[byte];
+                    if (command === null) {
                         throw new InvalidCommandError(count, byte);
                     }
                 }
                 if ((command.commandID === UndoCommand.ID ||
                     command.commandID === RedoCommand.ID) &&
                     (previous.commandID === UndoCommand.ID ||
-                    previous.commandID === RedoCommand.ID)) {
+                        previous.commandID === RedoCommand.ID)) {
                     undoCount++;
                 }
                 else {
@@ -149,17 +149,17 @@
                 throw new EOLError();
             }
             var byte:uint = bytes.readUnsignedByte();
-            var command:ICommand = m_commands[byte];
-            if (command === null) {
-                if (byte & 0x80) {
-                    command = m_commands[LineToCommand.ID];
-                    LineToCommand(command).compressedValue = byte;
-                }
-                else if (byte & 0x40) {
-                    command = m_commands[MoveToCommand.ID];
-                    MoveToCommand(command).compressedValue = byte;
-                }
-                else {
+            if (byte & 0x80) {
+                command = m_commands[LineToCommand.ID];
+                LineToCommand(command).compressedValue = byte;
+            }
+            else if (byte & 0x40) {
+                command = m_commands[MoveToCommand.ID];
+                MoveToCommand(command).compressedValue = byte;
+            }
+            else {
+                var command:ICommand = m_commands[byte];
+                if (command === null) {
                     throw new InvalidCommandError(m_count, byte);
                 }
             }
