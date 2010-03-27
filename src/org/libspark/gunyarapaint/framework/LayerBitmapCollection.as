@@ -1,5 +1,6 @@
 package org.libspark.gunyarapaint.framework
 {
+    import flash.display.Bitmap;
     import flash.display.BitmapData;
     import flash.display.Sprite;
     
@@ -15,7 +16,7 @@ package org.libspark.gunyarapaint.framework
         public function LayerBitmapCollection(width:int, height:int)
         {
             currentIndex = 0;
-            doCompositeAll = false;
+            doCompositeAll = true;
             m_width = width;
             m_height = height;
             layers = new Vector.<LayerBitmap>();
@@ -27,7 +28,7 @@ package org.libspark.gunyarapaint.framework
             layer.name = "Background";
             composited = new BitmapData(width, height, true, 0x0);
             layers.push(layer);
-            spriteToView.addChild(layer);
+            spriteToView.addChild(layer.bitmap);
         }
         
         /**
@@ -43,7 +44,7 @@ package org.libspark.gunyarapaint.framework
             );
             currentIndex++;
             layers.splice(currentIndex, 0, layer);
-            spriteToView.addChildAt(layer, currentIndex);
+            spriteToView.addChildAt(layer.bitmap, currentIndex);
             compositeAll();
             resetLayersIndex();
         }
@@ -80,7 +81,7 @@ package org.libspark.gunyarapaint.framework
             var layer:LayerBitmap = layers[index].clone();
             layer.name += "'s copy";
             layers.splice(index, 0, layer);
-            spriteToView.addChildAt(layer, index);
+            spriteToView.addChildAt(layer.bitmap, index);
             compositeAll();
             resetLayersIndex();
         }
@@ -203,13 +204,13 @@ package org.libspark.gunyarapaint.framework
             var count:uint = layers.length;
             for (var i:uint = 0; i < count; i++) {
                 var layer:LayerBitmap = layers[i];
-                layer.bitmapData.dispose();
-                if (spriteToView.contains(layer))
-                    spriteToView.removeChild(layer);
+                var bitmap:Bitmap = layer.bitmap;
+                if (spriteToView.contains(bitmap))
+                    spriteToView.removeChild(bitmap);
                 else
                     trace(layer.name + " is not child of spriteToView.");
             }
-            layers.length = 0;
+            layers.splice(0, count);
         }
         
         /**
@@ -220,7 +221,9 @@ package org.libspark.gunyarapaint.framework
         {
             if (doCompositeAll) {
                 var c:uint = count;
-                composited.fillRect(composited.rect, 0x0);
+                // 操作毎にBitmapDataが生成されるため、逆にGarbageCollectionを発生させやすくしている。
+                // そのため、これがないとBitmapDataによるメモリリークが余計にひどくなる。
+                composited = new BitmapData(m_width, m_height, true, 0x0);
                 for (var i:uint = 0; i < c; i++) {
                     var layer:LayerBitmap = layers[i];
                     layer.compositeTo(composited);

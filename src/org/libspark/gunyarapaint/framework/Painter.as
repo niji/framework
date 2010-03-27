@@ -1,5 +1,6 @@
 package org.libspark.gunyarapaint.framework
 {
+    import flash.display.Bitmap;
     import flash.display.BitmapData;
     import flash.display.BlendMode;
     import flash.display.Shape;
@@ -116,14 +117,9 @@ package org.libspark.gunyarapaint.framework
                 bitmapData.copyPixels(layerBitmap, rectangle, destination);
                 rectangle.y = i * height;
                 var layer:LayerBitmap = new LayerBitmap(bitmapData);
-                var layerInfo:Object = layersInfo[i];
-                layer.alpha = layerInfo.alpha;
-                layer.blendMode = layerInfo.blendMode;
-                layer.locked = layerInfo.lock == "true";
-                layer.name = layerInfo.name;
-                layer.visible = layerInfo.visible == "true";
+                layer.fromJSON(layersInfo[i]);
                 m_layers.layers.push(layer);
-                sprite.addChild(layer);
+                sprite.addChild(layer.bitmap);
             }
         }
         
@@ -144,14 +140,7 @@ package org.libspark.gunyarapaint.framework
                 var layer:LayerBitmap = m_layers.at(i);
                 layerBitmap.copyPixels(layer.bitmapData, rectangle, destination);
                 destination.y = i * height;
-                var layerInfo:Object = {
-                    "alpha": layer.alpha,
-                    "blendMode": layer.blendMode,
-                    "lock": layer.locked ? "true" : "false",
-                    "name": layer.name,
-                    "visible": layer.visible ? "true" : "false"
-                };
-                layersInfo.push(layerInfo);
+                layersInfo.push(layer.toJSON());
             }
             layerBitmap.unlock();
             metadata.width = width;
@@ -471,13 +460,13 @@ package org.libspark.gunyarapaint.framework
                 m_drawingSprite.blendMode =
                     blendMode == BlendMode.NORMAL ? BlendMode.LAYER : blendMode;
                 m_drawingSprite.alpha = currentLayer.alpha;
-                m_tempLayer = currentLayer.clone(false);
+                m_tempLayer = new Bitmap(currentLayer.bitmapData);
                 m_tempLayer.blendMode = BlendMode.NORMAL;
                 m_tempLayer.alpha = 1.0;
                 m_drawingSprite.addChild(m_tempLayer);
                 m_drawingSprite.addChild(m_paintEngine.shape);
                 var sprite:Sprite = m_layers.spriteToView;
-                sprite.removeChild(currentLayer);
+                sprite.removeChild(currentLayer.bitmap);
                 sprite.addChildAt(m_drawingSprite, m_layers.currentIndex);
             }
         }
@@ -496,7 +485,7 @@ package org.libspark.gunyarapaint.framework
                     blendMode == BlendMode.LAYER ? BlendMode.NORMAL : blendMode;
                 currentLayer.alpha = m_drawingSprite.alpha;
                 sprite.removeChild(m_drawingSprite);
-                sprite.addChildAt(currentLayer, m_layers.currentIndex);
+                sprite.addChildAt(currentLayer.bitmap, m_layers.currentIndex);
                 m_paintEngine.clear();
                 m_drawingSprite.removeChild(m_tempLayer);
                 m_drawingSprite.removeChild(m_paintEngine.shape);
@@ -541,12 +530,15 @@ package org.libspark.gunyarapaint.framework
         {
             var i:uint = 0;
             m_layers.clear();
-            var count:uint = undoData.layers.length;
+            var layers:Vector.<Object> = undoData.layers;
+            var count:uint = layers.length;
             var sprite:Sprite = m_layers.spriteToView;
             for (i = 0; i < count; i++) {
-                var layer:LayerBitmap = undoData.layers[i].clone();
+                var data:Object = layers[i];
+                var layer:LayerBitmap = new LayerBitmap(data.bitmapData);
+                layer.fromJSON(data);
                 m_layers.layers.push(layer);
-                sprite.addChild(layer);
+                sprite.addChild(layer.bitmap);
             }
             m_layers.currentIndex = undoData.index;
             m_layers.compositeAll();
@@ -555,12 +547,14 @@ package org.libspark.gunyarapaint.framework
         internal function saveState(undoData:Object):void
         {
             var count:uint = m_layers.count;
-            var layers:Vector.<LayerBitmap> = new Vector.<LayerBitmap>(
+            var layers:Vector.<Object> = new Vector.<Object>(
                 count, true
             );
             for (var i:uint = 0; i < count; i++) {
-                var layer:LayerBitmap = m_layers.layers[i].clone();
-                layers[i] = layer;
+                var layer:LayerBitmap = m_layers.at(i);
+                var data:Object = layer.toJSON();
+                data.bitmapData = layer.bitmapData;
+                layers[i] = data;
             }
             undoData.index = m_layers.currentIndex;
             undoData.layers = layers;
@@ -674,7 +668,7 @@ package org.libspark.gunyarapaint.framework
         private var m_moveMatrix:Matrix;
         private var m_scaleMatrix:Matrix;
         private var m_drawingSprite:Sprite;
-        private var m_tempLayer:LayerBitmap;
+        private var m_tempLayer:Bitmap;
         private var m_shouldCopyBitmap:Boolean;
         private var m_version:uint;
         private var m_undo:UndoStack;
