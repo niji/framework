@@ -2,6 +2,7 @@ package org.libspark.gunyarapaint.framework
 {
     import flash.display.Bitmap;
     import flash.display.BitmapData;
+    import flash.display.DisplayObject;
     import flash.display.IBitmapDrawable;
     import flash.geom.ColorTransform;
     import flash.geom.Matrix;
@@ -26,7 +27,7 @@ package org.libspark.gunyarapaint.framework
                 0
             );
             name = "Layer" + index;
-            this.bitmapData = bitmapData;
+            setBitmapData(bitmapData);
         }
         
         /**
@@ -62,7 +63,7 @@ package org.libspark.gunyarapaint.framework
         public function compositeFrom(source:IBitmapDrawable,
                                       blendMode:String):void
         {
-            bitmapData = m_bitmapData.clone();
+            setBitmapData(m_bitmapData.clone());
             m_bitmapData.draw(source, null, null, blendMode);
         }
         
@@ -91,7 +92,7 @@ package org.libspark.gunyarapaint.framework
         {
             var transformed:BitmapData = new BitmapData(width, height, true, 0x0);
             transformed.draw(bitmapData, matrix);
-            bitmapData = transformed;
+            setBitmapData(transformed);
         }
         
         /**
@@ -103,7 +104,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function floodFill(x:Number, y:Number, color:uint):void
         {
-            bitmapData = m_bitmapData.clone();
+            setBitmapData(m_bitmapData.clone());
             m_bitmapData.floodFill(x, y, color);
         }
         
@@ -116,7 +117,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function setPixel(x:Number, y:Number, color:uint):void
         {
-            bitmapData = m_bitmapData.clone();
+            setBitmapData(m_bitmapData.clone());
             m_bitmapData.setPixel32(x, y, color);
         }
         
@@ -147,6 +148,12 @@ package org.libspark.gunyarapaint.framework
                 "visible": visible ? "true" : "false"
             };
         }
+        
+        private function setBitmapData(value:BitmapData):void
+        {
+            m_bitmap.bitmapData = value;
+            m_bitmapData = value;
+        }
 
         /**
          * 現在の不透明度を取得する
@@ -164,6 +171,15 @@ package org.libspark.gunyarapaint.framework
         public function get blendMode():String
         {
             return m_bitmap.blendMode;
+        }
+        
+        /**
+         * DisplayObject の派生オブジェクトを取得する
+         *
+         */
+        public function get displayObject():DisplayObject
+        {
+            return m_bitmap;
         }
         
         /**
@@ -221,20 +237,14 @@ package org.libspark.gunyarapaint.framework
             m_bitmap.visible = value;
         }
         
-        internal function get bitmap():Bitmap
+        internal function get newDisplayObject():DisplayObject
         {
-            return m_bitmap;
+            return new Bitmap(m_bitmapData);
         }
         
         internal function get bitmapData():BitmapData
         {
             return m_bitmapData;
-        }
-        
-        internal function set bitmapData(value:BitmapData):void
-        {
-            m_bitmap.bitmapData = value;
-            m_bitmapData = value;
         }
         
         /**

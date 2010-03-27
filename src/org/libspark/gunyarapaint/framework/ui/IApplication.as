@@ -61,11 +61,5 @@ package org.libspark.gunyarapaint.framework.ui
          * 
          */
         function get canvasHeight():uint;
-        
-        /**
-         * キャンバスのスプライトオブジェクトを取得する
-         * 
-         */
-        function get canvasView():Sprite;
     }
 }

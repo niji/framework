@@ -22,10 +22,10 @@ package org.libspark.gunyarapaint.framework
             for (var i:uint = 0; i < size + 1; i++) {
                 m_buffer[i] = {};
             }
-            painter.saveState(m_buffer[0]);
+            painter.layers.saveState(m_buffer[0]);
         }
         
-        internal function undo(painter:Painter):void
+        internal function undo(layers:LayerBitmapCollection):void
         {
             if (m_index === m_first) {
                 throw new UndoError();
@@ -36,26 +36,26 @@ package org.libspark.gunyarapaint.framework
             else {
                 m_index--;
             }
-            painter.loadState(m_buffer[m_index]);
+            layers.loadState(m_buffer[m_index]);
             if (hasEventListener(UndoEvent.UNDO))
                 dispatchEvent(new UndoEvent(UndoEvent.UNDO));
         }
         
-        internal function redo(painter:Painter):void
+        internal function redo(layers:LayerBitmapCollection):void
         {
             if (m_index === m_last) {
                 throw new RedoError();
             }
             m_index = (m_index + 1) % m_buffer.length;
-            painter.loadState(m_buffer[m_index]);
+            layers.loadState(m_buffer[m_index]);
             if (hasEventListener(UndoEvent.REDO))
                 dispatchEvent(new UndoEvent(UndoEvent.REDO));
         }
         
-        internal function push(painter:Painter):void
+        internal function push(layers:LayerBitmapCollection):void
         {
             m_index = (m_index + 1) % m_buffer.length;
-            painter.saveState(m_buffer[m_index]);
+            layers.saveState(m_buffer[m_index]);
             m_last = m_index;
             if (m_index === m_first) {
                 m_first = (m_first + 1) % m_buffer.length;
