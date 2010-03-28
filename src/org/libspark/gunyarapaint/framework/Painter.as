@@ -23,7 +23,7 @@ package org.libspark.gunyarapaint.framework
          * ログのバージョン番号
          * 
          */
-        public static const PAINTER_LOG_VERSION:uint = 21;
+        public static const PAINTER_LOG_VERSION:uint = 22;
         
         /**
          * ペインター自体のバージョン
@@ -499,7 +499,7 @@ package org.libspark.gunyarapaint.framework
             if (version > 0 && version <= 10) {
                 return new PaintEngineV1(shape);
             }
-            else if (version > 10 && version <= 21) {
+            else if (version > 10 && version <= PAINTER_LOG_VERSION) {
                 return new PaintEngineV2(shape);
             }
             else {
