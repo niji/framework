@@ -17,13 +17,25 @@ package org.libspark.gunyarapaint.framework.ui
          * 名前から描写モジュールを設定する
          * 
          */
-        function setModule(value:String):void;
+        function setCanvasModule(value:String):void;
         
         /**
          * 描写モジュールを取得する
          * 
          */
-        function get module():ICanvasModule;
+        function get canvasModule():ICanvasModule;
+        
+        /**
+         * キャンバスの幅を取得する
+         * 
+         */
+        function get canvasWidth():uint;
+        
+        /**
+         * キャンバスの高さを取得する
+         * 
+         */
+        function get canvasHeight():uint;
         
         /**
          * レイヤーの配列を管理するオブジェクトを取得する
@@ -49,17 +61,5 @@ package org.libspark.gunyarapaint.framework.ui
          * 
          */
         function get supportedBlendModes():Array;
-        
-        /**
-         * キャンバスの幅を取得する
-         * 
-         */
-        function get canvasWidth():uint;
-        
-        /**
-         * キャンバスの高さを取得する
-         * 
-         */
-        function get canvasHeight():uint;
     }
 }
