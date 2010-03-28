@@ -173,8 +173,7 @@ package org.libspark.gunyarapaint.framework
          * 指定された番号のレイヤーを削除する
          * 
          * <p>
-         * レイヤーが削除されると LayerBitmap は削除され、画像データにアクセス出来なくなる。
-         * また、現在の番号が一つ下にずれる。
+         * レイヤーが削除されると 現在の番号が一つ下にずれる。
          * </p>
          * 
          * @param index 現在のレイヤー番号
@@ -184,7 +183,6 @@ package org.libspark.gunyarapaint.framework
         {
             if (m_layers.length <= 1)
                 throw new RemoveLayerError();
-            m_layers[index].bitmapData.dispose();
             m_layers.splice(index, 1);
             m_sprite.removeChildAt(index);
             if (currentIndex > 0 && index >= currentIndex)
