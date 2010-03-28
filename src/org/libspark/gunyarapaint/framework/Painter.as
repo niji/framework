@@ -574,6 +574,11 @@ package org.libspark.gunyarapaint.framework
             return m_undo;
         }
         
+        public function get newLayerBitmapData():BitmapData
+        {
+            return new BitmapData(m_width, m_height * m_layers.count, true, 0x0);
+        }
+        
         /**
          * 現在のレイヤーの透明度を変更する
          * 
