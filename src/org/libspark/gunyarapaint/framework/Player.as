@@ -39,7 +39,7 @@ package org.libspark.gunyarapaint.framework
          * 
          * @param bytes ログデータ
          */
-        public static function load(bytes:ByteArray):Player
+        public static function create(bytes:ByteArray):Player
         {
             var player:Player = new Player(new Parser(bytes));
             player.setUndoStack(new UndoStack(player, player.m_parser.maxUndoCount));
