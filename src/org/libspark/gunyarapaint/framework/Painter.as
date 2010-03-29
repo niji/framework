@@ -114,8 +114,8 @@ package org.libspark.gunyarapaint.framework
             m_layers.clear();
             for (var i:uint = 0; i < layerCount; i++) {
                 var bitmapData:BitmapData = new BitmapData(width, height);
-                bitmapData.copyPixels(layerBitmap, rectangle, destination);
                 rectangle.y = i * height;
+                bitmapData.copyPixels(layerBitmap, rectangle, destination);
                 var layer:LayerBitmap = new LayerBitmap(bitmapData);
                 layer.fromJSON(layersInfo[i]);
                 m_layers.addLayer(layer);
@@ -137,8 +137,8 @@ package org.libspark.gunyarapaint.framework
             layerBitmap.lock();
             for (var i:uint = 0; i < layerCount; i++) {
                 var layer:LayerBitmap = m_layers.at(i);
-                layerBitmap.copyPixels(layer.bitmapData, rectangle, destination);
                 destination.y = i * height;
+                layerBitmap.copyPixels(layer.bitmapData, rectangle, destination);
                 layersInfo.push(layer.toJSON());
             }
             layerBitmap.unlock();
