@@ -8,19 +8,19 @@ package org.libspark.gunyarapaint.framework.modules
         public function CanvasModuleContext(recorder:Recorder)
         {
             m_modules = {};
-            add(new CircleModule(recorder));
-            add(new DropperModule(recorder));
-            add(new EllipseModule(recorder));
-            add(new FloodFillModule(recorder));
-            add(new FreeHandModule(recorder));
-            add(new LineModule(recorder));
-            add(new PixelModule(recorder));
-            add(new RectModule(recorder));
-            add(new RoundRectModule(recorder));
-            add(new TransparentFloodFill(recorder));
+            registerModule(new CircleModule(recorder));
+            registerModule(new DropperModule(recorder));
+            registerModule(new EllipseModule(recorder));
+            registerModule(new FloodFillModule(recorder));
+            registerModule(new FreeHandModule(recorder));
+            registerModule(new LineModule(recorder));
+            registerModule(new PixelModule(recorder));
+            registerModule(new RectModule(recorder));
+            registerModule(new RoundRectModule(recorder));
+            registerModule(new TransparentFloodFill(recorder));
         }
         
-        public function add(module:ICanvasModule):void
+        public function registerModule(module:ICanvasModule):void
         {
             m_modules[module.name] = module;
         }
