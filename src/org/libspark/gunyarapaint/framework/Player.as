@@ -8,6 +8,7 @@ package org.libspark.gunyarapaint.framework
     
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.errors.EOLError;
+    import org.libspark.gunyarapaint.framework.events.CommandEvent;
     import org.libspark.gunyarapaint.framework.events.PlayerEvent;
     
     /**
@@ -106,6 +107,8 @@ package org.libspark.gunyarapaint.framework
                 for (var i:uint = 0; i < speed; i++) {
                     var command:ICommand = m_parser.parse();
                     command.read(bytes);
+                    if (hasEventListener(CommandEvent.PARSE))
+                        dispatchEvent(new CommandEvent(CommandEvent.PARSE, command));
                     command.execute(this);
                     if (hasEventListener(PlayerEvent.UPDATED))
                         dispatchEvent(new PlayerEvent(PlayerEvent.UPDATED));

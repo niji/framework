@@ -226,12 +226,18 @@ package org.libspark.gunyarapaint.framework
             return ret.reverse();
         }
         
-        public function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void
+        public function addEventListener(type:String,
+                                         listener:Function,
+                                         useCapture:Boolean = false,
+                                         priority:int = 0,
+                                         useWeakReference:Boolean = false):void
         {
             m_sprite.addEventListener(type, listener, useCapture, priority, useWeakReference);
         }
         
-        public function removeEventListener(type:String, listener:Function, useCapture:Boolean=false):void
+        public function removeEventListener(type:String,
+                                            listener:Function,
+                                            useCapture:Boolean = false):void
         {
             m_sprite.removeEventListener(type, listener, useCapture);
         }
@@ -388,6 +394,15 @@ package org.libspark.gunyarapaint.framework
         public function get count():uint
         {
             return m_layers.length;
+        }
+        
+        /**
+         * 全てのレイヤーを結合した結果の BitmapData のコピーを返す
+         * 
+         */
+        public function get compositedBitmapData():BitmapData
+        {
+            return composited.clone();
         }
         
         /**

@@ -33,15 +33,43 @@ package org.libspark.gunyarapaint.framework
     /**
      * コマンドを管理する
      * 
-     * 26以降について
-     * 26 = ScaleLayerCommand
-     * 27 = MoveLayerCommand
-     * 28 = BezierCurveCommand
      */
     public class CommandContext extends EventDispatcher
     {
         public static const MAX_COMMANDS:uint = 64;
         
+        /*
+         * 1 = MoveToCommand
+         * 2 = LineToCommand
+         * 3 = LineStyleCommand
+         * 4 = DrawShapeOnBitmap
+         * 5 = UndoCommand
+         * 6 = RedoCommand
+         * 7 = BeginFillCommand
+         * 8 = EndFillCommand
+         * 9 = DrawRectCommand (unused)
+         * 10 = DrawCircleCommand
+         * 11 = DrawEllipseCommand (unused)
+         * 12 = DrawRoundRectCommand (unsed)
+         * 13 = FloodFillCommand
+         * 14 = CreateLayerCommand
+         * 15 = CopyLayerCommand
+         * 16 = SwapCommandCommand
+         * 17 = MergeLayerCommand
+         * 18 = RemoveLayerCommand
+         * 19 = SetLayerIndexCommand
+         * 20 = SetLayerVisibleCommand
+         * 21 = SetLayerBlendModeCommand
+         * 22 = SetLayerAlphaCommand
+         * 23 = PixelCommand
+         * 24 = HorizontalMirrorCommand
+         * 25 = VerticalMirrorCommand
+         *
+         * 26以降について (予定)
+         * 26 = ScaleLayerCommand
+         * 27 = MoveLayerCommand
+         * 28 = BezierCurveCommand
+         */
         public function CommandContext()
         {
             m_commands = new Vector.<ICommand>(MAX_COMMANDS, true);

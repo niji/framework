@@ -164,8 +164,6 @@ package org.libspark.gunyarapaint.framework
                 }
             }
             m_position++;
-            if (hasEventListener(CommandEvent.PARSE))
-                dispatchEvent(new CommandEvent(CommandEvent.PARSE, command));
             return command;
         }
         
