@@ -265,12 +265,7 @@ package org.libspark.gunyarapaint.framework
         {
             var count:uint = m_layers.length;
             for (var i:uint = 0; i < count; i++) {
-                var layer:LayerBitmap = m_layers[i];
-                var displayObject:DisplayObject = layer.displayObject;
-                if (m_sprite.contains(displayObject))
-                    m_sprite.removeChild(displayObject);
-                else
-                    trace(layer.name + " is not child of spriteToView.");
+                m_sprite.removeChildAt(i);
             }
             m_layers.splice(0, count);
         }
@@ -301,13 +296,18 @@ package org.libspark.gunyarapaint.framework
         {
             var i:uint = 0;
             var layers:Vector.<Object> = undoData.layers;
-            var c:uint = layers.length;
-            clear();
+            var oldLayerCount:uint = m_layers.length;
+            var newLayerCount:uint = layers.length;
+            // レイヤー切り替えが発生しないケースの対処
+            // 古いレイヤーが一緒に消えないようにする必要がある
+            var c:uint = newLayerCount > oldLayerCount ? oldLayerCount : newLayerCount;
             for (i = 0; i < c; i++) {
                 var data:Object = layers[i];
-                var layer:LayerBitmap = new LayerBitmap(data.bitmapData);
-                layer.fromJSON(data);
-                addLayer(layer);
+                var newLayer:LayerBitmap = new LayerBitmap(data.bitmapData);
+                newLayer.fromJSON(data);
+                m_sprite.removeChildAt(i);
+                m_sprite.addChildAt(newLayer.displayObject, i);
+                m_layers[i] = newLayer;
             }
             currentIndex = undoData.index;
             compositeAll();
