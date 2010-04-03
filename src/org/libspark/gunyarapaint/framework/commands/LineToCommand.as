@@ -74,10 +74,8 @@ package org.libspark.gunyarapaint.framework.commands
         public function toString():String
         {
             return "[LineToCommand"
-                + " readCoordinateX=" + s_readCoordinateX
-                + ", readCoordinateY=" + s_readCoordinateY
-                + ", writeCoordinateX=" + s_writeCoordinateX
-                + ", writeCoordinateY=" + s_writeCoordinateY
+                + " x=" + (s_readCoordinateX || s_writeCoordinateX)
+                + ", y=" + (s_readCoordinateY || s_writeCoordinateY)
                 + "]";
         }
         
