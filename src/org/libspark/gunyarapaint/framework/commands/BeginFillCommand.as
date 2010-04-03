@@ -48,8 +48,8 @@ package org.libspark.gunyarapaint.framework.commands
         public function toString():String
         {
             return "[BeginFillCommand"
-                + " alpha=" + m_alpha
-                + ", color=" + m_color
+                + " alpha=" + m_alpha.toPrecision(4)
+                + ", color=0x" + m_color.toString(16)
                 + "]";
         }
         

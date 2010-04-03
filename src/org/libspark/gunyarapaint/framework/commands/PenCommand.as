@@ -1,5 +1,6 @@
 package org.libspark.gunyarapaint.framework.commands
 {
+    import flash.errors.IllegalOperationError;
     import flash.utils.ByteArray;
     
     import org.libspark.gunyarapaint.framework.Painter;
@@ -70,6 +71,7 @@ package org.libspark.gunyarapaint.framework.commands
                 default:
                     throw new ArgumentError();
             }
+            m_type = type;
         }
         
         public function write(bytes:ByteArray, args:Object):void
@@ -126,6 +128,7 @@ package org.libspark.gunyarapaint.framework.commands
                 default:
                     throw new ArgumentError();
             }
+            m_type = type;
         }
         
         public function execute(painter:Painter):void
@@ -140,17 +143,39 @@ package org.libspark.gunyarapaint.framework.commands
         
         public function toString():String
         {
-            return "[PenCommand"
-                + " thickness=" + m_pen.thickness
-                + ", color=0x" + m_pen.color.toString(16)
-                + ", alpha=" + m_pen.alpha.toPrecision(4)
-                + ", blendMode=" + m_pen.blendMode
-                + ", scaleMode=" + m_pen.scaleMode
-                + ", caps=" + m_pen.capsStyle
-                + ", joints=" + m_pen.jointStyle
-                + ", miterLimit=" + m_pen.miterLimit.toPrecision(4)
-                + ", pixelHinting=" + m_pen.pixelHinting
-                + "]";
+            var ret:String = "[PenCommand ";
+            switch (m_type) {
+                case THICKNESS:
+                    ret += "thickness=" + m_pen.thickness + "]";
+                    break;
+                case COLOR:
+                    ret += "color=0x" + m_pen.color.toString(16) + "]";
+                    break;
+                case ALPHA:
+                    ret += "alpha=" + m_pen.alpha.toPrecision(4) + "]";
+                    break;
+                case MITER_LIMIT:
+                    ret += "miterLimit=" + m_pen.miterLimit.toPrecision(4) + "]";
+                    break;
+                case BLEND_MODE:
+                    ret += "blendMode=" + m_pen.blendMode + "]";
+                    break;
+                case SCALE_MODE:
+                    ret += "scaleMode=" + m_pen.scaleMode + "]";
+                    break;
+                case CAPS:
+                    ret += "capsStyle=" + m_pen.capsStyle + "]";
+                    break;
+                case JOINTS:
+                    ret += "jointStyle=" + m_pen.jointStyle + "]";
+                    break;
+                case PIXEL_HINTING:
+                    ret += "pixelHinting=" + m_pen.pixelHinting + "]";
+                    break;
+                default:
+                    throw new IllegalOperationError();
+            }
+            return ret;
         }
         
         public function get commandID():uint
@@ -159,5 +184,6 @@ package org.libspark.gunyarapaint.framework.commands
         }
         
         private var m_pen:Pen;
+        private var m_type:uint;
     }
 }

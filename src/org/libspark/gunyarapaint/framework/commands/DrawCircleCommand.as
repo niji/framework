@@ -41,7 +41,7 @@ package org.libspark.gunyarapaint.framework.commands
         public function toString():String
         {
             return "[DrawCircleCommand"
-                + " radius=" + m_radius
+                + " radius=" + m_radius.toPrecision(4)
                 + "]";
         }
         

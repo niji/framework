@@ -47,7 +47,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
         public function toString():String
         {
             return "[SetLayerAlphaCommand"
-                + " alpha=" + m_alpha
+                + " alpha=" + m_alpha.toPrecision(4)
                 + "]";
         }
         
