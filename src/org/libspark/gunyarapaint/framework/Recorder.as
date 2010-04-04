@@ -48,7 +48,7 @@ package org.libspark.gunyarapaint.framework
             bytes.writeShort(height);
             bytes.writeShort(undo);
             var recorder:Recorder = new Recorder(bytes, width, height, commands);
-            recorder.setUndoStack(new UndoStack(recorder, undo));
+            recorder.setUndoStack(new UndoStack(recorder.layers, undo));
             return recorder;
         }
         

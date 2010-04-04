@@ -12,7 +12,7 @@ package org.libspark.gunyarapaint.framework
      */
     public final class UndoStack extends EventDispatcher
     {
-        public function UndoStack(painter:Painter,
+        public function UndoStack(layers:LayerBitmapCollection,
                                   size:uint = 16)
         {
             m_buffer = new Vector.<Object>(size + 1, true);
@@ -22,7 +22,7 @@ package org.libspark.gunyarapaint.framework
             for (var i:uint = 0; i < size + 1; i++) {
                 m_buffer[i] = {};
             }
-            painter.layers.saveState(m_buffer[0]);
+            layers.saveState(m_buffer[0]);
         }
         
         internal function undo(layers:LayerBitmapCollection):void
