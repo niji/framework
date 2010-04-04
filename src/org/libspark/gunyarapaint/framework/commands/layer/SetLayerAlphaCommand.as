@@ -36,7 +36,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
         public function execute(painter:Painter):void
         {
             painter.currentLayerAlpha = m_alpha;
-            painter.pushUndoIfNeed();
+            painter.pushUndo();
         }
         
         public function reset():void

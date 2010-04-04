@@ -29,7 +29,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
         public function execute(painter:Painter):void
         {
             painter.layers.remove();
-            painter.pushUndoIfNeed();
+            painter.pushUndo();
         }
         
         public function reset():void

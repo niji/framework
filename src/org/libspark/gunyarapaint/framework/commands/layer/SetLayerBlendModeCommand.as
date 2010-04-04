@@ -37,7 +37,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
         public function execute(painter:Painter):void
         {
             painter.currentLayerBlendMode = m_blendMode;
-            painter.pushUndoIfNeed();
+            painter.pushUndo();
         }
         
         public function reset():void
