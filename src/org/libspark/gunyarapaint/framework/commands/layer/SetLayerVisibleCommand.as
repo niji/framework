@@ -37,8 +37,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
         
         public function execute(painter:Painter):void
         {
-            painter.layers.at(m_index).visible = m_visible;
-            painter.pushUndoIfNeed();
+            painter.setVisibleAt(m_index, m_visible);
         }
         
         public function reset():void
