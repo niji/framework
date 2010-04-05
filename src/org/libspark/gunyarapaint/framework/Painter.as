@@ -60,6 +60,26 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
+         * バージョン番号からペイントエンジンオブジェクトを返す
+         *
+         * @param uint バージョン番号
+         * @return PaintEngine ペイントエンジンオブジェクト
+         */
+        public static function createPaintEngine(version:uint):PaintEngine
+        {
+            var shape:Shape = new Shape();
+            if (version > 0 && version <= 10) {
+                return new PaintEngineV1(shape);
+            }
+            else if (version > 10 && version <= PAINTER_LOG_VERSION) {
+                return new PaintEngineV2(shape);
+            }
+            else {
+                throw new NotSupportedVersionError(version.toString());
+            }
+        }
+        
+        /**
          * お絵描き操作の巻き戻しを実行する
          */
         public function undo():void
@@ -491,20 +511,6 @@ package org.libspark.gunyarapaint.framework
         public function correctCoordinate(coordinate:Point):void
         {
             m_paintEngine.correctCoordinate(coordinate);
-        }
-        
-        protected static function createPaintEngine(version:uint):PaintEngine
-        {
-            var shape:Shape = new Shape();
-            if (version > 0 && version <= 10) {
-                return new PaintEngineV1(shape);
-            }
-            else if (version > 10 && version <= PAINTER_LOG_VERSION) {
-                return new PaintEngineV2(shape);
-            }
-            else {
-                throw new NotSupportedVersionError(version.toString());
-            }
         }
         
         private function transformFromMatrixAt(index:int, matrix:Matrix):void
