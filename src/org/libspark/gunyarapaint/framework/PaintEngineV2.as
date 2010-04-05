@@ -13,8 +13,10 @@ package org.libspark.gunyarapaint.framework
         public override function correctCoordinate(coordinate:Point):void
         {
             var aux:Number = (pen.thickness % 2) ? 0.5 : 0;
-            coordinate.x = int(coordinate.x) + aux;
-            coordinate.y = int(coordinate.y) + aux;
+            var x:Number = coordinate.x;
+            var y:Number = coordinate.y;
+            coordinate.x = (x >= 0 ? int(x) : Math.floor(x)) + aux;
+            coordinate.y = (y >= 0 ? int(y) : Math.floor(y)) + aux;
         }
     }
 }
