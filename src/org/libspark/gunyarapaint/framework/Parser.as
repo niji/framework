@@ -86,7 +86,7 @@ package org.libspark.gunyarapaint.framework
          * 
          * @throws InvalidCommandError 登録されていないコマンドが検出された場合
          */
-        public function preload():void
+        public function preparse():void
         {
             rewind();
             var count:uint = 0;
@@ -95,6 +95,7 @@ package org.libspark.gunyarapaint.framework
             var undoCount:uint = 0;
             var maxUndo:uint = 0;
             var command:ICommand = null;
+            var eventType:String = CommandEvent.PREPARSE;
             while (bytes.bytesAvailable > 0) {
                 var byte:uint = bytes.readUnsignedByte();
                 if (byte & 0x80) {
@@ -124,6 +125,8 @@ package org.libspark.gunyarapaint.framework
                 previous = command;
                 command.read(bytes);
                 count++;
+                if (hasEventListener(eventType))
+                    dispatchEvent(new CommandEvent(eventType, command));
             }
             m_maxUndoCount = maxUndo + 1;
             m_count = count;

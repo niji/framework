@@ -183,6 +183,11 @@ package org.libspark.gunyarapaint.framework.commands
             return ID;
         }
         
+        public function get type():uint
+        {
+            return m_type;
+        }
+        
         private var m_pen:Pen;
         private var m_type:uint;
     }

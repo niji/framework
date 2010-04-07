@@ -21,7 +21,7 @@ package org.libspark.gunyarapaint.framework
         {
             var data:Object = {};
             parser.readHeader(data);
-            parser.preload();
+            parser.preparse();
             speed = 1;
             m_timer = new Timer(50);
             m_timer.addEventListener(TimerEvent.TIMER, process);
@@ -103,15 +103,17 @@ package org.libspark.gunyarapaint.framework
         private function process(event:TimerEvent):void
         {
             try {
+                var parseEvent:String = CommandEvent.PARSE;
+                var updateEvent:String = PlayerEvent.UPDATED;
                 var bytes:ByteArray = m_parser.bytes;
                 for (var i:uint = 0; i < speed; i++) {
                     var command:ICommand = m_parser.parse();
                     command.read(bytes);
-                    if (hasEventListener(CommandEvent.PARSE))
-                        dispatchEvent(new CommandEvent(CommandEvent.PARSE, command));
+                    if (hasEventListener(parseEvent))
+                        dispatchEvent(new CommandEvent(parseEvent, command));
                     command.execute(this);
-                    if (hasEventListener(PlayerEvent.UPDATED))
-                        dispatchEvent(new PlayerEvent(PlayerEvent.UPDATED));
+                    if (hasEventListener(updateEvent))
+                        dispatchEvent(new PlayerEvent(updateEvent));
                 }
             }
             catch (e:Error) {
@@ -125,7 +127,7 @@ package org.libspark.gunyarapaint.framework
                 }
                 else {
                     // 再生が途中で終了するようなエラーが出た
-                    trace(e.getStackTrace());
+                    throw e;
                 }
             }
         }

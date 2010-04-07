@@ -9,6 +9,12 @@ package org.libspark.gunyarapaint.framework.events
     public final class CommandEvent extends AbstractEvent
     {
         /**
+         * 先読みでログから対応するコマンドオブジェクトが取得出来た後
+         * 
+         */
+        public static const PREPARSE:String = PREFIX + "preparse";
+        
+        /**
          * ログから対応するコマンドオブジェクトが取得出来た後
          * 
          */
