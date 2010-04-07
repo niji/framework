@@ -7,6 +7,7 @@ package org.libspark.gunyarapaint.framework
     import flash.events.Event;
     import flash.events.IEventDispatcher;
     
+    import org.libspark.gunyarapaint.framework.errors.AddLayerError;
     import org.libspark.gunyarapaint.framework.errors.MergeLayersError;
     import org.libspark.gunyarapaint.framework.errors.RemoveLayerError;
     
@@ -16,6 +17,11 @@ package org.libspark.gunyarapaint.framework
      */
     public class LayerBitmapCollection implements IEventDispatcher
     {
+        /**
+         * 作成出来る最大レイヤー数
+         */
+        public static const MAX:uint = 8;
+        
         public function LayerBitmapCollection(width:int, height:int)
         {
             currentIndex = 0;
@@ -41,6 +47,8 @@ package org.libspark.gunyarapaint.framework
          */
         public function add():void
         {
+            if (m_layers.length >= MAX)
+                throw new AddLayerError(MAX);
             var layer:LayerBitmap = new LayerBitmap(
                 new BitmapData(m_width, m_height, true, 0x0)
             );
@@ -58,6 +66,8 @@ package org.libspark.gunyarapaint.framework
          */
         public function addLayer(layer:LayerBitmap):void
         {
+            if (m_layers.length >= MAX)
+                throw new AddLayerError(MAX);
             m_layers.push(layer);
             m_sprite.addChild(layer.displayObject);
         }
@@ -91,6 +101,8 @@ package org.libspark.gunyarapaint.framework
          */
         public function copyAt(index:int):void
         {
+            if (m_layers.length >= MAX)
+                throw new AddLayerError(MAX);
             var layer:LayerBitmap = m_layers[index].clone();
             layer.name += "'s copy";
             m_layers.splice(index, 0, layer);
