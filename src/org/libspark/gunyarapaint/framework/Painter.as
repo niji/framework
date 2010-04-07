@@ -388,7 +388,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function setVisibleAt(index:int, visible:Boolean):void
         {
-            m_layers[index].visible = visible;
+            m_layers.at(index).visible = visible;
             m_layers.compositeAll();
         }
         
