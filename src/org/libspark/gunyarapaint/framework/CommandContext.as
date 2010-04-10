@@ -4,6 +4,7 @@ package org.libspark.gunyarapaint.framework
     
     import org.libspark.gunyarapaint.framework.commands.BeginFillCommand;
     import org.libspark.gunyarapaint.framework.commands.BezierCurveCommand;
+    import org.libspark.gunyarapaint.framework.commands.CompatibilityCommand;
     import org.libspark.gunyarapaint.framework.commands.CompositeCommand;
     import org.libspark.gunyarapaint.framework.commands.DrawCircleCommand;
     import org.libspark.gunyarapaint.framework.commands.EndFillCommand;
@@ -69,11 +70,11 @@ package org.libspark.gunyarapaint.framework
          * 26 = ScaleLayerCommand
          * 27 = MoveLayerCommand
          * 28 = BezierCurveCommand
+         * 29 = CompatibilityCommand
          */
         public function CommandContext()
         {
             m_commands = new Vector.<ICommand>(MAX_COMMANDS, true);
-            registerCommand(new BezierCurveCommand());
             registerCommand(new CopyLayerCommand());
             registerCommand(new CreateLayerCommand());
             registerCommand(new MergeLayerCommand());
@@ -86,6 +87,8 @@ package org.libspark.gunyarapaint.framework
             registerCommand(new SetLayerVisibleCommand());
             registerCommand(new SwapLayerCommand());
             registerCommand(new BeginFillCommand());
+            registerCommand(new BezierCurveCommand());
+            registerCommand(new CompatibilityCommand);
             registerCommand(new CompositeCommand());
             registerCommand(new DrawCircleCommand());
             registerCommand(new EndFillCommand());

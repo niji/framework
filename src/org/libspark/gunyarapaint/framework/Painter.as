@@ -38,6 +38,18 @@ package org.libspark.gunyarapaint.framework
         public static const PAINTER_VERSION_STRING:String = "ver." + PAINTER_VERSION;
         
         /**
+         * レイヤー作成をアンドゥに含めるかどうかのオプション
+         *
+         */
+        public static const COMPATIBILITY_UNDO_LAYER:uint = 1;
+        
+        /**
+         * 1 ピクセル以上の大きさを持つ PixelCommand を有効にするかどうかのオプション
+         *
+         */
+        public static const COMPATIBILITY_BIG_PIXEL:uint = 2;
+        
+        /**
          * 反転関連で全てのレイヤーに対して適用するための定数
          * 
          */
@@ -45,6 +57,8 @@ package org.libspark.gunyarapaint.framework
         
         public function Painter(width:uint, height:uint, version:uint, paintEngine:PaintEngine)
         {
+            enableBigPixel = true;
+            enableUndoLayer = false;
             m_layers = new LayerBitmapCollection(width, height);
             m_drawingSprite = new Sprite();
             m_drawingSprite.mouseEnabled = false;
@@ -113,7 +127,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function pushUndoIfNeed():void
         {
-            if (m_version <= 21)
+            if (m_version <= 21 || enableUndoLayer)
                 pushUndo();
         }
         
@@ -548,7 +562,6 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在のお絵描きログのバージョンを返す
          * 
-         * @return ログのバージョン
          */
         public function get version():uint
         {
@@ -558,7 +571,6 @@ package org.libspark.gunyarapaint.framework
         /**
          * 描写するキャンバスの幅を返す
          * 
-         * @return 画像の幅
          */
         public function get width():uint
         {
@@ -568,18 +580,25 @@ package org.libspark.gunyarapaint.framework
         /**
          * 描写するキャンバスの高さを返す
          * 
-         * @return 画像の高さ
          */
         public function get height():uint
         {
             return m_height;
         }
         
+        /**
+         * UndoStack オブジェクトを返す
+         * 
+         */
         public function get undoStack():UndoStack
         {
             return m_undo;
         }
         
+        /**
+         * レイヤーを保存するために必要な BitmapData を生成する
+         * 
+         */
         public function get newLayerBitmapData():BitmapData
         {
             return new BitmapData(m_width, m_height * m_layers.count, true, 0x0);
@@ -615,14 +634,26 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
+         * ログのバージョンを設定する
+         * 
+         */
+        internal function setVersion(value:uint):void
+        {
+            m_version = value;
+        }
+        
+        /**
          * UndoStack オブジェクトを設定する
          * 
-         * @return ログのバージョン
          */
         internal function setUndoStack(value:UndoStack):void
         {
             m_undo = value;
         }
+        
+        public var enableUndoLayer:Boolean;
+        
+        public var enableBigPixel:Boolean;
         
         // テストでLayerBitmapCollectionの差し替えを行うため敢えてprotected にしてある
         protected var m_layers:LayerBitmapCollection;

@@ -97,6 +97,14 @@ package org.libspark.gunyarapaint.framework.modules
         function swapLayers(from:uint, to:uint):void;
         
         /**
+         * 挙動の互換性オプションを設定する
+         * 
+         * @param type 互換性名
+         * @param value 有効あるいは無効
+         */
+        function setCompatibility(type:uint, value:Boolean):void;
+        
+        /**
          * モジュール名を返す
          * 
          * @return name

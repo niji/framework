@@ -4,6 +4,7 @@ package org.libspark.gunyarapaint.framework.modules
     
     import org.libspark.gunyarapaint.framework.LayerBitmap;
     import org.libspark.gunyarapaint.framework.Recorder;
+    import org.libspark.gunyarapaint.framework.commands.CompatibilityCommand;
     import org.libspark.gunyarapaint.framework.commands.HorizontalMirrorCommand;
     import org.libspark.gunyarapaint.framework.commands.PenCommand;
     import org.libspark.gunyarapaint.framework.commands.RedoCommand;
@@ -96,6 +97,17 @@ package org.libspark.gunyarapaint.framework.modules
                 {
                     "from": from,
                     "to": to
+                }
+            );
+        }
+        
+        public function setCompatibility(type:uint, value:Boolean):void
+        {
+            m_recorder.commitCommand(
+                CompatibilityCommand.ID,
+                {
+                    "type": type,
+                    "value": value
                 }
             );
         }
