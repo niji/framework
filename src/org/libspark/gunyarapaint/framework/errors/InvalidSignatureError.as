@@ -1,5 +1,7 @@
 package org.libspark.gunyarapaint.framework.errors
 {
+    import org.libspark.gunyarapaint.framework.i18n.TranslatorRegistry;
+
     /**
      * ログの最初の識別子が一致しない場合に作成される
      * 
@@ -8,9 +10,8 @@ package org.libspark.gunyarapaint.framework.errors
     {
         public function InvalidSignatureError()
         {
-            var message:String = "Tried loading invalid signature log";
             name = "InvalidSignatureError";
-            super(message, 0);
+            super(TranslatorRegistry.tr("Tried loading invalid signature log"), 0);
         }
     }
 }

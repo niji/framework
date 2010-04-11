@@ -7,6 +7,8 @@ package org.libspark.gunyarapaint.framework
     import flash.geom.ColorTransform;
     import flash.geom.Matrix;
     
+    import org.libspark.gunyarapaint.framework.i18n.TranslatorRegistry;
+    
     /**
      * ビットマップによるレイヤー画像のオブジェクト
      * 
@@ -26,7 +28,7 @@ package org.libspark.gunyarapaint.framework
                 0,
                 0
             );
-            name = "Layer" + index;
+            name = TranslatorRegistry.tr("Layer") + index;
             setBitmapData(bitmapData);
         }
         

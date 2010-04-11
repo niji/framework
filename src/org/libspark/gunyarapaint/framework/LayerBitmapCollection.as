@@ -10,6 +10,7 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.errors.AddLayerError;
     import org.libspark.gunyarapaint.framework.errors.MergeLayersError;
     import org.libspark.gunyarapaint.framework.errors.RemoveLayerError;
+    import org.libspark.gunyarapaint.framework.i18n.TranslatorRegistry;
     
     /**
      * 複数のレイヤーを管理する
@@ -34,7 +35,7 @@ package org.libspark.gunyarapaint.framework
             var layer:LayerBitmap = new LayerBitmap(
                 new BitmapData(width, height, true, uint.MAX_VALUE)
             );
-            layer.name = "Background";
+            layer.name = TranslatorRegistry.tr("Background");
             composited = new BitmapData(width, height, true, 0x0);
             addLayer(layer);
         }

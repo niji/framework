@@ -1,5 +1,7 @@
 package org.libspark.gunyarapaint.framework.errors
 {
+    import org.libspark.gunyarapaint.framework.i18n.TranslatorRegistry;
+
     /**
      * これ以上やり直しが出来ないときに作成される
      * 
@@ -8,9 +10,8 @@ package org.libspark.gunyarapaint.framework.errors
     {
         public function UndoError()
         {
-            var message:String = "Cannot undo any more";
             name = "UndoError";
-            super(message, 0);
+            super(TranslatorRegistry.tr("Cannot undo any more"), 0);
         }
     }
 }

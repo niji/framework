@@ -1,5 +1,7 @@
 package org.libspark.gunyarapaint.framework.errors
 {
+    import org.libspark.gunyarapaint.framework.i18n.TranslatorRegistry;
+
     /**
      * ロック(描写禁止)されているレイヤーに対して描写を行う時に作成される
      * 
@@ -8,9 +10,8 @@ package org.libspark.gunyarapaint.framework.errors
     {
         public function LockedLayerError()
         {
-            var message:String = "The current layer is locked";
             name = "LockedLayerError";
-            super(message, 0);
+            super(TranslatorRegistry.tr("The current layer is locked"), 0);
         }
     }
 }

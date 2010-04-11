@@ -1,5 +1,7 @@
 package org.libspark.gunyarapaint.framework.errors
 {
+    import org.libspark.gunyarapaint.framework.i18n.TranslatorRegistry;
+
     /**
      * これ以上巻き戻しが出来ないときに作成される
      * 
@@ -8,9 +10,8 @@ package org.libspark.gunyarapaint.framework.errors
     {
         public function RedoError()
         {
-            var message:String = "Cannot redo any more";
             name = "RedoError";
-            super(message, 0);
+            super(TranslatorRegistry.tr("Cannot redo any more"), 0);
         }
     }
 }

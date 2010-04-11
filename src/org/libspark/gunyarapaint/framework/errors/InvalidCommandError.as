@@ -1,5 +1,7 @@
 package org.libspark.gunyarapaint.framework.errors
 {
+    import org.libspark.gunyarapaint.framework.i18n.TranslatorRegistry;
+
     /**
      * 登録されていないコマンドを呼び出そうとしたときに作成される
      * 
@@ -8,9 +10,8 @@ package org.libspark.gunyarapaint.framework.errors
     {
         public function InvalidCommandError(count:uint, command:uint)
         {
-            var message:String = command + " is not found at " +count;
             name = "InvalidCommandError";
-            super(message, 0);
+            super(TranslatorRegistry.tr("%s is not found at %s", command, count), 0);
         }
     }
 }

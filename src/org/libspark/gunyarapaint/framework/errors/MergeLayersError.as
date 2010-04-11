@@ -1,5 +1,7 @@
 package org.libspark.gunyarapaint.framework.errors
 {
+    import org.libspark.gunyarapaint.framework.i18n.TranslatorRegistry;
+
     /**
      * レイヤー統合時にレイヤーが一つ、あるいは統合対象のレイヤーのどちらかが非表示の場合に作成される
      * 
@@ -8,9 +10,8 @@ package org.libspark.gunyarapaint.framework.errors
     {
         public function MergeLayersError()
         {
-            var message:String = "Cannot merge layers because there is only one layer or invisible layer is found";
             name = "MergeLayersError";
-            super(message, 0);
+            super(TranslatorRegistry.tr("Cannot merge layers because there is only one layer or invisible layer is found"), 0);
         }
     }
 }

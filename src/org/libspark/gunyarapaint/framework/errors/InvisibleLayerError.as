@@ -1,5 +1,7 @@
 package org.libspark.gunyarapaint.framework.errors
 {
+    import org.libspark.gunyarapaint.framework.i18n.TranslatorRegistry;
+
     /**
      * 非表示レイヤーに対して描写を行う時にに作成される
      * 
@@ -8,9 +10,8 @@ package org.libspark.gunyarapaint.framework.errors
     {
         public function InvisibleLayerError()
         {
-            var message:String = "The current layer is invisible";
             name = "LockedLayerError";
-            super(message, 0);
+            super(TranslatorRegistry.tr("The current layer is invisible"), 0);
         }
     }
 }
