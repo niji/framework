@@ -54,6 +54,7 @@ package org.libspark.gunyarapaint.framework
                 new BitmapData(m_width, m_height, true, 0x0)
             );
             currentIndex++;
+            layer.name = TranslatorRegistry.tr("Layer") + currentIndex;
             m_layers.splice(currentIndex, 0, layer);
             m_sprite.addChildAt(layer.displayObject, currentIndex);
             compositeAll();
@@ -105,7 +106,7 @@ package org.libspark.gunyarapaint.framework
             if (m_layers.length >= MAX)
                 throw new AddLayerError(MAX);
             var layer:LayerBitmap = m_layers[index].clone();
-            layer.name += "'s copy";
+            layer.name = TranslatorRegistry.tr("Layer %s's copy", index);
             m_layers.splice(index, 0, layer);
             m_sprite.addChildAt(layer.displayObject, index);
             compositeAll();

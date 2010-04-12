@@ -28,7 +28,6 @@ package org.libspark.gunyarapaint.framework
                 0,
                 0
             );
-            name = TranslatorRegistry.tr("Layer") + index;
             setBitmapData(bitmapData);
         }
         
