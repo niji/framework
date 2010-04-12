@@ -31,6 +31,8 @@ package org.libspark.gunyarapaint.framework.commands
             bytes.writeByte(commandID);
             bytes.writeByte(type);
             bytes.writeBoolean(value);
+            m_type = type;
+            m_value = value;
         }
         
         public function execute(painter:Painter):void
