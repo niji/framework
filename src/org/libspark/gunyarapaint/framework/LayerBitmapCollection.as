@@ -105,8 +105,9 @@ package org.libspark.gunyarapaint.framework
         {
             if (m_layers.length >= MAX)
                 throw new AddLayerError(MAX);
-            var layer:LayerBitmap = m_layers[index].clone();
-            layer.name = TranslatorRegistry.tr("Layer %s's copy", index);
+            var selected:LayerBitmap = m_layers[index];
+            var layer:LayerBitmap = selected.clone();
+            layer.name = TranslatorRegistry.tr("%s's copy", selected.name);
             m_layers.splice(index, 0, layer);
             m_sprite.addChildAt(layer.displayObject, index);
             compositeAll();
