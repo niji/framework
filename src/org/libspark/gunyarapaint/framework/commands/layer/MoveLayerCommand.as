@@ -24,7 +24,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
         
         public function toString():String
         {
-            return "[MoveLayerCommand]";
+            return "[MoveLayerCommand x=" + m_coordinateX + ", y=" + m_coordinateY + "]";
         }
         
         public override function get commandID():uint

@@ -49,8 +49,8 @@ package org.libspark.gunyarapaint.framework.commands
         public function toString():String
         {
             return "[PixelCommand"
-                + " coordinateX=" + m_x
-                + ", coordinateY=" + m_y
+                + " x=" + m_x
+                + ", y=" + m_y
                 + "]";
         }
         

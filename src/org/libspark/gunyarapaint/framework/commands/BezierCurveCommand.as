@@ -61,7 +61,7 @@ package org.libspark.gunyarapaint.framework.commands
                 + " anchorX=" + m_anchorX
                 + ", anchorY=" + m_anchorY
                 + ", controlX=" + m_controlX
-                + ", controY=" + m_controlY
+                + ", controlY=" + m_controlY
                 + "]";
         }
         

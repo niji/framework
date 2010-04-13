@@ -26,7 +26,7 @@ package org.libspark.gunyarapaint.framework.commands.layer
         
         public function toString():String
         {
-            return "[ScaleLayerCommand]";
+            return "[ScaleLayerCommand x=" + m_coordinateX + ", y=" + m_coordinateY + "]";
         }
         
         public override function get commandID():uint
