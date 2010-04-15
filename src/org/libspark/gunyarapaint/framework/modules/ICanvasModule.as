@@ -105,6 +105,11 @@ package org.libspark.gunyarapaint.framework.modules
         function setCompatibility(type:uint, value:Boolean):void;
         
         /**
+         * 座標位置を(0,0)に戻す
+         */
+        function reset():void;
+        
+        /**
          * モジュール名を返す
          * 
          * @return name

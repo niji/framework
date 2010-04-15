@@ -8,6 +8,7 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.HorizontalMirrorCommand;
     import org.libspark.gunyarapaint.framework.commands.PenCommand;
     import org.libspark.gunyarapaint.framework.commands.RedoCommand;
+    import org.libspark.gunyarapaint.framework.commands.ResetAllCommand;
     import org.libspark.gunyarapaint.framework.commands.UndoCommand;
     import org.libspark.gunyarapaint.framework.commands.VerticalMirrorCommand;
     import org.libspark.gunyarapaint.framework.commands.layer.CopyLayerCommand;
@@ -110,6 +111,11 @@ package org.libspark.gunyarapaint.framework.modules
                     "value": value
                 }
             );
+        }
+        
+        public function reset():void
+        {
+            m_recorder.commitCommand(ResetAllCommand.ID, {});
         }
         
         /**

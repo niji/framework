@@ -16,6 +16,11 @@ package org.libspark.gunyarapaint.framework.commands
         public function reset():void
         {
             m_compressedValue = 0;
+            resetCoordinates();
+        }
+        
+        public static function resetCoordinates():void
+        {
             s_readCoordinateX = 0;
             s_readCoordinateY = 0;
             s_writeCoordinateX = 0;

@@ -16,6 +16,7 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.commands.PenCommand;
     import org.libspark.gunyarapaint.framework.commands.PixelCommand;
     import org.libspark.gunyarapaint.framework.commands.RedoCommand;
+    import org.libspark.gunyarapaint.framework.commands.ResetAllCommand;
     import org.libspark.gunyarapaint.framework.commands.UndoCommand;
     import org.libspark.gunyarapaint.framework.commands.VerticalMirrorCommand;
     import org.libspark.gunyarapaint.framework.commands.layer.CopyLayerCommand;
@@ -71,6 +72,7 @@ package org.libspark.gunyarapaint.framework
          * 27 = MoveLayerCommand
          * 28 = BezierCurveCommand
          * 29 = CompatibilityCommand
+         * 30 = ResetAllCommand
          */
         public function CommandContext()
         {
@@ -99,6 +101,7 @@ package org.libspark.gunyarapaint.framework
             registerCommand(new PenCommand());
             registerCommand(new PixelCommand());
             registerCommand(new RedoCommand());
+            registerCommand(new ResetAllCommand());
             registerCommand(new UndoCommand());
             registerCommand(new VerticalMirrorCommand());
             super();
