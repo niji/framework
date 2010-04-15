@@ -18,6 +18,7 @@ package org.libspark.gunyarapaint.framework.modules
             registerModule(new RectModule(recorder));
             registerModule(new RoundRectModule(recorder));
             registerModule(new TransparentFloodFill(recorder));
+            registerModule(new TransparentLineModule(recorder));
         }
         
         public function registerModule(module:ICanvasModule):void
