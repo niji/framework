@@ -21,7 +21,7 @@ package org.libspark.gunyarapaint.framework.modules
         {
             validateLayerState();
             setCoordinate(x, y);
-            m_blendMode = m_recorder.layers.currentLayer.blendMode;
+            m_blendMode = m_recorder.pen.blendMode;
             m_recorder.startDrawingSession();
         }
         
@@ -49,7 +49,7 @@ package org.libspark.gunyarapaint.framework.modules
                 m_recorder.commitCommand(CompositeCommand.ID, {});
                 blendMode = m_blendMode;
             }
-            m_recorder.currentLayerBlendMode = m_blendMode;
+            m_recorder.pen.blendMode = m_blendMode;
             saveCoordinate(x, y);
         }
         
