@@ -21,6 +21,7 @@
     <option allowSourcePathOverlap="False" />
     <option benchmark="True" />
     <option es="False" />
+    <option locale="" />
     <option loadConfig="" />
     <option optimize="True" />
     <option showActionScriptWarnings="True" />
@@ -34,7 +35,9 @@
     <option verboseStackTraces="True" />
     <option linkReport="" />
     <option loadExterns="" />
+    <option staticLinkRSL="True" />
     <option additional="-locale ja_JP" />
+    <option compilerConstants="" />
     <option customSDK="" />
   </build>
   <!-- SWC Include Libraries -->
@@ -67,16 +70,16 @@
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
-    <!-- example: <hidden path="..." /> -->
+    <hidden path=".settings" />
+    <hidden path=".FlexUnitSettings" />
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand>compc.exe -benchmark=true -incremental=true -optimize=true -target-player=10.0.0 -verbose-stacktraces=true -include-sources src -source-path src -output $(ProjectDir)/bin/framework.fd3.swc
-</preBuildCommand>
+  <preBuildCommand>compc.exe -benchmark=true -incremental=true -optimize=true -target-player=10.0.0 -verbose-stacktraces=true -include-sources src -source-path "$(ProjectDir)/src" -output "$(ProjectDir)/bin/framework.fd3.swc"</preBuildCommand>
   <!-- Executed after build -->
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->
   <options>
-    <option showHiddenPaths="True" />
+    <option showHiddenPaths="False" />
     <option testMovie="Default" />
   </options>
 </project>
