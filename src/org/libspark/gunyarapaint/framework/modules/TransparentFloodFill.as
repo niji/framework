@@ -7,7 +7,7 @@ package org.libspark.gunyarapaint.framework.modules
 
     public final class TransparentFloodFill extends CanvasModule implements ICanvasModule
     {
-        public static const TRANSPARENT_FLOOD_FILL:String = "transparentFloodFill";
+        public static const TRANSPARENT_FLOOD_FILL:String = PREFIX + "transparentFloodFill";
         
         public function TransparentFloodFill(recorder:Recorder)
         {
@@ -46,6 +46,8 @@ package org.libspark.gunyarapaint.framework.modules
         public function interrupt(x:Number, y:Number):void
         {
             stopDrawing();
+            alpha = m_alpha;
+            color = m_color;
         }
         
         public function get name():String
