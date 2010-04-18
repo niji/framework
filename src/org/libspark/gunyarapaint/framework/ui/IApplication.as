@@ -1,6 +1,7 @@
 package org.libspark.gunyarapaint.framework.ui
 {
     import flash.display.Sprite;
+    import flash.events.IEventDispatcher;
     
     import org.libspark.gunyarapaint.framework.LayerBitmapCollection;
     import org.libspark.gunyarapaint.framework.Pen;
@@ -11,7 +12,7 @@ package org.libspark.gunyarapaint.framework.ui
      * ペイントアプリケーションに必要なメソッドを定義したインターフェース
      * 
      */
-    public interface IApplication
+    public interface IApplication extends IEventDispatcher
     {
         /**
          * 名前から描写モジュールを設定する
