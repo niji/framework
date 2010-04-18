@@ -31,6 +31,14 @@ package org.libspark.gunyarapaint.framework.modules
             m_recorder = recorder;
         }
         
+        public function load():void
+        {
+        }
+        
+        public function unload():void
+        {
+        }
+        
         public function undo():void
         {
             m_recorder.commitCommand(UndoCommand.ID, {});

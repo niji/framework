@@ -7,6 +7,18 @@ package org.libspark.gunyarapaint.framework.modules
     public interface ICanvasModule
     {
         /**
+         * 別のペンから切り替えた後に呼び出される
+         * 
+         */
+        function load():void;
+        
+        /**
+         * 別のペンに切り替える前に呼び出される
+         * 
+         */
+        function unload():void;
+        
+        /**
          * 描写の開始をする
          * 
          * @param x x座標
