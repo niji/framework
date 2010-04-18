@@ -106,8 +106,15 @@ package org.libspark.gunyarapaint.framework.modules
         
         /**
          * 座標位置を(0,0)に戻す
+         * 
          */
         function reset():void;
+        
+        /**
+         * 指定された座標からアルファ値を含む色を取り出す
+         * 
+         */
+        function getPixel32(x:int, y:int):uint;
         
         /**
          * モジュール名を返す

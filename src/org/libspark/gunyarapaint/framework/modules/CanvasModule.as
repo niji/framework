@@ -120,6 +120,11 @@ package org.libspark.gunyarapaint.framework.modules
             m_recorder.commitCommand(ResetAllCommand.ID, {});
         }
         
+        public function getPixel32(x:int, y:int):uint
+        {
+            return m_recorder.getPixel32(x, y);
+        }
+        
         /**
          * 始点と終点を取得する(現在は単体テスト用に使われているのみ)
          * 
