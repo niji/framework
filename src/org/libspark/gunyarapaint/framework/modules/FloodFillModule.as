@@ -6,7 +6,7 @@ package org.libspark.gunyarapaint.framework.modules
     
     public final class FloodFillModule extends CanvasModule implements ICanvasModule
     {
-        public static const FLOOD_FILL:String = "floodFill";
+        public static const FLOOD_FILL:String = PREFIX + "floodFill";
         
         public function FloodFillModule(recorder:Recorder)
         {

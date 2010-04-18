@@ -5,7 +5,7 @@ package org.libspark.gunyarapaint.framework.modules
     
     public final class PixelModule extends CanvasModule implements ICanvasModule
     {
-        public static const PIXEL:String = "pixel";
+        public static const PIXEL:String = PREFIX + "pixel";
         
         public function PixelModule(recorder:Recorder)
         {

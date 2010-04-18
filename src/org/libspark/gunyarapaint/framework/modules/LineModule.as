@@ -7,7 +7,7 @@ package org.libspark.gunyarapaint.framework.modules
     
     public final class LineModule extends CanvasModule implements ICanvasModule
     {
-        public static const LINE:String = "line";
+        public static const LINE:String = PREFIX + "line";
         
         public function LineModule(recorder:Recorder)
         {

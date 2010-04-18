@@ -4,7 +4,7 @@ package org.libspark.gunyarapaint.framework.modules
     
     public final class RectModule extends CanvasModule implements ICanvasModule
     {
-        public static const RECT:String = "rect";
+        public static const RECT:String = PREFIX + "rect";
         
         public function RectModule(recorder:Recorder)
         {

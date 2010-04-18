@@ -4,7 +4,7 @@ package org.libspark.gunyarapaint.framework.modules
     
     public final class EllipseModule extends CanvasModule implements ICanvasModule
     {
-        public static const ELLIPSE:String = "ellipse";
+        public static const ELLIPSE:String = PREFIX + "ellipse";
         
         public function EllipseModule(recorder:Recorder)
         {

@@ -24,6 +24,8 @@ package org.libspark.gunyarapaint.framework.modules
 
     public class CanvasModule
     {
+        internal static const PREFIX:String = "org.libspark.gunyarapaint.framework.modules.";
+        
         public function CanvasModule(recorder:Recorder)
         {
             m_recorder = recorder;

@@ -12,7 +12,7 @@ package org.libspark.gunyarapaint.framework.modules
     
     public final class FreeHandModule extends CanvasModule implements ICanvasModule
     {
-        public static const FREE_HAND:String = "freeHand";
+        public static const FREE_HAND:String = PREFIX + "freeHand";
         
         public function FreeHandModule(recorder:Recorder)
         {

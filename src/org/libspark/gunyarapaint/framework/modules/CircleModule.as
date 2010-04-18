@@ -9,7 +9,7 @@ package org.libspark.gunyarapaint.framework.modules
     
     public final class CircleModule extends CanvasModule implements ICanvasModule
     {
-        public static const CIRCLE:String = "circle";
+        public static const CIRCLE:String = PREFIX + "circle";
         
         public function CircleModule(recorder:Recorder)
         {

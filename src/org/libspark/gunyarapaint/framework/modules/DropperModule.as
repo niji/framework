@@ -5,7 +5,7 @@ package org.libspark.gunyarapaint.framework.modules
     
     public final class DropperModule extends CanvasModule implements ICanvasModule
     {
-        public static const DROPPER:String = "dropper";
+        public static const DROPPER:String = PREFIX + "dropper";
         
         public function DropperModule(recorder:Recorder)
         {

@@ -4,7 +4,7 @@ package org.libspark.gunyarapaint.framework.modules
     
     public final class RoundRectModule extends CanvasModule implements ICanvasModule
     {
-        public static const ROUND_RECT:String = "roundRect";
+        public static const ROUND_RECT:String = PREFIX + "roundRect";
         
         public function RoundRectModule(recorder:Recorder)
         {
