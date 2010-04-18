@@ -60,6 +60,7 @@ package org.libspark.gunyarapaint.framework
             enableBigPixel = true;
             enableUndoLayer = false;
             m_layers = new LayerBitmapCollection(width, height);
+            m_layers.compositeAll();
             m_drawingSprite = new Sprite();
             m_drawingSprite.mouseEnabled = false;
             m_horizontalMirrorMatrix = new Matrix(-1, 0, 0, 1, width, 0);
