@@ -7,6 +7,8 @@ package org.libspark.gunyarapaint.framework
     import flash.display.Sprite;
     import flash.events.Event;
     import flash.events.IEventDispatcher;
+    import flash.geom.Point;
+    import flash.geom.Rectangle;
     
     import org.libspark.gunyarapaint.framework.errors.AddLayerError;
     import org.libspark.gunyarapaint.framework.errors.MergeLayersError;
@@ -40,7 +42,8 @@ package org.libspark.gunyarapaint.framework
             );
             layer.name = TranslatorRegistry.tr("Background");
             composited = new BitmapData(width, height, true, 0x0);
-            addLayer(layer);
+            m_layers.push(layer);
+            m_sprite.addChild(layer.displayObject);
         }
         
         /**
@@ -62,19 +65,6 @@ package org.libspark.gunyarapaint.framework
             m_sprite.addChildAt(layer.displayObject, currentIndex);
             compositeAll();
             resetLayersIndex();
-        }
-        
-        /**
-         * レイヤーオブジェクトを追加する
-         * 
-         * @param layer レイヤーオブジェクト
-         */
-        public function addLayer(layer:LayerBitmap):void
-        {
-            if (m_layers.length >= MAX)
-                throw new AddLayerError(MAX);
-            m_layers.push(layer);
-            m_sprite.addChild(layer.displayObject);
         }
         
         /**
@@ -242,6 +232,57 @@ package org.libspark.gunyarapaint.framework
                 ret.push(m_layers[i]);
             }
             return ret.reverse();
+        }
+        
+        /**
+         * 連結されたレイヤー画像とメタデータから復元する
+         * 
+         * @param layerBitmaps 縦に連結されたレイヤー画像
+         * @param metadata メタデータ
+         */
+        public function load(layerBitmap:BitmapData, metadata:Object):void
+        {
+            var width:uint = metadata.width;
+            var height:uint = metadata.height;
+            var layersInfo:Array = metadata.layer_infos;
+            var layerCount:uint = layerBitmap.height / height;
+            var destination:Point = new Point(0, 0);
+            var rectangle:Rectangle = new Rectangle(0, 0, width, height);
+            clear();
+            for (var i:uint = 0; i < layerCount; i++) {
+                var bitmapData:BitmapData = new BitmapData(width, height);
+                rectangle.y = i * height;
+                bitmapData.copyPixels(layerBitmap, rectangle, destination);
+                var layer:LayerBitmap = new LayerBitmap(bitmapData);
+                layer.fromJSON(layersInfo[i]);
+                m_layers.push(layer);
+                m_sprite.addChild(layer.displayObject);
+            }
+        }
+        
+        /**
+         * 連結されたレイヤー画像とメタデータを保存する
+         * 
+         * @param layerBitmaps 縦に連結されたレイヤー画像
+         * @param metadata メタデータ
+         */
+        public function save(layerBitmap:BitmapData, metadata:Object):void
+        {
+            var layersInfo:Array = [];
+            var layerCount:uint = layerBitmap.height / height;
+            var rectangle:Rectangle = new Rectangle(0, 0, width, height);
+            var destination:Point = new Point(0, 0);
+            layerBitmap.lock();
+            for (var i:uint = 0; i < layerCount; i++) {
+                var layer:LayerBitmap = m_layers[i];
+                destination.y = i * height;
+                layerBitmap.copyPixels(layer.bitmapData, rectangle, destination);
+                layersInfo.push(layer.toJSON());
+            }
+            layerBitmap.unlock();
+            metadata.width = width;
+            metadata.height = height;
+            metadata.layer_infos = layersInfo;
         }
         
         public function addEventListener(type:String,

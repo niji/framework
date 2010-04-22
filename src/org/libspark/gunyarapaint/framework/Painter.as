@@ -129,56 +129,6 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 連結されたレイヤー画像とメタデータから復元する
-         * 
-         * @param layerBitmaps 縦に連結されたレイヤー画像
-         * @param metadata メタデータ
-         */
-        public function load(layerBitmap:BitmapData, metadata:Object):void
-        {
-            var width:uint = metadata.width;
-            var height:uint = metadata.height;
-            var layersInfo:Array = metadata.layer_infos;
-            var layerCount:uint = layerBitmap.height / height;
-            var destination:Point = new Point(0, 0);
-            var rectangle:Rectangle = new Rectangle(0, 0, width, height);
-            m_layers.clear();
-            for (var i:uint = 0; i < layerCount; i++) {
-                var bitmapData:BitmapData = new BitmapData(width, height);
-                rectangle.y = i * height;
-                bitmapData.copyPixels(layerBitmap, rectangle, destination);
-                var layer:LayerBitmap = new LayerBitmap(bitmapData);
-                layer.fromJSON(layersInfo[i]);
-                m_layers.addLayer(layer);
-            }
-        }
-        
-        /**
-         * 連結されたレイヤー画像とメタデータを保存する
-         * 
-         * @param layerBitmaps 縦に連結されたレイヤー画像
-         * @param metadata メタデータ
-         */
-        public function save(layerBitmap:BitmapData, metadata:Object):void
-        {
-            var layersInfo:Array = [];
-            var layerCount:uint = layerBitmap.height / height;
-            var rectangle:Rectangle = new Rectangle(0, 0, width, height);
-            var destination:Point = new Point(0, 0);
-            layerBitmap.lock();
-            for (var i:uint = 0; i < layerCount; i++) {
-                var layer:LayerBitmap = m_layers.at(i);
-                destination.y = i * height;
-                layerBitmap.copyPixels(layer.bitmapData, rectangle, destination);
-                layersInfo.push(layer.toJSON());
-            }
-            layerBitmap.unlock();
-            metadata.width = width;
-            metadata.height = height;
-            metadata.layer_infos = layersInfo;
-        }
-        
-        /**
          * 現在位置を変更する
          * 
          * <p>
