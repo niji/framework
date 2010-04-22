@@ -363,7 +363,8 @@ package org.libspark.gunyarapaint.framework
                 m_tempLayer.alpha = 1.0;
                 m_drawingSprite.addChild(m_tempLayer);
                 m_drawingSprite.addChild(engine.shape);
-                swapChild(layer.displayObject, m_drawingSprite);
+                m_sprite.removeChild(layer.displayObject);
+                m_sprite.addChildAt(m_drawingSprite, currentIndex);
             }
         }
         
@@ -375,22 +376,13 @@ package org.libspark.gunyarapaint.framework
                 layer.blendMode =
                     blendMode == BlendMode.LAYER ? BlendMode.NORMAL : blendMode;
                 layer.alpha = m_drawingSprite.alpha;
-                swapChild(m_drawingSprite, layer.displayObject);
+                m_sprite.removeChild(m_drawingSprite);
+                m_sprite.addChildAt(layer.displayObject, currentIndex);
                 engine.clear();
                 m_drawingSprite.removeChild(m_tempLayer);
                 m_drawingSprite.removeChild(engine.shape);
                 m_tempLayer = null;
             }
-        }
-        
-        /**
-         * 現在のビューに対して表示オブジェクトの入れ替えを行う
-         *
-         */
-        internal function swapChild(from:DisplayObject, to:DisplayObject):void
-        {
-            m_sprite.removeChild(from);
-            m_sprite.addChildAt(to, currentIndex);
         }
         
         /**
