@@ -29,7 +29,7 @@ package org.libspark.gunyarapaint.framework.commands
         {
             painter.floodFill();
             painter.pushUndo();
-            painter.stopDrawingSession();
+            painter.stopDrawing();
         }
         
         public function reset():void

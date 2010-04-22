@@ -21,7 +21,7 @@ package org.libspark.gunyarapaint.framework.modules
         {
             validateLayerState();
             setCoordinate(x, y);
-            m_recorder.startDrawingSession();
+            m_recorder.startDrawing();
         }
         
         public function move(x:Number, y:Number):void
@@ -35,7 +35,7 @@ package org.libspark.gunyarapaint.framework.modules
         
         public function stop(x:Number, y:Number):void
         {
-            m_recorder.stopDrawingSession();
+            m_recorder.stopDrawing();
             if (!equalsCoordinate(x, y)) {
                 storeCircleCoordinate(x, y);
                 m_recorder.commitCommand(

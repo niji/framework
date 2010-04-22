@@ -61,16 +61,12 @@ package org.libspark.gunyarapaint.framework
             enableUndoLayer = false;
             m_layers = new LayerBitmapCollection(width, height);
             m_layers.compositeAll();
-            m_drawingSprite = new Sprite();
-            m_drawingSprite.mouseEnabled = false;
             m_horizontalMirrorMatrix = new Matrix(-1, 0, 0, 1, width, 0);
             m_verticalMirrorMatrix = new Matrix(1, 0, 0, -1, 0, height);
             m_moveMatrix = new Matrix();
             m_scaleMatrix = new Matrix();
             m_paintEngine = paintEngine;
             m_version = version;
-            m_width = width;
-            m_height = height;
             super();
         }
         
@@ -485,42 +481,18 @@ package org.libspark.gunyarapaint.framework
          * 適用されるように Sprite の変更が行われる。
          * </p>
          */
-        public function startDrawingSession():void
+        public function startDrawing():void
         {
-            if (m_tempLayer == null) {
-                var currentLayer:LayerBitmap = m_layers.currentLayer;
-                var blendMode:String = currentLayer.blendMode;
-                m_paintEngine.resetPen();
-                m_drawingSprite.blendMode =
-                    blendMode == BlendMode.NORMAL ? BlendMode.LAYER : blendMode;
-                m_drawingSprite.alpha = currentLayer.alpha;
-                m_tempLayer = currentLayer.newDisplayObject;
-                m_tempLayer.blendMode = BlendMode.NORMAL;
-                m_tempLayer.alpha = 1.0;
-                m_drawingSprite.addChild(m_tempLayer);
-                m_drawingSprite.addChild(m_paintEngine.shape);
-                m_layers.swapChild(currentLayer.displayObject, m_drawingSprite);
-            }
+            m_layers.startDrawing(m_paintEngine);
         }
         
         /**
          * 描写終了を宣言する
          * 
          */
-        public function stopDrawingSession():void
+        public function stopDrawing():void
         {
-            if (m_tempLayer != null) {
-                var currentLayer:LayerBitmap = m_layers.currentLayer;
-                var blendMode:String = m_drawingSprite.blendMode;
-                currentLayer.blendMode =
-                    blendMode == BlendMode.LAYER ? BlendMode.NORMAL : blendMode;
-                currentLayer.alpha = m_drawingSprite.alpha;
-                m_layers.swapChild(m_drawingSprite, currentLayer.displayObject);
-                m_paintEngine.clear();
-                m_drawingSprite.removeChild(m_tempLayer);
-                m_drawingSprite.removeChild(m_paintEngine.shape);
-                m_tempLayer = null;
-            }
+            m_layers.stopDrawing(m_paintEngine);
         }
         
         public function correctCoordinate(coordinate:Point):void
@@ -575,7 +547,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function get width():uint
         {
-            return m_width;
+            return m_layers.width;
         }
         
         /**
@@ -584,7 +556,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function get height():uint
         {
-            return m_height;
+            return m_layers.height;
         }
         
         /**
@@ -602,7 +574,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function get newLayerBitmapData():BitmapData
         {
-            return new BitmapData(m_width, m_height * m_layers.count, true, 0x0);
+            return new BitmapData(width, height * m_layers.count, true, 0x0);
         }
         
         /**
@@ -663,12 +635,8 @@ package org.libspark.gunyarapaint.framework
         private var m_verticalMirrorMatrix:Matrix;
         private var m_moveMatrix:Matrix;
         private var m_scaleMatrix:Matrix;
-        private var m_drawingSprite:Sprite;
-        private var m_tempLayer:DisplayObject;
         private var m_shouldCopyBitmap:Boolean;
         private var m_version:uint;
         private var m_undo:UndoStack;
-        private var m_width:uint;
-        private var m_height:uint;
     }
 }

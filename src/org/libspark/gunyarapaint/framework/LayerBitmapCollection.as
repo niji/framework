@@ -2,6 +2,7 @@ package org.libspark.gunyarapaint.framework
 {
     import flash.display.Bitmap;
     import flash.display.BitmapData;
+    import flash.display.BlendMode;
     import flash.display.DisplayObject;
     import flash.display.Sprite;
     import flash.events.Event;
@@ -31,6 +32,8 @@ package org.libspark.gunyarapaint.framework
             m_height = height;
             m_layers = new Vector.<LayerBitmap>();
             m_sprite = new Sprite();
+            m_drawingSprite = new Sprite();
+            m_drawingSprite.mouseEnabled = false;
             // 白い背景を作成してレイヤー群に追加する
             var layer:LayerBitmap = new LayerBitmap(
                 new BitmapData(width, height, true, uint.MAX_VALUE)
@@ -346,6 +349,40 @@ package org.libspark.gunyarapaint.framework
             undoData.layers = layers;
         }
         
+        internal function startDrawing(engine:PaintEngine):void
+        {
+            if (m_tempLayer == null) {
+                var layer:LayerBitmap = currentLayer;
+                var blendMode:String = layer.blendMode;
+                engine.resetPen();
+                m_drawingSprite.blendMode =
+                    blendMode == BlendMode.NORMAL ? BlendMode.LAYER : blendMode;
+                m_drawingSprite.alpha = layer.alpha;
+                m_tempLayer = currentLayer.newDisplayObject;
+                m_tempLayer.blendMode = BlendMode.NORMAL;
+                m_tempLayer.alpha = 1.0;
+                m_drawingSprite.addChild(m_tempLayer);
+                m_drawingSprite.addChild(engine.shape);
+                swapChild(layer.displayObject, m_drawingSprite);
+            }
+        }
+        
+        internal function stopDrawing(engine:PaintEngine):void
+        {
+            if (m_tempLayer != null) {
+                var layer:LayerBitmap = currentLayer;
+                var blendMode:String = m_drawingSprite.blendMode;
+                layer.blendMode =
+                    blendMode == BlendMode.LAYER ? BlendMode.NORMAL : blendMode;
+                layer.alpha = m_drawingSprite.alpha;
+                swapChild(m_drawingSprite, layer.displayObject);
+                engine.clear();
+                m_drawingSprite.removeChild(m_tempLayer);
+                m_drawingSprite.removeChild(engine.shape);
+                m_tempLayer = null;
+            }
+        }
+        
         /**
          * 現在のビューに対して表示オブジェクトの入れ替えを行う
          *
@@ -458,6 +495,8 @@ package org.libspark.gunyarapaint.framework
         internal var composited:BitmapData;
         
         private var m_layers:Vector.<LayerBitmap>;
+        private var m_drawingSprite:Sprite;
+        private var m_tempLayer:DisplayObject;
         private var m_width:uint;
         private var m_height:uint;
     }

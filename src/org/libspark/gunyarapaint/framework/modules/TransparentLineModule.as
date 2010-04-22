@@ -21,7 +21,7 @@ package org.libspark.gunyarapaint.framework.modules
         {
             validateLayerState();
             setCoordinate(x, y);
-            m_recorder.startDrawingSession();
+            m_recorder.startDrawing();
         }
         
         public function move(x:Number, y:Number):void
@@ -40,7 +40,7 @@ package org.libspark.gunyarapaint.framework.modules
         {
             var pen:Pen = m_recorder.pen;
             var currentBlendMode:String = pen.blendMode;
-            m_recorder.stopDrawingSession();
+            m_recorder.stopDrawing();
             if (!equalsCoordinate(x, y)) {
                 var from:Object = getArgumentsFromCurrentCoordinate();
                 var to:Object = getArgumentsFromCoordinate(x, y);

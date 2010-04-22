@@ -59,7 +59,7 @@ package org.libspark.gunyarapaint.framework.commands
                 s_readCoordinateX || s_writeCoordinateX,
                 s_readCoordinateY || s_writeCoordinateY
             );
-            painter.startDrawingSession();
+            painter.startDrawing();
         }
         
         public function toString():String

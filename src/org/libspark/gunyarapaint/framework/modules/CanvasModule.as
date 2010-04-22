@@ -247,7 +247,7 @@ package org.libspark.gunyarapaint.framework.modules
          */
         protected function stopDrawing():void
         {
-            m_recorder.stopDrawingSession();
+            m_recorder.stopDrawing();
         }
         
         public function set shouldDrawCircleClockwise(value:Boolean):void
