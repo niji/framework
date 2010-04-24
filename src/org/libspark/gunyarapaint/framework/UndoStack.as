@@ -32,9 +32,10 @@ package org.libspark.gunyarapaint.framework
             var bufferCount:uint = m_buffer.length;
             var data:Object = value.data;
             for (var i:uint = 0; i < bufferCount; i++) {
-                var layers:Object = data[i];
+                var layerState:Object = data[i];
                 m_buffer[i] = {};
-                if (layers != null) {
+                if (layerState != null) {
+                    var layers:Vector.<Object> = layerState.layers;
                     var layerCount:uint = layers.length;
                     for (var j:uint = 0; j < layerCount; j++) {
                         var layer:Object = layers[j];
@@ -46,7 +47,7 @@ package org.libspark.gunyarapaint.framework
                         delete layer.width;
                         delete layer.height;
                     }
-                    m_buffer[i] = layers;
+                    m_buffer[i] = layerState;
                 }
             }
             m_index = value.index;
@@ -57,9 +58,10 @@ package org.libspark.gunyarapaint.framework
         public function save(value:Object):void
         {
             var bufferCount:uint = m_buffer.length;
-            var buffer:Array = [];
+            var data:Array = [];
             for (var i:uint = 0; i < bufferCount; i++) {
-                var layers:Object = m_buffer[i].layers;
+                var layerState:Object = m_buffer[i];
+                var layers:Vector.<Object> = layerState.layers;
                 if (layers != null) {
                     var layerCount:uint = layers.length;
                     for (var j:uint = 0; j < layerCount; j++) {
@@ -71,10 +73,10 @@ package org.libspark.gunyarapaint.framework
                         layer.width = bitmapData.width;
                         layer.height = bitmapData.height;
                     }
-                    buffer.push(layers);
+                    data.push(layerState);
                 }
             }
-            value.data = buffer;
+            value.data = data;
             value.index = m_index;
             value.first = m_first;
             value.last = m_last;
