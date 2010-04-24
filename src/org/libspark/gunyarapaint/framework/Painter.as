@@ -519,15 +519,6 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤーを保存するために必要な BitmapData を生成する
-         * 
-         */
-        public function get newLayerBitmapData():BitmapData
-        {
-            return new BitmapData(width, height * m_layers.count, true, 0x0);
-        }
-        
-        /**
          * 現在のレイヤーの透明度を変更する
          * 
          */
