@@ -40,9 +40,8 @@ package org.libspark.gunyarapaint.framework
                     for (var j:uint = 0; j < layerCount; j++) {
                         var layer:Object = layers[j];
                         var bitmapData:BitmapData = new BitmapData(layer.width, layer.height);
-                        var pixels:ByteArray = ByteArray(layer.bitmapData);
-                        pixels.position = 0;
-                        bitmapData.setPixels(bitmapData.rect, pixels);
+                        var pixels:Vector.<uint> = Vector.<uint>(layer.bitmapData);
+                        bitmapData.setVector(bitmapData.rect, pixels);
                         layer.bitmapData = bitmapData;
                         delete layer.width;
                         delete layer.height;
@@ -67,8 +66,7 @@ package org.libspark.gunyarapaint.framework
                     for (var j:uint = 0; j < layerCount; j++) {
                         var layer:Object = layers[j];
                         var bitmapData:BitmapData = BitmapData(layer.bitmapData);
-                        var pixels:ByteArray = bitmapData.getPixels(bitmapData.rect);
-                        pixels.position = 0;
+                        var pixels:Vector.<uint> = bitmapData.getVector(bitmapData.rect);
                         layer.bitmapData = pixels;
                         layer.width = bitmapData.width;
                         layer.height = bitmapData.height;
