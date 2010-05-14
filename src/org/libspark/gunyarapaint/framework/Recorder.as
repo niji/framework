@@ -67,6 +67,16 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new CommandEvent(CommandEvent.COMMITTED, command));
         }
         
+        public function get bytes():ByteArray
+        {
+            var bytes:ByteArray = new ByteArray();
+            var pos:uint = m_bytes.position;
+            bytes.writeBytes(m_bytes);
+            bytes.compress();
+            m_bytes.position = pos;
+            return bytes;
+        }
+        
         private var m_command:CommandContext;
         private var m_bytes:ByteArray;
     }
