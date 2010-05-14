@@ -131,6 +131,11 @@ package org.libspark.gunyarapaint.framework
             return count < 0 ? count + m_buffer.length : count;
         }
         
+        public function get size():uint
+        {
+            return m_buffer.length - 1;
+        }
+        
         private var m_buffer:Vector.<Object>;
         private var m_index:uint;
         private var m_first:uint;
