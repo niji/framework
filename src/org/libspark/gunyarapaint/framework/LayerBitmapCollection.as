@@ -13,6 +13,7 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.errors.AddLayerError;
     import org.libspark.gunyarapaint.framework.errors.MergeLayersError;
     import org.libspark.gunyarapaint.framework.errors.RemoveLayerError;
+    import org.libspark.gunyarapaint.framework.errors.TooManyLayersError;
     import org.libspark.gunyarapaint.framework.i18n.TranslatorRegistry;
     
     /**
@@ -25,6 +26,11 @@ package org.libspark.gunyarapaint.framework
          * 作成出来る最大レイヤー数
          */
         public static const MAX:uint = 8;
+        
+        /**
+         * 連結したレイヤー画像で受け付ける最大ピクセル数
+         */
+        public static const MAX_PIXEL:uint = 2880;
         
         public function LayerBitmapCollection(width:int, height:int)
         {
@@ -268,6 +274,10 @@ package org.libspark.gunyarapaint.framework
          */
         public function save(layerBitmap:BitmapData, metadata:Object):void
         {
+            if (layerBitmap.height > MAX_PIXEL) {
+                var count:uint = Math.min(Math.floor((1.0 * MAX_PIXEL) / height), MAX);
+                throw new TooManyLayersError(count);
+            }
             var layersInfo:Array = [];
             var layerCount:uint = layerBitmap.height / height;
             var rectangle:Rectangle = new Rectangle(0, 0, width, height);
