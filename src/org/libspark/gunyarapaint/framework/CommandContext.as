@@ -89,7 +89,6 @@ package org.libspark.gunyarapaint.framework
             registerCommand(new SetLayerVisibleCommand());
             registerCommand(new SwapLayerCommand());
             registerCommand(new BeginFillCommand());
-            registerCommand(new BezierCurveCommand());
             registerCommand(new CompatibilityCommand);
             registerCommand(new CompositeCommand());
             registerCommand(new DrawCircleCommand());
