@@ -27,6 +27,11 @@ package org.libspark.gunyarapaint.framework
             layers.saveState(m_buffer[0]);
         }
         
+		/**
+		 * UndoStack を復元する
+		 * 
+		 * @param value #save で保存したオブジェクト
+		 */		
         public function load(value:Object):void
         {
             var bufferCount:uint = m_buffer.length;
@@ -54,6 +59,11 @@ package org.libspark.gunyarapaint.framework
             m_last = value.last;
         }
         
+		/**
+		 * UndoStack を保存する
+		 * 
+		 * @param value　保存先となる空のオブジェクト
+		 */		
         public function save(value:Object):void
         {
             var bufferCount:uint = m_buffer.length;
@@ -119,18 +129,33 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new UndoEvent(UndoEvent.PUSH));
         }
         
+		/**
+		 * 巻き戻し可能な回数を返す
+		 * 
+		 * @return 
+		 */		
         public function get undoCount():uint
         {
             var count:int = m_index - m_first;
             return count < 0 ? count + m_buffer.length : count;
         }
         
+		/**
+		 * やり直し可能な回数を返す
+		 * 
+		 * @return 
+		 */		
         public function get redoCount():uint
         {
             var count:int = m_last - m_index;
             return count < 0 ? count + m_buffer.length : count;
         }
         
+		/**
+		 * UndoStack の大きさを返す
+		 * 
+		 * @return 
+		 */		
         public function get size():uint
         {
             return m_buffer.length - 1;

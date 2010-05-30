@@ -2,7 +2,12 @@ package org.libspark.gunyarapaint.framework
 {
     import flash.display.Shape;
     import flash.geom.Point;
-
+	
+	/**
+	 * @private
+	 * 
+	 * ログのバージョンが 0.2.1 から使用されるペイントエンジン
+	 */
     internal final class PaintEngineV2 extends PaintEngine
     {
         public function PaintEngineV2(shape:Shape)

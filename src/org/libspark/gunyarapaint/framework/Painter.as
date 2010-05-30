@@ -14,7 +14,7 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.errors.NotSupportedVersionError;
     
     /**
-     * 再生及び記録のための共通基盤
+     * 再生及び記録のための共通基盤。実際の処理は Painter または PaintEngine に委譲する
      * 
      */
     public class Painter extends EventDispatcher

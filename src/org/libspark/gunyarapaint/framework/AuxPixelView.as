@@ -19,10 +19,12 @@ package org.libspark.gunyarapaint.framework
             var box:Graphics = m_box.graphics;
             var skew:Graphics = m_skew.graphics;
             var i:uint = 0;
+			// 縦線を描く
             for (i = m_divideCount; i < width; i += m_divideCount) {
                 box.moveTo(i, 0);
                 box.lineTo(i, height);
             }
+			// 横線を描く
             for (i = m_divideCount; i < height; i += m_divideCount) {
                 box.moveTo(0, i);
                 box.lineTo(width, i);

@@ -254,8 +254,10 @@ package org.libspark.gunyarapaint.framework
             var layerCount:uint = layerBitmap.height / height;
             var destination:Point = new Point(0, 0);
             var rectangle:Rectangle = new Rectangle(0, 0, width, height);
+			// 現在保管しているレイヤーを全て消去する
             clear();
             for (var i:uint = 0; i < layerCount; i++) {
+				// レイヤー画像は縦につながっているので、切り出しを行う
                 var bitmapData:BitmapData = new BitmapData(width, height);
                 rectangle.y = i * height;
                 bitmapData.copyPixels(layerBitmap, rectangle, destination);
@@ -274,6 +276,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function save(layerBitmap:BitmapData, metadata:Object):void
         {
+			// まずはレイヤー画像が規定以内かどうかを確認する
             if (layerBitmap.height > MAX_PIXEL) {
                 var count:uint = Math.min(Math.floor((1.0 * MAX_PIXEL) / height), MAX);
                 throw new TooManyLayersError(count);
@@ -282,10 +285,12 @@ package org.libspark.gunyarapaint.framework
             var layerCount:uint = layerBitmap.height / height;
             var rectangle:Rectangle = new Rectangle(0, 0, width, height);
             var destination:Point = new Point(0, 0);
+			// レイヤー画像を描写するので、ここでロックを掛ける
             layerBitmap.lock();
             for (var i:uint = 0; i < layerCount; i++) {
                 var layer:LayerBitmap = m_layers[i];
                 destination.y = i * height;
+				// 描写を行い、下の方向に縦のピクセル分ずらすことを繰り返す
                 layerBitmap.copyPixels(layer.bitmapData, rectangle, destination);
                 layersInfo.push(layer.toJSON());
             }
@@ -402,18 +407,23 @@ package org.libspark.gunyarapaint.framework
         
         internal function startDrawing(engine:PaintEngine):void
         {
+			// 裏うつりしないレイヤーは今ないよね？
             if (m_tempLayer == null) {
                 var layer:LayerBitmap = currentLayer;
                 var blendMode:String = layer.blendMode;
+				// ペンの状態は必ずリセットします
                 engine.resetPen();
                 m_drawingSprite.blendMode =
                     blendMode == BlendMode.NORMAL ? BlendMode.LAYER : blendMode;
                 m_drawingSprite.alpha = layer.alpha;
+				// 裏うつりしない描写用のレイヤーを敷く
                 m_tempLayer = currentLayer.newDisplayObject;
                 m_tempLayer.blendMode = BlendMode.NORMAL;
                 m_tempLayer.alpha = 1.0;
+				// 下に先程のレイヤーが、上に描いた内容が入った表示オブジェクトを作成する
                 m_drawingSprite.addChild(m_tempLayer);
                 m_drawingSprite.addChild(engine.shape);
+				// 現在のレイヤーと先程の表示オブジェクトを入れ替える
                 m_sprite.removeChild(layer.displayObject);
                 m_sprite.addChildAt(m_drawingSprite, currentIndex);
             }
@@ -421,17 +431,22 @@ package org.libspark.gunyarapaint.framework
         
         internal function stopDrawing(engine:PaintEngine):void
         {
+			// 裏うつりしないレイヤーは今あるよね？
             if (m_tempLayer != null) {
                 var layer:LayerBitmap = currentLayer;
                 var blendMode:String = m_drawingSprite.blendMode;
                 layer.blendMode =
                     blendMode == BlendMode.LAYER ? BlendMode.NORMAL : blendMode;
                 layer.alpha = m_drawingSprite.alpha;
+				// 現在のレイヤーと startDrawing で作成した表示オブジェクトを入れ替える
                 m_sprite.removeChild(m_drawingSprite);
                 m_sprite.addChildAt(layer.displayObject, currentIndex);
+				// 描いた内容を消去してリセットする
                 engine.clear();
+				// 裏うつりしないレイヤーと描いた内容を表示オブジェクトから外す
                 m_drawingSprite.removeChild(m_tempLayer);
                 m_drawingSprite.removeChild(engine.shape);
+				// 裏うつりしないレイヤーを開放
                 m_tempLayer = null;
             }
         }
@@ -506,6 +521,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function get newLayerBitmapData():BitmapData
         {
+			// レイヤーの数の分だけ縦につながった空白の画像が作成されます
             return new BitmapData(width, height * count, true, 0x0);
         }
         

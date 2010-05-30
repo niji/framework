@@ -43,9 +43,11 @@ package org.libspark.gunyarapaint.framework
         public function readHeader(data:Object):void
         {
             var signature:String = m_bytes.readUTFBytes(14);
+			// 先頭の 14bytes を確認
             if (signature !== "GUNYARA_PAINT:") {
                 throw new InvalidSignatureError();
             }
+			// 6 bytes をとってバージョン文字列を確認
             var pattern:RegExp = /^(\d)\.(\d)\.(\d):$/;
             var version:uint = 0;
             var versionString:String = m_bytes.readUTFBytes(6);
@@ -55,6 +57,7 @@ package org.libspark.gunyarapaint.framework
                     + uint(matched[2]) * 10
                     + uint(matched[3]);
             }
+			// 残り 6bytes はそれぞれ画像の幅と高さ、アンドゥ回数が入っている
             data.width = m_bytes.readShort();
             data.height = m_bytes.readShort();
             data.undo = m_bytes.readShort();
@@ -68,9 +71,10 @@ package org.libspark.gunyarapaint.framework
          */
         public function rewind():void
         {
+			// 26bytes 未満であれば エラーを出す
             if (m_bytes.length < EOH) {
                 throw new ArgumentError(
-                    "log data' length is less than 26 bytes"
+                    "log data' length is less than " + EOF + " bytes"
                 );
             }
             m_bytes.position = EOH;
@@ -97,6 +101,7 @@ package org.libspark.gunyarapaint.framework
             var command:ICommand = null;
             var eventType:String = CommandEvent.PREPARSE;
             while (bytes.bytesAvailable > 0) {
+				// TODO: Parser#parse を使う
                 var byte:uint = bytes.readUnsignedByte();
                 if (byte & 0x80) {
                     command = m_commands[LineToCommand.ID];
@@ -112,12 +117,14 @@ package org.libspark.gunyarapaint.framework
                         throw new InvalidCommandError(count, byte);
                     }
                 }
+				// 連続して Undo または Redo が使われている場合のみカウントする
                 if ((command.commandID === UndoCommand.ID ||
                     command.commandID === RedoCommand.ID) &&
                     (previous.commandID === UndoCommand.ID ||
                         previous.commandID === RedoCommand.ID)) {
                     undoCount++;
                 }
+				// それ以外の場合はリセットする
                 else {
                     maxUndo = maxUndo < undoCount ? undoCount : maxUndo;
                     undoCount = 0;
@@ -152,16 +159,19 @@ package org.libspark.gunyarapaint.framework
                 throw new EOLError();
             }
             var byte:uint = bytes.readUnsignedByte();
+			// 0x80 の場合は例外として直線描写命令とみなす
             if (byte & 0x80) {
                 command = m_commands[LineToCommand.ID];
                 LineToCommand(command).compressedValue = byte;
             }
+			// 0x40 の場合は例外として位置移動命令とみなす
             else if (byte & 0x40) {
                 command = m_commands[MoveToCommand.ID];
                 MoveToCommand(command).compressedValue = byte;
             }
             else {
                 var command:ICommand = m_commands[byte];
+				// 対応するコマンドが無い
                 if (command === null) {
                     throw new InvalidCommandError(m_count, byte);
                 }
@@ -176,6 +186,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function get bytes():ByteArray
         {
+			// XXX: コピーした方が望ましいと考えられる
             return m_bytes;
         }
         

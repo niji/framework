@@ -1,5 +1,9 @@
 package org.libspark.gunyarapaint.framework.i18n
 {
+	/**
+	 * @private
+	 * 
+	 */
     public final class NullTranslator implements ITranslator
     {
         public function NullTranslator()

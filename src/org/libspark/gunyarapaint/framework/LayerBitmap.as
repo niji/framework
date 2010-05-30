@@ -64,6 +64,8 @@ package org.libspark.gunyarapaint.framework
         public function compositeFrom(source:IBitmapDrawable,
                                       blendMode:String):void
         {
+			// m_bitmapData.clone でアンドゥ内のビットマップ画像を保持するようにする
+			// これは以下の floodFill や setPixel も同じ
             setBitmapData(m_bitmapData.clone());
             m_bitmapData.draw(source, null, null, blendMode);
         }
