@@ -36,7 +36,8 @@ package org.libspark.gunyarapaint.framework.commands.layer
         public function execute(painter:Painter):void
         {
             painter.layers.currentIndex = m_index;
-			painter.pushUndoIfNeed();
+			if (!painter.enableUndoLayer && painter.version >= 22)
+				painter.pushUndo();
         }
         
         public function reset():void

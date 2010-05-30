@@ -38,7 +38,7 @@ package org.libspark.gunyarapaint.framework
         public static const PAINTER_VERSION_STRING:String = "ver." + PAINTER_VERSION;
         
         /**
-         * レイヤー作成をアンドゥに含めるかどうかのオプション
+         * レイヤー選択をアンドゥに含めるかどうかのオプション
          *
          */
         public static const COMPATIBILITY_UNDO_LAYER:uint = 1;
