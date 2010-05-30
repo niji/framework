@@ -74,7 +74,7 @@ package org.libspark.gunyarapaint.framework
 			// 26bytes 未満であれば エラーを出す
             if (m_bytes.length < EOH) {
                 throw new ArgumentError(
-                    "log data' length is less than " + EOF + " bytes"
+                    "log data' length is less than " + EOH + " bytes"
                 );
             }
             m_bytes.position = EOH;
