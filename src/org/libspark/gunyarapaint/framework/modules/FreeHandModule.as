@@ -27,6 +27,7 @@ package org.libspark.gunyarapaint.framework.modules
                 MoveToCommand.ID,
                 getArgumentsFromCoordinate(x, y)
             );
+			m_drawedLine = false;
         }
         
         public function move(x:Number, y:Number):void
@@ -69,7 +70,6 @@ package org.libspark.gunyarapaint.framework.modules
                         "alpha": tempAlpha
                     }
                 );
-                m_drawedLine = false;
             }
             m_recorder.commitCommand(
                 CompositeCommand.ID,
