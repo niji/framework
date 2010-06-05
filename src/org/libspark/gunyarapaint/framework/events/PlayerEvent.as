@@ -1,5 +1,7 @@
 package org.libspark.gunyarapaint.framework.events
 {
+    import flash.events.Event;
+
     /**
      * ログ再生のイベント
      * 
@@ -39,6 +41,11 @@ package org.libspark.gunyarapaint.framework.events
         public function PlayerEvent(type:String)
         {
             super(type, false, false);
+        }
+        
+        public override function clone():Event
+        {
+            return new PlayerEvent(type);
         }
     }
 }

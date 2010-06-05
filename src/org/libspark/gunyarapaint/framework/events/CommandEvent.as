@@ -1,5 +1,7 @@
 package org.libspark.gunyarapaint.framework.events
 {
+    import flash.events.Event;
+    
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     
     /**
@@ -42,6 +44,11 @@ package org.libspark.gunyarapaint.framework.events
         {
             super(type, false, false);
             m_command = command;
+        }
+        
+        public override function clone():Event
+        {
+            return new CommandEvent(type, m_command);
         }
         
         /**

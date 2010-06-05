@@ -1,5 +1,7 @@
 package org.libspark.gunyarapaint.framework.events
 {
+    import flash.events.Event;
+
     /**
      * @private
      * 
@@ -31,6 +33,11 @@ package org.libspark.gunyarapaint.framework.events
         public function PenEvent(type:String)
         {
             super(type, false, false);
+        }
+        
+        public override function clone():Event
+        {
+            return new PenEvent(type);
         }
     }
 }

@@ -1,5 +1,7 @@
 package org.libspark.gunyarapaint.framework.events
 {
+    import flash.events.Event;
+
     /**
      * やり直しまたは巻き戻し関連のイベント
      * 
@@ -27,6 +29,11 @@ package org.libspark.gunyarapaint.framework.events
         public function UndoEvent(type:String)
         {
             super(type, false, false);
+        }
+        
+        public override function clone():Event
+        {
+            return new UndoEvent(type);
         }
     }
 }

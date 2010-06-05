@@ -94,7 +94,6 @@ package org.libspark.gunyarapaint.framework
         {
             rewind();
             var count:uint = 0;
-            var length:uint = bytes.length;
             var previous:ICommand = new MoveToCommand();
             var undoCount:uint = 0;
             var maxUndo:uint = 0;

@@ -44,6 +44,9 @@ package org.libspark.gunyarapaint.framework.commands
                 case Painter.COMPATIBILITY_BIG_PIXEL:
                     painter.enableBigPixel = m_value;
                     break;
+                default:
+                    throw new ArgumentError();
+                    break;
             }
         }
         

@@ -576,7 +576,6 @@ package org.libspark.gunyarapaint.framework
         private var m_verticalMirrorMatrix:Matrix;
         private var m_moveMatrix:Matrix;
         private var m_scaleMatrix:Matrix;
-        private var m_shouldCopyBitmap:Boolean;
         private var m_version:uint;
         private var m_undo:UndoStack;
     }
