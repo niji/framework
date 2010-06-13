@@ -150,9 +150,7 @@ package org.libspark.gunyarapaint.framework
         
 		/**
 		 * 巻き戻し可能な回数を返す
-		 * 
-		 * @return 
-		 */		
+		 */
         public function get undoCount():uint
         {
             var count:int = m_index - m_first;
@@ -161,9 +159,7 @@ package org.libspark.gunyarapaint.framework
         
 		/**
 		 * やり直し可能な回数を返す
-		 * 
-		 * @return 
-		 */		
+		 */
         public function get redoCount():uint
         {
             var count:int = m_last - m_index;
@@ -172,9 +168,7 @@ package org.libspark.gunyarapaint.framework
         
 		/**
 		 * UndoStack の大きさを返す
-		 * 
-		 * @return 
-		 */		
+		 */
         public function get size():uint
         {
             return m_buffer.length - 1;

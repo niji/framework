@@ -33,48 +33,52 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.events.CommandEvent;
     
     /**
-     * コマンドを管理する
+     * コマンドを管理する.
      * 
-     * @see ICommand
+     * <table>
+     * <thead>
+     * <th><td>番号</td><td>コマンド名</td></th>
+     * </thead>
+     * <tbody>
+     * <tr><td>1</td><td>MoveToCommand</td></tr>
+     * <tr><td>2</td><td>LineToCommand</td></tr>
+     * <tr><td>3</td><td>LineStyleCommand</td></tr>
+     * <tr><td>4</td><td>DrawShapeOnBitmap</td></tr>
+     * <tr><td>5</td><td>UndoCommand</td></tr>
+     * <tr><td>6</td><td>RedoCommand</td></tr>
+     * <tr><td>7</td><td>BeginFillCommand</td></tr>
+     * <tr><td>8</td><td>EndFillCommand</td></tr>
+     * <tr><td>9</td><td>DrawRectCommand</td></tr> (unused)
+     * <tr><td>10</td><td>DrawCircleCommand</td></tr>
+     * <tr><td>11</td><td>DrawEllipseCommand</td></tr> (unused)
+     * <tr><td>12</td><td>DrawRoundRectCommand</td></tr> (unsed)
+     * <tr><td>13</td><td>FloodFillCommand</td></tr>
+     * <tr><td>14</td><td>CreateLayerCommand</td></tr>
+     * <tr><td>15</td><td>CopyLayerCommand</td></tr>
+     * <tr><td>16</td><td>SwapCommandCommand</td></tr>
+     * <tr><td>17</td><td>MergeLayerCommand</td></tr>
+     * <tr><td>18</td><td>RemoveLayerCommand</td></tr>
+     * <tr><td>19</td><td>SetLayerIndexCommand</td></tr>
+     * <tr><td>20</td><td>SetLayerVisibleCommand</td></tr>
+     * <tr><td>21</td><td>SetLayerBlendModeCommand</td></tr>
+     * <tr><td>22</td><td>SetLayerAlphaCommand</td></tr>
+     * <tr><td>23</td><td>PixelCommand</td></tr>
+     * <tr><td>24</td><td>HorizontalMirrorCommand</td></tr>
+     * <tr><td>25</td><td>VerticalMirrorCommand</td></tr>
+     * <tr><td>26</td><td>ScaleLayerCommand</td></tr>
+     * <tr><td>27</td><td>MoveLayerCommand</td></tr>
+     * <tr><td>28</td><td>BezierCurveCommand</td></tr>
+     * <tr><td>29</td><td>CompatibilityCommand</td></tr>
+     * <tr><td>30</td><td>ResetAllCommand</td></tr>
+     * </tbody>
+     * </table>
+     * 
+     * @see org.libspark.gunyarapaint.framework.commands.ICommand
      */
     public class CommandContext extends EventDispatcher
     {
         public static const MAX_COMMANDS:uint = 64;
         
-        /*
-         * 1 = MoveToCommand
-         * 2 = LineToCommand
-         * 3 = LineStyleCommand
-         * 4 = DrawShapeOnBitmap
-         * 5 = UndoCommand
-         * 6 = RedoCommand
-         * 7 = BeginFillCommand
-         * 8 = EndFillCommand
-         * 9 = DrawRectCommand (unused)
-         * 10 = DrawCircleCommand
-         * 11 = DrawEllipseCommand (unused)
-         * 12 = DrawRoundRectCommand (unsed)
-         * 13 = FloodFillCommand
-         * 14 = CreateLayerCommand
-         * 15 = CopyLayerCommand
-         * 16 = SwapCommandCommand
-         * 17 = MergeLayerCommand
-         * 18 = RemoveLayerCommand
-         * 19 = SetLayerIndexCommand
-         * 20 = SetLayerVisibleCommand
-         * 21 = SetLayerBlendModeCommand
-         * 22 = SetLayerAlphaCommand
-         * 23 = PixelCommand
-         * 24 = HorizontalMirrorCommand
-         * 25 = VerticalMirrorCommand
-         *
-         * 26以降について (予定)
-         * 26 = ScaleLayerCommand
-         * 27 = MoveLayerCommand
-         * 28 = BezierCurveCommand
-         * 29 = CompatibilityCommand
-         * 30 = ResetAllCommand
-         */
         public function CommandContext()
         {
             m_commands = new Vector.<ICommand>(MAX_COMMANDS, true);

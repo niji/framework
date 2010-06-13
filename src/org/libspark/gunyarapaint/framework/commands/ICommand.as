@@ -49,8 +49,10 @@ package org.libspark.gunyarapaint.framework.commands
         /**
          * コマンド特有の ID を返す.
          * 
+         * <p>
          * ICommand を継承するクラスはこれとは別に定数 ID を定義しているので、
          * そちらを代わりに取得する事が可能。実際、このメソッドは定数 ID を返す処理をしている。
+         * </p>
          * 
          * @return コマンドのID
          */        

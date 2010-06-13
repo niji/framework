@@ -72,9 +72,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤーを BitmapData に描写する
+         * レイヤーを BitmapData に描写する.
          * 
-         * 現在のレイヤーの透明度及びブレンドモードを用いられて合成される。
+         * <p>現在のレイヤーの透明度及びブレンドモードを用いられて合成される。</p>
          * 
          * @param dest 描写先の BitmapData
          */

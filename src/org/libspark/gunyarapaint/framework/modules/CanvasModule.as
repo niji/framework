@@ -25,7 +25,10 @@ package org.libspark.gunyarapaint.framework.modules
     /**
      * ICanvasModuleの実装を助けるためのクラス.
      * 
-     * 大半の処理はここに集約されているため、基本的にすべてのメソッドを1から実装する必要はない。
+     * <p>
+     * 大半の処理はここに集約されているため、
+     * 基本的にすべてのメソッドを1から実装する必要はない。
+     * </p>
      */
     public class CanvasModule
     {

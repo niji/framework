@@ -7,9 +7,11 @@ package org.libspark.gunyarapaint.framework
     /**
      * Graphics に描写を委譲するクラス.
      * 
+     * <p>
      * Graphics の移譲クラスとして実装されている。これは Graphics がサブクラス
      * 出来無いクラスであるため、代わりにGraphicsの処理を受け持つという方法を適用している。
      * これは FlexUnit による単体テストをしやすくするために作られている。
+     * </p>
      */
     public class PaintEngine
     {

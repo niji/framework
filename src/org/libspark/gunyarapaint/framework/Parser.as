@@ -32,8 +32,10 @@ package org.libspark.gunyarapaint.framework
         /**
          * ログのヘッダーを読み取る.
          * 
+         * <p>
          * 最初の 14bytes に "GUNYARA_PAINT:" 、次の 6bytes に バージョン番号、
          * 6bytes にそれぞれ 2bytes ずつで画像の幅、高さとアンドゥ回数が含まれる。
+         * </p>
          * 
          * @param data
          * @throws InvalidSignatureError 最初の14文字がGUNYARA_PAINT:と一致しない場合
@@ -82,7 +84,9 @@ package org.libspark.gunyarapaint.framework
         /**
          * ログを先読みする.
          * 
+         * <p>
          * ログの先読みによって、お絵描きログのコマンド数、最適なアンドゥ回数が分かる
+         * </p>
          * 
          * @eventType CommandEvent.PREPARSE
          * @throws InvalidCommandError 登録されていないコマンドが検出された場合
@@ -140,7 +144,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * ログを解析する.
          * 
-         * 解析が完了すると、CommandEvent.PARSE イベントが発生する。
+         * <p>解析が完了すると、CommandEvent.PARSE イベントが発生する。</p>
          * 
          * @return コマンド
          * @throws EOLError これ以上ログを読み込むことが出来ない場合

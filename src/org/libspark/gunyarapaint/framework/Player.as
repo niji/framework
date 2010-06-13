@@ -33,8 +33,10 @@ package org.libspark.gunyarapaint.framework
         /**
          * ログデータを読み込む.
          * 
+         * <p>
          * まず先読みを実行してからお絵描きログを読み込んで再生出来る状態にする。
          * このクラスを継承する Player はこれを必ず実行する必要がある。
+         * </p>
          * 
          * @param bytes ログデータ
          */

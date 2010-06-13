@@ -9,7 +9,7 @@ package org.libspark.gunyarapaint.framework
     /**
      * 補助線を描写するスプライトオブジェクト.
      * 
-     * キャンバススプライトよりも上に配置する必要がある
+     * <p>キャンバススプライトよりも上に配置する必要がある</p>
      * 
      * @see AuxLineView
      * @see AuxPixelView

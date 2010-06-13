@@ -55,7 +55,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * レイヤーを作成して追加する.
          * 
-         * 完全に透明なレイヤーが作成される。また、現在の番号が一つ上にずれる。
+         * <p>完全に透明なレイヤーが作成される。また、現在の番号が一つ上にずれる。</p>
          * 
          */
         public function add():void
@@ -96,7 +96,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * レイヤーをコピーして指定された番号の次に作成する.
          * 
-         * コピー元の画像が複製されて追加される。また、現在の番号が一つ上にずれる。
+         * <p>コピー元の画像が複製されて追加される。また、現在の番号が一つ上にずれる。</p>
          * 
          * @param index　レイヤー番号
          */
@@ -142,8 +142,10 @@ package org.libspark.gunyarapaint.framework
         /**
          * 指定された番号のレイヤーを下のレイヤーと合成する.
          * 
+         * <p>
          * 両方のレイヤーは可視 (visible=true) である必要がある。
          * また、合成後は現在のレイヤーは下のレイヤーに変更され、完全に不透明になる。
+         * </p>
          * 
          * @param index レイヤー番号
          * @throws MergeLayersError レイヤーが一つ、あるいは対象のうち片方が不可視の場合
@@ -182,9 +184,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 指定された番号のレイヤーを削除する
+         * 指定された番号のレイヤーを削除する.
          * 
-         * レイヤーが削除されると 現在の番号が一つ下にずれる。
+         * <p>レイヤーが削除されると 現在の番号が一つ下にずれる。</p>
          * 
          * @param index 現在のレイヤー番号
          * @throws RemoveLayerError レイヤーが一つの場合

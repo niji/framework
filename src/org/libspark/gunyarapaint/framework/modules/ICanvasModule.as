@@ -3,6 +3,7 @@ package org.libspark.gunyarapaint.framework.modules
     /**
      * 描写モジュールに必要なメソッドを定義したインターフェース.
      * 
+     * <p>
      * 主な実装はCanvasModuleで行われるため、実際に実装する必要があるのは
      * <ul>
      * <li>start</li>
@@ -11,6 +12,7 @@ package org.libspark.gunyarapaint.framework.modules
      * <li>interrupt</li>
      * </ul>
      * の４つのみを実装すれば良い。
+     * </p>
      * 
      * @see CanvasModule
      */

@@ -45,7 +45,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 別のPenオブジェクトの設定を適用する.
          * 
-         * Painter でイベントを確実に発生させるためにsetterを経由する
+         * <p>Painter でイベントを確実に発生させるためにsetterを経由する</p>
          * 
          * @param value Pen
          */

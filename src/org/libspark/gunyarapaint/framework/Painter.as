@@ -16,7 +16,7 @@ package org.libspark.gunyarapaint.framework
     /**
      * 再生及び記録のための共通基盤.
      * 
-     * 実際の処理は Painter または PaintEngine に委譲する
+     * <p>実際の処理は Painter または PaintEngine に委譲する</p>
      */
     public class Painter extends EventDispatcher
     {
@@ -118,8 +118,10 @@ package org.libspark.gunyarapaint.framework
         /**
          * 必要であれば現在のお絵描き操作をアンドゥログに追加する.
          * 
+         * <p>
          * これはレイヤー操作もアンドゥログに含まれていた為、ログのバージョンが古いか、
          * レイヤー操作もアンドゥに含めてもいい選択が入っている場合にアンドゥログに追加する
+         * </p>
          */
         public function pushUndoIfNeed():void
         {
@@ -130,7 +132,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在位置を変更する.
          * 
-         * PaintEngine クラスにある moveTo の委譲
+         * <p>PaintEngine クラスにある moveTo の委譲</p>
          * 
          * @param x 移動先となる X 座標
          * @param y 移動先となる Y 座標
@@ -144,7 +146,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在位置から指定された位置まで線を描写する.
          * 
-         * PaintEngine クラスにある lineTo の委譲
+         * <p>PaintEngine クラスにある lineTo の委譲</p>
          * 
          * @param x 描写先となる X 座標
          * @param y 描写先となる Y 座標
@@ -158,7 +160,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 矩形を描写する.
          * 
-         * PaintEngine クラスにある drawRect の委譲
+         * <p>PaintEngine クラスにある drawRect の委譲</p>
          * 
          * @param x 基準点となる X 座標
          * @param y 基準点となる Y 座標
@@ -175,7 +177,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 楕円を描写する.
          * 
-         * PainterEngine クラスにある drawEllipse の委譲
+         * <p>PainterEngine クラスにある drawEllipse の委譲</p>
          * 
          * @param x 基準点となる X 座標
          * @param y 基準点となる Y 座標
@@ -192,7 +194,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 塗りつぶしを開始する.
          * 
-         * PaintEngine クラスにある beginFill の委譲
+         * <p>PaintEngine クラスにある beginFill の委譲</p>
          * 
          * @param color 塗りつぶす色
          * @param alpha 透明度
@@ -206,7 +208,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在の位置から円弧を描写する.
          * 
-         * PaintEngine クラスにある drawCircle の委譲
+         * <p>PaintEngine クラスにある drawCircle の委譲</p>
          * 
          * @param radius 半径
          * @see PaintEngine#drawCircle()
@@ -219,7 +221,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 塗りつぶしを終了する.
          * 
-         * PaintEngine クラスにある endFill の委譲
+         * <p>PaintEngine クラスにある endFill の委譲</p>
          * 
          * @see PaintEngine#endFill()
          */
@@ -231,7 +233,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * ペンオブジェクトを初期状態にリセットする.
          * 
-         * PaintEngine クラスにある resetPen の委譲
+         * <p>PaintEngine クラスにある resetPen の委譲</p>
          * 
          * @see PaintEngine#resetPen()
          */
@@ -243,7 +245,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 描写中の内容を消去する.
          * 
-         * PainterEngine クラスにある clear の委譲
+         * <p>PainterEngine クラスにある clear の委譲</p>
          * 
          * @see PaintEngine#clear()
          */
@@ -255,7 +257,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * PainterEngine クラスに描写された中身を現在のレイヤーに反映させる.
          * 
-         *  Pen クラスのブレンドモードを適用する
+         * <p>Pen クラスのブレンドモードを適用する</p>
          * 
          * @see LayerBitmap#compositeFrom()
          */
@@ -273,7 +275,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 塗りつぶしを行う.
          * 
-         * PainterEngine クラスの現在位置と Pen クラスの色を適用する
+         * <p>PainterEngine クラスの現在位置と Pen クラスの色を適用する</p>
          * 
          * @see LayerBitmap#floodFill()
          */
@@ -290,7 +292,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 1 ピクセルを描写する.
          * 
-         * 現在の Pen クラスの色を適用する
+         * <p>現在の Pen クラスの色を適用する</p>
          * 
          * @param x 描写先となる X 座標
          * @param y 描写先となる Y 座標
@@ -413,8 +415,10 @@ package org.libspark.gunyarapaint.framework
         /**
          * 描写開始を宣言する.
          * 
+         * <p>
          * 全てのレイヤーに対してではなく、現在のレイヤーのみにブレンドモードが
          * 適用されるように Sprite の変更が行われる。
+         * </p>
          */
         public function startDrawing():void
         {
