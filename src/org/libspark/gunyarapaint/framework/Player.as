@@ -43,7 +43,7 @@ package org.libspark.gunyarapaint.framework
         public static function create(bytes:ByteArray):Player
         {
             var player:Player = new Player(new Parser(bytes));
-            player.setUndoStack(new UndoStack(player.layers, player.m_parser.maxUndoCount));
+            player.setUndoStack(new UndoStack(player.layers));
             return player;
         }
         

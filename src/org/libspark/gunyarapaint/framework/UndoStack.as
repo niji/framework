@@ -14,6 +14,8 @@ package org.libspark.gunyarapaint.framework
      */
     public final class UndoStack extends EventDispatcher
     {
+        public static const DEFAULT_SIZE:uint = 16;
+        
         public function UndoStack(layers:LayerBitmapCollection,
                                   size:uint = 16)
         {
