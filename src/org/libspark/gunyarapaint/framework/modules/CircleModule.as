@@ -7,6 +7,9 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.DrawCircleCommand;
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     
+    /**
+     * 円描写ツールの実装
+     */
     public final class CircleModule extends CanvasModule implements ICanvasModule
     {
         public static const CIRCLE:String = PREFIX + "circle";
@@ -17,6 +20,9 @@ package org.libspark.gunyarapaint.framework.modules
             super(recorder);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function start(x:Number, y:Number):void
         {
             validateLayerState();
@@ -24,6 +30,9 @@ package org.libspark.gunyarapaint.framework.modules
             m_recorder.startDrawing();
         }
         
+        /**
+         * @inheritDoc
+         */
         public function move(x:Number, y:Number):void
         {
             storeCircleCoordinate(x, y);
@@ -33,6 +42,9 @@ package org.libspark.gunyarapaint.framework.modules
             m_recorder.drawCircle(m_rectangle.width);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function stop(x:Number, y:Number):void
         {
             m_recorder.stopDrawing();
@@ -54,11 +66,17 @@ package org.libspark.gunyarapaint.framework.modules
             saveCoordinate(x, y);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function interrupt(x:Number, y:Number):void
         {
             stopDrawing();
         }
         
+        /**
+         * @inheritDoc
+         */
         public function get name():String
         {
             return CIRCLE;

@@ -31,12 +31,10 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ログデータを読み込む
+         * ログデータを読み込む.
          * 
-         * <p>
          * まず先読みを実行してからお絵描きログを読み込んで再生出来る状態にする。
          * このクラスを継承する Player はこれを必ず実行する必要がある。
-         * </p>
          * 
          * @param bytes ログデータ
          */
@@ -50,10 +48,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * ログを再生する
          * 
-         * <p>
-         * PlayerEvent.STARTED イベントが発生する
-         * </p>
-         * 
+         * @eventType PlayerEvent.STARTED
          */
         public function start():void
         {
@@ -67,10 +62,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * ログの再生を一時停止する
          * 
-         * <p>
-         * PlayerEvent.PAUSED イベントが発生する
-         * </p>
-         * 
+         * @eventType PlayerEvent.PAUSED
          */
         public function pause():void
         {
@@ -84,10 +76,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * ログの再生を停止する
          * 
-         * <p>
-         * PlayerEvent.STOPPED イベントが発生する
-         * </p>
-         * 
+         * @eventType PlayerEvent.STOPPED
          */
         public function stop():void
         {
@@ -100,6 +89,11 @@ package org.libspark.gunyarapaint.framework
             }
         }
         
+        /**
+         * @eventType CommandEvent.PARSE
+         * @eventType PlayerEvent.UPDATED
+         * @eventType PlayerEvent.FINISHED
+         */ 
         private function process(event:TimerEvent):void
         {
             try {

@@ -8,6 +8,9 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.LineToCommand;
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     
+    /**
+     * 透明直線描写ツールの実装
+     */
     public final class TransparentLineModule extends CanvasModule implements ICanvasModule
     {
         public static const TRANSPARENT_LINE:String = PREFIX + "transparentLine";
@@ -17,6 +20,9 @@ package org.libspark.gunyarapaint.framework.modules
             super(recorder);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function start(x:Number, y:Number):void
         {
             validateLayerState();
@@ -24,6 +30,9 @@ package org.libspark.gunyarapaint.framework.modules
             m_recorder.startDrawing();
         }
         
+        /**
+         * @inheritDoc
+         */
         public function move(x:Number, y:Number):void
         {
             var pen:Pen = m_recorder.pen;
@@ -36,6 +45,9 @@ package org.libspark.gunyarapaint.framework.modules
             pen.blendMode = blendMode;
         }
         
+        /**
+         * @inheritDoc
+         */
         public function stop(x:Number, y:Number):void
         {
             var pen:Pen = m_recorder.pen;
@@ -54,11 +66,17 @@ package org.libspark.gunyarapaint.framework.modules
             saveCoordinate(x, y);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function interrupt(x:Number, y:Number):void
         {
             stopDrawing();
         }
         
+        /**
+         * @inheritDoc
+         */
         public function get name():String
         {
             return TRANSPARENT_LINE;

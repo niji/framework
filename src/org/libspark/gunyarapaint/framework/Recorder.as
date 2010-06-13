@@ -57,6 +57,7 @@ package org.libspark.gunyarapaint.framework
          * 
          * @param command コマンドオブジェクト
          * @param args コマンドに対する引数
+         * @eventType CommandEvent.COMMITTED
          */
         public function commitCommand(id:uint, args:Object):void
         {
@@ -67,6 +68,9 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new CommandEvent(CommandEvent.COMMITTED, command));
         }
         
+        /**
+         * 現在のログデータをコピーして返す
+         */
         public function get bytes():ByteArray
         {
             var bytes:ByteArray = new ByteArray();

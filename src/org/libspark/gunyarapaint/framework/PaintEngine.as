@@ -5,9 +5,11 @@ package org.libspark.gunyarapaint.framework
     import flash.geom.Point;
     
     /**
-     * 実際に描写を行う
+     * Graphics に描写を委譲するクラス.
      * 
-     * @todo correctCoordinate (もともとroundPixel という名前) を仮想メソッドとして実装する
+     * Graphics の移譲クラスとして実装されている。これは Graphics がサブクラス
+     * 出来無いクラスであるため、代わりにGraphicsの処理を受け持つという方法を適用している。
+     * これは FlexUnit による単体テストをしやすくするために作られている。
      */
     public class PaintEngine
     {
@@ -33,6 +35,7 @@ package org.libspark.gunyarapaint.framework
          * 
          * @param x 移動先となる X 座標
          * @param y 移動先となる Y 座標
+         * @see flash.display.Graphics#moveTo
          */
         public function moveTo(x:Number, y:Number):void
         {
@@ -47,6 +50,7 @@ package org.libspark.gunyarapaint.framework
          * 
          * @param x 描写先となる X 座標
          * @param y 描写先となる Y 座標
+         * @see flash.display.Graphics#lineTo
          */
         public function lineTo(x:Number, y:Number):void
         {
@@ -63,6 +67,7 @@ package org.libspark.gunyarapaint.framework
          * @param y 基準点となる Y 座標
          * @param width 幅
          * @param height 高さ
+         * @see flash.display.Graphics#drawRect
          */
         public function drawRect(x:Number, y:Number,
                                  width:uint, height:uint):void
@@ -77,6 +82,7 @@ package org.libspark.gunyarapaint.framework
          * @param y 基準点となる Y 座標
          * @param width 幅
          * @param height 高さ
+         * @see flash.display.Graphics#drawEllipse
          */
         public function drawEllipse(x:Number, y:Number,
                                     width:uint, height:uint):void
@@ -89,6 +95,7 @@ package org.libspark.gunyarapaint.framework
          * 
          * @param color 塗りつぶす色
          * @param alpha 透明度
+         * @see flash.display.Graphics#beginFill
          */
         public function beginFill(color:uint, alpha:Number):void
         {
@@ -99,6 +106,7 @@ package org.libspark.gunyarapaint.framework
          * 現在の位置から円弧を描写する
          * 
          * @param radius 半径
+         * @see flash.display.Graphics#drawCircle
          */
         public function drawCircle(radius:Number):void
         {
@@ -112,12 +120,18 @@ package org.libspark.gunyarapaint.framework
         /**
          * 塗りつぶしを終了する
          * 
+         * @see flash.display.Graphics#endFill
          */
         public function endFill():void
         {
             m_graphics.endFill();
         }
         
+        /**
+         * 座標を正しい位置に修正する
+         * 
+         * @param Point
+         */
         public function correctCoordinate(point:Point):void
         {
         }

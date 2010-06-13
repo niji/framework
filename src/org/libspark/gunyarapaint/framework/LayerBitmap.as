@@ -60,6 +60,7 @@ package org.libspark.gunyarapaint.framework
          * 
          * @param source ソース元
          * @param blendMode ブレンドモード
+         * @see flash.display.BlendMode
          */
         public function compositeFrom(source:IBitmapDrawable,
                                       blendMode:String):void
@@ -73,9 +74,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * レイヤーを BitmapData に描写する
          * 
-         * <p>
          * 現在のレイヤーの透明度及びブレンドモードを用いられて合成される。
-         * </p>
          * 
          * @param dest 描写先の BitmapData
          */
@@ -90,6 +89,7 @@ package org.libspark.gunyarapaint.framework
          * 現在のレイヤーにマトリックスオブジェクトを適用して変形させる
          * 
          * @param matrix マトリックスオブジェクト
+         * @see flash.geom.Matrix
          */
         public function applyMatrix(matrix:Matrix):void
         {
@@ -264,6 +264,9 @@ package org.libspark.gunyarapaint.framework
          */
         public var locked:Boolean;
         
+        /**
+         * 現在のレイヤー名
+         */
         public var name:String;
         
         private var m_bitmap:Bitmap;

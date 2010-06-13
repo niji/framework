@@ -53,7 +53,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤーを作成して追加する
+         * レイヤーを作成して追加する.
          * 
          * 完全に透明なレイヤーが作成される。また、現在の番号が一つ上にずれる。
          * 
@@ -77,7 +77,7 @@ package org.libspark.gunyarapaint.framework
          * 指定された番号のレイヤーを取り出す
          * 
          * @param index レイヤー番号
-         * @return 
+         * @return LayerBitmap
          */
         public function at(index:int):LayerBitmap
         {
@@ -94,7 +94,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤーをコピーして指定された番号の次に作成する
+         * レイヤーをコピーして指定された番号の次に作成する.
          * 
          * コピー元の画像が複製されて追加される。また、現在の番号が一つ上にずれる。
          * 
@@ -140,12 +140,10 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 指定された番号のレイヤーを下のレイヤーと合成する
+         * 指定された番号のレイヤーを下のレイヤーと合成する.
          * 
-         * <p>
          * 両方のレイヤーは可視 (visible=true) である必要がある。
          * また、合成後は現在のレイヤーは下のレイヤーに変更され、完全に不透明になる。
-         * </p>
          * 
          * @param index レイヤー番号
          * @throws MergeLayersError レイヤーが一つ、あるいは対象のうち片方が不可視の場合
@@ -186,9 +184,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 指定された番号のレイヤーを削除する
          * 
-         * <p>
          * レイヤーが削除されると 現在の番号が一つ下にずれる。
-         * </p>
          * 
          * @param index 現在のレイヤー番号
          * @throws RemoveLayerError レイヤーが一つの場合
@@ -245,6 +241,7 @@ package org.libspark.gunyarapaint.framework
          * 
          * @param layerBitmaps 縦に連結されたレイヤー画像
          * @param metadata メタデータ
+         * @see #newLayerBitmapData
          */
         public function load(layerBitmap:BitmapData, metadata:Object):void
         {
@@ -273,6 +270,7 @@ package org.libspark.gunyarapaint.framework
          * 
          * @param layerBitmaps 縦に連結されたレイヤー画像
          * @param metadata メタデータ
+         * @see #newLayerBitmapData
          */
         public function save(layerBitmap:BitmapData, metadata:Object):void
         {
@@ -367,6 +365,8 @@ package org.libspark.gunyarapaint.framework
         /**
          * saveState で保存したオブジェクトを復元する
          *
+         * @param undoData saveStateで保存したオブジェクト
+         * @see #saveState
          */
         internal function loadState(undoData:Object):void
         {
@@ -387,6 +387,8 @@ package org.libspark.gunyarapaint.framework
         /**
          * 画像データを含むすべてのレイヤー情報を保存する
          *
+         * @param undoData 保存先となる空のオブジェクト
+         * @see #loadState
          */
         internal function saveState(undoData:Object):void
         {
@@ -515,6 +517,8 @@ package org.libspark.gunyarapaint.framework
         /**
          * レイヤーを保存するために必要な BitmapData を生成する
          * 
+         * @see #load()
+         * @see #save()
          */
         public function get newLayerBitmapData():BitmapData
         {

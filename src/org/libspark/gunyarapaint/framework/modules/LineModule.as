@@ -5,6 +5,9 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.LineToCommand;
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     
+    /**
+     * 直線描写ツールの実装
+     */
     public final class LineModule extends CanvasModule implements ICanvasModule
     {
         public static const LINE:String = PREFIX + "line";
@@ -14,6 +17,9 @@ package org.libspark.gunyarapaint.framework.modules
             super(recorder);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function start(x:Number, y:Number):void
         {
             validateLayerState();
@@ -21,6 +27,9 @@ package org.libspark.gunyarapaint.framework.modules
             m_recorder.startDrawing();
         }
         
+        /**
+         * @inheritDoc
+         */
         public function move(x:Number, y:Number):void
         {
             m_recorder.clear();
@@ -29,6 +38,9 @@ package org.libspark.gunyarapaint.framework.modules
             m_recorder.lineTo(x, y);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function stop(x:Number, y:Number):void
         {
             m_recorder.stopDrawing();
@@ -42,6 +54,9 @@ package org.libspark.gunyarapaint.framework.modules
             saveCoordinate(x, y);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function interrupt(x:Number, y:Number):void
         {
             stopDrawing();

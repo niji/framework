@@ -3,6 +3,9 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.PenCommand;
     
+    /**
+     * スポイトツールの実装
+     */ 
     public final class DropperModule extends CanvasModule implements ICanvasModule
     {
         public static const DROPPER:String = PREFIX + "dropper";
@@ -12,26 +15,41 @@ package org.libspark.gunyarapaint.framework.modules
             super(recorder);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function start(x:Number, y:Number):void
         {
             drop(x, y);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function move(x:Number, y:Number):void
         {
             drop(x, y);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function stop(x:Number, y:Number):void
         {
             drop(x, y);
             saveCoordinate(x, y);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function interrupt(x:Number, y:Number):void
         {
         }
         
+        /**
+         * @inheritDoc
+         */
         public function get name():String
         {
             return DROPPER;

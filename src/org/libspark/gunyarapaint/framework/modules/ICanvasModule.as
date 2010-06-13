@@ -1,8 +1,18 @@
 package org.libspark.gunyarapaint.framework.modules
 {
     /**
-     * 描写モジュールに必要なメソッドを定義したインターフェース。利用は外部から可能だが、実装は内部で行われる。
-     * ICanvasModule
+     * 描写モジュールに必要なメソッドを定義したインターフェース.
+     * 
+     * 主な実装はCanvasModuleで行われるため、実際に実装する必要があるのは
+     * <ul>
+     * <li>start</li>
+     * <li>move</li>
+     * <li>stop</li>
+     * <li>interrupt</li>
+     * </ul>
+     * の４つのみを実装すれば良い。
+     * 
+     * @see CanvasModule
      */
     public interface ICanvasModule
     {

@@ -4,7 +4,10 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.FloodFillCommand;
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
-
+    
+    /**
+     * 透明塗りつぶし描写ツールの実装
+     */
     public final class TransparentFloodFill extends CanvasModule implements ICanvasModule
     {
         public static const TRANSPARENT_FLOOD_FILL:String = PREFIX + "transparentFloodFill";
@@ -14,6 +17,9 @@ package org.libspark.gunyarapaint.framework.modules
             super(recorder);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function start(x:Number, y:Number):void
         {
             var pen:Pen = m_recorder.pen;
@@ -32,10 +38,16 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @inheritDoc
+         */
         public function move(x:Number, y:Number):void
         {
         }
         
+        /**
+         * @inheritDoc
+         */
         public function stop(x:Number, y:Number):void
         {
             alpha = m_alpha;
@@ -43,6 +55,9 @@ package org.libspark.gunyarapaint.framework.modules
             saveCoordinate(x, y);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function interrupt(x:Number, y:Number):void
         {
             stopDrawing();
@@ -50,6 +65,9 @@ package org.libspark.gunyarapaint.framework.modules
             color = m_color;
         }
         
+        /**
+         * @inheritDoc
+         */
         public function get name():String
         {
             return TRANSPARENT_FLOOD_FILL;

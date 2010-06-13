@@ -7,10 +7,12 @@ package org.libspark.gunyarapaint.framework
     import flash.geom.Rectangle;
     
     /**
-     * 補助線を描写するスプライトオブジェクト。キャンバススプライトよりも上に配置する必要がある
+     * 補助線を描写するスプライトオブジェクト.
+     * 
+     * キャンバススプライトよりも上に配置する必要がある
      * 
      * @see AuxLineView
-     * @see AuxPixelBitmap
+     * @see AuxPixelView
      */
     public class AuxBitmap extends Sprite
     {

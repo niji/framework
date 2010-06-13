@@ -35,6 +35,7 @@ package org.libspark.gunyarapaint.framework
     /**
      * コマンドを管理する
      * 
+     * @see ICommand
      */
     public class CommandContext extends EventDispatcher
     {
@@ -123,11 +124,8 @@ package org.libspark.gunyarapaint.framework
         /**
          * コマンドを登録する
          * 
-         * <p>
-         * 登録にした後、CommandEvent.REGISTERED イベントが発生する。
-         * </p>
-         * 
          * @param command コマンドオブジェクト
+         * @eventType CommandEvent.REGISTERED
          * @throws ArgumentError command が 0x80 または 0x40 とビット演算で一致する場合
          */
         public function registerCommand(command:ICommand):void
@@ -148,11 +146,8 @@ package org.libspark.gunyarapaint.framework
         /**
          * コマンドを未登録にする
          * 
-         * <p>
-         * 未登録にした後、CommandEvent.UNREGISTERED イベントが発生する。
-         * </p>
-         * 
          * @param command コマンドオブジェクト
+         * @eventType CommandEvent.UNREGISTERED
          * @throws ArgumentError command が 0x80 または 0x40 とビット演算で一致する場合
          */
         public function unregisterCommand(command:ICommand):void

@@ -46,6 +46,9 @@ package org.libspark.gunyarapaint.framework.events
             m_command = command;
         }
         
+        /**
+         * @inheritDoc
+         */
         public override function clone():Event
         {
             return new CommandEvent(type, m_command);

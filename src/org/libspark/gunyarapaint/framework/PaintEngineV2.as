@@ -15,6 +15,9 @@ package org.libspark.gunyarapaint.framework
             super(shape);
         }
         
+        /**
+         * @inheritDoc
+         */
         public override function correctCoordinate(coordinate:Point):void
         {
             var aux:Number = pen.thickness & 1 ? 0.5 : 0;

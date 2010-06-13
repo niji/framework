@@ -4,6 +4,9 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.FloodFillCommand;
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     
+    /**
+     * バケツ塗りつぶしツールの実装
+     */
     public final class FloodFillModule extends CanvasModule implements ICanvasModule
     {
         public static const FLOOD_FILL:String = PREFIX + "floodFill";
@@ -13,6 +16,9 @@ package org.libspark.gunyarapaint.framework.modules
             super(recorder);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function start(x:Number, y:Number):void
         {
             validateLayerState();
@@ -26,15 +32,24 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @inheritDoc
+         */
         public function move(x:Number, y:Number):void
         {
         }
         
+        /**
+         * @inheritDoc
+         */
         public function stop(x:Number, y:Number):void
         {
             saveCoordinate(x, y);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function interrupt(x:Number, y:Number):void
         {
             stopDrawing();

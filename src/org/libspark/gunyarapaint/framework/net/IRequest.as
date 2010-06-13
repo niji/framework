@@ -32,7 +32,7 @@ package org.libspark.gunyarapaint.framework.net
         function load(url:String):void;
         
 		/**
-		 * Loader か URLLoader を返す。
+		 * Loader か URLLoader を返す.
 		 * 
 		 * Loader と URLLoader は継承関係に無いため、キャストする必要がある。
 		 * そのため、両方共継承している EventDispacher クラスをひとまず返す
@@ -42,9 +42,12 @@ package org.libspark.gunyarapaint.framework.net
         function get loader():EventDispatcher;
         
 		/**
-		 *　Loader か URLLoader のインスタンスを設定する。それ以外の場合は ArgumentError を送出する
+		 *　Loader か URLLoader のインスタンスを設定する.
+         * 
+         * それ以外の場合は ArgumentError を送出する
 		 *  
 		 * @param value Loader か URLLoader のインスタンス
+         * @throws ArgumentError Loader または URLLoader 以外のクラスを設定しようとしたとき
 		 */		
         function set loader(value:EventDispatcher):void;
     }

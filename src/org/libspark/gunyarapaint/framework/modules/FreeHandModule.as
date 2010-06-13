@@ -10,6 +10,9 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.commands.MoveToCommand;
     import org.libspark.gunyarapaint.framework.commands.PenCommand;
     
+    /**
+     * 手描きツールの実装
+     */
     public final class FreeHandModule extends CanvasModule implements ICanvasModule
     {
         public static const FREE_HAND:String = PREFIX + "freeHand";
@@ -19,6 +22,9 @@ package org.libspark.gunyarapaint.framework.modules
             super(recorder);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function start(x:Number, y:Number):void
         {
             validateLayerState();
@@ -30,6 +36,9 @@ package org.libspark.gunyarapaint.framework.modules
             m_drawedLine = false;
         }
         
+        /**
+         * @inheritDoc
+         */
         public function move(x:Number, y:Number):void
         {
             m_recorder.commitCommand(
@@ -39,6 +48,9 @@ package org.libspark.gunyarapaint.framework.modules
             m_drawedLine = true;
         }
         
+        /**
+         * @inheritDoc
+         */
         public function stop(x:Number, y:Number):void
         {
             if (!m_drawedLine) {
@@ -78,12 +90,18 @@ package org.libspark.gunyarapaint.framework.modules
             saveCoordinate(x, y);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function interrupt(x:Number, y:Number):void
         {
             move(x, y);
             stop(x, y);
         }
         
+        /**
+         * @inheritDoc
+         */
         public function get name():String
         {
             return FREE_HAND;

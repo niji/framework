@@ -11,6 +11,9 @@ package org.libspark.gunyarapaint.framework.events
             super(type, bubbles, cancelable);
         }
         
+        /**
+         * @inheritDoc
+         */
         public override function clone():Event
         {
             return new AbstractEvent(type, bubbles, cancelable);

@@ -22,6 +22,11 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.errors.InvisibleLayerError;
     import org.libspark.gunyarapaint.framework.errors.LockedLayerError;
 
+    /**
+     * ICanvasModuleの実装を助けるためのクラス.
+     * 
+     * 大半の処理はここに集約されているため、基本的にすべてのメソッドを1から実装する必要はない。
+     */
     public class CanvasModule
     {
         internal static const PREFIX:String = "org.libspark.gunyarapaint.framework.modules.";
@@ -31,24 +36,39 @@ package org.libspark.gunyarapaint.framework.modules
             m_recorder = recorder;
         }
         
+        /**
+         * @copy ICanvasModule#load()
+         */
         public function load():void
         {
         }
         
+        /**
+         * @copy ICanvasModule#unload()
+         */
         public function unload():void
         {
         }
         
+        /**
+         * @copy ICanvasModule#undo()
+         */
         public function undo():void
         {
             m_recorder.commitCommand(UndoCommand.ID, {});
         }
         
+        /**
+         * @copy ICanvasModule#redo()
+         */
         public function redo():void
         {
             m_recorder.commitCommand(RedoCommand.ID, {});
         }
         
+        /**
+         * @copy ICanvasModule#horizontalMirror()
+         */
         public function horizontalMirror(index:uint):void
         {
             m_recorder.commitCommand(
@@ -59,6 +79,9 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @copy ICanvasModule#verticalMirror()
+         */
         public function verticalMirror(index:uint):void
         {
             m_recorder.commitCommand(
@@ -69,6 +92,9 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @copy ICanvasModule#copyLayer()
+         */
         public function copyLayer():void
         {
             m_recorder.commitCommand(
@@ -77,6 +103,9 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @copy ICanvasModule#createLayer()
+         */
         public function createLayer():void
         {
             m_recorder.commitCommand(
@@ -85,6 +114,9 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @copy ICanvasModule#mergeLayers()
+         */
         public function mergeLayers():void
         {
             m_recorder.commitCommand(
@@ -93,6 +125,9 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @copy ICanvasModule#removeLayer()
+         */
         public function removeLayer():void
         {
             m_recorder.commitCommand(
@@ -101,6 +136,9 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @copy ICanvasModule#swapLayers()
+         */
         public function swapLayers(from:uint, to:uint):void
         {
             m_recorder.commitCommand(
@@ -112,6 +150,9 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @copy ICanvasModule#setCompatibility()
+         */
         public function setCompatibility(type:uint, value:Boolean):void
         {
             m_recorder.commitCommand(
@@ -123,11 +164,17 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @copy ICanvasModule#reset()
+         */
         public function reset():void
         {
             m_recorder.commitCommand(ResetAllCommand.ID, {});
         }
         
+        /**
+         * @copy ICanvasModule#getPixel32()
+         */
         public function getPixel32(x:int, y:int):uint
         {
             return m_recorder.getPixel32(x, y);
@@ -250,26 +297,41 @@ package org.libspark.gunyarapaint.framework.modules
             m_recorder.stopDrawing();
         }
         
+        /**
+         * @copy ICanvasModule#shouldDrawCircleClockwise
+         */
         public function set shouldDrawCircleClockwise(value:Boolean):void
         {
             s_shouldDrawCircleClockwise = value;
         }
         
+        /**
+         * @copy ICanvasModule#shouldDrawCircleCounterClockwise
+         */
         public function set shouldDrawCircleCounterClockwise(value:Boolean):void
         {
             s_shouldDrawCircleCounterClockwise = value;
         }
         
+        /**
+         * @copy ICanvasModule#shouldDrawFromStartPoint
+         */
         public function set shouldDrawFromStartPoint(value:Boolean):void
         {
             s_shouldDrawFromStartPoint = value;
         }
         
+        /**
+         * @copy ICanvasModule#shouldDrawFromEndPoint
+         */
         public function set shouldDrawFromEndPoint(value:Boolean):void
         {
             s_shouldDrawFromEndPoint = value;
         }
         
+        /**
+         * @copy ICanvasModule#alpha
+         */
         public function set alpha(value:Number):void
         {
             m_recorder.commitCommand(
@@ -281,6 +343,9 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @copy ICanvasModule#blendMode
+         */
         public function set blendMode(value:String):void
         {
             
@@ -293,6 +358,9 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @copy ICanvasModule#color
+         */
         public function set color(value:uint):void
         {
             m_recorder.commitCommand(
@@ -304,6 +372,9 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @copy ICanvasModule#thickness
+         */
         public function set thickness(value:uint):void
         {
             m_recorder.commitCommand(
@@ -315,6 +386,9 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @copy ICanvasModule#layerAlpha
+         */
         public function set layerAlpha(value:Number):void
         {
             m_recorder.commitCommand(
@@ -325,6 +399,9 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @copy ICanvasModule#layerBlendMode
+         */
         public function set layerBlendMode(value:String):void
         {
             m_recorder.commitCommand(
@@ -335,6 +412,9 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * @copy ICanvasModule#layerIndex
+         */
         public function set layerIndex(value:uint):void
         {
             m_recorder.commitCommand(
@@ -345,25 +425,46 @@ package org.libspark.gunyarapaint.framework.modules
             );
         }
         
+        /**
+         * 現在のX座標を取得する.
+         * 
+         * 内部は静的変数であるため、CanvasModuleを継承する全てのクラスに影響する
+         */
         protected function get coordinateX():Number
         {
             return s_coordinateX;
         }
         
+        /**
+         * 現在のY座標を取得する.
+         * 
+         * 内部は静的変数であるため、CanvasModuleを継承する全てのクラスに影響する
+         */
         protected function get coordinateY():Number
         {
             return s_coordinateY;
         }
         
+        /**
+         * 現在時計回りに描写しているかを取得する
+         */
         protected function getShouldDrawCircleClockwise():Boolean
         {
             return s_shouldDrawCircleClockwise;
         }
         
+        /**
+         * 現在反時計回りで描写しているかを取得する
+         */
         protected function getShouldDrawCircleCounterClockwise():Boolean
         {
             return s_shouldDrawCircleCounterClockwise;
         }
+        
+        /**
+         * @private
+         */
+        protected var m_recorder:Recorder;
         
         private static var s_coordinateX:Number = 0;
         private static var s_coordinateY:Number = 0;
@@ -375,6 +476,5 @@ package org.libspark.gunyarapaint.framework.modules
         private static var s_shouldDrawCircleCounterClockwise:Boolean = false;
         private static var s_shouldDrawFromStartPoint:Boolean = false;
         private static var s_shouldDrawFromEndPoint:Boolean = false;
-        protected var m_recorder:Recorder;
     }
 }

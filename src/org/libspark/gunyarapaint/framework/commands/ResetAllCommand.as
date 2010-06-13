@@ -4,6 +4,9 @@ package org.libspark.gunyarapaint.framework.commands
     
     import org.libspark.gunyarapaint.framework.Painter;
     
+    /**
+     * @private
+     */
     public final class ResetAllCommand implements ICommand
     {
         public static const ID:uint = 30;

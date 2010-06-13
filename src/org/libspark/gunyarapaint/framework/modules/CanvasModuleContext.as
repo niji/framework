@@ -35,10 +35,11 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
 		/**
-		 * ICanvasModule#name に対応するモジュールID から ICanvasModule を実装したクラスを返す
+		 * name に対応するモジュールID から ICanvasModule を実装したクラスを返す
 		 * 
 		 * @param name モジュールID
 		 * @return ICanvasModule を実装したクラス
+         * @see ICanvasModule#name
 		 */		
         public function getModule(name:String):ICanvasModule
         {

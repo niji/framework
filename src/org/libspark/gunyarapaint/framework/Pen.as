@@ -43,7 +43,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 別のPenオブジェクトの設定を適用する
+         * 別のPenオブジェクトの設定を適用する.
          * 
          * Painter でイベントを確実に発生させるためにsetterを経由する
          * 
@@ -106,6 +106,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * ペンの太さを設定する
          * 
+         * @eventType PenEvent.THICKNESS
          */
         public function set thickness(value:uint):void
         {
@@ -127,6 +128,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 色を設定する(アルファ情報は無視される)。
          * 
+         * @eventType PenEvent.COLOR
          */
         public function set color(value:uint):void
         {
@@ -148,6 +150,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 不透明度を設定する
          * 
+         * @eventType PenEvent.ALPHA
          */
         public function set alpha(value:Number):void
         {
@@ -169,6 +172,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * ブレンドモードを設定する
          * 
+         * @eventType PenEvent.BLEND_MODE
          */
         public function set blendMode(value:String):void
         {
@@ -190,6 +194,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * LineScaleMode の値を設定する
          * 
+         * @eventType PenEvent.SCALE_MODE
          */
         public function set scaleMode(value:String):void
         {
@@ -211,6 +216,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * CapsStyle の値を設定する
          * 
+         * @eventType PenEvent.CAPS_STYLE
          */
         public function set capsStyle(value:String):void
         {
@@ -232,6 +238,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * JointStyle の値を設定する
          * 
+         * @eventType PenEvent.JOINT_STYLE
          */
         public function set jointStyle(value:String):void
         {
@@ -253,6 +260,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * マイター値を設定する
          * 
+         * @eventType PenEvent.MITER_LIMIT
          */
         public function set miterLimit(value:Number):void
         {

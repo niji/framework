@@ -30,7 +30,8 @@ package org.libspark.gunyarapaint.framework
 		/**
 		 * UndoStack を復元する
 		 * 
-		 * @param value #save で保存したオブジェクト
+		 * @param value #save() で保存したオブジェクト
+         * @see #save()
 		 */		
         public function load(value:Object):void
         {
@@ -63,6 +64,7 @@ package org.libspark.gunyarapaint.framework
 		 * UndoStack を保存する
 		 * 
 		 * @param value　保存先となる空のオブジェクト
+         * @see #load()
 		 */		
         public function save(value:Object):void
         {
@@ -90,6 +92,12 @@ package org.libspark.gunyarapaint.framework
             value.last = m_last;
         }
         
+        /**
+         * 前回のレイヤーのスナップショットから巻き戻す
+         * 
+         * @param layers LayerbitmapCollectionオブジェクト
+         * @eventType UndoEvent.UNDO
+         */
         internal function undo(layers:LayerBitmapCollection):void
         {
             if (m_index === m_first) {
@@ -106,6 +114,12 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new UndoEvent(UndoEvent.UNDO));
         }
         
+        /**
+         * 前回のレイヤーのスナップショットからやり直す
+         * 
+         * @param layers LayerbitmapCollectionオブジェクト
+         * @eventType UndoEvent.REDO
+         */
         internal function redo(layers:LayerBitmapCollection):void
         {
             if (m_index === m_last) {
@@ -117,6 +131,11 @@ package org.libspark.gunyarapaint.framework
                 dispatchEvent(new UndoEvent(UndoEvent.REDO));
         }
         
+        /**
+         * レイヤーのスナップショットを追加する
+         * 
+         * @param layers LayerbitmapCollectionオブジェクト
+         */
         internal function push(layers:LayerBitmapCollection):void
         {
             m_index = (m_index + 1) % m_buffer.length;

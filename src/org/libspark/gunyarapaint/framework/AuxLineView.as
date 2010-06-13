@@ -14,6 +14,9 @@ package org.libspark.gunyarapaint.framework
             super(rect);
         }
         
+        /**
+         * @inheritDoc
+         */
         public override function divide():void
         {
             var box:Graphics = m_box.graphics;

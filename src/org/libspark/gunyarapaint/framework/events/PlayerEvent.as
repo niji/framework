@@ -43,6 +43,9 @@ package org.libspark.gunyarapaint.framework.events
             super(type, false, false);
         }
         
+        /**
+         * @inheritDoc
+         */
         public override function clone():Event
         {
             return new PlayerEvent(type);
