@@ -247,15 +247,27 @@ package org.libspark.gunyarapaint.framework
          */
         public function load(layerBitmap:BitmapData, metadata:Object):void
         {
+            var i:uint = 0;
             var width:uint = metadata.width;
             var height:uint = metadata.height;
             var layersInfo:Array = metadata.layer_infos;
             var layerCount:uint = layerBitmap.height / height;
             var destination:Point = new Point(0, 0);
             var rectangle:Rectangle = new Rectangle(0, 0, width, height);
+            // 古いバージョンだとメタデータが存在しないので空データを作る
+            if (!layersInfo) {
+                layersInfo = [];
+                for (i = 0; i < layerCount; i++) {
+                    // レイヤー名は各レイヤー毎に異なるため、毎回コピーを作成する
+                    var data:Object = at(0).toJSON();
+                    if (i > 0)
+                        data.name = TranslatorRegistry.tr("Layer") + i;
+                    layersInfo.push(data);
+                }
+            }
             // 現在保管しているレイヤーを全て消去する
             clear();
-            for (var i:uint = 0; i < layerCount; i++) {
+            for (i = 0; i < layerCount; i++) {
                 // レイヤー画像は縦につながっているので、切り出しを行う
                 var bitmapData:BitmapData = new BitmapData(width, height);
                 rectangle.y = i * height;
