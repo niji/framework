@@ -30,7 +30,7 @@ package org.libspark.gunyarapaint.framework
          * ペインター自体のバージョン
          * 
          */
-        public static const PAINTER_VERSION:uint = 20100401;
+        public static const PAINTER_VERSION:uint = 20100701;
         
         /**
          * ペインターのバージョン文字列
