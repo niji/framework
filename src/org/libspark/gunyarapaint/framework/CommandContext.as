@@ -33,7 +33,7 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.events.CommandEvent;
     
     /**
-     * コマンドを管理する.
+     * コマンドを管理するクラスです.
      * 
      * <table>
      * <thead>
@@ -77,8 +77,14 @@ package org.libspark.gunyarapaint.framework
      */
     public class CommandContext extends EventDispatcher
     {
+        /**
+         * 登録可能な最大コマンド数
+         */
         public static const MAX_COMMANDS:uint = 64;
         
+        /**
+         * はじめから使用可能なコマンドを予め登録した状態で生成します
+         */
         public function CommandContext()
         {
             m_commands = new Vector.<ICommand>(MAX_COMMANDS, true);
@@ -113,7 +119,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * コマンドの状態を全てリセットする
+         * コマンドの状態を全てリセットします
          */        
         public function resetCommands():void
         {
@@ -126,7 +132,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * コマンドを登録する
+         * コマンドを登録します
          * 
          * @param command コマンドオブジェクト
          * @eventType CommandEvent.REGISTERED
@@ -148,7 +154,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * コマンドを未登録にする
+         * コマンドを未登録にします
          * 
          * @param command コマンドオブジェクト
          * @eventType CommandEvent.UNREGISTERED
@@ -170,7 +176,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 引数からコマンドオブジェクトを返す
+         * 引数からコマンドオブジェクトを返します
          * 
          * @return ICommand コマンドオブジェクト
          * @throws ArgumentError 引数の値が0x80または0x40とビット演算レベルで一致する場合
@@ -187,7 +193,6 @@ package org.libspark.gunyarapaint.framework
         
         /**
          * @private
-         * 
          */
         protected var m_commands:Vector.<ICommand>;
     }

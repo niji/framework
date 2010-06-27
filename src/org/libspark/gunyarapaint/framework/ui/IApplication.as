@@ -9,57 +9,48 @@ package org.libspark.gunyarapaint.framework.ui
     import org.libspark.gunyarapaint.framework.modules.ICanvasModule;
     
     /**
-     * ペイントアプリケーションに必要なメソッドを定義したインターフェース
-     * 
+     * ペイントアプリケーションに必要なメソッドを定義したインターフェースです
      */
     public interface IApplication extends IEventDispatcher
     {
         /**
-         * 名前から描写モジュールを設定する
-         * 
+         * 名前から描写モジュールを設定します
          */
         function setCanvasModule(value:String):void;
         
         /**
-         * 描写モジュールを取得する
-         * 
+         * 描写モジュールを取得します
          */
         function get canvasModule():ICanvasModule;
         
         /**
-         * キャンバスの幅を取得する
-         * 
+         * キャンバスの幅を取得します
          */
         function get canvasWidth():uint;
         
         /**
-         * キャンバスの高さを取得する
-         * 
+         * キャンバスの高さを取得します
          */
         function get canvasHeight():uint;
         
         /**
-         * レイヤーの配列を管理するオブジェクトを取得する
-         * 
+         * レイヤーの配列を管理するオブジェクトを取得します
          */
         function get layers():LayerBitmapCollection;
         
         /**
-         * ペンオブジェクトを取得する
-         * 
+         * ペンオブジェクトを取得します
          */
         function get pen():Pen;
         
         /**
-         * やり直し管理オブジェクトを取得する
-         * 
+         * やり直し管理オブジェクトを取得します
          */
         function get undoStack():UndoStack;
         
         /**
-         * 利用可能なブレンドモードを取得する
-         * (dataProvider.toArray()での利用を想定している)
-         * 
+         * 利用可能なブレンドモードを取得します
+         * (dataProvider.toArray()での利用を想定)
          */
         function get supportedBlendModes():Array;
     }

@@ -7,15 +7,21 @@ package org.libspark.gunyarapaint.framework
     import flash.geom.Rectangle;
     
     /**
-     * 補助線を描写するスプライトオブジェクト.
+     * 補助線を描写するスプライトを継承したクラスです.
      * 
-     * <p>キャンバススプライトよりも上に配置する必要がある</p>
+     * <p>
+     * キャンバススプライトよりも上に配置する必要があります。
+     * また、抽象クラスなので、直接インスタンスを生成してはいけません。
+     * </p>
      * 
      * @see AuxLineView
      * @see AuxPixelView
      */
     public class AuxBitmap extends Sprite
     {
+        /**
+         * @private
+         */
         public function AuxBitmap(rect:Rectangle)
         {
             m_rect = rect;
@@ -33,8 +39,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 補助線を再描写するように指示する
-         * 
+         * 補助線を再描写するように指示します
          */
         public function update():void
         {
@@ -49,8 +54,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 補助線を実際に描写する
-         * 
+         * 補助線を実際に描写します
          */
         public function divide():void
         {
@@ -58,8 +62,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 補助線の色を取得する
-         * 
+         * 補助線の色を取得します
          */
         public function get lineColor():uint
         {
@@ -67,8 +70,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 補助線の不透明度を取得する
-         * 
+         * 補助線の不透明度を取得します
          */
         public function get lineAlpha():Number
         {
@@ -76,8 +78,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 補助線の分割単位を取得する
-         * 
+         * 補助線の分割単位を取得します
          */
         public function get divideCount():uint
         {
@@ -85,8 +86,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 補助線のうち直線が可視状態にあるかどうかを取得する
-         * 
+         * 補助線のうち直線が可視状態にあるかどうかを取得します
          */
         public function get boxVisible():Boolean
         {
@@ -94,8 +94,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 補助線のうち斜線が可視状態にあるかどうかを取得する
-         * 
+         * 補助線のうち斜線が可視状態にあるかどうかを取得します
          */
         public function get skewVisible():Boolean
         {
@@ -103,8 +102,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 補助線の色を設定する
-         * 
+         * 補助線の色を設定します
          */
         public function set lineColor(value:uint):void
         {
@@ -112,8 +110,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 補助線の不透明度を設定する
-         * 
+         * 補助線の不透明度を設定します
          */
         public function set lineAlpha(value:Number):void
         {
@@ -121,8 +118,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 補助線の分割単位を設定する
-         * 
+         * 補助線の分割単位を設定します
          */
         public function set divideCount(value:uint):void
         {
@@ -130,8 +126,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 補助線のうち直線の可視状態を設定する
-         * 
+         * 補助線のうち直線の可視状態を設定します
          */
         public function set boxVisible(value:Boolean):void
         {
@@ -139,8 +134,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 補助線のうち斜線の可視状態を設定する
-         * 
+         * 補助線のうち斜線の可視状態を設定します
          */
         public function set skewVisible(value:Boolean):void
         {
@@ -149,25 +143,21 @@ package org.libspark.gunyarapaint.framework
         
         /**
          * @private
-         * 
          */
         protected var m_rect:Rectangle;
         
         /**
          * @private
-         * 
          */
         protected var m_box:Shape;
         
         /**
          * @private
-         * 
          */
         protected var m_skew:Shape;
         
         /**
          * @private
-         * 
          */
         protected var m_divideCount:uint;
         

@@ -4,11 +4,15 @@ package org.libspark.gunyarapaint.framework
     import flash.geom.Rectangle;
     
     /**
-     * ピクセル単位で表示する補助線のオブジェクト
+     * ピクセル単位で表示する補助線のクラスです
      * 
+     * @see AuxBitmap
      */
     public final class AuxPixelView extends AuxBitmap
     {
+        /**
+         * 直線及び斜線を予め引いて、非表示にした状態で補助線画像を生成します
+         */
         public function AuxPixelView(rect:Rectangle)
         {
             super(rect);

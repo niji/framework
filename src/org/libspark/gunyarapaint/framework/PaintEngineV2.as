@@ -10,6 +10,9 @@ package org.libspark.gunyarapaint.framework
 	 */
     internal final class PaintEngineV2 extends PaintEngine
     {
+        /**
+         * @inheritDoc
+         */
         public function PaintEngineV2(shape:Shape)
         {
             super(shape);

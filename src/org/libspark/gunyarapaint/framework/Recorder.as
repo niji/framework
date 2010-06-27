@@ -7,8 +7,9 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.events.CommandEvent;
     
     /**
-     * ログを記録する
+     * ログを記録するクラスです
      * 
+     * @see Painter
      */
     public final class Recorder extends Painter
     {
@@ -18,6 +19,20 @@ package org.libspark.gunyarapaint.framework
          */
         public static const DEFAULT_UNDO_MAX:uint = 16;
         
+        /**
+         * ログデータ及びCommandContextを登録して記録可能な状態にしてから生成します.
+         *
+         * <p>
+         * コンストラクタから直接生成しないでください。代わりに
+         * Recorder#create() を呼び出す必要があります
+         * </p>
+         *
+         * @param bytes 空のログデータ
+         * @param width 画像の幅
+         * @param height 画像の高さ
+         * @param commands CommandContext オブジェクト
+         * @see #create()
+         */
         public function Recorder(bytes:ByteArray, width:uint, height:uint, commands:CommandContext)
         {
             m_bytes = bytes;
@@ -27,7 +42,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 画像の大きさを設定し、ヘッダーに書き込む
+         * オブジェクトの生成及びヘッダーに書き込みを同時に行ないます
          * 
          * @param width 画像の幅
          * @param height 画像の高さ
@@ -53,7 +68,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * コマンドの書き出し及び実行を同時に行う
+         * コマンドの書き出し及び実行を同時に行います
          * 
          * @param command コマンドオブジェクト
          * @param args コマンドに対する引数
@@ -69,7 +84,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のログデータをコピーして返す
+         * 現在のログデータをコピーして返します
          */
         public function get bytes():ByteArray
         {

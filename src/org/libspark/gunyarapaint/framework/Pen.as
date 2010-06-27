@@ -12,11 +12,13 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.events.PenEvent;
     
     /**
-     * ペンオブジェクト
-     * 
+     * ペンの状態を管理するクラスです
      */
     public final class Pen extends EventDispatcher
     {
+        /**
+         * ペンの状態を初期化して生成します
+         */
         public function Pen()
         {
             reset();
@@ -24,8 +26,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 初期状態に戻す
-         * 
+         * ペンの状態を初期状態に戻します
          */
         public function reset():void
         {
@@ -43,9 +44,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 別のPenオブジェクトの設定を適用する.
+         * 別のPenオブジェクトの設定を適用します.
          * 
-         * <p>Painter でイベントを確実に発生させるためにsetterを経由する</p>
+         * <p>Painter でイベントを確実に発生させるためにsetterを経由します</p>
          * 
          * @param value Pen
          */
@@ -66,8 +67,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * Graphics オブジェクトに対して現在のペンを適用する
+         * lineStyle を用いて Graphics オブジェクトに対して現在のペンを適用します
          * 
+         * @see flash.display.Graphics#lineStyle()
          */
         internal function setLineStyle(graphics:Graphics):void
         {
@@ -86,8 +88,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の色を取得する。ARGB 形式(0xAARRGGBB) で返す
-         * 
+         * 現在の色を ARGB 形式(0xAARRGGBB) で返します
          */
         public function get argb():uint
         {
@@ -95,8 +96,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のペンの太さを取得する
-         * 
+         * 現在のペンの太さを取得します
          */
         public function get thickness():uint
         {
@@ -104,7 +104,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ペンの太さを設定する
+         * ペンの太さを設定します
          * 
          * @eventType PenEvent.THICKNESS
          */
@@ -117,7 +117,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の色を取得する。RGB形式(0xRRGGBB) で返す
+         * 現在の色を RGB形式(0xRRGGBB) で返します
          * 
          */
         public function get color():uint
@@ -126,7 +126,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 色を設定する(アルファ情報は無視される)。
+         * 色を設定します。アルファ情報は無視されます
          * 
          * @eventType PenEvent.COLOR
          */
@@ -139,8 +139,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の不透明度を取得する
-         * 
+         * 現在の不透明度を取得します
          */
         public function get alpha():Number
         {
@@ -148,7 +147,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 不透明度を設定する
+         * 不透明度を設定します
          * 
          * @eventType PenEvent.ALPHA
          */
@@ -161,8 +160,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のブレンドモードを取得する
-         * 
+         * 現在のブレンドモードを取得します
          */
         public function get blendMode():String
         {
@@ -170,7 +168,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ブレンドモードを設定する
+         * ブレンドモードを設定します
          * 
          * @eventType PenEvent.BLEND_MODE
          */
@@ -183,8 +181,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のLineScaleMode の値を取得する
+         * 現在の LineScaleMode の値を取得します
          * 
+         * @see flash.display.LineScaleMode
          */
         public function get scaleMode():String
         {
@@ -192,9 +191,10 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * LineScaleMode の値を設定する
+         * LineScaleMode の値を設定します
          * 
          * @eventType PenEvent.SCALE_MODE
+         * @see flash.display.LineScaleMode
          */
         public function set scaleMode(value:String):void
         {
@@ -205,8 +205,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のCapsStyle の値を取得する
+         * 現在のCapsStyle の値を取得します
          * 
+         * @see flash.display.CapsStyle
          */
         public function get capsStyle():String
         {
@@ -214,9 +215,10 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * CapsStyle の値を設定する
+         * CapsStyle の値を設定します
          * 
          * @eventType PenEvent.CAPS_STYLE
+         * @see flash.display.CapsStyle
          */
         public function set capsStyle(value:String):void
         {
@@ -227,8 +229,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のJointStyle の値を取得する
+         * 現在のJointStyle の値を取得します
          * 
+         * @see flash.display.JointStyle
          */
         public function get jointStyle():String
         {
@@ -236,9 +239,10 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * JointStyle の値を設定する
+         * JointStyle の値を設定します
          * 
          * @eventType PenEvent.JOINT_STYLE
+         * @see flash.display.JointStyle
          */
         public function set jointStyle(value:String):void
         {
@@ -249,8 +253,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のマイター値を取得する
-         * 
+         * 現在のマイター値を取得します
          */
         public function get miterLimit():Number
         {
@@ -258,7 +261,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * マイター値を設定する
+         * マイター値を設定します
          * 
          * @eventType PenEvent.MITER_LIMIT
          */
@@ -272,7 +275,6 @@ package org.libspark.gunyarapaint.framework
         
         /**
          * @private
-         * 
          */
         public function get pixelHinting():Boolean
         {
@@ -281,7 +283,6 @@ package org.libspark.gunyarapaint.framework
         
         /**
          * @private
-         * 
          */
         public function set pixelHinting(value:Boolean):void
         {
@@ -293,7 +294,6 @@ package org.libspark.gunyarapaint.framework
         
         /**
          * @private
-         * 
          */
         public function get bitmap():BitmapData
         {
@@ -302,7 +302,6 @@ package org.libspark.gunyarapaint.framework
         
         /**
          * @private
-         * 
          */
         public function set bitmap(value:BitmapData):void
         {
@@ -314,7 +313,6 @@ package org.libspark.gunyarapaint.framework
         
         /**
          * @private
-         * 
          */
         public function get matrix():Matrix
         {
@@ -323,7 +321,6 @@ package org.libspark.gunyarapaint.framework
         
         /**
          * @private
-         * 
          */
         public function set matrix(value:Matrix):void
         {

@@ -14,13 +14,22 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.events.CommandEvent;
     
     /**
-     * ペイントログを解析して再生に必要な情報を管理する
+     * ペイントログを解析して再生に必要な情報を管理するクラスです
      * 
+     * @see CommandContext
      */
     public final class Parser extends CommandContext
     {
+        /**
+         * ヘッダーの終端位置
+         */
         public static const EOH:uint = 26;
         
+        /**
+         * ログデータを解析対象として登録して生成します
+         * 
+         * @param bytes zlibから解凍済みのログデータ
+         */
         public function Parser(bytes:ByteArray)
         {
             super();
@@ -30,11 +39,11 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ログのヘッダーを読み取る.
+         * ログのヘッダーを読み取ります.
          * 
          * <p>
          * 最初の 14bytes に "GUNYARA_PAINT:" 、次の 6bytes に バージョン番号、
-         * 6bytes にそれぞれ 2bytes ずつで画像の幅、高さとアンドゥ回数が含まれる。
+         * 6bytes にそれぞれ 2bytes ずつで画像の幅、高さとアンドゥ回数が含まれます。
          * </p>
          * 
          * @param data
@@ -65,9 +74,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ログを本体の最初の位置に移動する.
+         * ログを本体の最初の位置に移動します
          * 
-         * @throws ArgumentError ログの大きさが 26 bytes 未満の場合。
+         * @throws ArgumentError ログの大きさが 26 bytes 未満の場合
          */
         public function rewind():void
         {
@@ -82,10 +91,10 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ログを先読みする.
+         * ログを先読みを行ないます.
          * 
          * <p>
-         * ログの先読みによって、お絵描きログのコマンド数、最適なアンドゥ回数が分かる
+         * ログの先読みによって、お絵描きログのコマンド数、最適なアンドゥ回数が分かります
          * </p>
          * 
          * @eventType CommandEvent.PREPARSE
@@ -142,11 +151,15 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ログを解析する.
+         * ログを解析します.
          * 
-         * <p>解析が完了すると、CommandEvent.PARSE イベントが発生する。</p>
+         * <p>
+         * 解析が完了すると、position が 1 増え、
+         * CommandEvent.PARSE イベントが発生します。
+         * 対応するコマンドがない場合は例外を送出します。
+         * </p>
          * 
-         * @return コマンド
+         * @return コマンドオブジェクト
          * @throws EOLError これ以上ログを読み込むことが出来ない場合
          * @throws InvalidCommandError 登録されていないコマンドを実行しようとした場合
          */
@@ -179,8 +192,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ログデータそのものを返す
-         * 
+         * ログデータそのものを返します
          */
         public function get bytes():ByteArray
         {
@@ -189,8 +201,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ログのコマンド数を返す
-         * 
+         * ログのコマンド数を返します
          */
         public function get count():uint
         {
@@ -198,8 +209,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のログの解析回数を返す
-         * 
+         * 現在のログの解析回数を返します
          */
         public function get position():uint
         {
@@ -207,8 +217,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 先読みによって連続してアンドゥを行った回数を返す
-         * 
+         * 先読みによって連続してアンドゥを行った回数を返します
          */
         public function get maxUndoCount():uint
         {

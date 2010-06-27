@@ -17,8 +17,7 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.i18n.TranslatorRegistry;
     
     /**
-     * 複数のレイヤーを管理する
-     * 
+     * 複数のレイヤーを管理するクラスです
      */
     public class LayerBitmapCollection implements IEventDispatcher
     {
@@ -32,6 +31,17 @@ package org.libspark.gunyarapaint.framework
          */
         public static const MAX_PIXEL:uint = 2880;
         
+        /**
+         * 画像の幅及び高さからレイヤーの配列を生成します.
+         * 
+         * <p>
+         * レイヤーの配列が生成されると、一番目のレイヤーに "Background" という
+         * 名前の白背景のレイヤーが自動的に生成されます。
+         * </p>
+         * 
+         * @param width 画像の幅
+         * @param height 画像の高さ
+         */
         public function LayerBitmapCollection(width:int, height:int)
         {
             currentIndex = 0;
@@ -53,9 +63,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤーを作成して追加する.
+         * レイヤーを作成して追加します.
          * 
-         * <p>完全に透明なレイヤーが作成される。また、現在の番号が一つ上にずれる。</p>
+         * <p>完全に透明なレイヤーが作成される。また、現在の番号が一つ上にずれます。</p>
          * 
          */
         public function add():void
@@ -74,7 +84,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 指定された番号のレイヤーを取り出す
+         * 指定された番号のレイヤーを取り出します
          * 
          * @param index レイヤー番号
          * @return LayerBitmap
@@ -85,8 +95,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤーをコピーして現在の番号の次に追加する
-         * 
+         * レイヤーをコピーして現在の番号の次に追加します
          */
         public function copy():void
         {
@@ -94,9 +103,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤーをコピーして指定された番号の次に作成する.
+         * レイヤーをコピーして指定された番号の次に作成します.
          * 
-         * <p>コピー元の画像が複製されて追加される。また、現在の番号が一つ上にずれる。</p>
+         * <p>コピー元の画像が複製されて追加される。また、現在の番号が一つ上にずれます</p>
          * 
          * @param index　レイヤー番号
          */
@@ -114,7 +123,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤーを指定された番号と交換する
+         * レイヤーを指定された番号と交換します
          * 
          * @param from 入れ替え元のレイヤー番号
          * @param to 入れ替え先のレイヤー番号
@@ -130,8 +139,8 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のレイヤーを下のレイヤーと合成する 
-         * 
+         * 現在のレイヤーを下のレイヤーと合成します
+         *
          * @throws MergeLayersError レイヤーが一つ、あるいは対象のうち片方が不可視の場合
          */
         public function merge():void
@@ -140,11 +149,11 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 指定された番号のレイヤーを下のレイヤーと合成する.
+         * 指定された番号のレイヤーを下のレイヤーと合成します.
          * 
          * <p>
-         * 両方のレイヤーは可視 (visible=true) である必要がある。
-         * また、合成後は現在のレイヤーは下のレイヤーに変更され、完全に不透明になる。
+         * 両方のレイヤーは可視 (visible=true) である必要があります。
+         * また、合成後は現在のレイヤーは下のレイヤーに変更され、完全に不透明になります
          * </p>
          * 
          * @param index レイヤー番号
@@ -174,7 +183,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のレイヤーを削除する
+         * 現在のレイヤーを削除します
          * 
          * @throws RemoveLayerError レイヤーが一つの場合
          */
@@ -184,9 +193,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 指定された番号のレイヤーを削除する.
+         * 指定された番号のレイヤーを削除します.
          * 
-         * <p>レイヤーが削除されると 現在の番号が一つ下にずれる。</p>
+         * <p>レイヤーが削除されると 現在の番号が一つ下にずれます。</p>
          * 
          * @param index 現在のレイヤー番号
          * @throws RemoveLayerError レイヤーが一つの場合
@@ -204,7 +213,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 表示オブジェクトから現在のビューを削除する
+         * 表示オブジェクトから現在のビューを削除します
          *
          * @param parent 親となる表示オブジェクト
          */
@@ -214,7 +223,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のビューを表示オブジェクトに設定する
+         * 現在のビューを表示オブジェクトに設定します
          *
          * @param parent 親となる表示オブジェクト
          */
@@ -224,8 +233,8 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の全てのレイヤー情報を dataProvider に適用出来る形で返す
-         * 
+         * 現在の全てのレイヤー情報を dataProvider に適用出来る形で返します
+         *
          * @return Array dataProvider に適用出来る配列
          */
         public function toDataProvider():Array
@@ -239,8 +248,8 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 連結されたレイヤー画像とメタデータから復元する
-         * 
+         * 連結されたレイヤー画像とメタデータから復元します
+         *
          * @param layerBitmaps 縦に連結されたレイヤー画像
          * @param metadata メタデータ
          * @see #newLayerBitmapData
@@ -280,7 +289,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 連結されたレイヤー画像とメタデータを保存する
+         * 連結されたレイヤー画像とメタデータを保存します
          * 
          * @param layerBitmaps 縦に連結されたレイヤー画像
          * @param metadata メタデータ
@@ -312,6 +321,9 @@ package org.libspark.gunyarapaint.framework
             metadata.layer_infos = layersInfo;
         }
         
+        /**
+         * @copy flash.events.IEventDispatcher#addEventListener()
+         */
         public function addEventListener(type:String,
                                          listener:Function,
                                          useCapture:Boolean = false,
@@ -321,6 +333,9 @@ package org.libspark.gunyarapaint.framework
             m_sprite.addEventListener(type, listener, useCapture, priority, useWeakReference);
         }
         
+        /**
+         * @copy flash.events.IEventDispatcher#removeEventListener()
+         */
         public function removeEventListener(type:String,
                                             listener:Function,
                                             useCapture:Boolean = false):void
@@ -328,24 +343,32 @@ package org.libspark.gunyarapaint.framework
             m_sprite.removeEventListener(type, listener, useCapture);
         }
         
+        /**
+         * @copy flash.events.IEventDispatcher#dispatchEvent()
+         */
         public function dispatchEvent(event:Event):Boolean
         {
             return m_sprite.dispatchEvent(event);
         }
         
+        /**
+         * @copy flash.events.IEventDispatcher#hasEventListener()
+         */
         public function hasEventListener(type:String):Boolean
         {
             return m_sprite.hasEventListener(type);
         }
         
+        /**
+         * @copy flash.events.IEventDispatcher#willTrigger()
+         */
         public function willTrigger(type:String):Boolean
         {
             return m_sprite.willTrigger(type);
         }
         
         /**
-         * 全てのレイヤーを削除する
-         * 
+         * 全てのレイヤーを削除します
          */
         internal function clear():void
         {
@@ -359,8 +382,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 全てのレイヤーの画像を合成する
-         * 
+         * 全てのレイヤーの画像を合成します
          */
         internal function compositeAll():void
         {
@@ -377,7 +399,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * saveState で保存したオブジェクトを復元する
+         * saveState で保存したオブジェクトを復元します
          *
          * @param undoData saveStateで保存したオブジェクト
          * @see #saveState
@@ -399,7 +421,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 画像データを含むすべてのレイヤー情報を保存する
+         * 画像データを含むすべてのレイヤー情報を保存します
          *
          * @param undoData 保存先となる空のオブジェクト
          * @see #loadState
@@ -465,8 +487,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のレイヤー画像を設定する
-         * 
+         * 現在のレイヤー画像を設定します
          */
         internal function setCurrentLayer(value:LayerBitmap):void
         {
@@ -484,8 +505,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のレイヤー画像の幅を返す
-         * 
+         * 現在のレイヤー画像の幅を返します
          */
         public function get width():uint
         {
@@ -502,8 +522,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のレイヤー画像を返す
-         * 
+         * 現在のレイヤー画像を返します
          */
         public function get currentLayer():LayerBitmap
         {
@@ -511,8 +530,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のレイヤー数を返す
-         * 
+         * 現在のレイヤー数を返します
          */
         public function get count():uint
         {
@@ -520,8 +538,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 全てのレイヤーを結合した結果の BitmapData のコピーを返す
-         * 
+         * 全てのレイヤーを結合した結果の BitmapData のコピーを返します
          */
         public function get compositedBitmapData():BitmapData
         {
@@ -529,7 +546,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤーを保存するために必要な BitmapData を生成する
+         * レイヤーを保存するために必要な BitmapData を生成します
          * 
          * @see #load()
          * @see #save()
@@ -541,8 +558,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * スプライトオブジェクトを返す
-         * 
+         * スプライトオブジェクトを返します
          */
         internal function get view():Sprite
         {
@@ -564,19 +580,13 @@ package org.libspark.gunyarapaint.framework
         public var doCompositeAll:Boolean;
         
         /**
-         * キャンバス用のスプライトオブジェクト
-         * 
-         * @default null
-         */
-        private var m_sprite:Sprite;
-        
-        /**
-         * 全てのレイヤーが合成された結果の画像データ
+         * 全てのレイヤーが合成された結果の画像データです
          * 
          * @default null
          */
         internal var composited:BitmapData;
         
+        private var m_sprite:Sprite;
         private var m_layers:Vector.<LayerBitmap>;
         private var m_drawingSprite:Sprite;
         private var m_tempLayer:DisplayObject;

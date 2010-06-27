@@ -12,11 +12,17 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.events.PlayerEvent;
     
     /**
-     * ログを再生する
+     * ログを再生するクラスです
      * 
+     * @see Painter
      */
     public final class Player extends Painter
     {
+        /**
+         * Parser オブジェクトの登録及び再生準備をして生成します
+         *
+         * @param parser Parser オブジェクト
+         */
         public function Player(parser:Parser)
         {
             var data:Object = {};
@@ -31,11 +37,11 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ログデータを読み込む.
+         * ログデータを読み込みます.
          * 
          * <p>
-         * まず先読みを実行してからお絵描きログを読み込んで再生出来る状態にする。
-         * このクラスを継承する Player はこれを必ず実行する必要がある。
+         * まず先読みを実行してからお絵描きログを読み込んで再生出来る状態にします。
+         * このクラスを継承する Player はこれを必ず実行する必要があります。
          * </p>
          * 
          * @param bytes ログデータ
@@ -48,7 +54,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ログを再生する
+         * ログを再生します
          * 
          * @eventType PlayerEvent.STARTED
          */
@@ -62,7 +68,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ログの再生を一時停止する
+         * ログの再生を一時停止します
          * 
          * @eventType PlayerEvent.PAUSED
          */
@@ -76,7 +82,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ログの再生を停止する
+         * ログの再生を停止します
          * 
          * @eventType PlayerEvent.STOPPED
          */
@@ -129,8 +135,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ログのコマンド数を返す
-         * 
+         * ログのコマンド数を返します
          */
         public function get count():uint
         {
@@ -138,8 +143,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のログの解析回数を返す
-         * 
+         * 現在のログの解析回数を返します
          */
         public function get position():uint
         {
@@ -147,8 +151,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 再生中かどうかを調べる
-         * 
+         * 再生中かどうかのフラグを返します
          */
         public function get playing():Boolean
         {
@@ -156,14 +159,12 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 再生速度
-         * 
+         * 現在の再生速度を返します
          */
         public var speed:uint;
         
         /**
-         * 動作間隔(ミリ秒)
-         * 
+         * 現在の動作間隔をミリ秒単位で返します
          */
         public function set duration(value:uint):void
         {

@@ -3,11 +3,15 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.Recorder;
 
 	/**
-	 * ICanvasModule を管理するクラス
-	 * 
+	 * ICanvasModule を管理するクラスです
 	 */	
     public final class CanvasModuleContext
     {
+        /**
+         * はじめから使用可能なモジュールを予め登録し、Recorder を紐付けた状態で生成します
+         * 
+         * @param recorder Recorder オブジェクト
+         */
         public function CanvasModuleContext(recorder:Recorder)
         {
             m_modules = {};
@@ -25,7 +29,7 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
 		/**
-		 * ICanvasModule を登録して利用出来るようにする
+		 * ICanvasModule を登録して利用出来るようにします
 		 * 
 		 * @param module ICanvasModule を実装したクラス
 		 */		
@@ -35,7 +39,7 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
 		/**
-		 * name に対応するモジュールID から ICanvasModule を実装したクラスを返す
+		 * name に対応するモジュールID から ICanvasModule を実装したクラスを返します
 		 * 
 		 * @param name モジュールID
 		 * @return ICanvasModule を実装したクラス

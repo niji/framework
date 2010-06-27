@@ -23,11 +23,11 @@ package org.libspark.gunyarapaint.framework.modules
     import org.libspark.gunyarapaint.framework.errors.LockedLayerError;
 
     /**
-     * ICanvasModuleの実装を助けるためのクラス.
+     * ICanvasModuleの実装を助けるためのクラスです.
      * 
      * <p>
      * 大半の処理はここに集約されているため、
-     * 基本的にすべてのメソッドを1から実装する必要はない。
+     * 基本的にすべてのメソッドを1から実装する必要はありません。
      * </p>
      */
     public class CanvasModule
@@ -184,7 +184,7 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
         /**
-         * 始点と終点を取得する(現在は単体テスト用に使われているのみ)
+         * 始点と終点を取得します(現在は単体テスト用に使われているのみ)
          * 
          * @param start 始点
          * @param end 終点
@@ -198,10 +198,10 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
         /**
-         * 始点と終点の座標を保存する
+         * 始点と終点の座標を保存します
          * 
-         * @param x
-         * @param y
+         * @param x 終点となるX座標
+         * @param y 終点となるY座標
          */
         protected function saveCoordinate(x:Number, y:Number):void
         {
@@ -212,7 +212,7 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
         /**
-         * 現在のレイヤーの状態を検証する
+         * 現在のレイヤーの状態を検証します
          * 
          * @throws InvisibleLayerError 現在のレイヤーが不可視の場合
          * @throws LockedLayerError 現在のレイヤーがロックされている場合
@@ -227,10 +227,10 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
         /**
-         * 現在の座標を設定する
+         * 現在の座標を設定します
          * 
-         * @param x x座標
-         * @param y y座標
+         * @param x X座標
+         * @param y Y座標
          */
         protected function setCoordinate(x:Number, y:Number):void
         {
@@ -249,10 +249,10 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
         /**
-         * 指定された座標が現在の座標と一致するかを確認する
+         * 指定された座標が現在の座標と一致するかを確認します
          * 
-         * @param x x座標
-         * @param y y座標
+         * @param x X座標
+         * @param y Y座標
          * @return 同じである場合は true
          */        
         protected function equalsCoordinate(x:uint, y:uint):Boolean
@@ -265,8 +265,7 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
         /**
-         * 現在の座標から ICommand#write に渡す引数に変換する
-         * 
+         * 現在の座標から ICommand#write に渡す引数に変換します
          */
         protected function getArgumentsFromCurrentCoordinate():Object
         {
@@ -274,11 +273,11 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
         /**
-         * 指定された座標から ICommand#write に渡す引数に変換する
+         * 指定された座標から ICommand#write に渡す引数に変換します
          * 
-         * @param x x座標
-         * @param y y座標
-         * @return args プロパティxとyで構成されるオブジェクト
+         * @param x X座標
+         * @param y Y座標
+         * @return args プロパティXとYで構成されるオブジェクト
          */
         protected function getArgumentsFromCoordinate(x:Number, y:Number):Object
         {
@@ -292,8 +291,7 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
         /**
-         * 描写処理を終了する
-         * 
+         * 描写処理を終了します
          */
         protected function stopDrawing():void
         {
@@ -429,9 +427,11 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
         /**
-         * 現在のX座標を取得する.
+         * 現在のX座標を取得します.
          * 
-         * 内部は静的変数であるため、CanvasModuleを継承する全てのクラスに影響する
+         * <p>
+         * 内部は静的変数であるため、CanvasModuleを継承する全てのクラスに影響します
+         * </p>
          */
         protected function get coordinateX():Number
         {
@@ -439,9 +439,11 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
         /**
-         * 現在のY座標を取得する.
+         * 現在のY座標を取得します.
          * 
-         * 内部は静的変数であるため、CanvasModuleを継承する全てのクラスに影響する
+         * <p>
+         * 内部は静的変数であるため、CanvasModuleを継承する全てのクラスに影響します
+         * </p>
          */
         protected function get coordinateY():Number
         {
@@ -449,7 +451,7 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
         /**
-         * 現在時計回りに描写しているかを取得する
+         * 現在時計回りに描写しているかを取得します
          */
         protected function getShouldDrawCircleClockwise():Boolean
         {
@@ -457,7 +459,7 @@ package org.libspark.gunyarapaint.framework.modules
         }
         
         /**
-         * 現在反時計回りで描写しているかを取得する
+         * 現在反時計回りで描写しているかを取得します
          */
         protected function getShouldDrawCircleCounterClockwise():Boolean
         {

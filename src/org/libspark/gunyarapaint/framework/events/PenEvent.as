@@ -4,7 +4,6 @@ package org.libspark.gunyarapaint.framework.events
 
     /**
      * @private
-     * 
      */
     public final class PenEvent extends AbstractEvent
     {
@@ -63,6 +62,9 @@ package org.libspark.gunyarapaint.framework.events
          */
         public static const MATRIX:String = PREFIX + "matrix";
         
+        /**
+         * @inheritDoc 
+         */
         public function PenEvent(type:String)
         {
             super(type, false, false);

@@ -5,16 +5,21 @@ package org.libspark.gunyarapaint.framework
     import flash.geom.Point;
     
     /**
-     * Graphics に描写を委譲するクラス.
+     * Graphics に描写を委譲するクラスです.
      * 
      * <p>
-     * Graphics の移譲クラスとして実装されている。これは Graphics がサブクラス
-     * 出来無いクラスであるため、代わりにGraphicsの処理を受け持つという方法を適用している。
-     * これは FlexUnit による単体テストをしやすくするために作られている。
+     * Graphics がサブクラス出来無いクラスであるため、代わりにGraphicsの処理を
+     * 受け持つという方法を適用しています。これにより FlexUnit による単体テストを
+     * しやすくします。
      * </p>
      */
     public class PaintEngine
     {
+        /**
+         * Shape オブジェクトから描画エンジンを生成します
+         * 
+         * @param shape 描画対象となる Shape オブジェクト
+         */
         public function PaintEngine(shape:Shape)
         {
             m_coordinate = new Point();
@@ -24,7 +29,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * Graphics オブジェクトの描写内容を消去する
+         * Graphics オブジェクトの描写内容を消去します
          * 
          */
         public function clear():void
@@ -33,7 +38,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * Graphics の現在位置を変更する
+         * Graphics の現在位置を変更します
          * 
          * @param x 移動先となる X 座標
          * @param y 移動先となる Y 座標
@@ -48,7 +53,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * Graphics の現在位置から指定された座標まで線を描写する
+         * Graphics の現在位置から指定された座標まで線を描写します
          * 
          * @param x 描写先となる X 座標
          * @param y 描写先となる Y 座標
@@ -63,7 +68,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 矩形を描写する
+         * 矩形を描写します
          * 
          * @param x 基準点となる X 座標
          * @param y 基準点となる Y 座標
@@ -78,7 +83,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 楕円を描写する
+         * 楕円を描写します
          * 
          * @param x 基準点となる X 座標
          * @param y 基準点となる Y 座標
@@ -93,7 +98,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 塗りつぶしを開始する
+         * 塗りつぶしを開始します
          * 
          * @param color 塗りつぶす色
          * @param alpha 透明度
@@ -105,7 +110,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の位置から円弧を描写する
+         * 現在の位置から円弧を描写します
          * 
          * @param radius 半径
          * @see flash.display.Graphics#drawCircle
@@ -120,7 +125,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 塗りつぶしを終了する
+         * 塗りつぶしを終了します
          * 
          * @see flash.display.Graphics#endFill
          */
@@ -130,7 +135,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 座標を正しい位置に修正する
+         * 座標を正しい位置に修正します
          * 
          * @param Point
          */
@@ -139,7 +144,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * Graphics を現在のペンの状態に適用する
+         * Graphics を現在のペンの状態に適用します
          * 
          */
         public function resetPen():void
@@ -149,7 +154,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ペンオブジェクトを返す
+         * ペンオブジェクトを返します
          * 
          * @return Pen ペンオブジェクト
          */
@@ -159,7 +164,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * シェイプオブジェクトを返す
+         * シェイプオブジェクトを返します
          * 
          * @return Shape シェイプオブジェクト
          */
@@ -169,7 +174,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のx座標を返す
+         * 現在のx座標を返します
          * 
          * @return x 現在のx座標
          */

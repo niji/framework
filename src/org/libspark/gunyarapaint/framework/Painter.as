@@ -14,7 +14,7 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.errors.NotSupportedVersionError;
     
     /**
-     * 再生及び記録のための共通基盤.
+     * 再生及び記録のための共通基盤となるクラスです.
      * 
      * <p>実際の処理は Painter または PaintEngine に委譲する</p>
      */
@@ -22,40 +22,42 @@ package org.libspark.gunyarapaint.framework
     {
         /**
          * ログのバージョン番号
-         * 
          */
         public static const PAINTER_LOG_VERSION:uint = 22;
         
         /**
          * ペインター自体のバージョン
-         * 
          */
         public static const PAINTER_VERSION:uint = 20100701;
         
         /**
          * ペインターのバージョン文字列
-         * 
          */
         public static const PAINTER_VERSION_STRING:String = "ver." + PAINTER_VERSION;
         
         /**
          * レイヤー選択をアンドゥに含めるかどうかのオプション
-         *
          */
         public static const COMPATIBILITY_UNDO_LAYER:uint = 1;
         
         /**
          * 1 ピクセル以上の大きさを持つ PixelCommand を有効にするかどうかのオプション
-         *
          */
         public static const COMPATIBILITY_BIG_PIXEL:uint = 2;
         
         /**
          * 反転関連で全てのレイヤーに対して適用するための定数
-         * 
          */
         public static const ALL_LAYERS:uint = 0xff;
         
+        /**
+         * レイヤー配列の生成及び描画状態を初期化して Painter を生成します
+         *
+         * @param width 画像の幅
+         * @param height 画像の高さ
+         * @param version ログのバージョン
+         * @param paintEngine PaintEngine オブジェクト
+         */
         public function Painter(width:uint, height:uint, version:uint, paintEngine:PaintEngine)
         {
             enableBigPixel = true;
@@ -72,10 +74,11 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * バージョン番号からペイントエンジンオブジェクトを返す
+         * バージョン番号からペイントエンジンオブジェクトを返します
          *
          * @param uint バージョン番号
          * @return PaintEngine ペイントエンジンオブジェクト
+         * @see PaintEngine
          */
         public static function createPaintEngine(version:uint):PaintEngine
         {
@@ -92,7 +95,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * お絵描き操作の巻き戻しを実行する
+         * お絵描き操作の巻き戻しを実行します
          */
         public function undo():void
         {
@@ -100,7 +103,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * お絵描き操作のやり直しを実行する
+         * お絵描き操作のやり直しを実行します
          */
         public function redo():void
         {
@@ -108,7 +111,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のお絵描き操作をアンドゥログを追加する
+         * 現在のお絵描き操作をアンドゥログを追加します
          */
         public function pushUndo():void
         {
@@ -116,11 +119,11 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 必要であれば現在のお絵描き操作をアンドゥログに追加する.
+         * 必要であれば現在のお絵描き操作をアンドゥログに追加します.
          * 
          * <p>
          * これはレイヤー操作もアンドゥログに含まれていた為、ログのバージョンが古いか、
-         * レイヤー操作もアンドゥに含めてもいい選択が入っている場合にアンドゥログに追加する
+         * レイヤー操作もアンドゥに含めてもいい選択が入っている場合にアンドゥログに追加します
          * </p>
          */
         public function pushUndoIfNeed():void
@@ -130,9 +133,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在位置を変更する.
+         * 現在位置を変更します.
          * 
-         * <p>PaintEngine クラスにある moveTo の委譲</p>
+         * <p>PaintEngine クラスにある moveTo の委譲です</p>
          * 
          * @param x 移動先となる X 座標
          * @param y 移動先となる Y 座標
@@ -144,9 +147,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在位置から指定された位置まで線を描写する.
+         * 現在位置から指定された位置まで線を描写します.
          * 
-         * <p>PaintEngine クラスにある lineTo の委譲</p>
+         * <p>PaintEngine クラスにある lineTo の委譲です</p>
          * 
          * @param x 描写先となる X 座標
          * @param y 描写先となる Y 座標
@@ -158,9 +161,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 矩形を描写する.
+         * 矩形を描写します.
          * 
-         * <p>PaintEngine クラスにある drawRect の委譲</p>
+         * <p>PaintEngine クラスにある drawRect の委譲です</p>
          * 
          * @param x 基準点となる X 座標
          * @param y 基準点となる Y 座標
@@ -175,9 +178,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 楕円を描写する.
+         * 楕円を描写します.
          * 
-         * <p>PainterEngine クラスにある drawEllipse の委譲</p>
+         * <p>PainterEngine クラスにある drawEllipse の委譲です</p>
          * 
          * @param x 基準点となる X 座標
          * @param y 基準点となる Y 座標
@@ -192,9 +195,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 塗りつぶしを開始する.
+         * 塗りつぶしを開始します.
          * 
-         * <p>PaintEngine クラスにある beginFill の委譲</p>
+         * <p>PaintEngine クラスにある beginFill の委譲です</p>
          * 
          * @param color 塗りつぶす色
          * @param alpha 透明度
@@ -206,9 +209,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の位置から円弧を描写する.
+         * 現在の位置から円弧を描写します.
          * 
-         * <p>PaintEngine クラスにある drawCircle の委譲</p>
+         * <p>PaintEngine クラスにある drawCircle の委譲です</p>
          * 
          * @param radius 半径
          * @see PaintEngine#drawCircle()
@@ -219,9 +222,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 塗りつぶしを終了する.
+         * 塗りつぶしを終了します.
          * 
-         * <p>PaintEngine クラスにある endFill の委譲</p>
+         * <p>PaintEngine クラスにある endFill の委譲です</p>
          * 
          * @see PaintEngine#endFill()
          */
@@ -231,9 +234,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ペンオブジェクトを初期状態にリセットする.
+         * ペンオブジェクトを初期状態にリセットします.
          * 
-         * <p>PaintEngine クラスにある resetPen の委譲</p>
+         * <p>PaintEngine クラスにある resetPen の委譲です</p>
          * 
          * @see PaintEngine#resetPen()
          */
@@ -243,9 +246,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 描写中の内容を消去する.
+         * 描写中の内容を消去します.
          * 
-         * <p>PainterEngine クラスにある clear の委譲</p>
+         * <p>PainterEngine クラスにある clear の委譲です</p>
          * 
          * @see PaintEngine#clear()
          */
@@ -255,11 +258,12 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * PainterEngine クラスに描写された中身を現在のレイヤーに反映させる.
+         * PainterEngine クラスに描写された中身を現在のレイヤーに反映させます.
          * 
-         * <p>Pen クラスのブレンドモードを適用する</p>
+         * <p>Pen クラスのブレンドモードを適用します</p>
          * 
          * @see LayerBitmap#compositeFrom()
+         * @see PaintEngine#blendMode
          */
         public function composite():void
         {
@@ -273,11 +277,12 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 塗りつぶしを行う.
+         * 塗りつぶしを行います.
          * 
-         * <p>PainterEngine クラスの現在位置と Pen クラスの色を適用する</p>
+         * <p>PainterEngine クラスの現在位置と Pen クラスの色を適用します</p>
          * 
          * @see LayerBitmap#floodFill()
+         * @see PaintEngine#argb
          */
         public function floodFill():void
         {
@@ -290,9 +295,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 1 ピクセルを描写する.
+         * 1 ピクセルを描写します.
          * 
-         * <p>現在の Pen クラスの色を適用する</p>
+         * <p>現在の Pen クラスの色を適用します</p>
          * 
          * @param x 描写先となる X 座標
          * @param y 描写先となる Y 座標
@@ -305,7 +310,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 特定のピクセルの色を取得する(不透明度は取得しない)
+         * 特定のピクセルの色を取得します。不透明度は取得しません
          * 
          * @param x 取得先となる X 座標
          * @param y 取得先となる Y 座標
@@ -319,7 +324,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 特定のピクセルの色を取得する
+         * 特定のピクセルの色を取得します。不透明度も含まれます
          * 
          * @param x 取得先となる X 座標
          * @param y 取得先となる Y 座標
@@ -331,7 +336,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤーの可視状態を変更する
+         * レイヤーの可視状態を変更します
          * 
          * @param index レイヤー番号
          * @param visible 可視であるかどうか
@@ -343,7 +348,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 指定されたレイヤーに対して水平方向に鏡面処理を実行する
+         * 指定されたレイヤーに対して水平方向に鏡面処理を実行します
          * 
          * @param index レイヤー番号
          */
@@ -353,7 +358,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 指定されたレイヤーに対して垂直方向に鏡面処理を実行する
+         * 指定されたレイヤーに対して垂直方向に鏡面処理を実行します
          * 
          * @param index レイヤー番号
          */
@@ -363,7 +368,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のレイヤーに対して平行移動を行う
+         * 現在のレイヤーに対して平行移動を行います
          * 
          * @param x 移動先となるX座標
          * @param y 移動先となるY座標
@@ -374,7 +379,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 指定されたレイヤーに対して平行移動を行う
+         * 指定されたレイヤーに対して平行移動を行います
          * 
          * @param index レイヤー番号
          * @param x 移動先となるX座標
@@ -388,7 +393,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のレイヤーに対して拡大または縮小を行う
+         * 現在のレイヤーに対して拡大または縮小を行います
          * 
          * @param x 移動先となるX座標
          * @param y 移動先となるY座標
@@ -399,7 +404,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 指定されたレイヤーに対して拡大または縮小を行う
+         * 指定されたレイヤーに対して拡大または縮小を行います
          * 
          * @param index レイヤー番号
          * @param x 移動先となるX座標
@@ -413,11 +418,11 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 描写開始を宣言する.
+         * 描写開始を宣言します.
          * 
          * <p>
          * 全てのレイヤーに対してではなく、現在のレイヤーのみにブレンドモードが
-         * 適用されるように Sprite の変更が行われる。
+         * 適用されるように Sprite の変更が行われます。
          * </p>
          */
         public function startDrawing():void
@@ -426,14 +431,23 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 描写終了を宣言する
-         * 
+         * 描写終了を宣言します
          */
         public function stopDrawing():void
         {
             m_layers.stopDrawing(m_paintEngine);
         }
         
+        /**
+         * 座標の補正を行ないます.
+         * 
+         * <p>
+         * PaintEngine#correctCoordinate の移譲です
+         * </p>
+         * 
+         * @param coordinate 補正対象の座標となる Point オブジェクト
+         * @see PaintEngine#correctCoordinate()
+         */
         public function correctCoordinate(coordinate:Point):void
         {
             m_paintEngine.correctCoordinate(coordinate);
@@ -454,8 +468,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤーオブジェクトを返す
-         * 
+         * レイヤーオブジェクトを返します
          */
         public function get layers():LayerBitmapCollection
         {
@@ -463,8 +476,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ペンオブジェクトを返す
-         * 
+         * ペンオブジェクトを返します
          */
         public function get pen():Pen
         {
@@ -472,8 +484,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のお絵描きログのバージョンを返す
-         * 
+         * 現在のお絵描きログのバージョンを返します
          */
         public function get version():uint
         {
@@ -481,8 +492,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 描写するキャンバスの幅を返す
-         * 
+         * 描写するキャンバスの幅を返します
          */
         public function get width():uint
         {
@@ -490,8 +500,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 描写するキャンバスの高さを返す
-         * 
+         * 描写するキャンバスの高さを返します
          */
         public function get height():uint
         {
@@ -499,8 +508,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * UndoStack オブジェクトを返す
-         * 
+         * UndoStack オブジェクトを返します
          */
         public function get undoStack():UndoStack
         {
@@ -508,8 +516,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のレイヤーの透明度を変更する
-         * 
+         * 現在のレイヤーの透明度を変更します
          */
         public function set currentLayerAlpha(value:Number):void
         {
@@ -518,8 +525,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のブレンドモードを変更する
-         * 
+         * 現在のブレンドモードを変更します
          */
         public function set currentLayerBlendMode(value:String):void
         {
@@ -528,8 +534,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ペンオブジェクトを設定する
-         * 
+         * ペンオブジェクトを設定します
          */
         public function set pen(value:Pen):void
         {
@@ -537,8 +542,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ログのバージョンを設定する
-         * 
+         * ログのバージョンを設定します
          */
         internal function setVersion(value:uint):void
         {
@@ -546,8 +550,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * UndoStack オブジェクトを設定する
-         * 
+         * UndoStack オブジェクトを設定します
          */
         internal function setUndoStack(value:UndoStack):void
         {
@@ -555,14 +558,14 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤー位置の変更を巻き戻しに含めるか
+         * レイヤー位置の変更を巻き戻しに含めるかを設定します
          * 
          * @default true
          */
         public var enableUndoLayer:Boolean;
         
         /**
-         * 大きなピクセルを有効にするか
+         * 大きなピクセルを有効にするかを設定します
          * 
          * @default true
          */

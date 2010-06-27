@@ -6,9 +6,13 @@ package org.libspark.gunyarapaint.framework
     /**
      * 分割して表示する補助線のオブジェクト
      * 
+     * @see AuxBitmap
      */
     public final class AuxLineView extends AuxBitmap
     {
+        /**
+         * 直線及び斜線を予め引いて、非表示にした状態で補助線画像を生成します
+         */
         public function AuxLineView(rect:Rectangle)
         {
             super(rect);

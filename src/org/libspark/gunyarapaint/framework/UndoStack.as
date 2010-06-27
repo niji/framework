@@ -9,13 +9,22 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.events.UndoEvent;
     
     /**
-     * アンドゥを管理する
+     * アンドゥを管理するクラスです
      * 
      */
     public final class UndoStack extends EventDispatcher
     {
+        /**
+         * アンドゥを管理する標準キュー値
+         */
         public static const DEFAULT_SIZE:uint = 16;
         
+        /**
+         * アンドゥのキューを初期化し、最初にレイヤー配列を登録した状態で生成します
+         *
+         * @param layers レイヤー配列
+         * @param size レイヤーを管理するキュー数
+         */
         public function UndoStack(layers:LayerBitmapCollection,
                                   size:uint = 16)
         {
@@ -30,7 +39,7 @@ package org.libspark.gunyarapaint.framework
         }
         
 		/**
-		 * UndoStack を復元する
+		 * UndoStack を復元します
 		 * 
 		 * @param value #save() で保存したオブジェクト
          * @see #save()
@@ -63,7 +72,7 @@ package org.libspark.gunyarapaint.framework
         }
         
 		/**
-		 * UndoStack を保存する
+		 * UndoStack を保存します
 		 * 
 		 * @param value　保存先となる空のオブジェクト
          * @see #load()
@@ -95,7 +104,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 前回のレイヤーのスナップショットから巻き戻す
+         * 前回のレイヤーのスナップショットから巻き戻します
          * 
          * @param layers LayerbitmapCollectionオブジェクト
          * @eventType UndoEvent.UNDO
@@ -117,7 +126,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 前回のレイヤーのスナップショットからやり直す
+         * 前回のレイヤーのスナップショットからやり直します
          * 
          * @param layers LayerbitmapCollectionオブジェクト
          * @eventType UndoEvent.REDO
@@ -134,7 +143,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤーのスナップショットを追加する
+         * レイヤーのスナップショットを追加します
          * 
          * @param layers LayerbitmapCollectionオブジェクト
          */
@@ -151,7 +160,7 @@ package org.libspark.gunyarapaint.framework
         }
         
 		/**
-		 * 巻き戻し可能な回数を返す
+		 * 巻き戻し可能な回数を返します
 		 */
         public function get undoCount():uint
         {
@@ -160,7 +169,7 @@ package org.libspark.gunyarapaint.framework
         }
         
 		/**
-		 * やり直し可能な回数を返す
+		 * やり直し可能な回数を返します
 		 */
         public function get redoCount():uint
         {
@@ -169,7 +178,7 @@ package org.libspark.gunyarapaint.framework
         }
         
 		/**
-		 * UndoStack の大きさを返す
+		 * UndoStack の大きさを返します
 		 */
         public function get size():uint
         {

@@ -10,11 +10,15 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.i18n.TranslatorRegistry;
     
     /**
-     * ビットマップによるレイヤー画像のオブジェクト
-     * 
+     * ビットマップによるレイヤー画像のクラスです
      */
     public final class LayerBitmap
     {
+        /**
+         * ビットマップ画像データを紐付けてレイヤーを生成します
+         * 
+         * @param bitmapData ビットマップの画像データ
+         */
         public function LayerBitmap(bitmapData:BitmapData)
         {
             m_bitmap = new Bitmap();
@@ -32,7 +36,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤーを複製する
+         * レイヤーを複製します
          * 
          * @param bitmapDataCopy レイヤー画像のデータも複製するかどうか
          * @return 複製されたレイヤー (LayerBitmap)
@@ -56,7 +60,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * ソース元からレイヤーを合成する
+         * ソース元からレイヤーを合成します
          * 
          * @param source ソース元
          * @param blendMode ブレンドモード
@@ -72,9 +76,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * レイヤーを BitmapData に描写する.
+         * レイヤーを BitmapData に描写します.
          * 
-         * <p>現在のレイヤーの透明度及びブレンドモードを用いられて合成される。</p>
+         * <p>現在のレイヤーの透明度及びブレンドモードを用いられて合成されます</p>
          * 
          * @param dest 描写先の BitmapData
          */
@@ -86,7 +90,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のレイヤーにマトリックスオブジェクトを適用して変形させる
+         * 現在のレイヤーにマトリックスオブジェクトを適用して変形させます
          * 
          * @param matrix マトリックスオブジェクト
          * @see flash.geom.Matrix
@@ -99,7 +103,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 指定された位置にバケツツールを適用する
+         * 指定された位置にバケツツールを適用します
          * 
          * @param x 塗りつぶし先の X 座標
          * @param y 塗りつぶし先の Y 座標
@@ -112,7 +116,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 1 ピクセルを描写する
+         * 1 ピクセルを描写します
          * 
          * @param x 描写先の X 座標
          * @param y 描写先の Y 座標
@@ -125,8 +129,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * toJSON でシリアライズされたオブジェクトから復元する
-         *
+         * toJSON でシリアライズされたオブジェクトから復元します
          */
         public function fromJSON(data:Object):void
         {
@@ -138,8 +141,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の画像データを除くメタ情報をJSON 形式に変換する
-         *
+         * 現在の画像データを除くメタ情報をJSON 形式に変換します
          */
         public function toJSON():Object
         {
@@ -159,8 +161,7 @@ package org.libspark.gunyarapaint.framework
         }
 
         /**
-         * 現在の不透明度を取得する
-         *
+         * 現在の不透明度を取得します
          */
         public function get alpha():Number
         {
@@ -168,8 +169,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のブレンドモードを取得する
-         *
+         * 現在のブレンドモードを取得します
+         * 
+         * @see flash.display.BlendMode
          */
         public function get blendMode():String
         {
@@ -177,8 +179,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * DisplayObject の派生オブジェクトを取得する
-         *
+         * DisplayObject の派生オブジェクトを取得します
          */
         public function get displayObject():DisplayObject
         {
@@ -186,8 +187,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の画像の高さを取得する
-         *
+         * 現在の画像の高さを取得します
          */
         public function get height():uint
         {
@@ -195,8 +195,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の可視状態を取得する
-         *
+         * 現在の可視状態を取得します
          */
         public function get visible():Boolean
         {
@@ -204,8 +203,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の画像の幅を取得する
-         *
+         * 現在の画像の幅を取得します
          */
         public function get width():uint
         {
@@ -213,8 +211,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の不透明度を設定する
-         *
+         * 現在の不透明度を設定します
          */
         public function set alpha(value:Number):void
         {
@@ -223,8 +220,9 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のブレンドモードを設定する
-         *
+         * 現在のブレンドモードを設定します
+         * 
+         * @see flash.display.BlendMode
          */
         public function set blendMode(value:String):void
         {
@@ -232,8 +230,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の可視状態を設定する
-         *
+         * 現在の可視状態を設定します
          */
         public function set visible(value:Boolean):void
         {
