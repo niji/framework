@@ -4,8 +4,6 @@ package org.libspark.gunyarapaint.framework.events
     
     internal class AbstractEvent extends Event
     {
-        protected static const PREFIX:String = "org.libspark.gunyarapaint.framework.events.";
-        
         /**
          * @inheritDoc
          */
@@ -20,6 +18,11 @@ package org.libspark.gunyarapaint.framework.events
         public override function clone():Event
         {
             return new AbstractEvent(type, bubbles, cancelable);
+        }
+        
+        protected static function get commonPrefix():String
+        {
+            return "org.libspark.gunyarapaint.framework.events.";
         }
     }
 }

@@ -10,17 +10,17 @@ package org.libspark.gunyarapaint.framework.events
         /**
          * やり直しした後
          */
-        public static const UNDO:String = PREFIX + "undo";
+        public static const UNDO:String = prefix + "undo";
         
         /**
          * 巻き戻しした後
          */
-        public static const REDO:String = PREFIX + "redo";
+        public static const REDO:String = prefix + "redo";
         
         /**
          * アンドゥを管理するオブジェクトに情報が積まれた後
          */
-        public static const PUSH:String = PREFIX + "push";
+        public static const PUSH:String = prefix + "push";
         
         /**
          * @inheritDoc 
@@ -36,6 +36,11 @@ package org.libspark.gunyarapaint.framework.events
         public override function clone():Event
         {
             return new UndoEvent(type);
+        }
+        
+        public static function get prefix():String
+        {
+            return commonPrefix + "undoEvent.";
         }
     }
 }

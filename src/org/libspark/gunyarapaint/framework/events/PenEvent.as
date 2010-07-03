@@ -10,57 +10,57 @@ package org.libspark.gunyarapaint.framework.events
         /**
          * 太さが変更された
          */
-        public static const THICKNESS:String = PREFIX + "thickness";
+        public static const THICKNESS:String = prefix + "thickness";
         
         /**
          * 色が変更された
          */
-        public static const COLOR:String = PREFIX + "color";
+        public static const COLOR:String = prefix + "color";
         
         /**
          * 不透明度が変更された
          */
-        public static const ALPHA:String = PREFIX + "alpha";
+        public static const ALPHA:String = prefix + "alpha";
         
         /**
          * ブレンドモードが変更された
          */
-        public static const BLEND_MODE:String = PREFIX + "blendMode";
+        public static const BLEND_MODE:String = prefix + "blendMode";
         
         /**
          * スケールモードが変更された
          */
-        public static const SCALE_MODE:String = PREFIX + "scaleMode";
+        public static const SCALE_MODE:String = prefix + "scaleMode";
         
         /**
          * キャップモードが変更された
          */
-        public static const CAPS_STYLE:String = PREFIX + "capsStyle";
+        public static const CAPS_STYLE:String = prefix + "capsStyle";
         
         /**
          * ジョイントモードが変更された
          */
-        public static const JOINT_STYLE:String = PREFIX + "jointStyle";
+        public static const JOINT_STYLE:String = prefix + "jointStyle";
         
         /**
          * マイター値が変更された
          */
-        public static const MITER_LIMIT:String = PREFIX + "miterLimit";
+        public static const MITER_LIMIT:String = prefix + "miterLimit";
         
         /**
          * ピクセルヒンティングが変更された
          */
-        public static const PIXEL_HINTING:String = PREFIX + "pixelHinting";
+        public static const PIXEL_HINTING:String = prefix + "pixelHinting";
         
         /**
          * @private
          */
-        public static const BITMAP:String = PREFIX + "bitmap";
+        public static const BITMAP:String = prefix + "bitmap";
         
         /**
          * @private
          */
-        public static const MATRIX:String = PREFIX + "matrix";
+        public static const MATRIX:String = prefix + "matrix";
         
         /**
          * @inheritDoc 
@@ -76,6 +76,11 @@ package org.libspark.gunyarapaint.framework.events
         public override function clone():Event
         {
             return new PenEvent(type);
+        }
+        
+        public static function get prefix():String
+        {
+            return commonPrefix + "penEvent.";
         }
     }
 }

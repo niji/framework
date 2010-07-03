@@ -10,7 +10,7 @@ package org.libspark.gunyarapaint.framework.events
         /**
          * エラー発生時
          */
-        public static const ERROR:String = PREFIX + "error";
+        public static const ERROR:String = prefix + "error";
         
         /**
          * @inheritDoc 
@@ -35,6 +35,11 @@ package org.libspark.gunyarapaint.framework.events
         public function get cause():Error
         {
             return m_cause;
+        }
+        
+        public static function get prefix():String
+        {
+            return commonPrefix + "playerErrorEvent.";
         }
         
         private var m_cause:Error;

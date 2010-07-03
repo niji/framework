@@ -10,27 +10,27 @@ package org.libspark.gunyarapaint.framework.events
         /**
          * 開始後
          */
-        public static const STARTED:String = PREFIX + "started";
+        public static const STARTED:String = prefix + "started";
         
         /**
          * コマンドが読み込まれ、実行した後
          */
-        public static const UPDATED:String = PREFIX + "updated";
+        public static const UPDATED:String = prefix + "updated";
         
         /**
          * 一時停止後
          */
-        public static const PAUSED:String = PREFIX + "paused";
+        public static const PAUSED:String = prefix + "paused";
         
         /**
          * 停止後
          */
-        public static const STOPPED:String = PREFIX + "stopped";
+        public static const STOPPED:String = prefix + "stopped";
         
         /**
          * 終了後
          */
-        public static const FINISHED:String = PREFIX + "finished";
+        public static const FINISHED:String = prefix + "finished";
         
         /**
          * @inheritDoc 
@@ -46,6 +46,11 @@ package org.libspark.gunyarapaint.framework.events
         public override function clone():Event
         {
             return new PlayerEvent(type);
+        }
+        
+        public static function get prefix():String
+        {
+            return commonPrefix + "playerEvent.";
         }
     }
 }
