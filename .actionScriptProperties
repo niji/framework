@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="flex.as" projectUUID="78cce989-a7a8-42b6-b993-ccd713adae30" version="6">
+<actionScriptProperties analytics="false" mainApplicationPath="flex.as" projectUUID="78cce989-a7a8-42b6-b993-ccd713adae30" version="6">
   <compiler additionalCompilerArguments="-locale ja_JP" autoRSLOrdering="true" copyDependentFiles="false" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
@@ -15,4 +15,3 @@
   <modules/>
   <buildCSSFiles/>
 </actionScriptProperties>
-

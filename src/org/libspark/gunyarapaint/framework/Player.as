@@ -9,6 +9,7 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     import org.libspark.gunyarapaint.framework.errors.EOLError;
     import org.libspark.gunyarapaint.framework.events.CommandEvent;
+    import org.libspark.gunyarapaint.framework.events.PlayerErrorEvent;
     import org.libspark.gunyarapaint.framework.events.PlayerEvent;
     
     /**
@@ -129,7 +130,8 @@ package org.libspark.gunyarapaint.framework
                 }
                 else {
                     // 再生が途中で終了するようなエラーが出た
-                    throw e;
+                    if (hasEventListener(PlayerErrorEvent.ERROR))
+                        dispatchEvent(new PlayerErrorEvent(PlayerErrorEvent.ERROR, e));
                 }
             }
         }
