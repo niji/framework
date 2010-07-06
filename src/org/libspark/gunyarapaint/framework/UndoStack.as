@@ -85,16 +85,27 @@ package org.libspark.gunyarapaint.framework
                 var layerState:Object = m_buffer[i];
                 var layers:Vector.<Object> = layerState.layers;
                 if (layers != null) {
+                    var newLayerState:Object = {};
+                    var newLayers:Vector.<Object> = new Vector.<Object>(layers.length, true);
                     var layerCount:uint = layers.length;
                     for (var j:uint = 0; j < layerCount; j++) {
                         var layer:Object = layers[j];
+                        var newLayer:Object = {};
                         var bitmapData:BitmapData = BitmapData(layer.bitmapData);
                         var pixels:Vector.<uint> = bitmapData.getVector(bitmapData.rect);
-                        layer.bitmapData = pixels;
-                        layer.width = bitmapData.width;
-                        layer.height = bitmapData.height;
+                        for (var k:String in layer) {
+                            newLayer[k] = layer[k];
+                        }
+                        newLayer.bitmapData = pixels;
+                        newLayer.width = bitmapData.width;
+                        newLayer.height = bitmapData.height;
+                        newLayers[j] = newLayer;
                     }
-                    data.push(layerState);
+                    for (var l:String in layerState) {
+                        newLayerState[l] = layerState[l];
+                    }
+                    newLayerState.layers = newLayers;
+                    data.push(newLayerState);
                 }
             }
             value.data = data;
