@@ -439,6 +439,20 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
+         * 連結されたレイヤー画像とメタデータから復元した上でアンドゥ情報を再設定します
+         *
+         * @param layerBitmaps 縦に連結されたレイヤー画像
+         * @param metadata メタデータ
+         * @see LayerBitmapCollection#load()
+         * @see LayerBitmapCollection#newLayerBitmapData
+         */
+        public function load(layerBitmap:BitmapData, metadata:Object):void
+        {
+            m_layers.load(layerBitmap, metadata);
+            m_undo = new UndoStack(m_layers, m_undo.size);
+        }
+        
+        /**
          * 座標の補正を行ないます.
          * 
          * <p>

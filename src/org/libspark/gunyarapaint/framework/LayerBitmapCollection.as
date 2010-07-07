@@ -252,7 +252,7 @@ package org.libspark.gunyarapaint.framework
          *
          * @param layerBitmaps 縦に連結されたレイヤー画像
          * @param metadata メタデータ
-         * @see #newLayerBitmapData
+         * @see LayerBitmapCollection#newLayerBitmapData
          */
         public function load(layerBitmap:BitmapData, metadata:Object):void
         {
@@ -294,7 +294,7 @@ package org.libspark.gunyarapaint.framework
          * 
          * @param layerBitmaps 縦に連結されたレイヤー画像
          * @param metadata メタデータ
-         * @see #newLayerBitmapData
+         * @see LayerBitmapCollection#newLayerBitmapData
          */
         public function save(layerBitmap:BitmapData, metadata:Object):void
         {
