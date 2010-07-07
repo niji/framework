@@ -80,7 +80,7 @@ package org.libspark.gunyarapaint.framework
             m_layers.splice(currentIndex, 0, layer);
             m_sprite.addChildAt(layer.displayObject, currentIndex);
             compositeAll();
-            resetLayersIndex();
+            resetIndex();
         }
         
         /**
@@ -119,7 +119,7 @@ package org.libspark.gunyarapaint.framework
             m_layers.splice(index, 0, layer);
             m_sprite.addChildAt(layer.displayObject, index);
             compositeAll();
-            resetLayersIndex();
+            resetIndex();
         }
         
         /**
@@ -135,7 +135,7 @@ package org.libspark.gunyarapaint.framework
             m_layers[to] = layer;
             m_sprite.swapChildrenAt(from, to);
             compositeAll();
-            resetLayersIndex();
+            resetIndex();
         }
         
         /**
@@ -175,7 +175,7 @@ package org.libspark.gunyarapaint.framework
                     if (index >= currentIndex)
                         currentIndex -= 1;
                     compositeAll();
-                    resetLayersIndex();
+                    resetIndex();
                     return;
                 }
             }
@@ -209,7 +209,7 @@ package org.libspark.gunyarapaint.framework
             if (currentIndex > 0 && index >= currentIndex)
                 currentIndex -= 1;
             compositeAll();
-            resetLayersIndex();
+            resetIndex();
         }
         
         /**
@@ -286,6 +286,7 @@ package org.libspark.gunyarapaint.framework
                 m_layers.push(layer);
                 m_sprite.addChild(layer.displayObject);
             }
+            resetIndex();
         }
         
         /**
@@ -319,6 +320,18 @@ package org.libspark.gunyarapaint.framework
             metadata.width = width;
             metadata.height = height;
             metadata.layer_infos = layersInfo;
+        }
+        
+        /**
+         * 現在のレイヤー配列にあるレイヤーのインデックスを更新します
+         */
+        public function resetIndex():void
+        {
+            var c:uint = count;
+            for (var i:uint = 0; i < c; i++) {
+                var layer:LayerBitmap = m_layers[i];
+                layer.setIndex(i);
+            }
         }
         
         /**
@@ -492,16 +505,6 @@ package org.libspark.gunyarapaint.framework
         internal function setCurrentLayer(value:LayerBitmap):void
         {
             m_layers[currentIndex] = value;
-        }
-        
-        // LayerBitmap の name で正しい番号で作成されるように調整する
-        private function resetLayersIndex():void
-        {
-            var c:uint = count;
-            for (var i:uint = 0; i < c; i++) {
-                var layer:LayerBitmap = m_layers[i];
-                layer.index = i;
-            }
         }
         
         /**

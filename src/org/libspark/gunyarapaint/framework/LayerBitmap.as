@@ -52,10 +52,10 @@ package org.libspark.gunyarapaint.framework
             }
             layer.alpha = alpha;
             layer.blendMode = blendMode;
-            layer.index = index;
             layer.locked = false;
             layer.name = name;
             layer.visible = visible;
+            layer.setIndex(m_index);
             return layer;
         }
         
@@ -154,6 +154,11 @@ package org.libspark.gunyarapaint.framework
             };
         }
         
+        internal function setIndex(index:uint):void
+        {
+            m_index = index;
+        }
+        
         private function setBitmapData(value:BitmapData):void
         {
             m_bitmap.bitmapData = value;
@@ -192,6 +197,14 @@ package org.libspark.gunyarapaint.framework
         public function get height():uint
         {
             return m_bitmap.height;
+        }
+        
+        /**
+         * 現在のレイヤー番号を取得します
+         */
+        public function get index():uint
+        {
+            return m_index;
         }
         
         /**
@@ -248,13 +261,6 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のレイヤー番号
-         * 
-         * @default 0
-         */        
-        public var index:uint;
-        
-        /**
          * レイヤーがロックされているかどうか
          * 
          * @default false
@@ -271,5 +277,7 @@ package org.libspark.gunyarapaint.framework
         private var m_bitmapData:BitmapData;
         
         private var m_colorTransform:ColorTransform;
+        
+        private var m_index:uint;
     }
 }
