@@ -281,11 +281,9 @@ package org.libspark.gunyarapaint.framework.modules
          */
         protected function getArgumentsFromCoordinate(x:Number, y:Number):Object
         {
-            var coordinate:Point = new Point(x, y);
-            m_recorder.correctCoordinate(coordinate);
             var args:Object = {
-                "x": coordinate.x,
-                "y": coordinate.y
+                "x": x,
+                "y": y
             };
             return args;
         }
