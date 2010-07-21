@@ -86,7 +86,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在のログデータをコピーして返します
          */
-        public function get bytes():ByteArray
+        public function newBytes():ByteArray
         {
             var bytes:ByteArray = new ByteArray();
             var pos:uint = m_bytes.position;
