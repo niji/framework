@@ -9,6 +9,7 @@ package org.libspark.gunyarapaint.framework
     import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.UndoStack;
+    import org.libspark.gunyarapaint.framework.errors.MarshalVersionError;
     import org.libspark.gunyarapaint.framework.ui.IController;
     
     /**
@@ -44,6 +45,7 @@ package org.libspark.gunyarapaint.framework
          * 
          * @param bytes お絵描きログ
          * @param toBytes 保存先となる ByteArray
+         * @throws MarshalVersionError
          */
         public function load(bytes:ByteArray, toBytes:ByteArray):void
         {
@@ -51,6 +53,8 @@ package org.libspark.gunyarapaint.framework
             bytes.endian = Endian.BIG_ENDIAN;
             bytes.inflate();
             var version:uint = bytes.readUnsignedByte();
+            if (version > VERSION)
+                throw new MarshalVersionError(version, VERSION);
             var dataBytes:ByteArray = ByteArray(bytes.readObject());
             var rect:Object = bytes.readObject();
             var pixels:Vector.<uint> = Vector.<uint>(bytes.readObject());
