@@ -28,7 +28,8 @@ package org.libspark.gunyarapaint.framework.modules
 {
     import flash.geom.Point;
     
-    import org.libspark.gunyarapaint.framework.LayerBitmap;
+    import org.libspark.gunyarapaint.framework.BitmapLayer;
+    import org.libspark.gunyarapaint.framework.ILayer;
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.commands.CompatibilityCommand;
     import org.libspark.gunyarapaint.framework.commands.HorizontalMirrorCommand;
@@ -245,7 +246,7 @@ package org.libspark.gunyarapaint.framework.modules
          */
         protected function validateLayerState():void
         {
-            var layer:LayerBitmap = m_recorder.layers.currentLayer;
+            var layer:ILayer = m_recorder.layers.currentLayer;
             if (!layer.visible)
                 throw new InvisibleLayerError();
             else if (layer.locked)

@@ -31,7 +31,7 @@ package org.libspark.gunyarapaint.framework
     import flash.utils.ByteArray;
     import flash.utils.Endian;
     
-    import org.libspark.gunyarapaint.framework.LayerBitmapCollection;
+    import org.libspark.gunyarapaint.framework.LayerCollection;
     import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.Recorder;
     import org.libspark.gunyarapaint.framework.UndoStack;

@@ -38,14 +38,14 @@ package org.libspark.gunyarapaint.framework
     /**
      * ビットマップによるレイヤー画像のクラスです
      */
-    public final class LayerBitmap
+    public final class BitmapLayer implements ILayer
     {
         /**
          * ビットマップ画像データを紐付けてレイヤーを生成します
          * 
          * @param bitmapData ビットマップの画像データ
          */
-        public function LayerBitmap(bitmapData:BitmapData)
+        public function BitmapLayer(bitmapData:BitmapData)
         {
             m_bitmap = new Bitmap();
             m_colorTransform = new ColorTransform(
@@ -67,14 +67,14 @@ package org.libspark.gunyarapaint.framework
          * @param bitmapDataCopy レイヤー画像のデータも複製するかどうか
          * @return 複製されたレイヤー (LayerBitmap)
          */
-        public function clone(bitmapDataCopy:Boolean = true):LayerBitmap
+        public function clone(bitmapDataCopy:Boolean = true):ILayer
         {
-            var layer:LayerBitmap;
+            var layer:BitmapLayer;
             if (bitmapDataCopy) {
-                layer = new LayerBitmap(bitmapData.clone());
+                layer = new BitmapLayer(bitmapData.clone());
             }
             else {
-                layer = new LayerBitmap(bitmapData);
+                layer = new BitmapLayer(bitmapData);
             }
             layer.alpha = alpha;
             layer.blendMode = blendMode;
@@ -155,7 +155,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * toJSON でシリアライズされたオブジェクトから復元します
+         * @inheritDoc
          */
         public function fromJSON(data:Object):void
         {
@@ -167,7 +167,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の画像データを除くメタ情報をJSON 形式に変換します
+         * @inheritDoc
          */
         public function toJSON():Object
         {
@@ -180,7 +180,7 @@ package org.libspark.gunyarapaint.framework
             };
         }
         
-        internal function setIndex(index:uint):void
+        public function setIndex(index:uint):void
         {
             m_index = index;
         }
@@ -192,7 +192,7 @@ package org.libspark.gunyarapaint.framework
         }
 
         /**
-         * 現在の不透明度を取得します
+         * @inheritDoc
          */
         public function get alpha():Number
         {
@@ -210,7 +210,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * DisplayObject の派生オブジェクトを取得します
+         * @inheritDoc
          */
         public function get displayObject():DisplayObject
         {
@@ -218,7 +218,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の画像の高さを取得します
+         * @inheritDoc
          */
         public function get height():uint
         {
@@ -226,7 +226,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のレイヤー番号を取得します
+         * @inheritDoc
          */
         public function get index():uint
         {
@@ -234,7 +234,23 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の可視状態を取得します
+         * @inheritDoc
+         */
+        public function get locked():Boolean
+        {
+            return m_locked;
+        }
+        
+        /**
+         * @inheritDoc
+         */
+        public function get name():String
+        {
+            return m_name;
+        }
+        
+        /**
+         * @inheritDoc
          */
         public function get visible():Boolean
         {
@@ -242,7 +258,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の画像の幅を取得します
+         * @inheritDoc
          */
         public function get width():uint
         {
@@ -250,7 +266,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の不透明度を設定します
+         * @inheritDoc
          */
         public function set alpha(value:Number):void
         {
@@ -259,9 +275,7 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在のブレンドモードを設定します
-         * 
-         * @see flash.display.BlendMode
+         * @inheritDoc
          */
         public function set blendMode(value:String):void
         {
@@ -269,14 +283,33 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
-         * 現在の可視状態を設定します
+         * @inheritDoc
+         */
+        public function set locked(value:Boolean):void
+        {
+            m_locked = value;
+        }
+        
+        /**
+         * @inheritDoc
+         */
+        public function set name(value:String):void
+        {
+            m_name = value;
+        }
+        
+        /**
+         * @inheritDoc
          */
         public function set visible(value:Boolean):void
         {
             m_bitmap.visible = value;
         }
         
-        internal function get newDisplayObject():DisplayObject
+        /**
+         * @private
+         */
+        public function get newDisplayObject():DisplayObject
         {
             return new Bitmap(m_bitmapData);
         }
@@ -286,18 +319,6 @@ package org.libspark.gunyarapaint.framework
             return m_bitmapData;
         }
         
-        /**
-         * レイヤーがロックされているかどうか
-         * 
-         * @default false
-         */
-        public var locked:Boolean;
-        
-        /**
-         * 現在のレイヤー名
-         */
-        public var name:String;
-        
         private var m_bitmap:Bitmap;
         
         private var m_bitmapData:BitmapData;
@@ -305,5 +326,9 @@ package org.libspark.gunyarapaint.framework
         private var m_colorTransform:ColorTransform;
         
         private var m_index:uint;
+        
+        private var m_locked:Boolean;
+        
+        private var m_name:String;
     }
 }

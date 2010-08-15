@@ -29,7 +29,7 @@ package org.libspark.gunyarapaint.framework.ui
     import flash.display.Sprite;
     import flash.events.IEventDispatcher;
     
-    import org.libspark.gunyarapaint.framework.LayerBitmapCollection;
+    import org.libspark.gunyarapaint.framework.LayerCollection;
     import org.libspark.gunyarapaint.framework.Pen;
     import org.libspark.gunyarapaint.framework.UndoStack;
     import org.libspark.gunyarapaint.framework.modules.ICanvasModule;
@@ -62,7 +62,7 @@ package org.libspark.gunyarapaint.framework.ui
         /**
          * レイヤーの配列を管理するオブジェクトを取得します
          */
-        function get layers():LayerBitmapCollection;
+        function get layers():LayerCollection;
         
         /**
          * ペンオブジェクトを取得します

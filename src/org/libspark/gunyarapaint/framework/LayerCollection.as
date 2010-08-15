@@ -45,7 +45,7 @@ package org.libspark.gunyarapaint.framework
     /**
      * 複数のレイヤーを管理するクラスです
      */
-    public class LayerBitmapCollection implements IEventDispatcher
+    public class LayerCollection implements IEventDispatcher
     {
         /**
          * 作成出来る最大レイヤー数
@@ -68,18 +68,18 @@ package org.libspark.gunyarapaint.framework
          * @param width 画像の幅
          * @param height 画像の高さ
          */
-        public function LayerBitmapCollection(width:int, height:int)
+        public function LayerCollection(width:int, height:int)
         {
             currentIndex = 0;
             doCompositeAll = true;
             m_width = width;
             m_height = height;
-            m_layers = new Vector.<LayerBitmap>();
+            m_layers = new Vector.<ILayer>();
             m_sprite = new Sprite();
             m_drawingSprite = new Sprite();
             m_drawingSprite.mouseEnabled = false;
             // 白い背景を作成してレイヤー群に追加する
-            var layer:LayerBitmap = new LayerBitmap(
+            var layer:BitmapLayer = new BitmapLayer(
                 new BitmapData(width, height, true, uint.MAX_VALUE)
             );
             layer.name = TranslatorRegistry.tr("Background");
@@ -98,7 +98,7 @@ package org.libspark.gunyarapaint.framework
         {
             if (m_layers.length >= MAX)
                 throw new AddLayerError(MAX);
-            var layer:LayerBitmap = new LayerBitmap(
+            var layer:BitmapLayer = new BitmapLayer(
                 new BitmapData(m_width, m_height, true, 0x0)
             );
             currentIndex++;
@@ -115,7 +115,7 @@ package org.libspark.gunyarapaint.framework
          * @param index レイヤー番号
          * @return LayerBitmap
          */
-        public function at(index:int):LayerBitmap
+        public function at(index:int):ILayer
         {
             return m_layers[index];
         }
@@ -139,8 +139,8 @@ package org.libspark.gunyarapaint.framework
         {
             if (m_layers.length >= MAX)
                 throw new AddLayerError(MAX);
-            var selected:LayerBitmap = m_layers[index];
-            var layer:LayerBitmap = selected.clone();
+            var selected:ILayer = m_layers[index];
+            var layer:ILayer = selected.clone();
             layer.name = TranslatorRegistry.tr("%s's copy", selected.name);
             m_layers.splice(index, 0, layer);
             m_sprite.addChildAt(layer.displayObject, index);
@@ -156,7 +156,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function swap(from:int, to:int):void
         {
-            var layer:LayerBitmap = m_layers[from];
+            var layer:ILayer = m_layers[from];
             m_layers[from] = m_layers[to];
             m_layers[to] = layer;
             m_sprite.swapChildrenAt(from, to);
@@ -189,8 +189,8 @@ package org.libspark.gunyarapaint.framework
         {
             // レイヤーは必ず2つ以上
             if (currentIndex > 0) {
-                var current:LayerBitmap = m_layers[index];
-                var prev:LayerBitmap = m_layers[index - 1];
+                var current:BitmapLayer = BitmapLayer(m_layers[index]);
+                var prev:BitmapLayer = BitmapLayer(m_layers[index - 1]);
                 // 両方可視である必要がある
                 if (current.visible && prev.visible) {
                     current.compositeTo(prev.bitmapData);
@@ -307,7 +307,7 @@ package org.libspark.gunyarapaint.framework
                 var bitmapData:BitmapData = new BitmapData(width, height);
                 rectangle.y = i * height;
                 bitmapData.copyPixels(layerBitmap, rectangle, destination);
-                var layer:LayerBitmap = new LayerBitmap(bitmapData);
+                var layer:BitmapLayer = new BitmapLayer(bitmapData);
                 layer.fromJSON(layersInfo[i]);
                 m_layers.push(layer);
                 m_sprite.addChild(layer.displayObject);
@@ -336,7 +336,7 @@ package org.libspark.gunyarapaint.framework
             // レイヤー画像を描写するので、ここでロックを掛ける
             layerBitmap.lock();
             for (var i:uint = 0; i < layerCount; i++) {
-                var layer:LayerBitmap = m_layers[i];
+                var layer:BitmapLayer = BitmapLayer(m_layers[i]);
                 destination.y = i * height;
                 // 描写を行い、下の方向に縦のピクセル分ずらすことを繰り返す
                 layerBitmap.copyPixels(layer.bitmapData, rectangle, destination);
@@ -355,7 +355,7 @@ package org.libspark.gunyarapaint.framework
         {
             var c:uint = count;
             for (var i:uint = 0; i < c; i++) {
-                var layer:LayerBitmap = m_layers[i];
+                var layer:ILayer = m_layers[i];
                 layer.setIndex(i);
             }
         }
@@ -413,7 +413,7 @@ package org.libspark.gunyarapaint.framework
         {
             var count:uint = m_layers.length;
             for (var i:uint = 0; i < count; i++) {
-                var layer:LayerBitmap = m_layers[i];
+                var layer:ILayer = m_layers[i];
                 // ここから例外を送出することは不具合が無ければないと考えられる
                 m_sprite.removeChild(layer.displayObject);
             }
@@ -431,7 +431,7 @@ package org.libspark.gunyarapaint.framework
                 // そのため、これがないとBitmapDataによるメモリリークが余計にひどくなる。
                 composited = new BitmapData(m_width, m_height, true, 0x0);
                 for (var i:uint = 0; i < c; i++) {
-                    var layer:LayerBitmap = m_layers[i];
+                    var layer:BitmapLayer = BitmapLayer(m_layers[i]);
                     layer.compositeTo(composited);
                 }
             }
@@ -450,7 +450,7 @@ package org.libspark.gunyarapaint.framework
             clear();
             for (var i:uint = 0; i < count; i++) {
                 var data:Object = layers[i];
-                var newLayer:LayerBitmap = new LayerBitmap(data.bitmapData);
+                var newLayer:BitmapLayer = new BitmapLayer(data.bitmapData);
                 newLayer.fromJSON(data);
                 m_sprite.addChild(newLayer.displayObject);
                 m_layers.push(newLayer);
@@ -470,7 +470,7 @@ package org.libspark.gunyarapaint.framework
             var c:uint = count;
             var layers:Vector.<Object> = new Vector.<Object>(c, true);
             for (var i:uint = 0; i < c; i++) {
-                var layer:LayerBitmap = m_layers[i];
+                var layer:BitmapLayer = BitmapLayer(m_layers[i]);
                 var data:Object = layer.toJSON();
                 data.bitmapData = layer.bitmapData;
                 layers[i] = data;
@@ -483,7 +483,7 @@ package org.libspark.gunyarapaint.framework
         {
             // 裏うつりしないレイヤーは今ないよね？
             if (m_tempLayer == null) {
-                var layer:LayerBitmap = currentLayer;
+                var layer:ILayer = currentLayer;
                 var blendMode:String = layer.blendMode;
                 // ペンの状態は必ずリセットします
                 engine.resetPen();
@@ -507,7 +507,7 @@ package org.libspark.gunyarapaint.framework
         {
             // 裏うつりしないレイヤーは今あるよね？
             if (m_tempLayer != null) {
-                var layer:LayerBitmap = currentLayer;
+                var layer:ILayer = currentLayer;
                 var blendMode:String = m_drawingSprite.blendMode;
                 layer.blendMode =
                     blendMode == BlendMode.LAYER ? BlendMode.NORMAL : blendMode;
@@ -528,7 +528,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在のレイヤー画像を設定します
          */
-        internal function setCurrentLayer(value:LayerBitmap):void
+        internal function setCurrentLayer(value:BitmapLayer):void
         {
             m_layers[currentIndex] = value;
         }
@@ -553,7 +553,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * 現在のレイヤー画像を返します
          */
-        public function get currentLayer():LayerBitmap
+        public function get currentLayer():ILayer
         {
             return m_layers[currentIndex];
         }
@@ -616,7 +616,7 @@ package org.libspark.gunyarapaint.framework
         internal var composited:BitmapData;
         
         private var m_sprite:Sprite;
-        private var m_layers:Vector.<LayerBitmap>;
+        private var m_layers:Vector.<ILayer>;
         private var m_drawingSprite:Sprite;
         private var m_tempLayer:DisplayObject;
         private var m_width:uint;

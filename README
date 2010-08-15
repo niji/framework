@@ -1,4 +1,4 @@
-framework プロジェクトはぐにゃらペインターのライブラリプロジェクトです。
+framework プロジェクト (Niji Framework) はぐにゃらペインターのライブラリプロジェクトです。
 Flex ライブラリとして形成されていますが、Flex のコードは一切使用していません。
 compat や test といった framework を使用する外部プロジェクトから呼ばれるため、
 直接ビルドする必要は殆ど無いでしょう。
@@ -6,3 +6,6 @@ compat や test といった framework を使用する外部プロジェクト�
 * FlashDevelop
 FlashDevelop からビルドすることが出来ます。
 ビルドすると bin/framework.fd3.swc というバイナリが作られます。
+
+* ライセンスについて
+修正BSDライセンス(New BSD License)を適用しています。

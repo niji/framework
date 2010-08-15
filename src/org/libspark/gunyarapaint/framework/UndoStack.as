@@ -51,7 +51,7 @@ package org.libspark.gunyarapaint.framework
          * @param layers レイヤー配列
          * @param size レイヤーを管理するキュー数
          */
-        public function UndoStack(layers:LayerBitmapCollection,
+        public function UndoStack(layers:LayerCollection,
                                   size:uint = 16)
         {
             m_buffer = new Vector.<Object>(size + 1, true);
@@ -146,7 +146,7 @@ package org.libspark.gunyarapaint.framework
          * @param layers LayerbitmapCollectionオブジェクト
          * @eventType UndoEvent.UNDO
          */
-        internal function undo(layers:LayerBitmapCollection):void
+        internal function undo(layers:LayerCollection):void
         {
             if (m_index === m_first) {
                 throw new UndoError();
@@ -168,7 +168,7 @@ package org.libspark.gunyarapaint.framework
          * @param layers LayerbitmapCollectionオブジェクト
          * @eventType UndoEvent.REDO
          */
-        internal function redo(layers:LayerBitmapCollection):void
+        internal function redo(layers:LayerCollection):void
         {
             if (m_index === m_last) {
                 throw new RedoError();
@@ -184,7 +184,7 @@ package org.libspark.gunyarapaint.framework
          * 
          * @param layers LayerbitmapCollectionオブジェクト
          */
-        internal function push(layers:LayerBitmapCollection):void
+        internal function push(layers:LayerCollection):void
         {
             m_index = (m_index + 1) % m_buffer.length;
             layers.saveState(m_buffer[m_index]);

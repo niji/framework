@@ -2,6 +2,8 @@
 <flexLibProperties includeAllClasses="true" version="3">
   <includeClasses>
     <classEntry path="org.libspark.gunyarapaint.framework.events.PlayerErrorEvent"/>
+    <classEntry path="org.libspark.gunyarapaint.framework.ILayer"/>
+    <classEntry path="org.libspark.gunyarapaint.framework.VectorGraphicLayer"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

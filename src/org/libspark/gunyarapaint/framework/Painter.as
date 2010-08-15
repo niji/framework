@@ -88,7 +88,7 @@ package org.libspark.gunyarapaint.framework
         {
             enableBigPixel = true;
             enableUndoLayer = false;
-            m_layers = new LayerBitmapCollection(width, height);
+            m_layers = new LayerCollection(width, height);
             m_layers.compositeAll();
             m_horizontalMirrorMatrix = new Matrix(-1, 0, 0, 1, width, 0);
             m_verticalMirrorMatrix = new Matrix(1, 0, 0, -1, 0, height);
@@ -295,7 +295,7 @@ package org.libspark.gunyarapaint.framework
         {
             // undoBuffer に入っているLayerBitmapを上書きしない為にコピーしてから作業する
             // これは floodFill 及び setPixel も同様
-            m_layers.currentLayer.compositeFrom(
+            BitmapLayer(m_layers.currentLayer).compositeFrom(
                 m_paintEngine.shape,
                 m_paintEngine.pen.blendMode
             );
@@ -312,7 +312,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function floodFill():void
         {
-            m_layers.currentLayer.floodFill(
+            BitmapLayer(m_layers.currentLayer).floodFill(
                 m_paintEngine.x,
                 m_paintEngine.y,
                 m_paintEngine.pen.argb
@@ -331,7 +331,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function setPixel(x:int, y:int):void
         {
-            m_layers.currentLayer.setPixel(x, y, m_paintEngine.pen.argb);
+            BitmapLayer(m_layers.currentLayer).setPixel(x, y, m_paintEngine.pen.argb);
             m_layers.compositeAll();
         }
         
@@ -414,7 +414,7 @@ package org.libspark.gunyarapaint.framework
         public function moveAt(index:int, x:int, y:int):void
         {
             m_moveMatrix.translate(x, y);
-            m_layers.at(index).applyMatrix(m_moveMatrix);
+            BitmapLayer(m_layers.at(index)).applyMatrix(m_moveMatrix);
             m_layers.compositeAll();
         }
         
@@ -439,7 +439,7 @@ package org.libspark.gunyarapaint.framework
         public function scaleAt(index:int, x:int, y:int):void
         {
             m_scaleMatrix.scale(x, y);
-            m_layers.at(index).applyMatrix(m_scaleMatrix);
+            BitmapLayer(m_layers.at(index)).applyMatrix(m_scaleMatrix);
             m_layers.compositeAll();
         }
         
@@ -498,11 +498,11 @@ package org.libspark.gunyarapaint.framework
             if (index === ALL_LAYERS) {
                 var c:uint = m_layers.count;
                 for (var i:uint = 0; i < c; i++) {
-                    m_layers.at(i).applyMatrix(matrix);
+                    BitmapLayer(m_layers.at(i)).applyMatrix(matrix);
                 }
             }
             else {
-                m_layers.currentLayer.applyMatrix(matrix);
+                BitmapLayer(m_layers.currentLayer).applyMatrix(matrix);
             }
             m_layers.compositeAll();
         }
@@ -510,7 +510,7 @@ package org.libspark.gunyarapaint.framework
         /**
          * レイヤーオブジェクトを返します
          */
-        public function get layers():LayerBitmapCollection
+        public function get layers():LayerCollection
         {
             return m_layers;
         }
@@ -612,7 +612,7 @@ package org.libspark.gunyarapaint.framework
         public var enableBigPixel:Boolean;
         
         // テストでLayerBitmapCollectionの差し替えを行うため敢えてprotected にしてある
-        protected var m_layers:LayerBitmapCollection;
+        protected var m_layers:LayerCollection;
         private var m_paintEngine:PaintEngine;
         private var m_horizontalMirrorMatrix:Matrix;
         private var m_verticalMirrorMatrix:Matrix;
