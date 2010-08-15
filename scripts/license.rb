@@ -1,3 +1,6 @@
+#!/usr/bin/ruby
+
+header =<<EOS
 /*
     Copyright (c) 2008-2010, tasukuchan, hikarincl2
     All rights reserved.
@@ -24,50 +27,14 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package org.libspark.gunyarapaint.framework.commands
-{
-    import flash.utils.ByteArray;
-    
-    import org.libspark.gunyarapaint.framework.Painter;
-    
-    /**
-     * @private
-     * 
-     */
-    public final class UndoCommand implements ICommand
-    {
-        public static const ID:uint = 5;
-        
-        public function UndoCommand()
-        {
-        }
-        
-        public function read(bytes:ByteArray):void
-        {
-        }
-        
-        public function write(bytes:ByteArray, args:Object):void
-        {
-            bytes.writeByte(commandID);
-        }
-        
-        public function execute(painter:Painter):void
-        {
-            painter.undo();
-        }
-        
-        public function reset():void
-        {
-        }
-        
-        public function toString():String
-        {
-            return "[UndoCommand]";
-        }
-        
-        public function get commandID():uint
-        {
-            return ID;
-        }
-    }
-}
+EOS
+
+Dir['../src/org/**/*.as'].each do |file|
+  data = IO.read(file)
+  data.gsub!(/^\/\*.+?\*\/\n/m, "")
+  content = header + data
+  open(file, "w") do |io|
+    io.write(content)
+  end
+end
+
