@@ -1,9 +1,28 @@
 package org.libspark.gunyarapaint.framework
 {
+    import flash.display.BitmapData;
     import flash.display.DisplayObject;
 
     public interface ILayer
     {
+        /**
+         * レイヤーを対象のレイヤーに描写します.
+         * 
+         * <p>現在のレイヤーの透明度及びブレンドモードを用いられて合成されます</p>
+         * 
+         * @param dest 描写先の BitmapData
+         */
+        function compositeTo(dest:ILayer):void;
+        
+        /**
+         * レイヤーを BitmapData に描写します.
+         * 
+         * <p>現在のレイヤーの透明度及びブレンドモードを用いられて合成されます</p>
+         * 
+         * @param dest 描写先の BitmapData
+         */
+        function compositeBitmap(dest:BitmapData):void;
+        
         /**
          * レイヤーを複製します
          * 

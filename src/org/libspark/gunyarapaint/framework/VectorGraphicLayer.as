@@ -1,122 +1,141 @@
 package org.libspark.gunyarapaint.framework
 {
+    import flash.display.BitmapData;
     import flash.display.DisplayObject;
+    import flash.display.Shape;
+    import flash.geom.ColorTransform;
 
-    public class VectorGraphicLayer implements ILayer
+    public class VectorGraphicLayer extends Layer implements ILayer
     {
-        public function VectorGraphicLayer()
+        public function VectorGraphicLayer(shape:Shape)
         {
+            super();
+            m_shape = shape;
         }
         
+        /**
+         * @inheritDoc
+         */
+        public function compositeTo(dest:ILayer):void
+        {
+            if (visible && dest.visible) {
+                if (dest is BitmapLayer) {
+                    BitmapLayer(dest).bitmapData.draw(m_shape,
+                        null, m_colorTransform, blendMode);
+                }
+                else if (dest is VectorGraphicLayer) {
+                    // TODO: implement this
+                }
+            }
+        }
+        
+        /**
+         * @inheritDoc
+         */
+        public function compositeBitmap(dest:BitmapData):void
+        {
+            if (visible)
+                dest.draw(m_shape, null, m_colorTransform, blendMode);
+        }
+        
+        /**
+         * @inheritDoc
+         */
         public function clone(bitmapDataCopy:Boolean = true):ILayer
         {
-            return null;
+            var newShape:Shape = new Shape();
+            newShape.graphics.copyFrom(m_shape.graphics);
+            var layer:VectorGraphicLayer = new VectorGraphicLayer(newShape);
+            layer.alpha = alpha;
+            layer.blendMode = blendMode;
+            layer.locked = false;
+            layer.name = name;
+            layer.visible = visible;
+            layer.setIndex(index);
+            return layer;
         }
         
-        public function fromJSON(data:Object):void
+        /**
+         * @inheritDoc
+         */
+        public override function get alpha():Number
         {
+            return m_shape.alpha;
         }
         
-        public function toJSON():Object
+        /**
+         * @inheritDoc
+         */
+        public override function get blendMode():String
         {
-            return null;
+            return m_shape.blendMode;
         }
         
-        public function setIndex(index:uint):void
-        {
-        }
-        
-        public function get alpha():Number
-        {
-            return 0;
-        }
-        
-        public function get blendMode():String
-        {
-            return null;
-        }
-        
+        /**
+         * @inheritDoc
+         */
         public function get displayObject():DisplayObject
         {
-            return null;
+            return m_shape;
         }
         
+        /**
+         * @inheritDoc
+         */
         public function get height():uint
         {
-            return 0;
+            return m_shape.height;
         }
         
         /**
          * @inheritDoc
          */
-        public function get index():uint
+        public override function get visible():Boolean
         {
-            return m_index;
+            return m_shape.visible;
         }
         
         /**
          * @inheritDoc
          */
-        public function get locked():Boolean
-        {
-            return m_locked;
-        }
-        
-        /**
-         * @inheritDoc
-         */
-        public function get name():String
-        {
-            return m_name;
-        }
-        
-        public function get visible():Boolean
-        {
-            return false;
-        }
-        
         public function get width():uint
         {
-            return 0;
+            return m_shape.width;
         }
         
+        /**
+         * @inheritDoc
+         */
         public function get newDisplayObject():DisplayObject
         {
-            return null;
-        }
-        
-        public function set alpha(value:Number):void
-        {
-        }
-        
-        public function set blendMode(value:String):void
-        {
+            return m_shape;
         }
         
         /**
          * @inheritDoc
          */
-        public function set locked(value:Boolean):void
+        public override function set alpha(value:Number):void
         {
-            m_locked = value;
+            m_shape.alpha = value;
+            m_colorTransform.alphaMultiplier = value;
         }
         
         /**
          * @inheritDoc
          */
-        public function set name(value:String):void
+        public override function set blendMode(value:String):void
         {
-            m_name = value;
+            m_shape.blendMode = value;
         }
         
-        public function set visible(value:Boolean):void
+        /**
+         * @inheritDoc
+         */
+        public override function set visible(value:Boolean):void
         {
+            m_shape.visible = value;
         }
         
-        private var m_index:uint;
-        
-        private var m_locked:Boolean;
-        
-        private var m_name:String;
+        private var m_shape:Shape;
     }
 }

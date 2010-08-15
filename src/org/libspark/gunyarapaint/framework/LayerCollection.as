@@ -189,11 +189,11 @@ package org.libspark.gunyarapaint.framework
         {
             // レイヤーは必ず2つ以上
             if (currentIndex > 0) {
-                var current:BitmapLayer = BitmapLayer(m_layers[index]);
-                var prev:BitmapLayer = BitmapLayer(m_layers[index - 1]);
+                var current:ILayer = m_layers[index];
+                var prev:ILayer = m_layers[index - 1];
                 // 両方可視である必要がある
                 if (current.visible && prev.visible) {
-                    current.compositeTo(prev.bitmapData);
+                    current.compositeTo(prev);
                     // 合成後の LayerBitmap は完全に不透明にしておく
                     prev.alpha = 1.0;
                     m_layers.splice(index, 1);
@@ -431,8 +431,8 @@ package org.libspark.gunyarapaint.framework
                 // そのため、これがないとBitmapDataによるメモリリークが余計にひどくなる。
                 composited = new BitmapData(m_width, m_height, true, 0x0);
                 for (var i:uint = 0; i < c; i++) {
-                    var layer:BitmapLayer = BitmapLayer(m_layers[i]);
-                    layer.compositeTo(composited);
+                    var layer:ILayer = m_layers[i];
+                    layer.compositeBitmap(composited);
                 }
             }
         }

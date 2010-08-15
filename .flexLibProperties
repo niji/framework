@@ -4,6 +4,7 @@
     <classEntry path="org.libspark.gunyarapaint.framework.events.PlayerErrorEvent"/>
     <classEntry path="org.libspark.gunyarapaint.framework.ILayer"/>
     <classEntry path="org.libspark.gunyarapaint.framework.VectorGraphicLayer"/>
+    <classEntry path="org.libspark.gunyarapaint.framework.Layer"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
