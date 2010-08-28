@@ -586,6 +586,16 @@ package org.libspark.gunyarapaint.framework
             return new BitmapData(width, height * count, true, 0x0);
         }
         
+        public function get mouseX():Number
+        {
+            return m_sprite.mouseX;
+        }
+        
+        public function get mouseY():Number
+        {
+            return m_sprite.mouseY;
+        }
+        
         /**
          * スプライトオブジェクトを返します
          */
