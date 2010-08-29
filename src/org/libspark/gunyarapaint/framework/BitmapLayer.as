@@ -245,7 +245,10 @@ package org.libspark.gunyarapaint.framework
             return new Bitmap(m_bitmapData);
         }
         
-        internal function get bitmapData():BitmapData
+        /**
+         * @private
+         */
+        public function get bitmapData():BitmapData
         {
             return m_bitmapData;
         }

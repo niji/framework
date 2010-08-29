@@ -26,9 +26,12 @@
 */
 package org.libspark.gunyarapaint.framework.commands
 {
+    import flash.geom.Point;
     import flash.utils.ByteArray;
     
+    import org.libspark.gunyarapaint.framework.LayerCollection;
     import org.libspark.gunyarapaint.framework.Painter;
+    import org.libspark.gunyarapaint.framework.vg.VGLayer;
     
     /**
      * @private
@@ -45,50 +48,34 @@ package org.libspark.gunyarapaint.framework.commands
         
         public function read(bytes:ByteArray):void
         {
-            m_anchorX = bytes.readShort();
-            m_anchorY = bytes.readShort();
-            m_controlX = bytes.readShort();
-            m_controlY = bytes.readShort();
         }
         
         public function write(bytes:ByteArray, args:Object):void
         {
-            var anchorX:int = args.anchorX;
-            var anchorY:int = args.anchorY;
-            var controlX:int = args.controlX;
-            var controlY:int = args.controlY;
-            bytes.writeByte(commandID);
-            bytes.writeShort(anchorX);
-            bytes.writeShort(anchorY);
-            bytes.writeShort(controlX);
-            bytes.writeShort(controlY);
-            m_anchorX = anchorX;
-            m_anchorY = anchorY;
-            m_controlX = controlX;
-            m_controlY = controlY;
         }
         
         public function execute(painter:Painter):void
         {
-            // TODO: implement this
+            var layers:LayerCollection = painter.layers;
+            var layer:VGLayer = VGLayer(layers.currentLayer);
+            switch (m_type) {
+                case 1: // start
+                    layer.setCurrentPoint(m_x, m_y);
+                    break;
+                case 2: //end
+                    layer.commitCurrentVGPoint(m_x, m_y);
+                    break;
+            }
         }
         
         public function reset():void
         {
-            m_anchorX = 0;
-            m_anchorY = 0;
-            m_controlX = 0;
-            m_controlY = 0;
+            m_type = 0;
         }
         
         public function toString():String
         {
-            return "[BezierCurveCommand"
-                + " anchorX=" + m_anchorX
-                + ", anchorY=" + m_anchorY
-                + ", controlX=" + m_controlX
-                + ", controlY=" + m_controlY
-                + "]";
+            return "[BezierCurveCommand]";
         }
         
         public function get commandID():uint
@@ -96,9 +83,8 @@ package org.libspark.gunyarapaint.framework.commands
             return ID;
         }
         
-        private var m_anchorX:int;
-        private var m_anchorY:int;
-        private var m_controlX:int;
-        private var m_controlY:int;
+        private var m_type:uint;
+        private var m_x:Number;
+        private var m_y:Number;
     }
 }
