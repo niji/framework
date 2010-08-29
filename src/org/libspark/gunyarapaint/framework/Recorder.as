@@ -63,7 +63,7 @@ package org.libspark.gunyarapaint.framework
         {
             m_bytes = bytes;
             m_command = commands;
-            var version:uint = PAINTER_LOG_VERSION;
+            var version:uint = Version.LOG_VERSION;
             super(width, height, version, createPaintEngine(version));
         }
         
@@ -77,7 +77,7 @@ package org.libspark.gunyarapaint.framework
         public static function create(bytes:ByteArray, width:int, height:int, undo:int):Recorder
         {
             var commands:CommandContext = new CommandContext();
-            var version:uint = PAINTER_LOG_VERSION;
+            var version:uint = Version.LOG_VERSION;
             bytes.endian = Endian.BIG_ENDIAN;
             bytes.position = 0;
             var signature:String = "GUNYARA_PAINT:"

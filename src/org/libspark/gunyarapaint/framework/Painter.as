@@ -47,21 +47,6 @@ package org.libspark.gunyarapaint.framework
     public class Painter extends EventDispatcher
     {
         /**
-         * ログのバージョン番号
-         */
-        public static const PAINTER_LOG_VERSION:uint = 22;
-        
-        /**
-         * ペインター自体のバージョン
-         */
-        public static const PAINTER_VERSION:uint = 20100701;
-        
-        /**
-         * ペインターのバージョン文字列
-         */
-        public static const PAINTER_VERSION_STRING:String = "ver." + PAINTER_VERSION;
-        
-        /**
          * レイヤー選択をアンドゥに含めるかどうかのオプション
          */
         public static const COMPATIBILITY_UNDO_LAYER:uint = 1;
@@ -112,7 +97,7 @@ package org.libspark.gunyarapaint.framework
             if (version > 0 && version <= 10) {
                 return new PaintEngineV1(shape);
             }
-            else if (version > 10 && version <= PAINTER_LOG_VERSION) {
+            else if (version > 10 && Version.compareLogVersion(version) <= 0) {
                 return new PaintEngineV2(shape);
             }
             else {
