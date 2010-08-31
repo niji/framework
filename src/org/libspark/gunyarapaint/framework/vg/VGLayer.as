@@ -41,8 +41,6 @@ package org.libspark.gunyarapaint.framework.vg
 
     public class VGLayer extends Layer implements ILayer
     {
-        public static const EVENT_CLOSED:String = "closed";
-        
         public function VGLayer(shape:Shape)
         {
             super();
@@ -149,9 +147,10 @@ package org.libspark.gunyarapaint.framework.vg
             return m_points[index];
         }
         
-        public function hitTest(value:Point):Boolean
+        public function hitTest(x:Number, y:Number):Boolean
         {
             var length:uint = m_points.length;
+            var value:Point = new Point(x, y);
             if (!m_closed && length > 0 && m_points[0].equalsAnchor(value)) {
                 return false;
             }
