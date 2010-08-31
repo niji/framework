@@ -541,6 +541,14 @@ package org.libspark.gunyarapaint.framework
         }
         
         /**
+         * @private
+         */
+        public function get paintEngine():PaintEngine
+        {
+            return m_paintEngine;
+        }
+        
+        /**
          * 現在のレイヤーの透明度を変更します
          */
         public function set currentLayerAlpha(value:Number):void
