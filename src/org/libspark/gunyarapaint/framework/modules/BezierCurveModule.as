@@ -79,7 +79,7 @@ package org.libspark.gunyarapaint.framework.modules
                 m_recorder.paintEngine.drawVGAuxPoints(layer);
             }
             else {
-                // create a new shape
+                layer.createShape();
             }
             saveCoordinate(x, y);
         }
