@@ -177,7 +177,7 @@ package org.libspark.gunyarapaint.framework
         public function drawVG(layer:VGLayer):void
         {
             var g:Graphics = m_graphics;
-            var coordinates:Vector.<VGPoint> = layer.coordinates;
+            var coordinates:Vector.<VGPoint> = layer.allVGPoints;
             var count:uint = coordinates.length;
             var point:VGPoint;
             // draw background
@@ -234,7 +234,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function drawVGAuxLines(layer:VGLayer):void
         {
-            var coordinates:Vector.<VGPoint> = layer.coordinates;
+            var coordinates:Vector.<VGPoint> = layer.allVGPoints;
             var count:uint = coordinates.length;
             var g:Graphics = m_graphics;
             // draw lines between each control points
@@ -256,7 +256,7 @@ package org.libspark.gunyarapaint.framework
          */
         public function drawVGAuxPoints(layer:VGLayer):void
         {
-            var coordinates:Vector.<VGPoint> = layer.coordinates;
+            var coordinates:Vector.<VGPoint> = layer.allVGPoints;
             var count:uint = coordinates.length;
             var g:Graphics = m_graphics;
             var i:uint = 0;

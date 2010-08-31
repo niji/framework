@@ -45,9 +45,10 @@ package org.libspark.gunyarapaint.framework.vg
         {
             super();
             m_shape = shape;
-            m_points = new Vector.<VGPoint>();
-            m_rect = new Rectangle(width, height, -width, -height);
             m_closed = false;
+            m_shapes = new Vector.<VGShape>();
+            m_shapes.push(new VGShape(width, height));
+            m_shapeIndex = 0;
         }
         
         /**
@@ -81,6 +82,11 @@ package org.libspark.gunyarapaint.framework.vg
          */
         public function clone(bitmapDataCopy:Boolean = true):ILayer
         {
+            var length:uint = m_shapes.length;
+            var newShapes:Vector.<VGShape> = new Vector.<VGShape>(length);
+            for (var i:uint = 0; i < length; i++) {
+                newShapes[i] = m_shapes[i].clone();
+            }
             var newShape:Shape = new Shape();
             newShape.graphics.copyFrom(m_shape.graphics);
             var layer:VGLayer = new VGLayer(newShape);
@@ -90,6 +96,10 @@ package org.libspark.gunyarapaint.framework.vg
             layer.name = name;
             layer.visible = visible;
             layer.setIndex(index);
+            layer.m_closed = m_closed;
+            layer.m_current = m_current.clone();
+            layer.m_shapes = newShapes;
+            layer.m_shapeIndex = m_shapeIndex;
             return layer;
         }
         
@@ -98,19 +108,24 @@ package org.libspark.gunyarapaint.framework.vg
             m_shape.width = uint(value.width);
             m_shape.height = uint(value.height);
             m_current = VGPoint(value.current);
-            m_points = Vector.<VGPoint>(value.points);
+            //m_points = Vector.<VGPoint>(value.points);
         }
         
         public override function toJSON():Object
         {
-            var length:uint = m_points.length;
             var value:Object = {
                 "width" : width,
                 "height" : height,
-                "points" : this.coordinates,
+                "shapes" : null,
                 "current" : m_current.clone()
             };
             return value;
+        }
+        
+        public function createShape():void
+        {
+            m_shapes.push(new VGShape(width, height));
+            ++m_shapeIndex;
         }
         
         public function setCurrentPoint(x:Number, y:Number):void
@@ -118,17 +133,14 @@ package org.libspark.gunyarapaint.framework.vg
             m_current = new VGPoint(new Point(x, y));
         }
         
-        public function setCurrentVGPoint(value:VGPoint):void
-        {
-            m_current = value.clone();
-        }
-        
         public function commitCurrentVGPoint(x:Number, y:Number):void
         {
-            if (m_points.length > 0) {
-                var first:VGPoint = m_points[0];
+            var shape:VGShape = m_shapes[m_shapeIndex];
+            var points:Vector.<VGPoint> = shape.allVGPoints;
+            if (points.length > 0) {
+                var first:VGPoint = points[0];
                 if (first.equals(m_current)) {
-                    setCurrentVGPoint(first.clone0());
+                    currentVGPoint = first.clone0();
                     m_closed = true;
                 }
                 else {
@@ -138,64 +150,50 @@ package org.libspark.gunyarapaint.framework.vg
             else {
                 m_current.controlPoint = new Point(x, y);
             }
-            m_points.push(m_current);
-            updateRectangle();
+            points.push(m_current);
+            shape.updateRectangle(m_current.anchorPoint);
         }
         
         public function getVGPoint(index:uint):VGPoint
         {
-            return m_points[index];
+            return m_shapes[m_shapeIndex].allVGPoints[index];
         }
         
         public function hitTest(x:Number, y:Number):Boolean
         {
-            var length:uint = m_points.length;
+            var points:Vector.<VGPoint> = m_shapes[m_shapeIndex].allVGPoints;
+            var length:uint = points.length;
             var value:Point = new Point(x, y);
-            if (!m_closed && length > 0 && m_points[0].equalsAnchor(value)) {
+            if (!m_closed && length > 0 && points[0].equalsAnchor(value)) {
                 return false;
             }
             for (var i:uint = 0; i < length; i++) {
-                var point:VGPoint = m_points[i];
+                var point:VGPoint = points[i];
                 var anchor:Point = point.anchorPoint;
-                m_index = i;
+                m_hitIndex = i;
                 if (Point.distance(value, anchor) < 4) {
-                    m_type = "anchor";
+                    m_hitType = "anchor";
                     return true;
                 }
                 var cf:Point = point.controlPointForward;
                 if (Point.distance(value, cf) < 4) {
-                    m_type = "forward";
+                    m_hitType = "forward";
                     return true;
                 }
                 var cb:Point = point.controlPointBack;
                 if (Point.distance(value, cb) < 4) {
-                    m_type = "back";
+                    m_hitType = "back";
                     return true;
                 }
             }
             return false;
         }
         
-        private function updateRectangle():void
-        {
-            var point:Point = m_current.anchorPoint;
-            var px:Number = point.x;
-            var py:Number = point.y;
-            if (py < m_rect.top)
-                m_rect.top = py;
-            if (py > m_rect.bottom)
-                m_rect.bottom = py;
-            if (px < m_rect.left)
-                m_rect.left = px;
-            if (px > m_rect.right)
-                m_rect.right = px;
-        }
-        
         public function updateVGPoint(x:Number, y:Number):void
         {
             var point:Point = new Point(x, y);
-            var current:VGPoint = m_points[m_index];
-            switch (m_type) {
+            var current:VGPoint = m_shape[m_shapeIndex].allVGPoints[m_hitIndex];
+            switch (m_hitType) {
                 case "anchor":
                     current.anchorPoint = point;
                     break;
@@ -208,13 +206,9 @@ package org.libspark.gunyarapaint.framework.vg
             }
         }
         
-        public function get coordinates():Vector.<VGPoint>
+        public function get allVGPoints():Vector.<VGPoint>
         {
-            var points:Vector.<VGPoint> = new Vector.<VGPoint>(length, true);
-            for (var i:uint = 0; i < length; i++) {
-                points[i] = m_points[i].clone();
-            }
-            return points;
+            return m_shapes[m_shapeIndex].cloneVGPoints();
         }
         
         public function get currentVGPoint():VGPoint
@@ -224,22 +218,43 @@ package org.libspark.gunyarapaint.framework.vg
         
         public function get previousVGPoint():VGPoint
         {
-            return m_points[m_points.length - 1];
+            var points:Vector.<VGPoint> = m_shapes[m_shapeIndex].allVGPoints;
+            return points[points.length - 1];
         }
         
         public function get countVGPoints():uint
         {
-            return m_points.length;
+            return m_shapes[m_shapeIndex].allVGPoints.length;
         }
         
         public function get rectangle():Rectangle
         {
-            return m_rect.clone();
+            return m_shapes[m_shapeIndex].rectangle;
         }
         
         public function get closed():Boolean
         {
             return m_closed;
+        }
+        
+        public function get shapeIndex():uint
+        {
+            return m_shapeIndex;
+        }
+        
+        public function get countShapes():uint
+        {
+            return m_shapes.length;
+        }
+        
+        public function set currentVGPoint(value:VGPoint):void
+        {
+            m_current = value.clone();
+        }
+        
+        public function set shapeIndex(value:uint):void
+        {
+            m_shapeIndex = value;
         }
         
         /**
@@ -323,12 +338,12 @@ package org.libspark.gunyarapaint.framework.vg
             m_shape.visible = value;
         }
         
+        private var m_shapes:Vector.<VGShape>;
         private var m_shape:Shape;
-        private var m_points:Vector.<VGPoint>;
-        private var m_rect:Rectangle;
         private var m_current:VGPoint;
+        private var m_hitType:String;
+        private var m_hitIndex:uint;
+        private var m_shapeIndex:uint;
         private var m_closed:Boolean;
-        private var m_type:String;
-        private var m_index:uint;
     }
 }
