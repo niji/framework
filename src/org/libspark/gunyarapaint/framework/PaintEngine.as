@@ -44,6 +44,12 @@ package org.libspark.gunyarapaint.framework
      */
     public class PaintEngine
     {
+        public static const VG_AUX_ANCHOR_COLOR:uint = 0x0000ff;
+        
+        public static const VG_AUX_CONTROL_POINT_COLOR:uint = 0x00ff00;
+        
+        public static const VG_AUX_LINE_COLOR:uint = 0xaaffaa;
+        
         /**
          * Shape オブジェクトから描画エンジンを生成します
          * 
@@ -179,19 +185,45 @@ package org.libspark.gunyarapaint.framework
             g.beginFill(0x0, 0);
             g.drawRect(0, 0, m_shape.width, m_shape.height);
             g.endFill();
-            g.lineStyle(0.5, 0xaaffaa);
+            g.lineStyle(0.5, VG_AUX_LINE_COLOR);
             if (!layer.closed)
                 drawVGAuxLines(layer);
             // draw Bezier lines
             if (count > 1) {
                 var anchor:Point = coordinates[0].anchorPoint;
-                g.lineStyle(0.5, 0x0000ff);
+                g.lineStyle(0.5, VG_AUX_CONTROL_POINT_COLOR);
                 g.moveTo(anchor.x, anchor.y);
                 for (var i:uint = 1; i < count; i++) {
                     var prev:VGPoint = coordinates[i - 1];
                     var current:VGPoint = coordinates[i];
                     drawBezierCurve(prev, current);
                 }
+            }
+        }
+        
+        /**
+         * 現在のVGLayerの座標リストからベジエ曲線のプレビューを描画します
+         * 
+         * @param layer
+         */
+        public function drawVGPreview(layer:VGLayer):void
+        {
+            var current:VGPoint = layer.currentVGPoint;
+            var currentAnchor:Point = current.anchorPoint;
+            var g:Graphics = m_graphics;
+            var len:uint = layer.countVGPoints;
+            g.clear();
+            g.lineStyle(1, VG_AUX_LINE_COLOR);
+            g.moveTo(x, y);
+            g.lineTo(currentAnchor.x, currentAnchor.y);
+            g.lineTo(currentAnchor.x * 2 - x, currentAnchor.y * 2 - y);
+            if (len > 0) {
+                current.controlPoint = new Point(x, y);
+                var prev:VGPoint = layer.previousVGPoint;
+                var prevAnchor:Point = prev.anchorPoint;
+                g.lineStyle(1, 0xaaaaff);
+                g.moveTo(prevAnchor.x, prevAnchor.y);
+                drawBezierCurve(prev, current);
             }
         }
         
@@ -230,14 +262,14 @@ package org.libspark.gunyarapaint.framework
             var i:uint = 0;
             // draw anchor points
             g.lineStyle(0, 0, 0);
-            g.beginFill(0x0000ff);
+            g.beginFill(VG_AUX_ANCHOR_COLOR);
             for (i = 0; i < count; i++) {
                 var anchor:Point = coordinates[i].anchorPoint;
                 g.drawCircle(anchor.x, anchor.y, 1.5);
             }
             g.endFill();
             // draw control points
-            g.beginFill(0x00ff00);
+            g.beginFill(VG_AUX_CONTROL_POINT_COLOR);
             for (i = 0; i < count; i++) {
                 var point:VGPoint = coordinates[i];
                 var cf:Point = point.controlPointForward;
