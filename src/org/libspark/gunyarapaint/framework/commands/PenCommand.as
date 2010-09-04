@@ -27,7 +27,8 @@
 package org.libspark.gunyarapaint.framework.commands
 {
     import flash.errors.IllegalOperationError;
-    import flash.utils.ByteArray;
+    import flash.utils.IDataInput;
+    import flash.utils.IDataOutput;
     
     import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.Pen;
@@ -63,7 +64,7 @@ package org.libspark.gunyarapaint.framework.commands
             m_pen = new Pen();
         }
         
-        public function read(bytes:ByteArray):void
+        public function read(bytes:IDataInput):void
         {
             var type:int = bytes.readUnsignedByte();
             switch (type) {
@@ -100,7 +101,7 @@ package org.libspark.gunyarapaint.framework.commands
             m_type = type;
         }
         
-        public function write(bytes:ByteArray, args:Object):void
+        public function write(bytes:IDataOutput, args:Object):void
         {
             var type:int = args.type;
             bytes.writeByte(commandID);

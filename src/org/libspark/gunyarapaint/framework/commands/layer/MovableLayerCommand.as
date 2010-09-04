@@ -26,7 +26,8 @@
 */
 package org.libspark.gunyarapaint.framework.commands.layer
 {
-    import flash.utils.ByteArray;
+    import flash.utils.IDataInput;
+    import flash.utils.IDataOutput;
     
     import org.libspark.gunyarapaint.framework.Painter;
 
@@ -37,13 +38,13 @@ package org.libspark.gunyarapaint.framework.commands.layer
             reset();
         }
         
-        public function read(bytes:ByteArray):void
+        public function read(bytes:IDataInput):void
         {
             m_coordinateX = bytes.readShort();
             m_coordinateY = bytes.readShort();
         }
         
-        public function write(bytes:ByteArray, args:Object):void
+        public function write(bytes:IDataOutput, args:Object):void
         {
             var x:int = args.x;
             var y:int = args.y;

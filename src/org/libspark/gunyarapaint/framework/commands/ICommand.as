@@ -26,7 +26,8 @@
 */
 package org.libspark.gunyarapaint.framework.commands
 {
-    import flash.utils.ByteArray;
+    import flash.utils.IDataInput;
+    import flash.utils.IDataOutput;
     
     import org.libspark.gunyarapaint.framework.Painter;
     
@@ -41,7 +42,7 @@ package org.libspark.gunyarapaint.framework.commands
          * @param bytes 描写ログ
          * @param segment 直線
          */
-        function read(bytes:ByteArray):void;
+        function read(bytes:IDataInput):void;
         
         /**
          * 引数から描写ログを書き出します
@@ -50,7 +51,7 @@ package org.libspark.gunyarapaint.framework.commands
          * @param segment 直線
          * @param args 引数
          */
-        function write(bytes:ByteArray, args:Object):void;
+        function write(bytes:IDataOutput, args:Object):void;
         
         /**
          * キャンバスに描写を実行します

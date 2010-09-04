@@ -26,8 +26,6 @@
 */
 package org.libspark.gunyarapaint.framework.commands.layer
 {
-    import flash.utils.ByteArray;
-    
     import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
     

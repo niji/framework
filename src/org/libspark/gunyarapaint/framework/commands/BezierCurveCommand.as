@@ -27,7 +27,8 @@
 package org.libspark.gunyarapaint.framework.commands
 {
     import flash.geom.Point;
-    import flash.utils.ByteArray;
+    import flash.utils.IDataInput;
+    import flash.utils.IDataOutput;
     
     import org.libspark.gunyarapaint.framework.LayerCollection;
     import org.libspark.gunyarapaint.framework.Painter;
@@ -46,11 +47,11 @@ package org.libspark.gunyarapaint.framework.commands
             reset();
         }
         
-        public function read(bytes:ByteArray):void
+        public function read(bytes:IDataInput):void
         {
         }
         
-        public function write(bytes:ByteArray, args:Object):void
+        public function write(bytes:IDataOutput, args:Object):void
         {
         }
         

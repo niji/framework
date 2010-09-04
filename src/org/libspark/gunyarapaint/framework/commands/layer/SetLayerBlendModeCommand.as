@@ -27,7 +27,8 @@
 package org.libspark.gunyarapaint.framework.commands.layer
 {
     import flash.display.BlendMode;
-    import flash.utils.ByteArray;
+    import flash.utils.IDataInput;
+    import flash.utils.IDataOutput;
     
     import org.libspark.gunyarapaint.framework.Painter;
     import org.libspark.gunyarapaint.framework.commands.ICommand;
@@ -45,12 +46,12 @@ package org.libspark.gunyarapaint.framework.commands.layer
             reset();
         }
         
-        public function read(bytes:ByteArray):void
+        public function read(bytes:IDataInput):void
         {
             m_blendMode = bytes.readUTF();
         }
         
-        public function write(bytes:ByteArray, args:Object):void
+        public function write(bytes:IDataOutput, args:Object):void
         {
             var blendMode:String = args.blendMode;
             if (m_blendMode !== blendMode) {
