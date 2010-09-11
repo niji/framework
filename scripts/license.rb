@@ -29,7 +29,7 @@ header =<<EOS
 */
 EOS
 
-Dir['../src/org/**/*.as'].each do |file|
+Dir['../src/com/**/*.as'].each do |file|
   data = IO.read(file)
   data.gsub!(/^\/\*.+?\*\/\n/m, "")
   content = header + data
