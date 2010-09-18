@@ -74,7 +74,7 @@
     <hidden path=".FlexUnitSettings" />
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand>$(CompilerPath)\bin\compc.exe -benchmark=true -incremental=true -optimize=true -target-player=10.0.0 -verbose-stacktraces=true -include-sources src -source-path "$(ProjectDir)/src" -output "$(ProjectDir)/bin/framework.fd3.swc"</preBuildCommand>
+  <preBuildCommand>$(CompilerPath)\bin\compc.exe -benchmark=true -incremental=true -optimize=true -target-player=10.0.0 -verbose-stacktraces=true -include-sources src -source-path "$(ProjectDir)/src" -output "$(ProjectDir)/bin/$(ProjectName).swc"</preBuildCommand>
   <!-- Executed after build -->
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->
