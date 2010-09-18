@@ -72,6 +72,8 @@
   <hiddenPaths>
     <hidden path=".settings" />
     <hidden path=".FlexUnitSettings" />
+    <hidden path=".git" />
+    <hidden path="scripts" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand>$(CompilerPath)\bin\compc.exe -benchmark=true -incremental=true -optimize=true -target-player=10.0.0 -verbose-stacktraces=true -include-sources src -source-path "$(ProjectDir)/src" -output "$(ProjectDir)/bin/$(ProjectName).swc"</preBuildCommand>
