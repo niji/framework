@@ -73,7 +73,7 @@ package com.github.niji.framework
         {
             enableBigPixel = true;
             enableUndoLayer = false;
-            m_layers = new LayerCollection(width, height);
+            m_layers = new LayerList(width, height);
             m_layers.compositeAll();
             m_horizontalMirrorMatrix = new Matrix(-1, 0, 0, 1, width, 0);
             m_verticalMirrorMatrix = new Matrix(1, 0, 0, -1, 0, height);
@@ -495,7 +495,7 @@ package com.github.niji.framework
         /**
          * レイヤーオブジェクトを返します
          */
-        public function get layers():LayerCollection
+        public function get layers():LayerList
         {
             return m_layers;
         }
@@ -605,7 +605,7 @@ package com.github.niji.framework
         public var enableBigPixel:Boolean;
         
         // テストでLayerBitmapCollectionの差し替えを行うため敢えてprotected にしてある
-        protected var m_layers:LayerCollection;
+        protected var m_layers:LayerList;
         private var m_paintEngine:PaintEngine;
         private var m_horizontalMirrorMatrix:Matrix;
         private var m_verticalMirrorMatrix:Matrix;

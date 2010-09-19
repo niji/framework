@@ -45,7 +45,7 @@ package com.github.niji.framework
     /**
      * 複数のレイヤーを管理するクラスです
      */
-    public class LayerCollection implements IEventDispatcher
+    public class LayerList implements IEventDispatcher
     {
         /**
          * 作成出来る最大レイヤー数
@@ -68,7 +68,7 @@ package com.github.niji.framework
          * @param width 画像の幅
          * @param height 画像の高さ
          */
-        public function LayerCollection(width:int, height:int)
+        public function LayerList(width:int, height:int)
         {
             currentIndex = 0;
             doCompositeAll = true;
@@ -236,26 +236,6 @@ package com.github.niji.framework
                 currentIndex -= 1;
             compositeAll();
             resetIndex();
-        }
-        
-        /**
-         * 表示オブジェクトから現在のビューを削除します
-         *
-         * @param parent 親となる表示オブジェクト
-         */
-        public function removeView(parent:Sprite):void
-        {
-            parent.removeChild(m_sprite);
-        }
-        
-        /**
-         * 現在のビューを表示オブジェクトに設定します
-         *
-         * @param parent 親となる表示オブジェクト
-         */
-        public function setView(parent:Sprite):void
-        {
-            parent.addChild(m_sprite);
         }
         
         /**
@@ -586,20 +566,10 @@ package com.github.niji.framework
             return new BitmapData(width, height * count, true, 0x0);
         }
         
-        public function get mouseX():Number
-        {
-            return m_sprite.mouseX;
-        }
-        
-        public function get mouseY():Number
-        {
-            return m_sprite.mouseY;
-        }
-        
         /**
          * スプライトオブジェクトを返します
          */
-        internal function get view():Sprite
+        public function get view():Sprite
         {
             return m_sprite;
         }

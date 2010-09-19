@@ -30,7 +30,7 @@ package com.github.niji.framework.commands
     import flash.utils.IDataInput;
     import flash.utils.IDataOutput;
     
-    import com.github.niji.framework.LayerCollection;
+    import com.github.niji.framework.LayerList;
     import com.github.niji.framework.Painter;
     import com.github.niji.framework.vg.VGLayer;
     
@@ -57,7 +57,7 @@ package com.github.niji.framework.commands
         
         public function execute(painter:Painter):void
         {
-            var layers:LayerCollection = painter.layers;
+            var layers:LayerList = painter.layers;
             var layer:VGLayer = VGLayer(layers.currentLayer);
             switch (m_type) {
                 case 1: // start
