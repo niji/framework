@@ -29,7 +29,7 @@ package com.github.niji.framework.ui
     import flash.display.Sprite;
     import flash.events.IEventDispatcher;
     
-    import com.github.niji.framework.LayerCollection;
+    import com.github.niji.framework.LayerList;
     import com.github.niji.framework.Pen;
     import com.github.niji.framework.UndoStack;
     import com.github.niji.framework.modules.ICanvasModule;
@@ -62,7 +62,7 @@ package com.github.niji.framework.ui
         /**
          * レイヤーの配列を管理するオブジェクトを取得します
          */
-        function get layers():LayerCollection;
+        function get layers():LayerList;
         
         /**
          * ペンオブジェクトを取得します

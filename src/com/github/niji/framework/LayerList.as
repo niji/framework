@@ -45,7 +45,7 @@ package com.github.niji.framework
     /**
      * 複数のレイヤーを管理するクラスです
      */
-    public class LayerCollection implements IEventDispatcher
+    public class LayerList implements IEventDispatcher
     {
         /**
          * 作成出来る最大レイヤー数
@@ -68,7 +68,7 @@ package com.github.niji.framework
          * @param width 画像の幅
          * @param height 画像の高さ
          */
-        public function LayerCollection(width:int, height:int)
+        public function LayerList(width:int, height:int)
         {
             currentIndex = 0;
             doCompositeAll = true;

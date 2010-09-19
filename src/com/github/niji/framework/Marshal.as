@@ -31,7 +31,7 @@ package com.github.niji.framework
     import flash.utils.ByteArray;
     import flash.utils.Endian;
     
-    import com.github.niji.framework.LayerCollection;
+    import com.github.niji.framework.LayerList;
     import com.github.niji.framework.Painter;
     import com.github.niji.framework.Recorder;
     import com.github.niji.framework.UndoStack;
