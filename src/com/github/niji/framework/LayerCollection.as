@@ -239,26 +239,6 @@ package com.github.niji.framework
         }
         
         /**
-         * 表示オブジェクトから現在のビューを削除します
-         *
-         * @param parent 親となる表示オブジェクト
-         */
-        public function removeView(parent:Sprite):void
-        {
-            parent.removeChild(m_sprite);
-        }
-        
-        /**
-         * 現在のビューを表示オブジェクトに設定します
-         *
-         * @param parent 親となる表示オブジェクト
-         */
-        public function setView(parent:Sprite):void
-        {
-            parent.addChild(m_sprite);
-        }
-        
-        /**
          * 現在の全てのレイヤー情報を dataProvider に適用出来る形で返します
          *
          * @return Array dataProvider に適用出来る配列
@@ -586,20 +566,10 @@ package com.github.niji.framework
             return new BitmapData(width, height * count, true, 0x0);
         }
         
-        public function get mouseX():Number
-        {
-            return m_sprite.mouseX;
-        }
-        
-        public function get mouseY():Number
-        {
-            return m_sprite.mouseY;
-        }
-        
         /**
          * スプライトオブジェクトを返します
          */
-        internal function get view():Sprite
+        public function get view():Sprite
         {
             return m_sprite;
         }
