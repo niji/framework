@@ -36,7 +36,7 @@ package com.github.niji.framework
         /**
          * ペインター自体のバージョン
          */
-        public static const DATE:uint = 20100701;
+        public static const DATE:uint = 20101001;
         
         /**
          * ペインターのバージョン文字列
