@@ -26,17 +26,18 @@
 */
 package com.github.niji.framework
 {
-    import flash.display.BitmapData;
-    import flash.geom.Rectangle;
-    import flash.utils.ByteArray;
-    import flash.utils.Endian;
-    
     import com.github.niji.framework.LayerList;
     import com.github.niji.framework.Painter;
     import com.github.niji.framework.Recorder;
     import com.github.niji.framework.UndoStack;
+    import com.github.niji.framework.errors.MarshalRectError;
     import com.github.niji.framework.errors.MarshalVersionError;
     import com.github.niji.framework.ui.IController;
+    
+    import flash.display.BitmapData;
+    import flash.geom.Rectangle;
+    import flash.utils.ByteArray;
+    import flash.utils.Endian;
     
     /**
      * ふっかつのじゅもんのデータとして保存するクラス.
@@ -89,6 +90,10 @@ package com.github.niji.framework
             var controllerData:Object = bytes.readObject();
             var w:uint = rect.width;
             var h:uint = rect.height;
+            var rw:uint = m_recorder.width;
+            var rh:uint = m_recorder.height;
+            if (w != rw || h != rh)
+                throw new MarshalRectError(w, h, rw, rh);
             var bitmapData:BitmapData = new BitmapData(w, h, true, 0x0);
             bitmapData.setVector(new Rectangle(0, 0, w, h), pixels);
             dataBytes.readBytes(toBytes);
