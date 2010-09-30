@@ -76,6 +76,7 @@ package com.github.niji.framework
         public static function create(bytes:ByteArray):Player
         {
             var player:Player = new Player(new Parser(bytes));
+            player.layers.throwsError = false;
             player.setUndoStack(new UndoStack(player.layers));
             return player;
         }

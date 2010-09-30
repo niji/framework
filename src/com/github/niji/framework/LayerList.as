@@ -26,6 +26,12 @@
 */
 package com.github.niji.framework
 {
+    import com.github.niji.framework.errors.AddLayerError;
+    import com.github.niji.framework.errors.MergeLayersError;
+    import com.github.niji.framework.errors.RemoveLayerError;
+    import com.github.niji.framework.errors.TooManyLayersError;
+    import com.github.niji.framework.i18n.TranslatorRegistry;
+    
     import flash.display.Bitmap;
     import flash.display.BitmapData;
     import flash.display.BlendMode;
@@ -35,12 +41,6 @@ package com.github.niji.framework
     import flash.events.IEventDispatcher;
     import flash.geom.Point;
     import flash.geom.Rectangle;
-    
-    import com.github.niji.framework.errors.AddLayerError;
-    import com.github.niji.framework.errors.MergeLayersError;
-    import com.github.niji.framework.errors.RemoveLayerError;
-    import com.github.niji.framework.errors.TooManyLayersError;
-    import com.github.niji.framework.i18n.TranslatorRegistry;
     
     /**
      * 複数のレイヤーを管理するクラスです
@@ -72,6 +72,7 @@ package com.github.niji.framework
         {
             currentIndex = 0;
             doCompositeAll = true;
+            throwsError = true;
             m_width = width;
             m_height = height;
             m_layers = new Vector.<ILayer>();
@@ -96,8 +97,12 @@ package com.github.niji.framework
          */
         public function add():void
         {
-            if (m_layers.length >= MAX)
-                throw new AddLayerError(MAX);
+            if (m_layers.length >= MAX) {
+                if (throwsError)
+                    throw new AddLayerError(MAX)
+                else
+                    return;
+            }
             var layer:BitmapLayer = new BitmapLayer(
                 new BitmapData(m_width, m_height, true, 0x0)
             );
@@ -137,8 +142,12 @@ package com.github.niji.framework
          */
         public function copyAt(index:int):void
         {
-            if (m_layers.length >= MAX)
-                throw new AddLayerError(MAX);
+            if (m_layers.length >= MAX) {
+                if (throwsError)
+                    throw new AddLayerError(MAX)
+                else
+                    return;
+            }
             var selected:ILayer = m_layers[index];
             var layer:ILayer = selected.clone();
             layer.name = TranslatorRegistry.tr("%s's copy", selected.name);
@@ -205,7 +214,8 @@ package com.github.niji.framework
                     return;
                 }
             }
-            throw new MergeLayersError();
+            if (throwsError)
+                throw new MergeLayersError();
         }
         
         /**
@@ -228,8 +238,12 @@ package com.github.niji.framework
          */
         public function removeAt(index:int):void
         {
-            if (m_layers.length <= 1)
-                throw new RemoveLayerError();
+            if (m_layers.length <= 1) {
+                if (throwsError)
+                    throw new RemoveLayerError()
+                else
+                    return;
+            }
             m_layers.splice(index, 1);
             m_sprite.removeChildAt(index);
             if (currentIndex > 0 && index >= currentIndex)
@@ -587,6 +601,13 @@ package com.github.niji.framework
          * @default false
          */
         public var doCompositeAll:Boolean;
+        
+        /**
+         * レイヤー操作に失敗した場合例外を送出するかどうか
+         * 
+         * @default true
+         */
+        internal var throwsError:Boolean;
         
         /**
          * 全てのレイヤーが合成された結果の画像データです
