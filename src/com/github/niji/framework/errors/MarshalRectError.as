@@ -24,43 +24,30 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.github.niji.framework
+package com.github.niji.framework.errors
 {
-    public final class Version
+    import com.github.niji.framework.i18n.TranslatorRegistry;
+	
+	/**
+	 * キャンバスのサイズと異なるふっかつのじゅもんのログを読み込もうとした場合に作成される例外クラスです
+	 */
+    public final class MarshalRectError extends Error
     {
         /**
-         * ログのバージョン番号
+         * コンストラクタ
+         * 
+         * @param actual 読み込まれたログのバージョン
+         * @param expected バージョンの上限
          */
-        public static const LOG_VERSION:uint = 22;
-        
-        /**
-         * ペインター自体のバージョン
-         */
-        public static const DATE:uint = 20101001;
-        
-        /**
-         * ペインターのバージョン文字列
-         */
-        public static const DATE_STRING:String = "ver." + DATE;
-        
-        public static function compareDate(date:uint):int
+        public function MarshalRectError(actualWidth:uint,
+                                         actualHeight:uint,
+                                         expectedWidth:uint,
+                                         expectedHeight:uint)
         {
-            return compareUInt(date, DATE);
-        }
-        
-        public static function compareLogVersion(version:uint):int
-        {
-            return compareUInt(version, LOG_VERSION);
-        }
-        
-        private static function compareUInt(src:uint, target:uint):int
-        {
-            if (src > target)
-                return 1;
-            else if (src < target)
-                return -1;
-            else
-                return 0;
+            name = "MarshalRectError";
+            super(TranslatorRegistry.tr(
+                "Cannot load this file because the size of an image is not equal: actual = (%s,%s), expected = (%s,%s)",
+                actualWidth, actualHeight, expectedWidth, expectedHeight), 0);
         }
     }
 }
