@@ -324,8 +324,8 @@ package com.github.niji.framework.modules
         protected function getArgumentsFromCoordinate(x:Number, y:Number):Object
         {
             var args:Object = {
-                "x": x,
-                "y": y
+                "x": Math.floor(x),
+                "y": Math.floor(y)
             };
             return args;
         }
