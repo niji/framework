@@ -147,6 +147,14 @@ package com.github.niji.framework.modules
         function setCompatibility(type:uint, value:Boolean):void;
         
         /**
+         * レイヤーの表示及び非表示を切り替えます
+         * 
+         * @param index 対象のレイヤー番号
+         * @param value 表示または非表示
+         */
+        function setLayerVisible(index:int, value:Boolean):void
+        
+        /**
          * 座標位置を(0,0)に戻します
          */
         function reset():void;

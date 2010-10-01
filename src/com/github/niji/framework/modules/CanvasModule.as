@@ -26,8 +26,6 @@
 */
 package com.github.niji.framework.modules
 {
-    import flash.geom.Point;
-    
     import com.github.niji.framework.BitmapLayer;
     import com.github.niji.framework.ILayer;
     import com.github.niji.framework.Recorder;
@@ -45,9 +43,12 @@ package com.github.niji.framework.modules
     import com.github.niji.framework.commands.layer.SetLayerAlphaCommand;
     import com.github.niji.framework.commands.layer.SetLayerBlendModeCommand;
     import com.github.niji.framework.commands.layer.SetLayerIndexCommand;
+    import com.github.niji.framework.commands.layer.SetLayerVisibleCommand;
     import com.github.niji.framework.commands.layer.SwapLayerCommand;
     import com.github.niji.framework.errors.InvisibleLayerError;
     import com.github.niji.framework.errors.LockedLayerError;
+    
+    import flash.geom.Point;
 
     /**
      * ICanvasModuleの実装を助けるためのクラスです.
@@ -190,6 +191,20 @@ package com.github.niji.framework.modules
                 {
                     "type": type,
                     "value": value
+                }
+            );
+        }
+        
+        /**
+         * @copy ICanvasModule#setLayerVisible()
+         */
+        public function setLayerVisible(index:int, value:Boolean):void
+        {
+            m_recorder.commitCommand(
+                SetLayerVisibleCommand.ID,
+                {
+                    "index": index,
+                    "visible": value
                 }
             );
         }
