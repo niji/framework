@@ -46,9 +46,9 @@ package com.github.niji.framework
      * <pre>
      * 1:uint          version
      * n:ByteArray     logData
-     * n:Rectangle     rectangle
-     * n:Vector.<uint> pixelData
      * n:Object        metadata
+     * n:Vector.<uint> layerPixelData
+     * n:Object        layerInfo
      * n:Object        undoData
      * n:Object        controllerData
      * </pre>
@@ -61,10 +61,12 @@ package com.github.niji.framework
         public static const VERSION:uint = 1;
         
         public function Marshal(recorder:Recorder,
-                                controllers:Vector.<IController>)
+                                controllers:Vector.<IController>,
+                                metadata:Object)
         {
             m_recorder = recorder;
             m_controllers = controllers;
+            m_metadata = metadata;
         }
         
         /**
@@ -83,21 +85,25 @@ package com.github.niji.framework
             if (version > VERSION)
                 throw new MarshalVersionError(version, VERSION);
             var dataBytes:ByteArray = ByteArray(bytes.readObject());
-            var rect:Object = bytes.readObject();
+            m_metadata = bytes.readObject();
             var pixels:Vector.<uint> = Vector.<uint>(bytes.readObject());
-            var metadata:Object = bytes.readObject();
+            var layerInfo:Object = bytes.readObject();
             var undoData:Object = bytes.readObject();
             var controllerData:Object = bytes.readObject();
-            var w:uint = rect.width;
-            var h:uint = rect.height;
+            var lw:uint = m_metadata.width;
+            var lh:uint = m_metadata.height;
+            var layerImage:BitmapData = new BitmapData(lw, lh, true, 0x0);
+            layerImage.setVector(new Rectangle(0, 0, lw, lh), pixels);
+            dataBytes.readBytes(toBytes);
+            m_recorder.layers.load(layerImage, layerInfo);
+            delete m_metadata.width;
+            delete m_metadata.height;
+            var w:uint = layerInfo.width;
+            var h:uint = layerInfo.height;
             var rw:uint = m_recorder.width;
             var rh:uint = m_recorder.height;
             if (w != rw || h != rh)
                 throw new MarshalRectError(w, h, rw, rh);
-            var bitmapData:BitmapData = new BitmapData(w, h, true, 0x0);
-            bitmapData.setVector(new Rectangle(0, 0, w, h), pixels);
-            dataBytes.readBytes(toBytes);
-            m_recorder.layers.load(bitmapData, metadata);
             m_recorder.undoStack.load(undoData);
             toBytes.position = toBytes.length;
             var count:uint = m_controllers.length;
@@ -116,19 +122,23 @@ package com.github.niji.framework
          */
         public function save(bytes:ByteArray, fromBytes:ByteArray):void
         {
-            var bitmapData:BitmapData = m_recorder.layers.newLayerBitmapData;
+            var layerImage:BitmapData = m_recorder.layers.newLayerBitmapData;
             var metadata:Object = {};
             var undoData:Object = {};
-            var rect:Rectangle = bitmapData.rect;
-            m_recorder.layers.save(bitmapData, metadata);
+            var rect:Rectangle = layerImage.rect;
+            m_metadata.width = rect.width;
+            m_metadata.height = rect.height;
+            m_recorder.layers.save(layerImage, metadata);
             m_recorder.undoStack.save(undoData);
             bytes.endian = Endian.BIG_ENDIAN;
             bytes.writeByte(VERSION);
             bytes.writeObject(fromBytes);
-            bytes.writeObject(rect);
-            bytes.writeObject(bitmapData.getVector(rect));
+            bytes.writeObject(m_metadata);
+            bytes.writeObject(layerImage.getVector(rect));
             bytes.writeObject(metadata);
             bytes.writeObject(undoData);
+            delete m_metadata.width;
+            delete m_metadata.height;
             var controllerData:Object = {};
             var count:uint = m_controllers.length;
             for (var i:uint = 0; i < count; i++) {
@@ -149,5 +159,6 @@ package com.github.niji.framework
         
         private var m_recorder:Recorder;
         private var m_controllers:Vector.<IController>;
+        private var m_metadata:Object;
     }
 }
