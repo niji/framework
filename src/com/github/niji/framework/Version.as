@@ -31,7 +31,7 @@ package com.github.niji.framework
         /**
          * ログのバージョン番号
          */
-        public static const LOG_VERSION:uint = 22;
+        public static const LOG_VERSION:uint = 23;
         
         /**
          * ペインター自体のバージョン
