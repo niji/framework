@@ -26,6 +26,8 @@
 */
 package com.github.niji.framework
 {
+    import com.github.niji.framework.events.PenEvent;
+    
     import flash.display.BitmapData;
     import flash.display.BlendMode;
     import flash.display.CapsStyle;
@@ -35,13 +37,13 @@ package com.github.niji.framework
     import flash.events.EventDispatcher;
     import flash.geom.Matrix;
     
-    import com.github.niji.framework.events.PenEvent;
-    
     /**
      * ペンの状態を管理するクラスです
      */
     public final class Pen extends EventDispatcher
     {
+        public static const DEFAULT_THICKNESS:uint = 3;
+        
         /**
          * ペンの状態を初期化して生成します
          */
@@ -56,7 +58,7 @@ package com.github.niji.framework
          */
         public function reset():void
         {
-            m_thickness = 3;
+            m_thickness = DEFAULT_THICKNESS;
             m_color = 0x0;
             m_alpha = 1.0;
             m_blendMode = BlendMode.NORMAL;
