@@ -33,15 +33,15 @@ package com.github.niji.framework
     import com.github.niji.framework.errors.MarshalRectError;
     import com.github.niji.framework.errors.MarshalVersionError;
     import com.github.niji.framework.ui.IController;
-    
+
     import flash.display.BitmapData;
     import flash.geom.Rectangle;
     import flash.utils.ByteArray;
     import flash.utils.Endian;
-    
+
     /**
      * ふっかつのじゅもんのデータとして保存するクラス.
-     * 
+     *
      * <p>以下のフォーマットに基づいて zlib 形式で圧縮して保存されます。</p>
      * <pre>
      * 1:uint          version
@@ -59,7 +59,7 @@ package com.github.niji.framework
          * ログのバージョン番号
          */
         public static const VERSION:uint = 1;
-        
+
         public function Marshal(recorder:Recorder,
                                 controllers:Vector.<IController>,
                                 metadata:Object)
@@ -68,10 +68,10 @@ package com.github.niji.framework
             m_controllers = controllers;
             m_metadata = metadata;
         }
-        
+
         /**
          * ふっかつのじゅもんを復元します
-         * 
+         *
          * @param bytes お絵描きログ
          * @param toBytes 保存先となる ByteArray
          * @throws MarshalVersionError
@@ -113,12 +113,12 @@ package com.github.niji.framework
                 controller.load(value);
             }
         }
-        
+
         /**
          * ふっかつのじゅもんを保存します
-         * 
+         *
          * @param bytes お絵描きログ
-         * @param fromoBytes 保存元となる ByteArray
+         * @param fromBytes 保存元となる ByteArray
          */
         public function save(bytes:ByteArray, fromBytes:ByteArray):void
         {
@@ -151,12 +151,12 @@ package com.github.niji.framework
             bytes.deflate();
             bytes.position = 0;
         }
-        
+
         public function newRecorderBytes():ByteArray
         {
             return m_recorder.newBytes();
         }
-        
+
         private var m_recorder:Recorder;
         private var m_controllers:Vector.<IController>;
         private var m_metadata:Object;
