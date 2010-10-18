@@ -41,6 +41,7 @@ package com.github.niji.framework.commands
         
         public function DrawCircleCommand()
         {
+            reset();
         }
         
         public function read(bytes:IDataInput):void
@@ -63,6 +64,7 @@ package com.github.niji.framework.commands
         
         public function reset():void
         {
+            m_radius = 0;
         }
         
         public function toString():String

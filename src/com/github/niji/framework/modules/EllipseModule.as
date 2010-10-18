@@ -57,12 +57,6 @@ package com.github.niji.framework.modules
         {
             m_recorder.clear();
             m_recorder.resetPen();
-            m_recorder.drawEllipse(
-                coordinateX,
-                coordinateY,
-                Math.abs(x - coordinateX),
-                Math.abs(y - coordinateY)
-            );
         }
         
         /**

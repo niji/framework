@@ -27,15 +27,20 @@
 package com.github.niji.framework.modules
 {
     import com.github.niji.framework.Recorder;
+    import com.github.niji.framework.commands.CompositeCommand;
+    import com.github.niji.framework.commands.DrawRectangleCommand;
+    import com.github.niji.framework.commands.MoveToCommand;
+    
+    import flash.geom.Rectangle;
     
     /**
-     * 長方形描写ツールの実装
+     * 矩形描写ツールの実装
      */
-    public final class RectModule extends CanvasModule implements ICanvasModule
+    public final class RectangleModule extends CanvasModule implements ICanvasModule
     {
-        public static const RECT:String = PREFIX + "rect";
+        public static const RECTANGLE:String = PREFIX + "rectangle";
         
-        public function RectModule(recorder:Recorder)
+        public function RectangleModule(recorder:Recorder)
         {
             super(recorder);
         }
@@ -55,14 +60,12 @@ package com.github.niji.framework.modules
          */
         public function move(x:Number, y:Number):void
         {
+            var width:int = Math.floor(x - coordinateX);
+            var height:int = Math.floor(y - coordinateY);
             m_recorder.clear();
             m_recorder.resetPen();
-            m_recorder.drawRect(
-                coordinateX,
-                coordinateY,
-                Math.abs(x - coordinateX),
-                Math.abs(y - coordinateY)
-            );
+            m_recorder.moveTo(coordinateX, coordinateY);
+            m_recorder.drawRect(width, height);
         }
         
         /**
@@ -72,7 +75,20 @@ package com.github.niji.framework.modules
         {
             m_recorder.stopDrawing();
             if (!equalsCoordinate(x, y)) {
-                // TODO: implement this
+                var width:int = Math.floor(x - coordinateX);
+                var height:int = Math.floor(y - coordinateY);
+                m_recorder.commitCommand(
+                    MoveToCommand.ID,
+                    getArgumentsFromCoordinate(coordinateX, coordinateY)
+                );
+                m_recorder.commitCommand(
+                    DrawRectangleCommand.ID,
+                    { "width": width, "height": height }
+                );
+                m_recorder.commitCommand(
+                    CompositeCommand.ID,
+                    {}
+                );
             }
             saveCoordinate(x, y);
         }
@@ -87,7 +103,7 @@ package com.github.niji.framework.modules
         
         public function get name():String
         {
-            return RECT;
+            return RECTANGLE;
         }
     }
 }

@@ -48,7 +48,7 @@ package com.github.niji.framework.modules
             registerModule(new FreeHandModule(recorder));
             registerModule(new LineModule(recorder));
             registerModule(new PixelModule(recorder));
-            registerModule(new RectModule(recorder));
+            registerModule(new RectangleModule(recorder));
             registerModule(new RoundRectModule(recorder));
             registerModule(new TransparentFloodFill(recorder));
             registerModule(new TransparentLineModule(recorder));

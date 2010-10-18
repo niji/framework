@@ -105,16 +105,13 @@ package com.github.niji.framework
         /**
          * 矩形を描写します
          * 
-         * @param x 基準点となる X 座標
-         * @param y 基準点となる Y 座標
          * @param width 幅
          * @param height 高さ
          * @see flash.display.Graphics#drawRect
          */
-        public function drawRect(x:Number, y:Number,
-                                 width:uint, height:uint):void
+        public function drawRect(width:uint, height:uint):void
         {
-            m_graphics.drawRect(x, y, width, height);
+            m_graphics.drawRect(m_coordinate.x, m_coordinate.y, width, height);
         }
         
         /**
@@ -126,10 +123,9 @@ package com.github.niji.framework
          * @param height 高さ
          * @see flash.display.Graphics#drawEllipse
          */
-        public function drawEllipse(x:Number, y:Number,
-                                    width:uint, height:uint):void
+        public function drawEllipse(width:uint, height:uint):void
         {
-            m_graphics.drawEllipse(x, y, width, height);
+            m_graphics.drawEllipse(m_coordinate.x, m_coordinate.y, width, height);
         }
         
         /**

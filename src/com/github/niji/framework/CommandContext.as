@@ -26,13 +26,12 @@
 */
 package com.github.niji.framework
 {
-    import flash.events.EventDispatcher;
-    
     import com.github.niji.framework.commands.BeginFillCommand;
     import com.github.niji.framework.commands.BezierCurveCommand;
     import com.github.niji.framework.commands.CompatibilityCommand;
     import com.github.niji.framework.commands.CompositeCommand;
     import com.github.niji.framework.commands.DrawCircleCommand;
+    import com.github.niji.framework.commands.DrawRectangleCommand;
     import com.github.niji.framework.commands.EndFillCommand;
     import com.github.niji.framework.commands.FloodFillCommand;
     import com.github.niji.framework.commands.HorizontalMirrorCommand;
@@ -58,6 +57,8 @@ package com.github.niji.framework
     import com.github.niji.framework.commands.layer.SwapLayerCommand;
     import com.github.niji.framework.events.CommandEvent;
     
+    import flash.events.EventDispatcher;
+    
     /**
      * コマンドを管理するクラスです.
      * 
@@ -74,7 +75,7 @@ package com.github.niji.framework
      * <tr><td>6</td><td>RedoCommand</td></tr>
      * <tr><td>7</td><td>BeginFillCommand</td></tr>
      * <tr><td>8</td><td>EndFillCommand</td></tr>
-     * <tr><td>9</td><td>DrawRectCommand</td></tr> (unused)
+     * <tr><td>9</td><td>DrawRectangleCommand</td></tr>
      * <tr><td>10</td><td>DrawCircleCommand</td></tr>
      * <tr><td>11</td><td>DrawEllipseCommand</td></tr> (unused)
      * <tr><td>12</td><td>DrawRoundRectCommand</td></tr> (unsed)
@@ -130,6 +131,7 @@ package com.github.niji.framework
             registerCommand(new CompatibilityCommand);
             registerCommand(new CompositeCommand());
             registerCommand(new DrawCircleCommand());
+            registerCommand(new DrawRectangleCommand());
             registerCommand(new EndFillCommand());
             registerCommand(new FloodFillCommand());
             registerCommand(new HorizontalMirrorCommand());
