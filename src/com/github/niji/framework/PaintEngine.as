@@ -26,12 +26,12 @@
 */
 package com.github.niji.framework
 {
+    import com.github.niji.framework.vg.VGLayer;
+    import com.github.niji.framework.vg.VGPoint;
+    
     import flash.display.Graphics;
     import flash.display.Shape;
     import flash.geom.Point;
-    
-    import com.github.niji.framework.vg.VGLayer;
-    import com.github.niji.framework.vg.VGPoint;
     
     /**
      * Graphics に描写を委譲するクラスです.
@@ -109,7 +109,7 @@ package com.github.niji.framework
          * @param height 高さ
          * @see flash.display.Graphics#drawRect
          */
-        public function drawRect(width:uint, height:uint):void
+        public function drawRect(width:int, height:int):void
         {
             m_graphics.drawRect(m_coordinate.x, m_coordinate.y, width, height);
         }

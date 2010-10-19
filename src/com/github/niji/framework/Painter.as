@@ -182,7 +182,7 @@ package com.github.niji.framework
          * @param height 高さ
          * @see PaintEngine#drawRect()
          */
-        public function drawRect(width:uint, height:uint):void
+        public function drawRect(width:int, height:int):void
         {
             m_paintEngine.drawRect(width, height);
         }
@@ -198,7 +198,7 @@ package com.github.niji.framework
          * @param height 高さ
          * @see PaintEngine#drawEllipse()
          */
-        public function drawEllipse(width:uint, height:uint):void
+        public function drawEllipse(width:int, height:int):void
         {
             m_paintEngine.drawEllipse(width, height);
         }
