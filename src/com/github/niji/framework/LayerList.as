@@ -408,8 +408,9 @@ package com.github.niji.framework
             var count:uint = m_layers.length;
             for (var i:uint = 0; i < count; i++) {
                 var layer:ILayer = m_layers[i];
-                // ここから例外を送出することは不具合が無ければないと考えられる
-                m_sprite.removeChild(layer.displayObject);
+                var child:DisplayObject = layer.displayObject;
+                if (m_sprite.contains(child))
+                    m_sprite.removeChild(child);
             }
             m_layers.splice(0, count);
         }
