@@ -24,6 +24,7 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+
 package com.github.niji.framework.modules
 {
     import com.github.niji.framework.Recorder;
@@ -39,6 +40,8 @@ package com.github.niji.framework.modules
         public function PixelModule(recorder:Recorder)
         {
             super(recorder);
+            m_x = 0;
+            m_y = 0;
         }
         
         /**
@@ -77,15 +80,24 @@ package com.github.niji.framework.modules
         
         private function setPixel(x:Number, y:Number):void
         {
-            m_recorder.commitCommand(
-                PixelCommand.ID,
-                getArgumentsFromCoordinate(x, y)
-            );
+            x = Math.floor(x);
+            y = Math.floor(y);
+            if (m_x != x || m_y != y) {
+                m_recorder.commitCommand(
+                    PixelCommand.ID,
+                    getArgumentsFromCoordinate(x, y)
+                );
+            }
+            m_x = x;
+            m_y = y;
         }
         
         public function get name():String
         {
             return PIXEL;
         }
+        
+        private var m_x:int;
+        private var m_y:int;
     }
 }
