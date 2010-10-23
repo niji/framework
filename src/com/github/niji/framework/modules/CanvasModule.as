@@ -269,7 +269,7 @@ package com.github.niji.framework.modules
         }
         
         /**
-         * 現在の座標を設定します
+         * 描写開始時の座標を設定します
          * 
          * @param x X座標
          * @param y Y座標
@@ -291,12 +291,12 @@ package com.github.niji.framework.modules
         }
         
         /**
-         * 指定された座標が現在の座標と一致するかを確認します
+         * 指定された座標が描写開始時の座標と一致するかを確認します
          * 
          * @param x X座標
          * @param y Y座標
          * @return 同じである場合は true
-         */        
+         */
         protected function equalsCoordinate(x:uint, y:uint):Boolean
         {
             var from:Point = new Point(s_coordinateX, s_coordinateY);
@@ -467,7 +467,7 @@ package com.github.niji.framework.modules
         }
         
         /**
-         * 現在のX座標を取得します.
+         * 開始時のX座標を取得します.
          * 
          * <p>
          * 内部は静的変数であるため、CanvasModuleを継承する全てのクラスに影響します
@@ -479,7 +479,7 @@ package com.github.niji.framework.modules
         }
         
         /**
-         * 現在のY座標を取得します.
+         * 開始時のY座標を取得します.
          * 
          * <p>
          * 内部は静的変数であるため、CanvasModuleを継承する全てのクラスに影響します
