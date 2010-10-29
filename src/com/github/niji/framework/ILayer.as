@@ -58,6 +58,13 @@ package com.github.niji.framework
         function clone(bitmapDataCopy:Boolean = true):ILayer;
         
         /**
+         * レイヤーを統合します
+         * 
+         * @param 統合するレイヤー (統合後は表示上から外すこと)
+         */
+        function merge(source:ILayer):void;
+        
+        /**
          * toJSON でシリアライズされたオブジェクトから復元します
          */
         function fromJSON(data:Object):void;

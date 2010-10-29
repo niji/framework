@@ -26,6 +26,10 @@
 */
 package com.github.niji.framework.vg
 {
+    import com.github.niji.framework.BitmapLayer;
+    import com.github.niji.framework.ILayer;
+    import com.github.niji.framework.Layer;
+    
     import flash.display.BitmapData;
     import flash.display.DisplayObject;
     import flash.display.Graphics;
@@ -34,10 +38,6 @@ package com.github.niji.framework.vg
     import flash.geom.ColorTransform;
     import flash.geom.Point;
     import flash.geom.Rectangle;
-    
-    import com.github.niji.framework.BitmapLayer;
-    import com.github.niji.framework.ILayer;
-    import com.github.niji.framework.Layer;
 
     public class VGLayer extends Layer implements ILayer
     {
@@ -103,6 +103,17 @@ package com.github.niji.framework.vg
             return layer;
         }
         
+        /**
+         * @inheritDoc
+         */
+        public function merge(source:ILayer):void
+        {
+            throw new Error();
+        }
+        
+        /**
+         * @inheritDoc
+         */
         public override function fromJSON(value:Object):void
         {
             m_shape.width = uint(value.width);
@@ -111,6 +122,9 @@ package com.github.niji.framework.vg
             //m_points = Vector.<VGPoint>(value.points);
         }
         
+        /**
+         * @inheritDoc
+         */
         public override function toJSON():Object
         {
             var value:Object = {

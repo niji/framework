@@ -202,9 +202,9 @@ package com.github.niji.framework
                 var prev:ILayer = m_layers[index - 1];
                 // 両方可視である必要がある
                 if (current.visible && prev.visible) {
-                    current.compositeTo(prev);
-                    // 合成後の LayerBitmap は完全に不透明にしておく
-                    prev.alpha = 1.0;
+                    // 一番上のレイヤーをその下のレイヤーに統合し、
+                    // 一番上のレイヤーを表示上から削除する
+                    prev.merge(current);
                     m_layers.splice(index, 1);
                     m_sprite.removeChildAt(index);
                     if (index >= currentIndex)

@@ -26,14 +26,14 @@
 */
 package com.github.niji.framework
 {
+    import com.github.niji.framework.i18n.TranslatorRegistry;
+    
     import flash.display.Bitmap;
     import flash.display.BitmapData;
     import flash.display.DisplayObject;
     import flash.display.IBitmapDrawable;
     import flash.geom.ColorTransform;
     import flash.geom.Matrix;
-    
-    import com.github.niji.framework.i18n.TranslatorRegistry;
     
     /**
      * ビットマップによるレイヤー画像のクラスです
@@ -53,10 +53,7 @@ package com.github.niji.framework
         }
         
         /**
-         * レイヤーを複製します
-         * 
-         * @param bitmapDataCopy レイヤー画像のデータも複製するかどうか
-         * @return 複製されたレイヤー (LayerBitmap)
+         * @inheritDoc
          */
         public function clone(bitmapDataCopy:Boolean = true):ILayer
         {
@@ -77,11 +74,7 @@ package com.github.niji.framework
         }
         
         /**
-         * ソース元からレイヤーを合成します
-         * 
-         * @param source ソース元
-         * @param blendMode ブレンドモード
-         * @see flash.display.BlendMode
+         * @inheritDoc
          */
         public function compositeFrom(source:IBitmapDrawable,
                                       blendMode:String):void
@@ -117,6 +110,19 @@ package com.github.niji.framework
                         "Cannot composite BitmapLayer to VectorGraphicLayer");
                 }
             }
+        }
+        
+        /**
+         * @inheritDoc
+         */
+        public function merge(source:ILayer):void
+        {
+            var pixels:BitmapData = new BitmapData(width, height, true, 0x0);
+            var dest:BitmapLayer = new BitmapLayer(pixels);
+            compositeTo(dest);
+            source.compositeTo(dest);
+            setBitmapData(pixels);
+            alpha = 1.0;
         }
         
         /**
