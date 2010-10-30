@@ -69,7 +69,7 @@ package com.github.niji.framework.commands.layer
         
         public function reset():void
         {
-            m_index = 0;
+            m_index = -1;
         }
         
         public function toString():String
