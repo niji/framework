@@ -26,17 +26,17 @@
 */
 package com.github.niji.framework
 {
-    import flash.events.TimerEvent;
-    import flash.utils.ByteArray;
-    import flash.utils.Timer;
-    import flash.utils.clearInterval;
-    import flash.utils.setInterval;
-    
     import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.errors.EOLError;
     import com.github.niji.framework.events.CommandEvent;
     import com.github.niji.framework.events.PlayerErrorEvent;
     import com.github.niji.framework.events.PlayerEvent;
+    
+    import flash.events.TimerEvent;
+    import flash.utils.ByteArray;
+    import flash.utils.Timer;
+    import flash.utils.clearInterval;
+    import flash.utils.setInterval;
     
     /**
      * ログを再生するクラスです
@@ -76,8 +76,11 @@ package com.github.niji.framework
         public static function create(bytes:ByteArray):Player
         {
             var player:Player = new Player(new Parser(bytes));
-            player.layers.throwsError = false;
-            player.setUndoStack(new UndoStack(player.layers));
+            var layers:LayerList = player.layers;
+            var undoStack:UndoStack = new UndoStack(layers);
+            player.setUndoStack(undoStack);
+            layers.throwsError = false;
+            undoStack.throwsError = false;
             return player;
         }
         

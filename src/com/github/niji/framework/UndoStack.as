@@ -54,6 +54,7 @@ package com.github.niji.framework
         public function UndoStack(layers:LayerList,
                                   size:uint = 16)
         {
+            throwsError = true;
             m_buffer = new Vector.<Object>(size + 1, true);
             m_index = 0;
             m_first = 0;
@@ -149,7 +150,10 @@ package com.github.niji.framework
         internal function undo(layers:LayerList):void
         {
             if (m_index === m_first) {
-                throw new UndoError();
+                if (throwsError)
+                    throw new UndoError();
+                else
+                    return;
             }
             else if (m_index === 0) {
                 m_index = m_buffer.length - 1;
@@ -171,7 +175,10 @@ package com.github.niji.framework
         internal function redo(layers:LayerList):void
         {
             if (m_index === m_last) {
-                throw new RedoError();
+                if (throwsError)
+                    throw new RedoError();
+                else
+                    return;
             }
             m_index = (m_index + 1) % m_buffer.length;
             layers.loadState(m_buffer[m_index]);
@@ -221,6 +228,13 @@ package com.github.niji.framework
         {
             return m_buffer.length - 1;
         }
+        
+        /**
+         * 巻き戻し操作に失敗した場合例外を送出するかどうか
+         * 
+         * @default true
+         */
+        internal var throwsError:Boolean;
         
         private var m_buffer:Vector.<Object>;
         private var m_index:uint;
