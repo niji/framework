@@ -24,8 +24,10 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework
 {
+/// @endcond
     import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.errors.EOLError;
     import com.github.niji.framework.events.CommandEvent;
@@ -35,8 +37,6 @@ package com.github.niji.framework
     import flash.events.TimerEvent;
     import flash.utils.ByteArray;
     import flash.utils.Timer;
-    import flash.utils.clearInterval;
-    import flash.utils.setInterval;
     
     /**
      * ログを再生するクラスです

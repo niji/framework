@@ -24,13 +24,15 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework
 {
-    import flash.utils.ByteArray;
-    import flash.utils.Endian;
-    
+/// @endcond
     import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.events.CommandEvent;
+    
+    import flash.utils.ByteArray;
+    import flash.utils.Endian;
     
     /**
      * ログを記録するクラスです

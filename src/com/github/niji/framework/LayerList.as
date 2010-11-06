@@ -24,15 +24,16 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework
 {
+/// @endcond
     import com.github.niji.framework.errors.AddLayerError;
     import com.github.niji.framework.errors.MergeLayersError;
     import com.github.niji.framework.errors.RemoveLayerError;
     import com.github.niji.framework.errors.TooManyLayersError;
     import com.github.niji.framework.i18n.TranslatorRegistry;
     
-    import flash.display.Bitmap;
     import flash.display.BitmapData;
     import flash.display.BlendMode;
     import flash.display.DisplayObject;

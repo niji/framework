@@ -24,16 +24,14 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework
 {
-    import com.github.niji.framework.LayerList;
-    import com.github.niji.framework.Painter;
-    import com.github.niji.framework.Recorder;
-    import com.github.niji.framework.UndoStack;
+/// @endcond
     import com.github.niji.framework.errors.MarshalRectError;
     import com.github.niji.framework.errors.MarshalVersionError;
     import com.github.niji.framework.ui.IController;
-
+    
     import flash.display.BitmapData;
     import flash.geom.Rectangle;
     import flash.utils.ByteArray;

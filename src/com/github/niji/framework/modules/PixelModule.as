@@ -25,8 +25,10 @@
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+/// @cond
 package com.github.niji.framework.modules
 {
+/// @endcond
     import com.github.niji.framework.Recorder;
     import com.github.niji.framework.commands.PixelCommand;
     

@@ -24,14 +24,16 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework.modules
 {
-    import flash.geom.Rectangle;
-    
+/// @endcond
     import com.github.niji.framework.Recorder;
     import com.github.niji.framework.commands.CompositeCommand;
     import com.github.niji.framework.commands.DrawCircleCommand;
     import com.github.niji.framework.commands.MoveToCommand;
+    
+    import flash.geom.Rectangle;
     
     /**
      * 円描写ツールの実装

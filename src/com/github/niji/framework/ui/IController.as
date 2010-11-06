@@ -24,12 +24,10 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework.ui
 {
-    import flash.utils.ByteArray;
-    
-    import com.github.niji.framework.ui.IApplication;
-
+/// @endcond
     /**
      * コントローラの処理と情報の復元及び保存に必要なインターフェースです
      */

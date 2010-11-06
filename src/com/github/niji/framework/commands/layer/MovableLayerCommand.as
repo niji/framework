@@ -24,12 +24,12 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework.commands.layer
 {
+/// @endcond
     import flash.utils.IDataInput;
     import flash.utils.IDataOutput;
-    
-    import com.github.niji.framework.Painter;
 
     internal class MovableLayerCommand
     {

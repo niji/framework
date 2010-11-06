@@ -24,18 +24,17 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework.vg
 {
+/// @endcond
     import com.github.niji.framework.BitmapLayer;
     import com.github.niji.framework.ILayer;
     import com.github.niji.framework.Layer;
     
     import flash.display.BitmapData;
     import flash.display.DisplayObject;
-    import flash.display.Graphics;
     import flash.display.Shape;
-    import flash.events.Event;
-    import flash.geom.ColorTransform;
     import flash.geom.Point;
     import flash.geom.Rectangle;
 

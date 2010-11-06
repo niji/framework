@@ -24,8 +24,10 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework
 {
+/// @endcond
     import com.github.niji.framework.vg.VGLayer;
     import com.github.niji.framework.vg.VGPoint;
     

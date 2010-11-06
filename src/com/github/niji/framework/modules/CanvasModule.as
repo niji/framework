@@ -24,9 +24,10 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework.modules
 {
-    import com.github.niji.framework.BitmapLayer;
+/// @endcond
     import com.github.niji.framework.ILayer;
     import com.github.niji.framework.Recorder;
     import com.github.niji.framework.commands.CompatibilityCommand;

@@ -24,11 +24,10 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework
 {
-    import flash.utils.ByteArray;
-    import flash.utils.Endian;
-    
+/// @endcond
     import com.github.niji.framework.commands.ICommand;
     import com.github.niji.framework.commands.LineToCommand;
     import com.github.niji.framework.commands.MoveToCommand;
@@ -38,6 +37,9 @@ package com.github.niji.framework
     import com.github.niji.framework.errors.InvalidCommandError;
     import com.github.niji.framework.errors.InvalidSignatureError;
     import com.github.niji.framework.events.CommandEvent;
+    
+    import flash.utils.ByteArray;
+    import flash.utils.Endian;
     
     /**
      * ペイントログを解析して再生に必要な情報を管理するクラスです

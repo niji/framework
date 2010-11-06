@@ -24,15 +24,17 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework.modules
 {
-    import flash.display.BlendMode;
-    
+/// @endcond
     import com.github.niji.framework.Pen;
     import com.github.niji.framework.Recorder;
     import com.github.niji.framework.commands.CompositeCommand;
     import com.github.niji.framework.commands.LineToCommand;
     import com.github.niji.framework.commands.MoveToCommand;
+    
+    import flash.display.BlendMode;
     
     /**
      * 透明直線描写ツールの実装

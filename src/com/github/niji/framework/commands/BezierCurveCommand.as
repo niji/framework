@@ -24,15 +24,16 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework.commands
 {
-    import flash.geom.Point;
-    import flash.utils.IDataInput;
-    import flash.utils.IDataOutput;
-    
+/// @endcond
     import com.github.niji.framework.LayerList;
     import com.github.niji.framework.Painter;
     import com.github.niji.framework.vg.VGLayer;
+    
+    import flash.utils.IDataInput;
+    import flash.utils.IDataOutput;
     
     /**
      * @private

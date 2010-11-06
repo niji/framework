@@ -24,8 +24,10 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework.modules
 {
+/// @endcond
     /**
      * 描写モジュールに必要なメソッドを定義したインターフェースです.
      * 

@@ -24,15 +24,16 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework
 {
-    import flash.display.BitmapData;
-    import flash.events.EventDispatcher;
-    import flash.utils.ByteArray;
-    
+/// @endcond
     import com.github.niji.framework.errors.RedoError;
     import com.github.niji.framework.errors.UndoError;
     import com.github.niji.framework.events.UndoEvent;
+    
+    import flash.display.BitmapData;
+    import flash.events.EventDispatcher;
     
     /**
      * アンドゥを管理するクラスです

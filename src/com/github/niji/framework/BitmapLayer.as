@@ -24,15 +24,14 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework
 {
-    import com.github.niji.framework.i18n.TranslatorRegistry;
-    
+/// @endcond
     import flash.display.Bitmap;
     import flash.display.BitmapData;
     import flash.display.DisplayObject;
     import flash.display.IBitmapDrawable;
-    import flash.geom.ColorTransform;
     import flash.geom.Matrix;
     
     /**

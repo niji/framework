@@ -24,20 +24,17 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework
 {
-    import flash.display.Bitmap;
+/// @endcond
+    import com.github.niji.framework.errors.NotSupportedVersionError;
+    
     import flash.display.BitmapData;
-    import flash.display.BlendMode;
-    import flash.display.DisplayObject;
     import flash.display.Shape;
-    import flash.display.Sprite;
     import flash.events.EventDispatcher;
     import flash.geom.Matrix;
     import flash.geom.Point;
-    import flash.geom.Rectangle;
-    
-    import com.github.niji.framework.errors.NotSupportedVersionError;
     
     /**
      * 再生及び記録のための共通基盤となるクラスです.

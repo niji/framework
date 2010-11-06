@@ -24,8 +24,10 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework.i18n
 {
+/// @endcond
 	/**
 	 * ITranslator を実装するクラスを管理するグローバルなクラスです
 	 */

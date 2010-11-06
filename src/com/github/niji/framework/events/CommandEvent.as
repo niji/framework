@@ -24,11 +24,13 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+/// @cond
 package com.github.niji.framework.events
 {
-    import flash.events.Event;
-    
+/// @endcond
     import com.github.niji.framework.commands.ICommand;
+    
+    import flash.events.Event;
     
     /**
      * コマンド関連のイベントです
