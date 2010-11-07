@@ -125,12 +125,9 @@ package com.github.niji.framework
         }
         
         /**
-         * 現在のレイヤーにマトリックスオブジェクトを適用して変形させます
-         * 
-         * @param matrix マトリックスオブジェクト
-         * @see flash.geom.Matrix
+         * @inheritDoc
          */
-        public function applyMatrix(matrix:Matrix):void
+        public function transform(matrix:Matrix):void
         {
             var transformed:BitmapData = new BitmapData(width, height, true, 0x0);
             transformed.draw(bitmapData, matrix);

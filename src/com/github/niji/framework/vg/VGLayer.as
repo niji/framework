@@ -35,6 +35,7 @@ package com.github.niji.framework.vg
     import flash.display.BitmapData;
     import flash.display.DisplayObject;
     import flash.display.Shape;
+    import flash.geom.Matrix;
     import flash.geom.Point;
     import flash.geom.Rectangle;
 
@@ -106,6 +107,11 @@ package com.github.niji.framework.vg
          * @inheritDoc
          */
         public function merge(source:ILayer):void
+        {
+            throw new Error();
+        }
+        
+        public function transform(matrix:Matrix):void
         {
             throw new Error();
         }

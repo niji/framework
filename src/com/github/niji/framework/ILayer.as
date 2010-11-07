@@ -30,6 +30,7 @@ package com.github.niji.framework
 /// @endcond
     import flash.display.BitmapData;
     import flash.display.DisplayObject;
+    import flash.geom.Matrix;
 
     public interface ILayer
     {
@@ -65,6 +66,13 @@ package com.github.niji.framework
          * @param 統合するレイヤー (統合後は表示上から外すこと)
          */
         function merge(source:ILayer):void;
+        
+        /**
+         * 行列からレイヤーを変換します
+         * 
+         * @param 行列
+         */
+        function transform(matrix:Matrix):void;
         
         /**
          * toJSON でシリアライズされたオブジェクトから復元します
