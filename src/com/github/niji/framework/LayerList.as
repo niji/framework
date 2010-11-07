@@ -40,6 +40,7 @@ package com.github.niji.framework
     import flash.display.Sprite;
     import flash.events.Event;
     import flash.events.IEventDispatcher;
+    import flash.geom.Matrix;
     import flash.geom.Point;
     import flash.geom.Rectangle;
     
@@ -57,6 +58,11 @@ package com.github.niji.framework
          * 連結したレイヤー画像で受け付ける最大ピクセル数
          */
         public static const MAX_PIXEL:uint = 2880;
+        
+        /**
+         * 反転関連で全てのレイヤーに対して適用するための定数
+         */
+        public static const ALL_LAYERS:uint = 0xff;
         
         /**
          * 画像の幅及び高さからレイヤーの配列を生成します.
@@ -353,6 +359,26 @@ package com.github.niji.framework
                 var layer:ILayer = m_layers[i];
                 layer.setIndex(i);
             }
+        }
+        
+        /**
+         * 指定されたレイヤーに対して行列による変換を行います
+         * 
+         * @param index レイヤーの番号
+         * @param matrix 行列
+         */
+        public function transformAt(index:int, matrix:Matrix):void
+        {
+            if (index === ALL_LAYERS) {
+                var c:uint = count;
+                for (var i:uint = 0; i < c; i++) {
+                    m_layers[i].transform(matrix);
+                }
+            }
+            else {
+                m_layers[index].transform(matrix);
+            }
+            compositeAll();
         }
         
         /**

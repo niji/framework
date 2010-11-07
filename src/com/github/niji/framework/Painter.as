@@ -54,11 +54,6 @@ package com.github.niji.framework
         public static const COMPATIBILITY_BIG_PIXEL:uint = 2;
         
         /**
-         * 反転関連で全てのレイヤーに対して適用するための定数
-         */
-        public static const ALL_LAYERS:uint = 0xff;
-        
-        /**
          * レイヤー配列の生成及び描画状態を初期化して Painter を生成します
          *
          * @param width 画像の幅
@@ -360,7 +355,7 @@ package com.github.niji.framework
          */
         public function transformWithHorizontalMirrorAt(index:int):void
         {
-            transformFromMatrixAt(index, m_horizontalMirrorMatrix);
+            m_layers.transformAt(index, m_horizontalMirrorMatrix);
         }
         
         /**
@@ -370,7 +365,7 @@ package com.github.niji.framework
          */
         public function transformWithVerticalMirrorAt(index:int):void
         {
-            transformFromMatrixAt(index, m_verticalMirrorMatrix);
+            m_layers.transformAt(index, m_verticalMirrorMatrix);
         }
         
         /**
@@ -394,7 +389,7 @@ package com.github.niji.framework
         public function moveAt(index:int, x:int, y:int):void
         {
             m_moveMatrix.translate(x, y);
-            BitmapLayer(m_layers.at(index)).applyMatrix(m_moveMatrix);
+            BitmapLayer(m_layers.at(index)).transform(m_moveMatrix);
             m_layers.compositeAll();
         }
         
@@ -419,7 +414,7 @@ package com.github.niji.framework
         public function scaleAt(index:int, x:int, y:int):void
         {
             m_scaleMatrix.scale(x, y);
-            BitmapLayer(m_layers.at(index)).applyMatrix(m_scaleMatrix);
+            BitmapLayer(m_layers.at(index)).transform(m_scaleMatrix);
             m_layers.compositeAll();
         }
         
@@ -471,20 +466,6 @@ package com.github.niji.framework
         public function correctCoordinate(coordinate:Point):void
         {
             m_paintEngine.correctCoordinate(coordinate);
-        }
-        
-        private function transformFromMatrixAt(index:int, matrix:Matrix):void
-        {
-            if (index === ALL_LAYERS) {
-                var c:uint = m_layers.count;
-                for (var i:uint = 0; i < c; i++) {
-                    BitmapLayer(m_layers.at(i)).applyMatrix(matrix);
-                }
-            }
-            else {
-                BitmapLayer(m_layers.currentLayer).applyMatrix(matrix);
-            }
-            m_layers.compositeAll();
         }
         
         /**
