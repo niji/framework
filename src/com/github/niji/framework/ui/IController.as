@@ -27,6 +27,8 @@
 /// @cond
 package com.github.niji.framework.ui
 {
+    import flash.display.DisplayObject;
+
 /// @endcond
     /**
      * コントローラの処理と情報の復元及び保存に必要なインターフェースです
@@ -63,5 +65,10 @@ package com.github.niji.framework.ui
          * コントローラ名を取得します
          */
         function get name():String;
+        
+        /**
+         * コントローラの親ビューのインスタンスを取得します
+         */
+        function get parentDisplayObject():DisplayObject;
     }
 }

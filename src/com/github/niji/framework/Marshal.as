@@ -70,8 +70,8 @@ package com.github.niji.framework
         /**
          * ふっかつのじゅもんを復元します
          *
-         * @param bytes お絵描きログ
-         * @param toBytes 保存先となる ByteArray
+         * @param bytes 読み込み元
+         * @param toBytes お絵描きログの読み込み先
          * @throws MarshalVersionError
          */
         public function load(bytes:ByteArray, toBytes:ByteArray):void
@@ -115,8 +115,8 @@ package com.github.niji.framework
         /**
          * ふっかつのじゅもんを保存します
          *
-         * @param bytes お絵描きログ
-         * @param fromBytes 保存元となる ByteArray
+         * @param bytes 保存先
+         * @param fromBytes お絵描きログ
          */
         public function save(bytes:ByteArray, fromBytes:ByteArray):void
         {
