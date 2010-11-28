@@ -90,6 +90,9 @@ package com.github.niji.framework.modules
             stopDrawing();
         }
         
+        /**
+         * @inheritDoc
+         */
         public function get name():String
         {
             return LINE;

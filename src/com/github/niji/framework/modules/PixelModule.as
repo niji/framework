@@ -94,6 +94,9 @@ package com.github.niji.framework.modules
             m_y = y;
         }
         
+        /**
+         * @inheritDoc
+         */
         public function get name():String
         {
             return PIXEL;

@@ -76,14 +76,17 @@ package com.github.niji.framework.modules
         /**
          * @inheritDoc
          */
-        public function get name():String
-        {
-            return ELLIPSE;
-        }
-        
         public function interrupt(x:Number, y:Number):void
         {
             stopDrawing();
+        }
+        
+        /**
+         * @inheritDoc
+         */
+        public function get name():String
+        {
+            return ELLIPSE;
         }
     }
 }
