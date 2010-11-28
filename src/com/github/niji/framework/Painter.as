@@ -432,6 +432,16 @@ package com.github.niji.framework
         }
         
         /**
+         * 現在描画中かどうかを返します
+         * 
+         * @return Boolean
+         */
+        public function isDrawing():Boolean
+        {
+            return m_layers.isDrawing();
+        }
+        
+        /**
          * 描写終了を宣言します
          */
         public function stopDrawing():void

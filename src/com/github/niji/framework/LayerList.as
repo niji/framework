@@ -525,6 +525,11 @@ package com.github.niji.framework
             }
         }
         
+        internal function isDrawing():Boolean
+        {
+            return m_tempLayer != null;
+        }
+        
         internal function stopDrawing(engine:PaintEngine):void
         {
             // 裏うつりしないレイヤーは今あるよね？
