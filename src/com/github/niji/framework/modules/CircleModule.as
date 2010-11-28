@@ -110,6 +110,16 @@ package com.github.niji.framework.modules
             return CIRCLE;
         }
         
+        /**
+         * 現在の半径を取得します
+         * 
+         * @return Number
+         */
+        public function get radius():Number
+        {
+            return m_recorder.isDrawing() ? m_rectangle.width : 0;
+        }
+        
         private function storeCircleCoordinate(x:Number, y:Number):void
         {
             var dx:Number = x - coordinateX;
