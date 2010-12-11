@@ -271,7 +271,7 @@ package com.github.niji.framework
             // undoBuffer に入っているLayerBitmapを上書きしない為にコピーしてから作業する
             // これは floodFill 及び setPixel も同様
             BitmapLayer(m_layers.currentLayer).compositeFrom(
-                m_paintEngine.shape,
+                m_paintEngine.shapeToPaint,
                 m_paintEngine.pen.blendMode
             );
             m_layers.compositeAll();

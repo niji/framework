@@ -59,6 +59,7 @@ package com.github.niji.framework
          */
         public function PaintEngine(shape:Shape)
         {
+            m_smoother = new SMASmoother();
             m_coordinate = new Point();
             m_pen = new Pen();
             m_shape = shape;
@@ -86,7 +87,10 @@ package com.github.niji.framework
             m_coordinate.x = x;
             m_coordinate.y = y;
             correctCoordinate(m_coordinate);
-            m_graphics.moveTo(m_coordinate.x, m_coordinate.y);
+            x = m_coordinate.x;
+            y = m_coordinate.y;
+            m_graphics.moveTo(x, y);
+            m_smoother.moveTo(x, y);
         }
         
         /**
@@ -101,7 +105,10 @@ package com.github.niji.framework
             m_coordinate.x = x;
             m_coordinate.y = y;
             correctCoordinate(m_coordinate);
-            m_graphics.lineTo(m_coordinate.x, m_coordinate.y);
+            x = m_coordinate.x;
+            y = m_coordinate.y;
+            m_graphics.lineTo(x, y);
+            m_smoother.lineTo(x, y);
         }
         
         /**
@@ -365,6 +372,22 @@ package com.github.niji.framework
         }
         
         /**
+         * @private
+         */
+        internal function get shapeToPaint():Shape
+        {
+            var result:Vector.<Number> = m_smoother.calcurate();
+            var length:uint = result.length;
+            m_graphics.clear();
+            resetPen();
+            m_graphics.moveTo(result[0], result[1]);
+            for (var i:uint = 2; i < length; i += 2) {
+                m_graphics.lineTo(result[i], result[i + 1]);
+            }
+            return m_shape;
+        }
+        
+        /**
          * 現在のx座標を返します
          * 
          * @return x 現在のx座標
@@ -384,6 +407,7 @@ package com.github.niji.framework
             return m_coordinate.y;
         }
         
+        private var m_smoother:ISmoother;
         private var m_coordinate:Point;
         private var m_pen:Pen;
         private var m_shape:Shape;
