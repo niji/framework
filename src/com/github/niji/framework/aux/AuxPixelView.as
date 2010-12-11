@@ -25,40 +25,58 @@
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 /// @cond
-package com.github.niji.framework
+package com.github.niji.framework.aux
 {
 /// @endcond
-    import flash.display.Bitmap;
-    import flash.display.BitmapData;
+    import flash.display.Graphics;
     import flash.geom.Rectangle;
     
     /**
-     * 一番下に表示する透明画像の代替となるビットマップ画像のクラスです
+     * ピクセル単位で表示する補助線のクラスです
      * 
-     * @see flash.display.Bitmap
+     * @see AuxBitmap
      */
-    public final class TransparentBitmap extends Bitmap
+    public final class AuxPixelView extends AuxBitmap
     {
         /**
-         * 透明画像として表示するための描画を予め行った状態で生成します
-         *
-         * @param rect 画像の幅及び高さを予め設定した Rectangle オブジェクト
-         * @param pixelSnapping
-         * @param smoothing
+         * 直線及び斜線を予め引いて、非表示にした状態で補助線画像を生成します
          */
-        public function TransparentBitmap(rect:Rectangle, pixelSnapping:String = "auto", smoothing:Boolean = false)
+        public function AuxPixelView(rect:Rectangle)
         {
-            var w:uint = rect.width;
-            var h:uint = rect.height;
-            var bitmapData:BitmapData = new BitmapData(w, h, false);
-            bitmapData.lock();
-            for (var i:uint = 0; i < w; i++) {
-                for (var j:uint = 0; j < h; j++) {
-                    bitmapData.setPixel(i, j, ((i ^ j) & 1) ? 0x999999 : 0xffffff);
-                }
+            super(rect);
+        }
+        
+        /**
+         * @inheritDoc
+         */
+        public override function divide():void
+        {
+            var box:Graphics = m_box.graphics;
+            var skew:Graphics = m_skew.graphics;
+            var i:uint = 0;
+			// 縦線を描く
+            for (i = m_divideCount; i < width; i += m_divideCount) {
+                box.moveTo(i, 0);
+                box.lineTo(i, height);
             }
-            bitmapData.unlock();
-            super(bitmapData, pixelSnapping, smoothing);
+			// 横線を描く
+            for (i = m_divideCount; i < height; i += m_divideCount) {
+                box.moveTo(0, i);
+                box.lineTo(width, i);
+            }
+            var max:uint = (m_rect.width > m_rect.height) ? m_rect.width : m_rect.height;
+            max += m_divideCount - (max % m_divideCount);
+            for (i = m_divideCount; i <= max; i += m_divideCount) {
+                skew.moveTo(i - m_divideCount, 0);
+                skew.lineTo(0, i - m_divideCount);
+                skew.moveTo(max - (i - m_divideCount), 0);
+                skew.lineTo(max, i - m_divideCount);
+                skew.moveTo(max, max - i);
+                skew.lineTo(max - i, max);
+                skew.moveTo(0, max - i);
+                skew.lineTo(i, max);
+            }
+            m_skew.scrollRect = m_rect;
         }
     }
 }

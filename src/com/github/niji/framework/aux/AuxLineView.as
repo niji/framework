@@ -25,7 +25,7 @@
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 /// @cond
-package com.github.niji.framework
+package com.github.niji.framework.aux
 {
 /// @endcond
     import flash.display.Graphics;
